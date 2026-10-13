@@ -1,0 +1,200 @@
+{
+  "path": [
+    {
+      "vehicle": 0,
+      "choices": [
+        0,
+        1,
+        4
+      ],
+      "waiting": [],
+      "cursor": 2,
+      "events": [
+        [
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "vehicle": 1,
+      "choices": [
+        1,
+        2,
+        4
+      ],
+      "waiting": [
+        [
+          1,
+          0
+        ]
+      ],
+      "cursor": 2,
+      "events": []
+    },
+    {
+      "vehicle": 2,
+      "choices": [
+        2,
+        4
+      ],
+      "waiting": [],
+      "cursor": 8,
+      "events": [
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          4
+        ]
+      ]
+    },
+    {
+      "vehicle": 3,
+      "choices": [
+        3,
+        4
+      ],
+      "waiting": [
+        [
+          3,
+          0
+        ]
+      ],
+      "cursor": 8,
+      "events": []
+    },
+    {
+      "vehicle": 4,
+      "choices": [
+        4,
+        5
+      ],
+      "waiting": [
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "cursor": 8,
+      "events": []
+    },
+    {
+      "vehicle": 5,
+      "choices": [
+        5
+      ],
+      "waiting": [],
+      "cursor": 18,
+      "events": [
+        [
+          5,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          3,
+          2
+        ]
+      ]
+    },
+    {
+      "vehicle": 6,
+      "choices": [
+        6
+      ],
+      "waiting": [],
+      "cursor": 20,
+      "events": [
+        [
+          6,
+          2
+        ]
+      ]
+    },
+    {
+      "vehicle": 7,
+      "choices": [
+        7
+      ],
+      "waiting": [],
+      "cursor": 24,
+      "events": [
+        [
+          7,
+          4
+        ]
+      ]
+    },
+    {
+      "vehicle": 8,
+      "choices": [
+        8,
+        9
+      ],
+      "waiting": [],
+      "cursor": 26,
+      "events": [
+        [
+          8,
+          2
+        ]
+      ]
+    },
+    {
+      "vehicle": 9,
+      "choices": [
+        9
+      ],
+      "waiting": [],
+      "cursor": 30,
+      "events": [
+        [
+          9,
+          4
+        ]
+      ]
+    }
+  ],
+  "blockers": [
+    0,
+    0,
+    1,
+    4,
+    0,
+    8,
+    32,
+    66,
+    128,
+    128
+  ],
+  "probability": "3661/3888",
+  "states": 30,
+  "edges": 47,
+  "wins": 60,
+  "losses": 11,
+  "deadlocks": 3,
+  "minimum_calls_to_deadlock": 5,
+  "optional_slots": {
+    "4": "1",
+    "5": "1"
+  },
+  "window_failures": 0
+}

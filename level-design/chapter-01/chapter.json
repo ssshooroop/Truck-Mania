@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "status": "verified_logical_design_not_runtime_integrated",
+  "initial_buffer_slots": 3,
+  "purchasable_additional_slots": 2,
+  "levels": [
+    {
+      "id": 1,
+      "name": "Первая отгрузка",
+      "config": "level-001.json",
+      "verification": "level-001-verification.json",
+      "vehicles": 8,
+      "cargo": 32,
+      "minimum_dispatches": 8
+    },
+    {
+      "id": 2,
+      "name": "Освободи дорогу",
+      "config": "level-002.json",
+      "verification": "level-002-verification.json",
+      "vehicles": 8,
+      "cargo": 32,
+      "minimum_dispatches": 8
+    },
+    {
+      "id": 3,
+      "name": "Разная вместимость",
+      "config": "level-003.json",
+      "verification": "level-003-verification.json",
+      "vehicles": 9,
+      "cargo": 26,
+      "minimum_dispatches": 9
+    },
+    {
+      "id": 4,
+      "name": "Оставь место",
+      "config": "level-004.json",
+      "verification": "level-004-verification.json",
+      "vehicles": 10,
+      "cargo": 30,
+      "minimum_dispatches": 10
+    },
+    {
+      "id": 5,
+      "name": "Большая поставка",
+      "config": "level-005.json",
+      "verification": "level-005-verification.json",
+      "vehicles": 10,
+      "cargo": 34,
+      "minimum_dispatches": 10
+    }
+  ]
+}

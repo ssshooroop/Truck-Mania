@@ -1,0 +1,179 @@
+{
+  "seed": 407,
+  "layout": [
+    [
+      4,
+      7,
+      "S"
+    ],
+    [
+      6,
+      6,
+      "W"
+    ],
+    [
+      6,
+      7,
+      "W"
+    ],
+    [
+      7,
+      2,
+      "S"
+    ],
+    [
+      3,
+      0,
+      "W"
+    ],
+    [
+      5,
+      1,
+      "E"
+    ],
+    [
+      4,
+      2,
+      "N"
+    ],
+    [
+      0,
+      5,
+      "W"
+    ]
+  ],
+  "blockers": [
+    0,
+    1,
+    1,
+    6,
+    0,
+    8,
+    48,
+    0
+  ],
+  "path": [
+    {
+      "id": 0,
+      "available": [
+        0,
+        4,
+        7
+      ],
+      "before_buffer": [],
+      "after_buffer": [],
+      "queue_index": 4
+    },
+    {
+      "id": 1,
+      "available": [
+        1,
+        2,
+        4,
+        7
+      ],
+      "before_buffer": [],
+      "after_buffer": [
+        [
+          1,
+          0
+        ]
+      ],
+      "queue_index": 4
+    },
+    {
+      "id": 2,
+      "available": [
+        2,
+        4,
+        7
+      ],
+      "before_buffer": [
+        [
+          1,
+          0
+        ]
+      ],
+      "after_buffer": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "queue_index": 4
+    },
+    {
+      "id": 3,
+      "available": [
+        3,
+        4,
+        7
+      ],
+      "before_buffer": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "after_buffer": [],
+      "queue_index": 16
+    },
+    {
+      "id": 4,
+      "available": [
+        4,
+        5,
+        7
+      ],
+      "before_buffer": [],
+      "after_buffer": [],
+      "queue_index": 20
+    },
+    {
+      "id": 5,
+      "available": [
+        5,
+        7
+      ],
+      "before_buffer": [],
+      "after_buffer": [],
+      "queue_index": 24
+    },
+    {
+      "id": 6,
+      "available": [
+        6,
+        7
+      ],
+      "before_buffer": [],
+      "after_buffer": [],
+      "queue_index": 28
+    },
+    {
+      "id": 7,
+      "available": [
+        7
+      ],
+      "before_buffer": [],
+      "after_buffer": [],
+      "queue_index": 32
+    }
+  ],
+  "random_win_rate": "1",
+  "win_paths": 96,
+  "lose_paths": 0,
+  "min_deadlock_moves": null,
+  "states": 37,
+  "edges": 67,
+  "window_failures": 0,
+  "peak_buffer": 2,
+  "score": 1230.0
+}

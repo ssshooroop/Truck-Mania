@@ -1,0 +1,426 @@
+{
+  "document": "Макет.psd",
+  "file": "C:\\Users\\urgen\\.codex\\.chatgpt-projects\\g-p-6aca23a934e08191b460c0b3146a69b8\\bus-bloom\\assets\\Макет.psd",
+  "width": 1179,
+  "height": 2556,
+  "resolution": 120,
+  "saved": true,
+  "activeLayer": "Red Flatbed Truck copy",
+  "layers": [
+    {
+      "id": 14,
+      "name": "Orange Dump Truck copy",
+      "path": "Orange Dump Truck copy",
+      "type": "ArtLayer",
+      "visible": true,
+      "ownVisible": true,
+      "opacity": 100,
+      "bounds": [
+        151,
+        505,
+        370,
+        818
+      ],
+      "boundsNoEffects": [
+        151,
+        505,
+        370,
+        818
+      ],
+      "kind": "LayerKind.SMARTOBJECT",
+      "transform": [
+        126.364162812636,
+        554.129107483516,
+        237.81187056194,
+        499.051890176849,
+        372,
+        770.579032693334,
+        260.552292250697,
+        825.65625
+      ],
+      "width_px": 124.31448599748984,
+      "length_px": 302.8752931575191,
+      "angle_deg": -26.29848336045616
+    },
+    {
+      "id": 8,
+      "name": "Orange Dump Truck",
+      "path": "Orange Dump Truck",
+      "type": "ArtLayer",
+      "visible": true,
+      "ownVisible": true,
+      "opacity": 100,
+      "bounds": [
+        162,
+        1391,
+        465,
+        1515
+      ],
+      "boundsNoEffects": [
+        162,
+        1391,
+        465,
+        1515
+      ],
+      "kind": "LayerKind.SMARTOBJECT",
+      "transform": [
+        160.84463279208,
+        1514.31029866805,
+        162.483707223147,
+        1390.00661865885,
+        465.33267306374,
+        1394,
+        463.693598632673,
+        1518.3036800092
+      ],
+      "width_px": 124.31448599749032,
+      "length_px": 302.87529315751806,
+      "angle_deg": -89.24453881912173
+    },
+    {
+      "id": 17,
+      "name": "Red Flatbed Truck copy",
+      "path": "Red Flatbed Truck copy",
+      "type": "ArtLayer",
+      "visible": true,
+      "ownVisible": true,
+      "opacity": 100,
+      "bounds": [
+        470,
+        508,
+        742,
+        908
+      ],
+      "boundsNoEffects": [
+        470,
+        508,
+        742,
+        908
+      ],
+      "kind": "LayerKind.SMARTOBJECT",
+      "transform": [
+        465,
+        557.14711651855,
+        565.536376957229,
+        505,
+        749.292882784501,
+        859.271042611189,
+        648.756505827271,
+        911.418159129739
+      ],
+      "width_px": 113.2558380521078,
+      "length_px": 399.09200075504793,
+      "angle_deg": -27.415274696105524
+    },
+    {
+      "id": 7,
+      "name": "Red Flatbed Truck",
+      "path": "Red Flatbed Truck",
+      "type": "ArtLayer",
+      "visible": true,
+      "ownVisible": true,
+      "opacity": 100,
+      "bounds": [
+        390,
+        1033,
+        799,
+        1263
+      ],
+      "boundsNoEffects": [
+        390,
+        1033,
+        799,
+        1263
+      ],
+      "kind": "LayerKind.SMARTOBJECT",
+      "transform": [
+        762.592531064433,
+        1026.74966438479,
+        801.057932433837,
+        1133.27336010727,
+        425.688718935567,
+        1268.81810778994,
+        387.223317566162,
+        1162.29441206745
+      ],
+      "width_px": 113.25583805210587,
+      "length_px": 399.0920007550495,
+      "angle_deg": 70.14549401388486
+    },
+    {
+      "id": 4,
+      "name": "Green Dump Truck",
+      "path": "Green Dump Truck",
+      "type": "ArtLayer",
+      "visible": true,
+      "ownVisible": true,
+      "opacity": 100,
+      "bounds": [
+        387,
+        1246,
+        667,
+        1560
+      ],
+      "boundsNoEffects": [
+        387,
+        1246,
+        667,
+        1560
+      ],
+      "kind": "LayerKind.SMARTOBJECT",
+      "transform": [
+        668.014575375305,
+        1488.95869908062,
+        567.471825752662,
+        1564.03500123654,
+        384.558653227338,
+        1319.07630215592,
+        485.101402849983,
+        1244
+      ],
+      "width_px": 125.48025998972302,
+      "length_px": 305.71554252041,
+      "angle_deg": 143.2509256267728
+    },
+    {
+      "id": 16,
+      "name": "Blue-pickup copy",
+      "path": "Blue-pickup copy",
+      "type": "ArtLayer",
+      "visible": true,
+      "ownVisible": true,
+      "opacity": 100,
+      "bounds": [
+        302,
+        513,
+        499,
+        747
+      ],
+      "boundsNoEffects": [
+        302,
+        513,
+        499,
+        747
+      ],
+      "kind": "LayerKind.SMARTOBJECT",
+      "transform": [
+        299.519377245577,
+        559.743353364298,
+        402,
+        505,
+        503.064652364858,
+        694.194995854318,
+        400.584029610436,
+        748.938349218617
+      ],
+      "width_px": 116.18568232662211,
+      "length_px": 214.49664429530125,
+      "angle_deg": -28.1103519043158
+    },
+    {
+      "id": 13,
+      "name": "Cartoon Industrial Conveyor Loading Dock",
+      "path": "Cartoon Industrial Conveyor Loading Dock",
+      "type": "ArtLayer",
+      "visible": true,
+      "ownVisible": true,
+      "opacity": 100,
+      "bounds": [
+        -3,
+        2,
+        1176,
+        811
+      ],
+      "boundsNoEffects": [
+        -3,
+        2,
+        1176,
+        811
+      ],
+      "kind": "LayerKind.SMARTOBJECT",
+      "transform": [
+        -3,
+        1.69098025446146,
+        1176,
+        1.69098025446146,
+        1176,
+        811.328125,
+        -3,
+        811.328125
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Blue-pickup",
+      "path": "Blue-pickup",
+      "type": "ArtLayer",
+      "visible": true,
+      "ownVisible": true,
+      "opacity": 100,
+      "bounds": [
+        293,
+        1179,
+        409,
+        1394
+      ],
+      "boundsNoEffects": [
+        293,
+        1179,
+        409,
+        1394
+      ],
+      "kind": "LayerKind.SMARTOBJECT",
+      "transform": [
+        292.794407158836,
+        1179.15973154362,
+        408.980089485458,
+        1179.15973154362,
+        408.980089485458,
+        1393.65637583893,
+        292.794407158836,
+        1393.65637583893
+      ],
+      "width_px": 116.18568232662199,
+      "length_px": 214.49664429531003,
+      "angle_deg": 0.0
+    },
+    {
+      "id": 6,
+      "name": "Rectangle 1",
+      "path": "Rectangle 1",
+      "type": "ArtLayer",
+      "visible": true,
+      "ownVisible": true,
+      "opacity": 100,
+      "bounds": [
+        -10,
+        796,
+        1198,
+        827
+      ],
+      "boundsNoEffects": [
+        -10,
+        796,
+        1198,
+        827
+      ],
+      "kind": "LayerKind.GRADIENTFILL"
+    },
+    {
+      "id": 1,
+      "name": "Background",
+      "path": "Background",
+      "type": "ArtLayer",
+      "visible": true,
+      "ownVisible": true,
+      "opacity": 100,
+      "bounds": [
+        0,
+        0,
+        1179,
+        2556
+      ],
+      "boundsNoEffects": [
+        0,
+        0,
+        1179,
+        2556
+      ],
+      "kind": "LayerKind.NORMAL"
+    }
+  ],
+  "gaps": [
+    {
+      "a": "Orange Dump Truck copy",
+      "b": "Blue-pickup copy",
+      "gap_px": 38.47076812334269,
+      "a_point": [
+        285.5,
+        614.5
+      ],
+      "b_point": [
+        319.5,
+        596.5
+      ]
+    },
+    {
+      "a": "Blue-pickup copy",
+      "b": "Red Flatbed Truck copy",
+      "gap_px": 40.792156108742276,
+      "a_point": [
+        441.5,
+        598.5
+      ],
+      "b_point": [
+        481.5,
+        590.5
+      ]
+    },
+    {
+      "a": "Red Flatbed Truck",
+      "b": "Blue-pickup",
+      "gap_px": 5.0,
+      "a_point": [
+        398.5,
+        1195.5
+      ],
+      "b_point": [
+        394.5,
+        1198.5
+      ]
+    },
+    {
+      "a": "Red Flatbed Truck",
+      "b": "Green Dump Truck",
+      "gap_px": 6.082762530298219,
+      "a_point": [
+        465.5,
+        1252.5
+      ],
+      "b_point": [
+        466.5,
+        1258.5
+      ]
+    },
+    {
+      "a": "Blue-pickup",
+      "b": "Green Dump Truck",
+      "gap_px": 8.0,
+      "a_point": [
+        394.5,
+        1310.5
+      ],
+      "b_point": [
+        402.5,
+        1310.5
+      ]
+    },
+    {
+      "a": "Blue-pickup",
+      "b": "Orange Dump Truck",
+      "gap_px": 9.848857801796104,
+      "a_point": [
+        387.5,
+        1393.5
+      ],
+      "b_point": [
+        391.5,
+        1402.5
+      ]
+    },
+    {
+      "a": "Orange Dump Truck",
+      "b": "Green Dump Truck",
+      "gap_px": 6.4031242374328485,
+      "a_point": [
+        464.5,
+        1411.5
+      ],
+      "b_point": [
+        468.5,
+        1406.5
+      ]
+    }
+  ],
+  "gap_method": "Minimum Euclidean clearance between pixel squares on separate PSD alpha contours >=128. Antialiasing uncertainty approximately 1 pixel. Includes mirrors and wheels."
+}

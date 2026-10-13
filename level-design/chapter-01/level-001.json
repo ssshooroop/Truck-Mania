@@ -1,0 +1,153 @@
+{
+  "metadata": {
+    "id": 1,
+    "name": "Первая отгрузка",
+    "difficulty": "EASY",
+    "buffer_slots": 3,
+    "max_buffer_slots": 5,
+    "color_count": 3,
+    "seed": 100151,
+    "lesson": "Цвет груза, свободный выезд и ожидание на перроне",
+    "coordinate_system": "logical_grid_head_top_left"
+  },
+  "grid": {
+    "width": 8,
+    "height": 8,
+    "walls": [],
+    "obstacles": []
+  },
+  "vehicles": [
+    {
+      "id": "V01",
+      "color": "#FF8614",
+      "capacity": 4,
+      "position": [
+        0,
+        0
+      ],
+      "direction": "N",
+      "length": 3
+    },
+    {
+      "id": "V02",
+      "color": "#7C828A",
+      "capacity": 4,
+      "position": [
+        2,
+        2
+      ],
+      "direction": "N",
+      "length": 3
+    },
+    {
+      "id": "V03",
+      "color": "#FF8614",
+      "capacity": 4,
+      "position": [
+        1,
+        0
+      ],
+      "direction": "N",
+      "length": 3
+    },
+    {
+      "id": "V04",
+      "color": "#FF3535",
+      "capacity": 4,
+      "position": [
+        5,
+        0
+      ],
+      "direction": "W",
+      "length": 3
+    },
+    {
+      "id": "V05",
+      "color": "#FF3535",
+      "capacity": 4,
+      "position": [
+        4,
+        2
+      ],
+      "direction": "W",
+      "length": 3
+    },
+    {
+      "id": "V06",
+      "color": "#7C828A",
+      "capacity": 4,
+      "position": [
+        5,
+        3
+      ],
+      "direction": "N",
+      "length": 3
+    },
+    {
+      "id": "V07",
+      "color": "#FF8614",
+      "capacity": 4,
+      "position": [
+        7,
+        4
+      ],
+      "direction": "N",
+      "length": 3
+    },
+    {
+      "id": "V08",
+      "color": "#FF3535",
+      "capacity": 4,
+      "position": [
+        0,
+        6
+      ],
+      "direction": "S",
+      "length": 3
+    }
+  ],
+  "passenger_queue": [
+    "#FF8614",
+    "#FF8614",
+    "#FF8614",
+    "#FF8614",
+    "#FF3535",
+    "#FF3535",
+    "#FF3535",
+    "#FF3535",
+    "#FF8614",
+    "#FF8614",
+    "#FF8614",
+    "#FF8614",
+    "#7C828A",
+    "#7C828A",
+    "#7C828A",
+    "#7C828A",
+    "#FF3535",
+    "#FF3535",
+    "#FF3535",
+    "#FF3535",
+    "#7C828A",
+    "#7C828A",
+    "#7C828A",
+    "#7C828A",
+    "#FF8614",
+    "#FF8614",
+    "#FF8614",
+    "#FF8614",
+    "#FF3535",
+    "#FF3535",
+    "#FF3535",
+    "#FF3535"
+  ],
+  "golden_path": [
+    "V01",
+    "V02",
+    "V03",
+    "V04",
+    "V05",
+    "V06",
+    "V07",
+    "V08"
+  ]
+}

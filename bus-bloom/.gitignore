@@ -1,0 +1,24 @@
+# Godot import cache and local editor state
+.godot/
+*.translation
+
+# Keep source assets, .import settings and .uid identifiers in Git.
+# Intermediate capture frames can be recreated by the preview scripts.
+/artifacts/frames/
+/artifacts/*-frames/
+/artifacts/*-test*.cfg
+*.blend1
+
+# Local build output and signing materials
+build/
+dist/
+*.apk
+*.aab
+*.ipa
+*.pck
+export_credentials.cfg
+*.keystore
+*.jks
+*.p12
+*.mobileprovision
+.DS_Store

@@ -1,0 +1,164 @@
+{
+  "path": [
+    {
+      "vehicle": 0,
+      "choices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "waiting": [],
+      "cursor": 4,
+      "events": [
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "vehicle": 1,
+      "choices": [
+        1,
+        2,
+        3
+      ],
+      "waiting": [
+        [
+          1,
+          0
+        ]
+      ],
+      "cursor": 4,
+      "events": []
+    },
+    {
+      "vehicle": 2,
+      "choices": [
+        2,
+        3
+      ],
+      "waiting": [],
+      "cursor": 12,
+      "events": [
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          4
+        ]
+      ]
+    },
+    {
+      "vehicle": 3,
+      "choices": [
+        3,
+        7
+      ],
+      "waiting": [
+        [
+          3,
+          0
+        ]
+      ],
+      "cursor": 12,
+      "events": []
+    },
+    {
+      "vehicle": 4,
+      "choices": [
+        4,
+        7
+      ],
+      "waiting": [
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "cursor": 12,
+      "events": []
+    },
+    {
+      "vehicle": 5,
+      "choices": [
+        5,
+        7
+      ],
+      "waiting": [],
+      "cursor": 24,
+      "events": [
+        [
+          5,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          3,
+          4
+        ]
+      ]
+    },
+    {
+      "vehicle": 6,
+      "choices": [
+        6,
+        7
+      ],
+      "waiting": [],
+      "cursor": 28,
+      "events": [
+        [
+          6,
+          4
+        ]
+      ]
+    },
+    {
+      "vehicle": 7,
+      "choices": [
+        7
+      ],
+      "waiting": [],
+      "cursor": 32,
+      "events": [
+        [
+          7,
+          4
+        ]
+      ]
+    }
+  ],
+  "blockers": [
+    0,
+    0,
+    0,
+    0,
+    13,
+    18,
+    32,
+    5
+  ],
+  "probability": "1",
+  "states": 38,
+  "edges": 71,
+  "wins": 144,
+  "losses": 0,
+  "deadlocks": 0,
+  "minimum_calls_to_deadlock": null,
+  "optional_slots": {
+    "4": "1",
+    "5": "1"
+  },
+  "window_failures": 0
+}

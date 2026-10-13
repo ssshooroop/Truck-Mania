@@ -1,0 +1,102 @@
+{
+  "initial_state": "all_vehicles_departed_and_queue_empty",
+  "undo_steps": [
+    {
+      "return_vehicle": "V09",
+      "prepend_unloaded_batches": [
+        {
+          "vehicle_id": "V09",
+          "color": "#7C828A",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "return_vehicle": "V08",
+      "prepend_unloaded_batches": [
+        {
+          "vehicle_id": "V08",
+          "color": "#FF3535",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "return_vehicle": "V07",
+      "prepend_unloaded_batches": [
+        {
+          "vehicle_id": "V07",
+          "color": "#FF8614",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "return_vehicle": "V06",
+      "prepend_unloaded_batches": [
+        {
+          "vehicle_id": "V04",
+          "color": "#FF8614",
+          "count": 2
+        },
+        {
+          "vehicle_id": "V06",
+          "color": "#7C828A",
+          "count": 2
+        },
+        {
+          "vehicle_id": "V04",
+          "color": "#FF8614",
+          "count": 2
+        },
+        {
+          "vehicle_id": "V05",
+          "color": "#FF3535",
+          "count": 2
+        },
+        {
+          "vehicle_id": "V06",
+          "color": "#7C828A",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "return_vehicle": "V05",
+      "prepend_unloaded_batches": []
+    },
+    {
+      "return_vehicle": "V04",
+      "prepend_unloaded_batches": []
+    },
+    {
+      "return_vehicle": "V03",
+      "prepend_unloaded_batches": [
+        {
+          "vehicle_id": "V02",
+          "color": "#FF3535",
+          "count": 4
+        },
+        {
+          "vehicle_id": "V03",
+          "color": "#7C828A",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "return_vehicle": "V02",
+      "prepend_unloaded_batches": []
+    },
+    {
+      "return_vehicle": "V01",
+      "prepend_unloaded_batches": [
+        {
+          "vehicle_id": "V01",
+          "color": "#FF8614",
+          "count": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "level_id": 2,
+  "vehicles": 8,
+  "cargo_units": 32,
+  "color_capacity": {
+    "#FF8614": 12,
+    "#FF3535": 12,
+    "#7C828A": 8
+  },
+  "buffer_slots": 4,
+  "lookahead_window": 16,
+  "reachable_states": 38,
+  "legal_transitions": 71,
+  "winning_sequences": 144,
+  "losing_sequences": 0,
+  "random_legal_choice_win_probability": "1",
+  "deadlock_example": [],
+  "human_win_rate": null,
+  "deadlocks": 0,
+  "minimum_calls_to_deadlock": null,
+  "lookahead_failures": 0,
+  "dependencies": {
+    "V01": [],
+    "V02": [],
+    "V03": [],
+    "V04": [],
+    "V05": [
+      "V01",
+      "V03",
+      "V04"
+    ],
+    "V06": [
+      "V02",
+      "V05"
+    ],
+    "V07": [
+      "V06"
+    ],
+    "V08": [
+      "V01",
+      "V03"
+    ]
+  },
+  "golden_path": [
+    {
+      "vehicle": "V01",
+      "available_before": [
+        "V01",
+        "V02",
+        "V03",
+        "V04"
+      ],
+      "waiting_after": [],
+      "delivered_this_move": 4,
+      "delivery_order": [
+        "V01"
+      ],
+      "delivery_batches": [
+        [
+          "V01",
+          4
+        ]
+      ],
+      "queue_consumed": 4
+    },
+    {
+      "vehicle": "V02",
+      "available_before": [
+        "V02",
+        "V03",
+        "V04"
+      ],
+      "waiting_after": [
+        [
+          "V02",
+          0
+        ]
+      ],
+      "delivered_this_move": 0,
+      "delivery_order": [],
+      "delivery_batches": [],
+      "queue_consumed": 4
+    },
+    {
+      "vehicle": "V03",
+      "available_before": [
+        "V03",
+        "V04"
+      ],
+      "waiting_after": [],
+      "delivered_this_move": 8,
+      "delivery_order": [
+        "V03",
+        "V02"
+      ],
+      "delivery_batches": [
+        [
+          "V03",
+          4
+        ],
+        [
+          "V02",
+          4
+        ]
+      ],
+      "queue_consumed": 12
+    },
+    {
+      "vehicle": "V04",
+      "available_before": [
+        "V04",
+        "V08"
+      ],
+      "waiting_after": [
+        [
+          "V04",
+          0
+        ]
+      ],
+      "delivered_this_move": 0,
+      "delivery_order": [],
+      "delivery_batches": [],
+      "queue_consumed": 12
+    },
+    {
+      "vehicle": "V05",
+      "available_before": [
+        "V05",
+        "V08"
+      ],
+      "waiting_after": [
+        [
+          "V04",
+          0
+        ],
+        [
+          "V05",
+          0
+        ]
+      ],
+      "delivered_this_move": 0,
+      "delivery_order": [],
+      "delivery_batches": [],
+      "queue_consumed": 12
+    },
+    {
+      "vehicle": "V06",
+      "available_before": [
+        "V06",
+        "V08"
+      ],
+      "waiting_after": [],
+      "delivered_this_move": 12,
+      "delivery_order": [
+        "V06",
+        "V05",
+        "V04"
+      ],
+      "delivery_batches": [
+        [
+          "V06",
+          4
+        ],
+        [
+          "V05",
+          4
+        ],
+        [
+          "V04",
+          4
+        ]
+      ],
+      "queue_consumed": 24
+    },
+    {
+      "vehicle": "V07",
+      "available_before": [
+        "V07",
+        "V08"
+      ],
+      "waiting_after": [],
+      "delivered_this_move": 4,
+      "delivery_order": [
+        "V07"
+      ],
+      "delivery_batches": [
+        [
+          "V07",
+          4
+        ]
+      ],
+      "queue_consumed": 28
+    },
+    {
+      "vehicle": "V08",
+      "available_before": [
+        "V08"
+      ],
+      "waiting_after": [],
+      "delivered_this_move": 4,
+      "delivery_order": [
+        "V08"
+      ],
+      "delivery_batches": [
+        [
+          "V08",
+          4
+        ]
+      ],
+      "queue_consumed": 32
+    }
+  ],
+  "reverse_generation_verified": true,
+  "scope": "Settled discrete states after automatic FIFO loading, before the next dispatch."
+}

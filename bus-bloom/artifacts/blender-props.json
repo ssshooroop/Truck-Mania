@@ -1,0 +1,1474 @@
+[
+  {
+    "name": "Bench",
+    "dimensions": [
+      1.6397625207901,
+      0.9005650281906128,
+      1.121482253074646
+    ],
+    "materials": [
+      {
+        "name": "metal",
+        "color": [
+          0.22153505682945251,
+          0.22153505682945251,
+          0.22153505682945251,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "wood",
+        "color": [
+          0.23176971077919006,
+          0.10695497691631317,
+          0.05259299278259277,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Bike Rack",
+    "dimensions": [
+      2.4624125957489014,
+      0.5998683571815491,
+      0.766334056854248
+    ],
+    "materials": [
+      {
+        "name": "light metal.001",
+        "color": [
+          0.6892988085746765,
+          0.6892988085746765,
+          0.6892988085746765,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Bollard",
+    "dimensions": [
+      0.25188860297203064,
+      0.25188860297203064,
+      0.9260392189025879
+    ],
+    "materials": [
+      {
+        "name": "metal",
+        "color": [
+          0.22153505682945251,
+          0.22153505682945251,
+          0.22153505682945251,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "light metal.001",
+        "color": [
+          0.6892988085746765,
+          0.6892988085746765,
+          0.6892988085746765,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "bush",
+    "dimensions": [
+      0.5032417178153992,
+      0.9999999403953552,
+      0.8340933322906494
+    ],
+    "materials": [
+      {
+        "name": "Material.021",
+        "color": [
+          0.0,
+          0.8001810312271118,
+          0.030239347368478775,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "Material.022",
+        "color": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "Material.023",
+        "color": [
+          0.07563827931880951,
+          0.02093600481748581,
+          0.0073250518180429935,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Dumpster",
+    "dimensions": [
+      1.6608070135116577,
+      0.9827077984809875,
+      1.2774686813354492
+    ],
+    "materials": [
+      {
+        "name": "grey",
+        "color": [
+          0.03411126509308815,
+          0.03411126509308815,
+          0.03411126509308815,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "green dark",
+        "color": [
+          0.023433495312929153,
+          0.09285254776477814,
+          0.01566268503665924,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "dark grey",
+        "color": [
+          0.053590692579746246,
+          0.053590692579746246,
+          0.053590692579746246,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "FACTORY 1",
+    "dimensions": [
+      11.800000190734863,
+      12.300000190734863,
+      16.399999618530273
+    ],
+    "materials": [
+      {
+        "name": "color palette",
+        "color": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ],
+          [
+            "TEX_IMAGE",
+            "//..\\3D\\colorful-palette-full-spectrum-colors-brown-gray-shades-set-bright-rainbow-vector-illustration-148622578.webp"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fire Hydrant",
+    "dimensions": [
+      0.5984902381896973,
+      0.5611814260482788,
+      1.2298262119293213
+    ],
+    "materials": [
+      {
+        "name": "red",
+        "color": [
+          0.8001965880393982,
+          0.03642001748085022,
+          0.04244773089885712,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fountain",
+    "dimensions": [
+      3.4720046520233154,
+      3.4720046520233154,
+      2.3878519535064697
+    ],
+    "materials": [
+      {
+        "name": "Material.014",
+        "color": [
+          0.4728033244609833,
+          0.41527611017227173,
+          0.3113613724708557,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "WATER BLUE.001",
+        "color": [
+          0.030758438631892204,
+          0.36385080218315125,
+          0.800536572933197,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "generator",
+    "dimensions": [
+      4.073910713195801,
+      2.61799955368042,
+      2.610455274581909
+    ],
+    "materials": [
+      {
+        "name": "color palette",
+        "color": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ],
+          [
+            "TEX_IMAGE",
+            "//..\\3D\\colorful-palette-full-spectrum-colors-brown-gray-shades-set-bright-rainbow-vector-illustration-148622578.webp"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "loader",
+    "dimensions": [
+      2.9490065574645996,
+      1.7832860946655273,
+      1.2257782220840454
+    ],
+    "materials": [
+      {
+        "name": "color palette",
+        "color": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ],
+          [
+            "TEX_IMAGE",
+            "//..\\3D\\colorful-palette-full-spectrum-colors-brown-gray-shades-set-bright-rainbow-vector-illustration-148622578.webp"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Mail",
+    "dimensions": [
+      0.6932508945465088,
+      1.369627594947815,
+      0.7281794548034668
+    ],
+    "materials": [
+      {
+        "name": "white",
+        "color": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "dark BLUE.001",
+        "color": [
+          0.01589897833764553,
+          0.0568462610244751,
+          0.36903834342956543,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "NewspaperStand",
+    "dimensions": [
+      0.776395320892334,
+      0.6736244559288025,
+      2.0983123779296875
+    ],
+    "materials": [
+      {
+        "name": "light metal.001",
+        "color": [
+          0.6892988085746765,
+          0.6892988085746765,
+          0.6892988085746765,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "PAPER",
+        "color": [
+          0.6351051330566406,
+          0.579504668712616,
+          0.48545658588409424,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Parking",
+    "dimensions": [
+      0.3396983742713928,
+      0.1601516157388687,
+      1.8935354948043823
+    ],
+    "materials": [
+      {
+        "name": "light metal.001",
+        "color": [
+          0.6892988085746765,
+          0.6892988085746765,
+          0.6892988085746765,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "Material.006",
+        "color": [
+          0.3007688820362091,
+          0.3408668637275696,
+          0.40196818113327026,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "grey.001",
+        "color": [
+          0.1119670495390892,
+          0.1119670495390892,
+          0.1119670495390892,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Phone",
+    "dimensions": [
+      0.5980147123336792,
+      0.5007143616676331,
+      2.022975444793701
+    ],
+    "materials": [
+      {
+        "name": "metal",
+        "color": [
+          0.22153505682945251,
+          0.22153505682945251,
+          0.22153505682945251,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "light metal.001",
+        "color": [
+          0.6892988085746765,
+          0.6892988085746765,
+          0.6892988085746765,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "dark BLUE.001",
+        "color": [
+          0.01589897833764553,
+          0.0568462610244751,
+          0.36903834342956543,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sign1",
+    "dimensions": [
+      0.7195305228233337,
+      0.11871062964200974,
+      2.0332281589508057
+    ],
+    "materials": [
+      {
+        "name": "red",
+        "color": [
+          0.8001965880393982,
+          0.03642001748085022,
+          0.04244773089885712,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "white - metal",
+        "color": [
+          0.9434890747070312,
+          0.9434890747070312,
+          0.9434890747070312,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "white",
+        "color": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sign2",
+    "dimensions": [
+      0.5044052600860596,
+      1.8851052522659302,
+      0.1019032895565033
+    ],
+    "materials": [
+      {
+        "name": "white - metal",
+        "color": [
+          0.9434890747070312,
+          0.9434890747070312,
+          0.9434890747070312,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "white",
+        "color": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "BLUE",
+        "color": [
+          0.0,
+          0.08622473478317261,
+          0.8004660606384277,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sign3",
+    "dimensions": [
+      0.7140867710113525,
+      0.10522035509347916,
+      1.9670391082763672
+    ],
+    "materials": [
+      {
+        "name": "red",
+        "color": [
+          0.8001965880393982,
+          0.03642001748085022,
+          0.04244773089885712,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "white - metal",
+        "color": [
+          0.9434890747070312,
+          0.9434890747070312,
+          0.9434890747070312,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "white",
+        "color": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Street Lamp",
+    "dimensions": [
+      0.8123646974563599,
+      0.340653657913208,
+      2.480388879776001
+    ],
+    "materials": [
+      {
+        "name": "dark grey",
+        "color": [
+          0.053590692579746246,
+          0.053590692579746246,
+          0.053590692579746246,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "Material.005",
+        "color": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Traffic Light1",
+    "dimensions": [
+      0.34826013445854187,
+      0.33741047978401184,
+      2.8305931091308594
+    ],
+    "materials": [
+      {
+        "name": "red",
+        "color": [
+          0.8001965880393982,
+          0.03642001748085022,
+          0.04244773089885712,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "dark grey",
+        "color": [
+          0.053590692579746246,
+          0.053590692579746246,
+          0.053590692579746246,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "metal",
+        "color": [
+          0.22153505682945251,
+          0.22153505682945251,
+          0.22153505682945251,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "yellow",
+        "color": [
+          0.8010241389274597,
+          0.661573052406311,
+          0.0,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "light green",
+        "color": [
+          0.0,
+          0.8002588152885437,
+          0.004070793278515339,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "light metal.001",
+        "color": [
+          0.6892988085746765,
+          0.6892988085746765,
+          0.6892988085746765,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Traffic Light2",
+    "dimensions": [
+      2.5786614418029785,
+      5.179094314575195,
+      0.354078084230423
+    ],
+    "materials": [
+      {
+        "name": "red",
+        "color": [
+          0.8001965880393982,
+          0.03642001748085022,
+          0.04244773089885712,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "dark grey",
+        "color": [
+          0.053590692579746246,
+          0.053590692579746246,
+          0.053590692579746246,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "metal",
+        "color": [
+          0.22153505682945251,
+          0.22153505682945251,
+          0.22153505682945251,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "yellow",
+        "color": [
+          0.8010241389274597,
+          0.661573052406311,
+          0.0,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "light green",
+        "color": [
+          0.0,
+          0.8002588152885437,
+          0.004070793278515339,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "light metal.001",
+        "color": [
+          0.6892988085746765,
+          0.6892988085746765,
+          0.6892988085746765,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "TrashBin",
+    "dimensions": [
+      0.6582852602005005,
+      0.6582852602005005,
+      0.8042966723442078
+    ],
+    "materials": [
+      {
+        "name": "metal",
+        "color": [
+          0.22153505682945251,
+          0.22153505682945251,
+          0.22153505682945251,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "Material.011",
+        "color": [
+          0.053590692579746246,
+          0.053590692579746246,
+          0.053590692579746246,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "green dark dark.001",
+        "color": [
+          0.0048615699633955956,
+          0.013634873554110527,
+          0.0037043048068881035,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tree 1.001",
+    "dimensions": [
+      2.575509786605835,
+      2.532945394515991,
+      4.032220363616943
+    ],
+    "materials": [
+      {
+        "name": "Material.019",
+        "color": [
+          0.5668337345123291,
+          0.26291143894195557,
+          0.09362758696079254,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "Material.020",
+        "color": [
+          0.0,
+          0.8001810312271118,
+          0.030239347368478775,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tree 2.001",
+    "dimensions": [
+      1.3134747743606567,
+      1.3810670375823975,
+      2.9494709968566895
+    ],
+    "materials": [
+      {
+        "name": "Material.017",
+        "color": [
+          0.5668337345123291,
+          0.26291143894195557,
+          0.09362758696079254,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "Material.018",
+        "color": [
+          0.0,
+          0.8001810312271118,
+          0.030239347368478775,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tree 3.001",
+    "dimensions": [
+      1.2615114450454712,
+      1.2550866603851318,
+      2.4153285026550293
+    ],
+    "materials": [
+      {
+        "name": "Material.031",
+        "color": [
+          0.5668337345123291,
+          0.26291143894195557,
+          0.09362758696079254,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      },
+      {
+        "name": "Material.016",
+        "color": [
+          0.0,
+          0.8001810312271118,
+          0.030239347368478775,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "warehouse 1",
+    "dimensions": [
+      10.5,
+      5.999999046325684,
+      12.799999237060547
+    ],
+    "materials": [
+      {
+        "name": "color palette",
+        "color": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ],
+          [
+            "TEX_IMAGE",
+            "//..\\3D\\colorful-palette-full-spectrum-colors-brown-gray-shades-set-bright-rainbow-vector-illustration-148622578.webp"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "water tanks 1",
+    "dimensions": [
+      2.31000018119812,
+      5.0447845458984375,
+      4.234999656677246
+    ],
+    "materials": [
+      {
+        "name": "color palette",
+        "color": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ],
+          [
+            "TEX_IMAGE",
+            "//..\\3D\\colorful-palette-full-spectrum-colors-brown-gray-shades-set-bright-rainbow-vector-illustration-148622578.webp"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "water tower",
+    "dimensions": [
+      3.0000009536743164,
+      7.5050249099731445,
+      3.3818981647491455
+    ],
+    "materials": [
+      {
+        "name": "color palette",
+        "color": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1.0
+        ],
+        "nodes": [
+          [
+            "BSDF_PRINCIPLED",
+            ""
+          ],
+          [
+            "OUTPUT_MATERIAL",
+            ""
+          ],
+          [
+            "TEX_IMAGE",
+            "//..\\3D\\colorful-palette-full-spectrum-colors-brown-gray-shades-set-bright-rainbow-vector-illustration-148622578.webp"
+          ]
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+# Keep Godot source files consistent across Windows, macOS and Linux.
+* text=auto eol=lf
+*.cmd text eol=crlf
+
+# Editable asset sources and media are binary files.
+*.png binary
+*.jpg binary
+*.gif binary
+*.psd binary
+*.blend binary
+*.fbx binary
+*.wav binary
+*.ogg binary
+*.npz binary

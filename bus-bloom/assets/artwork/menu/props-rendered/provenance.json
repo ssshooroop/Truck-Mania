@@ -1,0 +1,16 @@
+{
+  "source": "../props.blend",
+  "objects": {
+    "tree-wide": "Tree 1.001",
+    "tree-tall": "Tree 2.001",
+    "tree-round": "Tree 3.001",
+    "bench": "Bench",
+    "hydrant": "Fire Hydrant",
+    "lamp": "Street Lamp",
+    "sign": "Sign1",
+    "fountain": "Fountain",
+    "traffic-light": "Traffic Light1",
+    "sign-alt": "Sign3"
+  },
+  "camera": "orthographic; fixed three-quarter view; transparent; original materials"
+}

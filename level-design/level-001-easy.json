@@ -1,0 +1,191 @@
+{
+  "metadata": {
+    "id": 1,
+    "name": "Первая отгрузка",
+    "difficulty": "EASY",
+    "buffer_slots": 3,
+    "color_count": 3,
+    "special_mechanics": [],
+    "generation_seed": 407
+  },
+  "grid": {
+    "width": 8,
+    "height": 8,
+    "walls": [],
+    "obstacles": []
+  },
+  "vehicles": [
+    {
+      "id": "V01",
+      "color": "#FF8614",
+      "capacity": 4,
+      "position": [
+        4,
+        7
+      ],
+      "direction": "S",
+      "length": 2
+    },
+    {
+      "id": "V02",
+      "color": "#7C828A",
+      "capacity": 4,
+      "position": [
+        6,
+        6
+      ],
+      "direction": "W",
+      "length": 2
+    },
+    {
+      "id": "V03",
+      "color": "#FF8614",
+      "capacity": 4,
+      "position": [
+        6,
+        7
+      ],
+      "direction": "W",
+      "length": 2
+    },
+    {
+      "id": "V04",
+      "color": "#FF3535",
+      "capacity": 4,
+      "position": [
+        7,
+        2
+      ],
+      "direction": "S",
+      "length": 2
+    },
+    {
+      "id": "V05",
+      "color": "#FF3535",
+      "capacity": 4,
+      "position": [
+        3,
+        0
+      ],
+      "direction": "W",
+      "length": 2
+    },
+    {
+      "id": "V06",
+      "color": "#7C828A",
+      "capacity": 4,
+      "position": [
+        5,
+        1
+      ],
+      "direction": "E",
+      "length": 2
+    },
+    {
+      "id": "V07",
+      "color": "#FF8614",
+      "capacity": 4,
+      "position": [
+        4,
+        2
+      ],
+      "direction": "N",
+      "length": 2
+    },
+    {
+      "id": "V08",
+      "color": "#FF3535",
+      "capacity": 4,
+      "position": [
+        0,
+        5
+      ],
+      "direction": "W",
+      "length": 2
+    }
+  ],
+  "passenger_queue": [
+    "#FF8614",
+    "#FF8614",
+    "#FF8614",
+    "#FF8614",
+    "#FF3535",
+    "#FF3535",
+    "#FF3535",
+    "#FF3535",
+    "#7C828A",
+    "#7C828A",
+    "#7C828A",
+    "#7C828A",
+    "#FF8614",
+    "#FF8614",
+    "#FF8614",
+    "#FF8614",
+    "#FF3535",
+    "#FF3535",
+    "#FF3535",
+    "#FF3535",
+    "#7C828A",
+    "#7C828A",
+    "#7C828A",
+    "#7C828A",
+    "#FF8614",
+    "#FF8614",
+    "#FF8614",
+    "#FF8614",
+    "#FF3535",
+    "#FF3535",
+    "#FF3535",
+    "#FF3535"
+  ],
+  "golden_path": [
+    "V01",
+    "V02",
+    "V03",
+    "V04",
+    "V05",
+    "V06",
+    "V07",
+    "V08"
+  ],
+  "economy": {
+    "status": "proposed_starting_values",
+    "currency": "coins",
+    "completion_reward": 20,
+    "reward_policy": "first_completion",
+    "max_buffer_slots": 5,
+    "buffer_slot_unlocks": [
+      {
+        "slot_number": 4,
+        "cost": 60,
+        "requires_buffer_slots": 3
+      },
+      {
+        "slot_number": 5,
+        "cost": 100,
+        "requires_buffer_slots": 4
+      }
+    ]
+  },
+  "tutorial": [
+    {
+      "trigger": "level_start",
+      "message": "Нажми оранжевую машину — она заберёт кирпичи.",
+      "focus_vehicle_ids": [
+        "V01"
+      ]
+    },
+    {
+      "trigger": "first_blocked_tap",
+      "message": "Сначала освободи путь перед машиной."
+    },
+    {
+      "trigger": "first_waiting_vehicle",
+      "message": "Здесь машина ждёт грузы своего цвета."
+    },
+    {
+      "trigger": "first_level_complete",
+      "message": "+20 монет! Копи на дополнительное место."
+    }
+  ]
+}
