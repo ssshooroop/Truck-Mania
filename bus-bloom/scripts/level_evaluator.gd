@@ -47,6 +47,19 @@ var tutorial_tries := 40
 var tutorial_strength := 8
 var tutorial_min_recoverable := 1.0
 var tutorial_min_post_win := 0.6
+var shuffle_tutorial_enabled := true
+## Levels that need a booster by construction (slot gates) are kept only if allowed.
+var allow_slot_gates := true
+## Booster onboarding: a level winnable without help where a novice usually
+## deadlocks, then wins with the free booster the hint offers.
+var onboarding_booster := "slot"
+var onboarding_skill := 0.35
+var onboarding_runs := 120
+var onboarding_max_vehicles := 11
+var onboarding_min_deadlock := 0.6
+var onboarding_min_post_win := 0.9
+## Novice reference for the early-level attempt cap (LevelSequencer).
+var novice_skill := 0.35
 ## interest = gap * skill_gap + traps * trap_score + near_miss * near_miss
 ##          + tension * mean_peak_fill, times luck_penalty when experts fail.
 var interest_weights := {"gap": 0.35, "traps": 0.25, "near_miss": 0.2, "tension": 0.2}
@@ -77,6 +90,16 @@ func configure(settings: Dictionary) -> void:
 	tutorial_strength = int(tutorial.get("strength", tutorial_strength))
 	tutorial_min_recoverable = float(tutorial.get("min_recoverable", tutorial_min_recoverable))
 	tutorial_min_post_win = float(tutorial.get("min_post_win", tutorial_min_post_win))
+	shuffle_tutorial_enabled = bool(tutorial.get("enabled", shuffle_tutorial_enabled))
+	allow_slot_gates = bool(settings.get("allow_slot_gates", allow_slot_gates))
+	novice_skill = float(settings.get("novice_skill", novice_skill))
+	var onboarding: Dictionary = settings.get("booster_tutorial", {})
+	onboarding_booster = str(onboarding.get("booster", onboarding_booster))
+	onboarding_skill = float(onboarding.get("skill", onboarding_skill))
+	onboarding_runs = int(onboarding.get("runs", onboarding_runs))
+	onboarding_max_vehicles = int(onboarding.get("max_vehicles", onboarding_max_vehicles))
+	onboarding_min_deadlock = float(onboarding.get("min_deadlock", onboarding_min_deadlock))
+	onboarding_min_post_win = float(onboarding.get("min_post_win", onboarding_min_post_win))
 	interest_weights.merge(settings.get("interest_weights", {}), true)
 	ideal_trap_ratio = float(settings.get("ideal_trap_ratio", ideal_trap_ratio))
 	expert_fail_limit = float(settings.get("expert_fail_limit", expert_fail_limit))
@@ -96,7 +119,7 @@ func evaluate(candidate: Dictionary, rng_seed: int) -> Dictionary:
 	}
 	result.merge(candidate.metrics)
 	var tutorial_ok := false
-	if exact.statuses.get(str(base_slots), "") == "unsolvable" \
+	if shuffle_tutorial_enabled and exact.statuses.get(str(base_slots), "") == "unsolvable" \
 			and int(candidate.metrics.vehicle_count) <= tutorial_max_vehicles:
 		var tutorial_rng := RandomNumberGenerator.new()
 		tutorial_rng.seed = rng_seed + 1
@@ -106,7 +129,8 @@ func evaluate(candidate: Dictionary, rng_seed: int) -> Dictionary:
 		tutorial_ok = float(profile.tutorial_recoverable) >= tutorial_min_recoverable \
 			and float(profile.tutorial_post_win) >= tutorial_min_post_win
 	result["shuffle_tutorial_eligible"] = tutorial_ok
-	if not tutorial_ok and (minimum == -1 or minimum > base_slots + 1):
+	if not tutorial_ok and (minimum == -1 or minimum > base_slots + 1 \
+			or (minimum > base_slots and not allow_slot_gates)):
 		result["category"] = "rejected"
 		result["reason"] = "needs_too_many_slots" if minimum != -1 else "unsolved"
 		return result
@@ -133,6 +157,16 @@ func evaluate(candidate: Dictionary, rng_seed: int) -> Dictionary:
 		result["category"] = "regular"
 		result["tier"] = _tier(fail)
 		result["soft_gate_eligible"] = fail >= float(soft_gate_fail[0]) and fail <= float(soft_gate_fail[1])
+		var novice_fail := float(fail_by_skill.get(str(novice_skill), fail))
+		result["novice_attempts"] = 1.0 / maxf(0.01, 1.0 - novice_fail)
+		var eligible := false
+		if int(candidate.metrics.vehicle_count) <= onboarding_max_vehicles:
+			var onboarding: Dictionary = solver.onboarding_profile(base_slots, onboarding_runs, onboarding_skill,
+				onboarding_booster, rng)
+			result.merge(onboarding)
+			eligible = float(onboarding.onboarding_deadlock_rate) >= onboarding_min_deadlock \
+				and float(onboarding.onboarding_post_win) >= onboarding_min_post_win
+		result["booster_tutorial_eligible"] = eligible
 	elif not exact.proven or exact.statuses.get(str(base_slots), "") != "unsolvable":
 		result["category"] = "rejected"
 		result["reason"] = "base_slots_not_proven_unsolvable"

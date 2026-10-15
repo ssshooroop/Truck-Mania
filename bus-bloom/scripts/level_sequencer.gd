@@ -20,10 +20,17 @@ var level_count := 100
 var onboarding: Array = ["easy", "easy", "medium", "easy"]
 var rhythm: Array = ["easy", "medium", "hard", "medium"]
 var gate_every := 5
-var gate_pattern: Array = ["slot_gate", "soft_gate"]
-var first_gate_level := 10
+var gate_pattern: Array = ["soft_gate", "hard", "hard", "hard"]
+var first_gate_level := 20
 ## Levels that teach the shuffle: unsolvable without it, a hint offers it.
-var shuffle_tutorial_levels: Array = [6, 8, 12]
+var shuffle_tutorial_levels: Array = []
+## Levels that teach one booster: winnable alone, a novice usually deadlocks,
+## the hint gives the booster for free.
+var booster_tutorial_levels: Array = [3]
+## The first early_levels levels must take a novice at most early_max_attempts
+## expected attempts without boosters (LevelEvaluator novice_attempts).
+var early_levels := 10
+var early_max_attempts := 3.5
 var ramp_levels := 100
 ## Target band per type: [value at level 1, value at ramp_levels]. Regular
 ## tiers and soft gates use the base-slot fail rate; slot gates use the fail
@@ -36,6 +43,7 @@ var targets := {
 	"soft_gate": [0.55, 0.80],
 	"slot_gate": [0.05, 0.35],
 	"shuffle_tutorial": [0.0, 0.1],
+	"booster_tutorial": [0.0, 0.1],
 }
 ## Preferred truck count [min, max] at level 1 and at ramp_levels.
 var vehicles_start: Array = [8, 11]
@@ -55,6 +63,9 @@ func configure(settings: Dictionary) -> void:
 	gate_pattern = settings.get("gate_pattern", gate_pattern)
 	first_gate_level = int(settings.get("first_gate_level", first_gate_level))
 	shuffle_tutorial_levels = settings.get("shuffle_tutorial_levels", shuffle_tutorial_levels)
+	booster_tutorial_levels = settings.get("booster_tutorial_levels", booster_tutorial_levels)
+	early_levels = int(settings.get("early_levels", early_levels))
+	early_max_attempts = float(settings.get("early_max_attempts", early_max_attempts))
 	ramp_levels = int(settings.get("ramp_levels", ramp_levels))
 	targets.merge(settings.get("targets", {}), true)
 	vehicles_start = settings.get("vehicles_start", vehicles_start)
@@ -66,6 +77,9 @@ func configure(settings: Dictionary) -> void:
 
 ## Planned type of a 1-based level number.
 func slot_type(number: int) -> String:
+	for tutorial in booster_tutorial_levels:
+		if int(tutorial) == number:
+			return "booster_tutorial"
 	for tutorial in shuffle_tutorial_levels:
 		if int(tutorial) == number:
 			return "shuffle_tutorial"
@@ -94,7 +108,7 @@ func build(records: Array) -> Dictionary:
 		var pick := {}
 		var actual := ""
 		for type: String in order:
-			pick = _best(records, used, type, progress, previous)
+			pick = _best(records, used, type, progress, previous, number)
 			if not pick.is_empty():
 				actual = type
 				break
@@ -139,6 +153,9 @@ func build(records: Array) -> Dictionary:
 			"interest": snappedf(float(evaluation.get("interest", 0.0)), 0.001),
 			"trap_ratio": snappedf(float(evaluation.get("trap_ratio", 0.0)), 0.001),
 			"critical_share": snappedf(float(evaluation.get("critical_share", 0.0)), 0.001),
+			"novice_attempts": snappedf(float(evaluation.get("novice_attempts", 0.0)), 0.01),
+			"onboarding_deadlock_rate": snappedf(float(evaluation.get("onboarding_deadlock_rate", 0.0)), 0.001),
+			"onboarding_post_win": snappedf(float(evaluation.get("onboarding_post_win", 0.0)), 0.001),
 		})
 	return {"levels": levels, "summary": _summary(levels, records.size(), used.size())}
 
@@ -149,6 +166,8 @@ func _matches(evaluation: Dictionary, type: String) -> bool:
 	match type:
 		"shuffle_tutorial":
 			return evaluation.get("shuffle_tutorial_eligible", false)
+		"booster_tutorial":
+			return evaluation.category == "regular" and evaluation.get("booster_tutorial_eligible", false)
 		"slot_gate":
 			return evaluation.category == "slot_gate"
 		"soft_gate":
@@ -159,10 +178,12 @@ func _matches(evaluation: Dictionary, type: String) -> bool:
 func _measure(evaluation: Dictionary, type: String) -> float:
 	if type == "shuffle_tutorial":
 		return 1.0 - float(evaluation.get("tutorial_post_win", 0.0))
+	if type == "booster_tutorial":
+		return 1.0 - float(evaluation.get("onboarding_post_win", 0.0))
 	return float(evaluation.post_rescue_fail) if type == "slot_gate" else float(evaluation.fail_rate)
 
 func _best(records: Array, used: Dictionary, type: String, progress: float,
-		previous: Dictionary) -> Dictionary:
+		previous: Dictionary, number: int = 0) -> Dictionary:
 	var band: Array = targets.get(type, [0.0, 1.0])
 	var target := lerpf(float(band[0]), float(band[1]), progress)
 	var low := roundi(lerpf(float(vehicles_start[0]), float(vehicles_end[0]), progress))
@@ -174,6 +195,10 @@ func _best(records: Array, used: Dictionary, type: String, progress: float,
 			continue
 		var evaluation: Dictionary = record.evaluation
 		if not _matches(evaluation, type) or float(evaluation.get("interest", 1.0)) < min_interest:
+			continue
+		# Early levels keep progress continuous even for a novice (tutorials excepted).
+		if number <= early_levels and type != "booster_tutorial" \
+				and float(evaluation.get("novice_attempts", 99.0)) > early_max_attempts:
 			continue
 		var measure := _measure(evaluation, type)
 		var count: int = evaluation.vehicle_count

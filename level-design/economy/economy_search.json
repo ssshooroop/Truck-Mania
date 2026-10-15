@@ -19,6 +19,6 @@
   },
   "objective": {
     "lambdas": [0.0, 0.005, 0.01, 0.02, 0.04, 0.08],
-    "constraints": {"retention_level_10_min": 0.70, "wall_share_max": 0.25}
+    "constraints": {"retention_level_10_min": 0.70, "wall_share_max": 0.25, "early_max_attempts": 3.5}
   }
 }

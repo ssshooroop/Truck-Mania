@@ -56,6 +56,12 @@ func _run() -> void:
 		level["min_slots"] = evaluation.min_slots
 		level["solution"] = evaluation.solution
 		level["campaign"] = entry
+		if entry.type == "booster_tutorial":
+			# The level is winnable alone; at the first deadlock the game shows a hint
+			# and gives this booster for free.
+			level["tutorial"] = {"booster": evaluator.onboarding_booster, "hint": "first_deadlock",
+				"free": true, "novice_deadlock_rate": entry.onboarding_deadlock_rate,
+				"post_booster_win": entry.onboarding_post_win}
 		if entry.type == "shuffle_tutorial":
 			# The game shows the shuffle hint at the first deadlock, gives the shuffle
 			# for free and picks it with LevelSolver.verified_shuffle.

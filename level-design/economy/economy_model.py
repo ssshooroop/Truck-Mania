@@ -188,7 +188,7 @@ def fixed_completion_coins(number: int, cfg: dict, by_level: dict) -> float:
 def booster_applies(level: dict, number: int, fails_here: int, cfg: dict) -> bool:
     """Extra Slot for the whole level is considered on hard levels and after a fail."""
     b = cfg['booster']
-    return level['type'] != 'shuffle_tutorial' and number >= b['unlock_level'] \
+    return level['type'] not in ('shuffle_tutorial', 'booster_tutorial') and number >= b['unlock_level'] \
         and (level['type'] in HARD_TYPES or fails_here > 0)
 
 
@@ -301,9 +301,14 @@ class Player:
                 self.result.tutorial_shuffles += 1
                 p = level['tutorial_again']
                 tools = 1
+            tutorial = level.get('tutorial_booster') if level['type'] == 'booster_tutorial' else None
             while rng.random() < p:
                 tool = None
-                if tools < cfg['rescue']['max_tools']:
+                if tutorial and tools == 0:
+                    # Onboarding hint: the first deadlock gets this booster for free.
+                    tool = tutorial
+                    self.result.tutorial_shuffles += 1
+                elif tools < cfg['rescue']['max_tools']:
                     tool = self._rescue(level, added, bought, fails_here)
                 if tool is None:
                     gave_up = True
@@ -312,7 +317,7 @@ class Player:
                 p = again_after(level, tool, added)
                 if tool == 'slot':
                     added += 1
-                    bought += 1
+                    bought += 0 if tutorial and tools == 1 else 1
                 elif tool == 'crane':
                     added += 1      # the crane also opens a slot place
             if gave_up:

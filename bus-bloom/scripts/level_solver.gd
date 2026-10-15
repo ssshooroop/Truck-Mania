@@ -319,6 +319,38 @@ func tutorial_profile(base_slots: int, runs: int, tries: int, strength: int, nod
 		"tutorial_post_win": float(wins) / recovered if recovered > 0 else 0.0,
 	}
 
+## Booster onboarding check for a level that is winnable without help. A
+## player of `skill` plays `runs` times; at the first deadlock the tutorial
+## gives `booster` ("slot", "crane" or "shuffle") for free.
+## - deadlock_rate: share of runs that hit a deadlock, i.e. see the hint;
+## - post_win: share of those that then win without further help.
+func onboarding_profile(base_slots: int, runs: int, skill: float, booster: String,
+		rng: RandomNumberGenerator, strength: int = 16) -> Dictionary:
+	var deadlocks := 0
+	var wins := 0
+	for run in runs:
+		var state := _initial_state(base_slots)
+		if _play_until_deadlock(state, skill, rng):
+			continue
+		deadlocks += 1
+		var helped := false
+		match booster:
+			"crane":
+				helped = crane_truck(state)
+			"shuffle":
+				state["queue"] = Boosters.smart_shuffle(state.get("queue", queue), rng,
+					int(state["offset"]), _docked(state), strength)
+				helped = true
+			_:
+				state["bays"].append(-1)
+				helped = true
+		if helped and _play_until_deadlock(state, skill, rng):
+			wins += 1
+	return {
+		"onboarding_deadlock_rate": float(deadlocks) / runs,
+		"onboarding_post_win": float(wins) / deadlocks if deadlocks > 0 else 0.0,
+	}
+
 ## Runtime helper for the onboarding hint: a smart shuffle of `strength` that
 ## the exact solver confirms winnable from `state`, or the last draw if none
 ## was found within `tries`. state: as built by state_from_model.

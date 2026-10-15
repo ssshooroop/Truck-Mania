@@ -220,6 +220,14 @@ def evaluate_segment(levels: list, cfg: dict, seg: dict, by_level: dict,
                 clean += group * (1 - p)
                 dead = group * p
                 out['deadlocks'][i] += dead.sum()
+                if level['type'] == 'booster_tutorial' and level.get('tutorial_booster'):
+                    # Onboarding hint: the first deadlock gets this booster for free.
+                    tool = level['tutorial_booster']
+                    out['tutorial_shuffles'][i] += dead.sum()
+                    q = em.again_after(level, tool, added)
+                    rescued_win += dead * (1 - q)
+                    resolve(dead * q, added + (1 if tool in ('slot', 'crane') else 0), 0, 1)
+                    continue
                 if level['type'] == 'shuffle_tutorial':
                     # Onboarding: free verified shuffle at the deadlock, then a possible misplay.
                     out['tutorial_shuffles'][i] += dead.sum()

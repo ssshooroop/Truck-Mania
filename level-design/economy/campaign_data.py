@@ -18,6 +18,8 @@ SKILL_GRID = (0.0, 0.35, 0.7, 0.95)
 
 def slot_type(number: int, seq: dict) -> str:
     """Same schedule as LevelSequencer.slot_type."""
+    if number in seq.get('booster_tutorial_levels', []):
+        return 'booster_tutorial'
     if number in seq.get('shuffle_tutorial_levels', []):
         return 'shuffle_tutorial'
     onboarding = seq['onboarding']
@@ -78,6 +80,7 @@ def _normalise(entry: dict) -> dict:
     entry['shuffle_by_strength'] = {int(k): [float(x) for x in v['again']]
                                    for k, v in (entry.get('shuffle_by_strength') or {}).items()}
     entry['tutorial_again'] = 1.0 - float(entry.get('tutorial_post_win') or 0.0)
+    entry.setdefault('tutorial_booster', 'slot' if entry['type'] == 'booster_tutorial' else None)
     entry['fail_by_skill'] = sorted((float(s), float(p)) for s, p in entry['fail_by_skill'].items())
     return entry
 
@@ -96,6 +99,8 @@ def synthesize(pipeline_cfg: dict, count: int | None = None, seed: int = 7) -> l
         v_high = seq['vehicles_start'][1] + (seq['vehicles_end'][1] - seq['vehicles_start'][1]) * progress
         vehicles = round(rng.uniform(v_low, v_high))
         tutorial = None
+        if kind == 'booster_tutorial':
+            target = 0.35
         if kind == 'shuffle_tutorial':
             kind, tutorial = 'shuffle_tutorial', 0.88
             target = 0.3
@@ -163,6 +168,7 @@ def load_levels(path: Path) -> list:
             'shuffle_again': c.get('shuffle_again'), 'shuffle_by_strength': c.get('shuffle_by_strength'),
             'swap_again': c.get('swap_again'), 'crane_again': c.get('crane_again'),
             'tutorial_post_win': c.get('tutorial_post_win') if c['type'] == 'shuffle_tutorial' else None,
+            'tutorial_booster': (level.get('tutorial') or {}).get('booster') if c['type'] == 'booster_tutorial' else None,
             'shuffle_hopeless': c.get('shuffle_hopeless', 0.0), 'shuffle_spread': c.get('shuffle_spread', 0.0),
             'moves': c['vehicle_count'], 'cargo': len(level['queue']), 'synthetic': False,
         }))

@@ -213,28 +213,31 @@ func _test_evaluator_categories() -> void:
 	print("  evaluator categories seen: ", seen.keys())
 
 func _test_sequencer_schedule() -> void:
+	var config = JSON.parse_string(FileAccess.get_file_as_string("res://config/level_pipeline.json"))
 	var sequencer = Sequencer.new()
+	sequencer.configure(config.sequence)
 	check(sequencer.slot_type(1) == "easy", "Level 1 is onboarding")
-	check(sequencer.slot_type(6) == "shuffle_tutorial" and sequencer.slot_type(12) == "shuffle_tutorial",
-		"Levels 6 and 12 teach the shuffle")
-	check(sequencer.slot_type(5) == "hard", "Gates before first_gate_level are plain hard levels")
-	check(sequencer.slot_type(10) == "slot_gate", "Level 10 is the first slot gate")
-	check(sequencer.slot_type(15) == "soft_gate", "Level 15 is a soft gate")
-	check(sequencer.slot_type(20) == "slot_gate", "Gate types alternate")
-	check(sequencer.slot_type(11) == "easy", "A breather follows every gate")
-	# Synthetic pool: the sequencer must honour types and never reuse a level.
+	check(sequencer.slot_type(3) == "booster_tutorial", "Level 3 teaches one booster")
+	check(sequencer.slot_type(5) == "hard" and sequencer.slot_type(10) == "hard",
+		"Gates before first_gate_level are plain hard levels")
+	check(sequencer.slot_type(20) == "soft_gate" and sequencer.slot_type(40) == "soft_gate",
+		"A soft gate every 20 levels")
+	check(sequencer.slot_type(25) == "hard" and sequencer.slot_type(30) == "hard", "Hard levels between gates")
+	check(sequencer.slot_type(21) == "easy", "A breather follows every gate")
+	for number in range(1, 101):
+		check(not sequencer.slot_type(number) in ["slot_gate", "shuffle_tutorial"],
+			"Level %d never needs a booster by construction" % number)
+	# Synthetic pool: the sequencer must honour types, the early cap and never reuse a level.
 	var records: Array = []
-	for index in 200:
-		var category := "slot_gate" if index % 10 == 0 else "regular"
+	for index in 300:
 		var fail := float(index % 97) / 96.0
-		records.append({"index": index, "evaluation": {"seed": index, "category": category,
-			"tier": "slot_gate" if category == "slot_gate" else _tier_of(fail),
-			"soft_gate_eligible": fail >= 0.5 and fail <= 0.85,
-			"fail_rate": 1.0 if category == "slot_gate" else fail,
-			"post_rescue_fail": float(index % 7) / 20.0, "expected_rescues": 1.0 if category == "slot_gate" else fail,
+		records.append({"index": index, "evaluation": {"seed": index, "category": "regular",
+			"tier": _tier_of(fail), "soft_gate_eligible": fail >= 0.5 and fail <= 0.85,
+			"fail_rate": fail, "post_rescue_fail": float(index % 7) / 20.0, "expected_rescues": fail,
 			"speed_bonus_rate": 0.0, "clutch_rate": 0.0, "min_slots": 3, "vehicle_count": 8 + index % 13,
 			"color_count": 3 + index % 3, "queue_window": 1 + index % 4, "blocking_depth": 3,
-			"shuffle_tutorial_eligible": index % 25 == 5, "tutorial_post_win": 0.9}})
+			"novice_attempts": 1.0 / maxf(0.05, 1.0 - minf(0.95, fail * 1.4)),
+			"booster_tutorial_eligible": index % 25 == 5, "onboarding_post_win": 0.95}})
 	sequencer.level_count = 40
 	var campaign: Dictionary = sequencer.build(records)
 	var used := {}
@@ -242,8 +245,10 @@ func _test_sequencer_schedule() -> void:
 		check(entry.type != "missing", "Level %d was filled" % entry.level)
 		check(not used.has(entry.record_index), "Record %d is used once" % entry.record_index)
 		used[entry.record_index] = true
-		check(entry.type == entry.planned, "Level %d keeps its planned type %s" % [entry.level, entry.planned])
-	check(campaign.summary.by_type.get("slot_gate", 0) == 4, "Forty levels hold four slot gates")
+		if entry.level <= 10 and entry.type != "booster_tutorial":
+			check(float(entry.novice_attempts) <= 3.5, "Level %d takes a novice at most 3.5 attempts" % entry.level)
+	check(campaign.levels[2].type == "booster_tutorial", "Level 3 is the booster tutorial")
+	check(campaign.summary.by_type.get("soft_gate", 0) == 2, "Forty levels hold two soft gates")
 
 func _tier_of(fail: float) -> String:
 	if fail <= 0.15:

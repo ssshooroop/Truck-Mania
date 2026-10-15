@@ -96,7 +96,20 @@ class Evaluator:
 
     def __call__(self, cfg: dict) -> dict:
         self.calls += 1
-        return exact_model.evaluate(self.campaign(cfg), cfg, self.achievements)['summary']
+        levels = self.campaign(cfg)
+        summary = exact_model.evaluate(levels, cfg, self.achievements)['summary']
+        summary['early_novice_attempts'] = early_novice_attempts(levels)
+        return summary
+
+
+def early_novice_attempts(levels: list, count: int = 10, skill: float = 0.35) -> float:
+    """Worst expected attempts without boosters for a novice over the first levels."""
+    worst = 1.0
+    for level in levels[:count]:
+        if level['type'] in ('booster_tutorial', 'shuffle_tutorial'):
+            continue
+        worst = max(worst, 1.0 / max(0.01, 1.0 - em.fail_at(level, skill)))
+    return worst
 
 
 def objective(s: dict, lam: float, constraints: dict) -> float:
@@ -105,6 +118,9 @@ def objective(s: dict, lam: float, constraints: dict) -> float:
     floor = constraints.get('retention_level_10_min')
     if floor is not None:
         value -= 10.0 * max(0.0, floor - s['retention'].get(10, 0.0))
+    early = constraints.get('early_max_attempts')
+    if early is not None and 'early_novice_attempts' in s:
+        value -= 1.0 * max(0.0, s['early_novice_attempts'] - early)
     walls = constraints.get('wall_share_max')
     if walls is not None:
         value -= 10.0 * max(0.0, s['wall_share'] - walls)
@@ -197,6 +213,7 @@ def headline(s: dict) -> dict:
         'extra_slot_boosters': round(s['boosters'], 2),
         'balance_med_15_50': round(statistics.fmean(medians), 0) if medians else None,
         'wall_share': round(s['wall_share'], 3),
+        'early_attempts': round(s.get('early_novice_attempts', 0.0), 2),
         'sink_faucet': round(s['sink_faucet'], 3),
     }
 
