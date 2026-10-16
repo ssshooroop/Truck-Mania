@@ -139,6 +139,22 @@ def attempt_seconds(level: dict, cfg: dict) -> float:
     return s['seconds_per_attempt'] + s['seconds_per_move'] * level['moves']
 
 
+def win_hazards(level: dict, number: int, segment: dict, cfg: dict, shows: dict, p_player: float) -> tuple:
+    """Churn after a win: (easy clean win, win after effort).
+
+    Flow channel: a first-attempt clean win on a level whose deadlock chance
+    for this player is below flow_low bores (up to x(1 + flow_boredom) at zero
+    challenge); a win after a fail or a booster satisfies (x(1 - win_relief)).
+    Interest and interstitials act on both.
+    """
+    b = cfg['behaviour']
+    base = segment['churn_win'] * (1 + b['boredom_weight'] * (1 - level['interest']))
+    low = b.get('flow_low', 0.0)
+    boredom = b.get('flow_boredom', 0.0) * max(0.0, (low - p_player) / low) if low > 0 else 0.0
+    extra = shows.get(number, 0.0)
+    return (min(1.0, base * (1 + boredom) + extra),
+            min(1.0, base * (1 - b.get('win_relief', 0.0)) + extra))
+
 def interstitial_schedule(levels: list, cfg: dict) -> dict:
     """{level number: extra churn hazard} for the levels followed by an interstitial.
 
@@ -336,10 +352,11 @@ class Player:
             self.result.balance.append(self.balance)
             self.result.earned.append(self._earned)
             self.result.spent.append(self._spent)
-            hazard = seg['churn_win'] * (1 + b['boredom_weight'] * (1 - level['interest']))
+            easy, effort = win_hazards(level, number, seg, cfg, self.shows,
+                                       start_fail(level, skill_at(self.completed - 1, seg), 0))
+            hazard = easy if attempts == 1 and self._clean_win else effort
             if number in self.shows:
                 self.result.interstitials += 1
-                hazard += self.shows[number]
             if rng.random() < hazard:
                 self.result.churned_at = number + 1
                 return False
@@ -347,6 +364,7 @@ class Player:
 
     def _win(self, level: dict, number: int, tools: int) -> None:
         cfg, rng = self.cfg, self.rng
+        self._clean_win = tools == 0
         if tools == 0:
             self.streak += 1
             reward = base_reward(number, cfg) + streak_bonus(self.streak, cfg)

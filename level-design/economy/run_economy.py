@@ -102,8 +102,9 @@ class Evaluator:
         return summary
 
 
-def early_novice_attempts(levels: list, count: int = 10, skill: float = 0.35) -> float:
-    """Worst expected attempts without boosters for a novice over the first levels."""
+def early_novice_attempts(levels: list, count: int = 10, skill: float = 0.9) -> float:
+    """Worst expected attempts without boosters over the first levels for the
+    reference player (skill 0.9 = the ordinary planning player)."""
     worst = 1.0
     for level in levels[:count]:
         if level['type'] in ('booster_tutorial', 'shuffle_tutorial'):

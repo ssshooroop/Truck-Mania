@@ -204,6 +204,9 @@ func _test_evaluator_categories() -> void:
 			"regular":
 				check(evaluation.min_slots <= 3, "Regular level %d is solvable with base slots" % level_seed)
 				check(evaluation.fail_rate >= 0.0 and evaluation.fail_rate <= 1.0, "Fail rate is a probability")
+				check(float(evaluation.ordinary_fail) <= float(evaluation.fail_rate) + 0.15,
+					"The planning player does not do much worse than the greedy one on %d" % level_seed)
+				check(float(evaluation.ordinary_attempts) >= 1.0, "Attempts are at least one on %d" % level_seed)
 			"slot_gate":
 				check(evaluation.min_slots == 4 and evaluation.min_slots_proven,
 					"Slot gate %d is proven to need exactly one extra slot" % level_seed)
@@ -237,6 +240,7 @@ func _test_sequencer_schedule() -> void:
 			"speed_bonus_rate": 0.0, "clutch_rate": 0.0, "min_slots": 3, "vehicle_count": 8 + index % 13,
 			"color_count": 3 + index % 3, "queue_window": 1 + index % 4, "blocking_depth": 3,
 			"novice_attempts": 1.0 / maxf(0.05, 1.0 - minf(0.95, fail * 1.4)),
+			"ordinary_attempts": 1.0 / maxf(0.05, 1.0 - minf(0.95, fail)), "critical_share": 0.3,
 			"booster_tutorial_eligible": index % 25 == 5, "onboarding_post_win": 0.95}})
 	sequencer.level_count = 40
 	var campaign: Dictionary = sequencer.build(records)
@@ -246,7 +250,7 @@ func _test_sequencer_schedule() -> void:
 		check(not used.has(entry.record_index), "Record %d is used once" % entry.record_index)
 		used[entry.record_index] = true
 		if entry.level <= 10 and entry.type != "booster_tutorial":
-			check(float(entry.novice_attempts) <= 3.5, "Level %d takes a novice at most 3.5 attempts" % entry.level)
+			check(float(entry.ordinary_attempts) <= 3.5, "Level %d takes an ordinary player at most 3.5 attempts" % entry.level)
 	check(campaign.levels[2].type == "booster_tutorial", "Level 3 is the booster tutorial")
 	check(campaign.summary.by_type.get("soft_gate", 0) == 2, "Forty levels hold two soft gates")
 

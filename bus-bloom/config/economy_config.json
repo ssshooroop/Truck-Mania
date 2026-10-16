@@ -37,20 +37,23 @@
     "near_miss_weight": 0.4,
     "streak_weight": 0.15,
     "boredom_weight": 1.2,
-    "frustration_weight": 0.6,
+    "frustration_weight": 0.3,
+    "flow_low": 0.25,
+    "flow_boredom": 1.0,
+    "win_relief": 0.3,
     "wall_churn_multiplier": 2.0,
     "interstitial_churn": 0.004,
     "interstitial_fatigue": 0.25
   },
   "segments": [
-    {"name": "casual", "share": 0.55, "skill_start": 0.40, "skill_end": 0.70, "learning_levels": 50,
+    {"name": "casual", "share": 0.55, "skill_start": 0.40, "skill_end": 0.80, "learning_levels": 50,
      "rv_double_rate": 0.20, "rv_rescue_rate": 0.55, "buy_rescue_base": 0.55, "tool_weights": {"slot": 1.0, "shuffle": 1.5, "swap": 0.3, "crane": 0.6}, "iap_rate": 0.0,
-     "booster_rate": 0.05, "cosmetic_rate": 0.03, "churn_win": 0.010, "churn_fail": 0.040},
-    {"name": "core", "share": 0.40, "skill_start": 0.60, "skill_end": 0.85, "learning_levels": 40,
+     "booster_rate": 0.05, "cosmetic_rate": 0.03, "churn_win": 0.010, "churn_fail": 0.0040},
+    {"name": "core", "share": 0.40, "skill_start": 0.70, "skill_end": 0.95, "learning_levels": 40,
      "rv_double_rate": 0.35, "rv_rescue_rate": 0.65, "buy_rescue_base": 0.75, "tool_weights": {"slot": 1.0, "shuffle": 1.0, "swap": 0.5, "crane": 0.8}, "iap_rate": 0.0,
-     "booster_rate": 0.10, "cosmetic_rate": 0.06, "churn_win": 0.006, "churn_fail": 0.025},
-    {"name": "payer", "share": 0.05, "skill_start": 0.60, "skill_end": 0.85, "learning_levels": 40,
+     "booster_rate": 0.10, "cosmetic_rate": 0.06, "churn_win": 0.006, "churn_fail": 0.0025},
+    {"name": "payer", "share": 0.05, "skill_start": 0.70, "skill_end": 0.95, "learning_levels": 40,
      "rv_double_rate": 0.20, "rv_rescue_rate": 0.30, "buy_rescue_base": 0.90, "tool_weights": {"slot": 1.0, "shuffle": 0.67, "swap": 1.0, "crane": 1.2}, "iap_rate": 0.35,
-     "booster_rate": 0.20, "cosmetic_rate": 0.15, "churn_win": 0.004, "churn_fail": 0.015}
+     "booster_rate": 0.20, "cosmetic_rate": 0.15, "churn_win": 0.004, "churn_fail": 0.0015}
   ]
 }

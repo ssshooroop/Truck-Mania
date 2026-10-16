@@ -42,6 +42,10 @@ func _run() -> void:
 	if config.has("tutorial_pool"):
 		_generate_pool(config.tutorial_pool, "tutorial ", generator, evaluator, records, candidates,
 			stats, started)
+	# Further targeted pools, e.g. for hard levels: [{"label": ..., size, first_seed, ...}].
+	for extra: Dictionary in config.get("extra_pools", []):
+		_generate_pool(extra, str(extra.get("label", "extra")) + " ", generator, evaluator, records,
+			candidates, stats, started)
 
 	var campaign: Dictionary = sequencer.build(records)
 	campaign.summary["pool_breakdown"] = stats
@@ -92,8 +96,10 @@ func _generate_pool(pool: Dictionary, label: String, generator, evaluator, recor
 		var window := params.randi_range(int(pool.queue_windows[0]), int(pool.queue_windows[1]))
 		var twins: Array = pool.get("same_color_chance", [0.0, 0.0])
 		var same_color := params.randf_range(float(twins[0]), float(twins[1]))
+		var runs = pool.max_run
+		var max_run: int = params.randi_range(int(runs[0]), int(runs[1])) if runs is Array else int(runs)
 		var candidate: Dictionary = generator.generate(level_seed, vehicle_count, colors,
-			int(pool.placement_attempts), window, int(pool.max_run), same_color)
+			int(pool.placement_attempts), window, max_run, same_color)
 		if not candidate.ok:
 			_count(stats, label + "generator:" + str(candidate.reason))
 			continue

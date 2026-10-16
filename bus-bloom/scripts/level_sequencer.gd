@@ -31,6 +31,15 @@ var booster_tutorial_levels: Array = [3]
 ## expected attempts without boosters (LevelEvaluator novice_attempts).
 var early_levels := 10
 var early_max_attempts := 3.5
+## Which evaluation field measures attempts (early cap and regular targets).
+var attempts_key := "ordinary_attempts"
+## Regular tiers and soft gates are matched on attempts_key instead of the
+## greedy fail rate; targets bands are then in attempts.
+var measure_attempts := true
+## From min_critical_from_level on, a level needs at least this share of
+## decisions where some move is a proven trap (no trap-free levels).
+var min_critical_share := 0.1
+var min_critical_from_level := 3
 var ramp_levels := 100
 ## Target band per type: [value at level 1, value at ramp_levels]. Regular
 ## tiers and soft gates use the base-slot fail rate; slot gates use the fail
@@ -66,6 +75,10 @@ func configure(settings: Dictionary) -> void:
 	booster_tutorial_levels = settings.get("booster_tutorial_levels", booster_tutorial_levels)
 	early_levels = int(settings.get("early_levels", early_levels))
 	early_max_attempts = float(settings.get("early_max_attempts", early_max_attempts))
+	attempts_key = str(settings.get("attempts_key", attempts_key))
+	measure_attempts = bool(settings.get("measure_attempts", measure_attempts))
+	min_critical_share = float(settings.get("min_critical_share", min_critical_share))
+	min_critical_from_level = int(settings.get("min_critical_from_level", min_critical_from_level))
 	ramp_levels = int(settings.get("ramp_levels", ramp_levels))
 	targets.merge(settings.get("targets", {}), true)
 	vehicles_start = settings.get("vehicles_start", vehicles_start)
@@ -154,6 +167,8 @@ func build(records: Array) -> Dictionary:
 			"trap_ratio": snappedf(float(evaluation.get("trap_ratio", 0.0)), 0.001),
 			"critical_share": snappedf(float(evaluation.get("critical_share", 0.0)), 0.001),
 			"novice_attempts": snappedf(float(evaluation.get("novice_attempts", 0.0)), 0.01),
+			"ordinary_attempts": snappedf(float(evaluation.get("ordinary_attempts", 0.0)), 0.01),
+			"strong_attempts": snappedf(float(evaluation.get("strong_attempts", 0.0)), 0.01),
 			"onboarding_deadlock_rate": snappedf(float(evaluation.get("onboarding_deadlock_rate", 0.0)), 0.001),
 			"onboarding_post_win": snappedf(float(evaluation.get("onboarding_post_win", 0.0)), 0.001),
 		})
@@ -180,6 +195,8 @@ func _measure(evaluation: Dictionary, type: String) -> float:
 		return 1.0 - float(evaluation.get("tutorial_post_win", 0.0))
 	if type == "booster_tutorial":
 		return 1.0 - float(evaluation.get("onboarding_post_win", 0.0))
+	if measure_attempts and type != "slot_gate":
+		return float(evaluation.get(attempts_key, 1.0))
 	return float(evaluation.post_rescue_fail) if type == "slot_gate" else float(evaluation.fail_rate)
 
 func _best(records: Array, used: Dictionary, type: String, progress: float,
@@ -198,7 +215,10 @@ func _best(records: Array, used: Dictionary, type: String, progress: float,
 			continue
 		# Early levels keep progress continuous even for a novice (tutorials excepted).
 		if number <= early_levels and type != "booster_tutorial" \
-				and float(evaluation.get("novice_attempts", 99.0)) > early_max_attempts:
+				and float(evaluation.get(attempts_key, 99.0)) > early_max_attempts:
+			continue
+		if number >= min_critical_from_level \
+				and float(evaluation.get("critical_share", 1.0)) < min_critical_share:
 			continue
 		var measure := _measure(evaluation, type)
 		var count: int = evaluation.vehicle_count

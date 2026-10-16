@@ -58,6 +58,21 @@ var onboarding_runs := 120
 var onboarding_max_vehicles := 11
 var onboarding_min_deadlock := 0.6
 var onboarding_min_post_win := 0.9
+## Planning player models (LevelSolver.simulate_planner). Difficulty and tiers
+## are measured by the ordinary player when tier_measure is "ordinary_attempts".
+var ordinary_player := {"depth": 2, "mistake": 0.1, "runs": 150}
+var strong_player := {"depth": 3, "mistake": 0.05, "runs": 80}
+var tier_measure := "ordinary_attempts"
+## Ascending upper bounds of expected ordinary-player attempts per tier.
+var attempt_tiers: Array = [
+	{"name": "easy", "max_attempts": 1.5},
+	{"name": "medium", "max_attempts": 2.5},
+	{"name": "hard", "max_attempts": 5.0},
+	{"name": "very_hard", "max_attempts": 1000.0},
+]
+var soft_gate_attempts := [5.0, 7.0]
+## The onboarding level must also stop the ordinary player, or nobody sees the hint.
+var onboarding_planner := true
 ## Novice reference for the early-level attempt cap (LevelSequencer).
 var novice_skill := 0.35
 ## interest = gap * skill_gap + traps * trap_score + near_miss * near_miss
@@ -100,6 +115,12 @@ func configure(settings: Dictionary) -> void:
 	onboarding_max_vehicles = int(onboarding.get("max_vehicles", onboarding_max_vehicles))
 	onboarding_min_deadlock = float(onboarding.get("min_deadlock", onboarding_min_deadlock))
 	onboarding_min_post_win = float(onboarding.get("min_post_win", onboarding_min_post_win))
+	onboarding_planner = bool(onboarding.get("planner", onboarding_planner))
+	ordinary_player.merge(settings.get("ordinary_player", {}), true)
+	strong_player.merge(settings.get("strong_player", {}), true)
+	tier_measure = str(settings.get("tier_measure", tier_measure))
+	attempt_tiers = settings.get("attempt_tiers", attempt_tiers)
+	soft_gate_attempts = settings.get("soft_gate_attempts", soft_gate_attempts)
 	interest_weights.merge(settings.get("interest_weights", {}), true)
 	ideal_trap_ratio = float(settings.get("ideal_trap_ratio", ideal_trap_ratio))
 	expert_fail_limit = float(settings.get("expert_fail_limit", expert_fail_limit))
@@ -142,6 +163,17 @@ func evaluate(candidate: Dictionary, rng_seed: int) -> Dictionary:
 		var runs := player_runs if is_equal_approx(float(skill), player_skill) else maxi(20, player_runs / 2)
 		fail_by_skill[str(skill)] = solver.simulate(base_slots, runs, float(skill), 0, base_slots, rng).fail_rate
 	fail_by_skill[str(player_skill)] = result.fail_rate
+	# Planning players extend the skill scale: 0.9 = ordinary, 1.0 = strong.
+	var ordinary: Dictionary = solver.simulate_planner(base_slots, int(ordinary_player.runs),
+		int(ordinary_player.depth), float(ordinary_player.mistake), rng)
+	var strong: Dictionary = solver.simulate_planner(base_slots, int(strong_player.runs),
+		int(strong_player.depth), float(strong_player.mistake), rng)
+	fail_by_skill["0.9"] = ordinary.fail_rate
+	fail_by_skill["1.0"] = strong.fail_rate
+	result["ordinary_fail"] = ordinary.fail_rate
+	result["ordinary_attempts"] = 1.0 / maxf(0.01, 1.0 - float(ordinary.fail_rate))
+	result["strong_fail"] = strong.fail_rate
+	result["strong_attempts"] = 1.0 / maxf(0.01, 1.0 - float(strong.fail_rate))
 	result["fail_by_skill"] = fail_by_skill
 	if not exact.path.is_empty():
 		result.merge(solver.trap_profile(maxi(minimum, base_slots), exact.path, trap_node_limit))
@@ -155,14 +187,20 @@ func evaluate(candidate: Dictionary, rng_seed: int) -> Dictionary:
 	elif minimum <= base_slots:
 		var fail: float = result.fail_rate
 		result["category"] = "regular"
-		result["tier"] = _tier(fail)
-		result["soft_gate_eligible"] = fail >= float(soft_gate_fail[0]) and fail <= float(soft_gate_fail[1])
+		if tier_measure == "ordinary_attempts":
+			var attempts: float = result.ordinary_attempts
+			result["tier"] = _tier_by_attempts(attempts)
+			result["soft_gate_eligible"] = attempts >= float(soft_gate_attempts[0]) \
+				and attempts <= float(soft_gate_attempts[1])
+		else:
+			result["tier"] = _tier(fail)
+			result["soft_gate_eligible"] = fail >= float(soft_gate_fail[0]) and fail <= float(soft_gate_fail[1])
 		var novice_fail := float(fail_by_skill.get(str(novice_skill), fail))
 		result["novice_attempts"] = 1.0 / maxf(0.01, 1.0 - novice_fail)
 		var eligible := false
 		if int(candidate.metrics.vehicle_count) <= onboarding_max_vehicles:
 			var onboarding: Dictionary = solver.onboarding_profile(base_slots, onboarding_runs, onboarding_skill,
-				onboarding_booster, rng)
+				onboarding_booster, rng, 16, ordinary_player if onboarding_planner else {})
 			result.merge(onboarding)
 			eligible = float(onboarding.onboarding_deadlock_rate) >= onboarding_min_deadlock \
 				and float(onboarding.onboarding_post_win) >= onboarding_min_post_win
@@ -194,6 +232,12 @@ func _interest(metrics: Dictionary, slot_gate: bool) -> float:
 	if not slot_gate and expert > expert_fail_limit:
 		value *= luck_penalty
 	return clampf(value, 0.0, 1.0)
+
+func _tier_by_attempts(attempts: float) -> String:
+	for tier: Dictionary in attempt_tiers:
+		if attempts <= float(tier.max_attempts):
+			return tier.name
+	return attempt_tiers[-1].name
 
 func _tier(fail: float) -> String:
 	for tier: Dictionary in tiers:

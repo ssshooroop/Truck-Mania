@@ -81,7 +81,12 @@ def _normalise(entry: dict) -> dict:
                                    for k, v in (entry.get('shuffle_by_strength') or {}).items()}
     entry['tutorial_again'] = 1.0 - float(entry.get('tutorial_post_win') or 0.0)
     entry.setdefault('tutorial_booster', 'slot' if entry['type'] == 'booster_tutorial' else None)
-    entry['fail_by_skill'] = sorted((float(s), float(p)) for s, p in entry['fail_by_skill'].items())
+    curve = {float(s): float(p) for s, p in entry['fail_by_skill'].items()}
+    if 0.9 in curve:
+        # Planning players define 0.9 (ordinary) and 1.0 (strong); the greedy
+        # 0.95 point would break the order of the scale.
+        curve.pop(0.95, None)
+    entry['fail_by_skill'] = sorted(curve.items())
     return entry
 
 
@@ -156,7 +161,7 @@ def shift_difficulty(levels: list, delta: float) -> list:
 
 
 def load_levels(path: Path) -> list:
-    data = json.loads(path.read_text(encoding='utf-8'))
+    data = json.loads(path.read_text(encoding='utf-8-sig'))
     levels = []
     for level in data['levels']:
         c = level['campaign']

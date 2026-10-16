@@ -325,12 +325,12 @@ func tutorial_profile(base_slots: int, runs: int, tries: int, strength: int, nod
 ## - deadlock_rate: share of runs that hit a deadlock, i.e. see the hint;
 ## - post_win: share of those that then win without further help.
 func onboarding_profile(base_slots: int, runs: int, skill: float, booster: String,
-		rng: RandomNumberGenerator, strength: int = 16) -> Dictionary:
+		rng: RandomNumberGenerator, strength: int = 16, planner: Dictionary = {}) -> Dictionary:
 	var deadlocks := 0
 	var wins := 0
 	for run in runs:
 		var state := _initial_state(base_slots)
-		if _play_until_deadlock(state, skill, rng):
+		if _play_until_deadlock(state, skill, rng, planner):
 			continue
 		deadlocks += 1
 		var helped := false
@@ -344,7 +344,7 @@ func onboarding_profile(base_slots: int, runs: int, skill: float, booster: Strin
 			_:
 				state["bays"].append(-1)
 				helped = true
-		if helped and _play_until_deadlock(state, skill, rng):
+		if helped and _play_until_deadlock(state, skill, rng, planner):
 			wins += 1
 	return {
 		"onboarding_deadlock_rate": float(deadlocks) / runs,
@@ -462,9 +462,73 @@ func _docked(state: Dictionary) -> Array:
 				"free": int(vehicles[id].capacity) - int(loads[id])})
 	return result
 
+## Planning player: before each dispatch it checks, in order of conveyor need,
+## whether the move keeps a deadlock-free continuation for `depth` more
+## dispatches, and takes the first safe one. With probability `mistake` it
+## plays the plain greedy move instead. depth 2 / mistake 0.1 models an
+## ordinary attentive player, depth 3 / 0.05 a strong one.
+func simulate_planner(slots: int, runs: int, depth: int, mistake: float,
+		rng: RandomNumberGenerator) -> Dictionary:
+	var planner := {"depth": depth, "mistake": mistake}
+	var wins := 0
+	var near_miss_sum := 0.0
+	for run in runs:
+		var state := _initial_state(slots)
+		if _play_until_deadlock(state, 1.0, rng, planner):
+			wins += 1
+		else:
+			near_miss_sum += float(state["offset"]) / maxi(1, state.get("queue", queue).size())
+	var fails := runs - wins
+	return {"fail_rate": float(fails) / runs,
+		"near_miss": near_miss_sum / fails if fails > 0 else 0.0}
+
+func _planner_choice(state: Dictionary, available: Array, planner: Dictionary,
+		rng: RandomNumberGenerator) -> int:
+	if rng.randf() < float(planner.mistake):
+		return _player_choice(state, available, 1.0, rng)
+	# Equally needed trucks are tried in random order, as a person would.
+	var ordered := available.duplicate()
+	var keys := {}
+	for id: int in ordered:
+		keys[id] = float(_next_need(state, int(vehicles[id].color))) + rng.randf() * 0.5
+	ordered.sort_custom(func(a: int, b: int) -> bool: return float(keys[a]) < float(keys[b]))
+	var free: int = state["bays"].find(-1)
+	for id: int in ordered:
+		var child: Dictionary = state.duplicate(true)
+		child["yard"] = int(child["yard"]) & ~(1 << id)
+		child["bays"][free] = id
+		if _safe_for(child, int(planner.depth)):
+			return id
+	return ordered[0]
+
+## True if `state` (just after a dispatch) can avoid a deadlock for `depth`
+## more dispatches, or wins.
+func _safe_for(state: Dictionary, depth: int) -> bool:
+	_settle(state)
+	if int(state["yard"]) == 0 and int(state["offset"]) == state.get("queue", queue).size():
+		return true
+	var bays: Array = state["bays"]
+	var free: int = bays.find(-1)
+	if free == -1:
+		return false
+	var moves := _available(state)
+	if moves.is_empty():
+		return false
+	if depth <= 0:
+		return true
+	for id: int in moves:
+		var child: Dictionary = state.duplicate(true)
+		child["yard"] = int(child["yard"]) & ~(1 << id)
+		child["bays"][free] = id
+		if _safe_for(child, depth - 1):
+			return true
+	return false
+
 ## Plays the player policy from `state` (modified in place). True on a win,
-## false at the first deadlock.
-func _play_until_deadlock(state: Dictionary, skill: float, rng: RandomNumberGenerator) -> bool:
+## false at the first deadlock. A non-empty `planner` ({depth, mistake}) plays
+## the planning player instead of the greedy one of `skill`.
+func _play_until_deadlock(state: Dictionary, skill: float, rng: RandomNumberGenerator,
+		planner: Dictionary = {}) -> bool:
 	var bays: Array = state["bays"]
 	var length: int = state.get("queue", queue).size()
 	while true:
@@ -475,7 +539,8 @@ func _play_until_deadlock(state: Dictionary, skill: float, rng: RandomNumberGene
 		var available: Array = _available(state) if free != -1 else []
 		if available.is_empty():
 			return false
-		var choice := _player_choice(state, available, skill, rng)
+		var choice := _planner_choice(state, available, planner, rng) if not planner.is_empty() \
+			else _player_choice(state, available, skill, rng)
 		state["yard"] = int(state["yard"]) & ~(1 << choice)
 		bays[free] = choice
 	return false

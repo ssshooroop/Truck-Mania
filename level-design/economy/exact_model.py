@@ -109,8 +109,8 @@ def evaluate_segment(levels: list, cfg: dict, seg: dict, by_level: dict,
         seconds = em.attempt_seconds(level, cfg)
         skill = em.skill_at(i, seg)
         willing = np.array([em.willingness(level, s, seg, cfg) for s in range(n_s)])[None, :, None]
-        win_hazard = seg['churn_win'] * (1 + beh['boredom_weight'] * (1 - level['interest'])) \
-            + shows.get(number, 0.0)
+        hazard_easy, hazard_effort = em.win_hazards(level, number, seg, cfg, shows,
+                                                    em.start_fail(level, skill, 0))
         double = seg['rv_double_rate'] if rv_cfg['double_reward'] and number >= rv_cfg['double_unlock_level'] else 0.0
         fixed = em.fixed_completion_coins(number, cfg, by_level)
         base = em.base_reward(number, cfg)
@@ -119,7 +119,9 @@ def evaluate_segment(levels: list, cfg: dict, seg: dict, by_level: dict,
         rescue_move = [(min(n_s - 1, em.after_rescue_streak(s, cfg)),
                         base + (em.streak_bonus(s + 1, cfg) if policy == 'keep' else 0)) for s in range(n_s)]
         out['reached'][i] = state.sum()
-        winners = np.zeros((n_p, n_s, nb))   # after the reward, before churn
+        # After the reward, before churn: first-attempt clean wins vs wins after effort.
+        winners_easy = np.zeros((n_p, n_s, nb))
+        winners_effort = np.zeros((n_p, n_s, nb))
         pending = state
 
         for fails in range(MAX_ATTEMPTS):
@@ -239,7 +241,8 @@ def evaluate_segment(levels: list, cfg: dict, seg: dict, by_level: dict,
                 resolve(dead, added, 0, 0)
 
             # Wins: the streak moves and the reward is paid.
-            for source, moves in ((clean, clean_move), (rescued_win, rescue_move)):
+            for source, moves, easy in ((clean, clean_move, fails == 0), (rescued_win, rescue_move, False)):
+                target = winners_easy if easy else winners_effort
                 for s in range(n_s):
                     slab = source[:, s, :]
                     m = slab.sum()
@@ -252,7 +255,7 @@ def evaluate_segment(levels: list, cfg: dict, seg: dict, by_level: dict,
                     paid_out = shift(slab, reward + fixed, quantum) * (1 - double)
                     if double > 0:
                         paid_out += shift(slab, 2 * reward + fixed, quantum) * double
-                    winners[:, s_next] += paid_out
+                    target[:, s_next] += paid_out
 
             # Give-ups: streak lost, one more fail on this level, possible churn.
             lost = gave_up.sum(axis=1)                    # (n_p, nb), streak -> 0
@@ -264,13 +267,15 @@ def evaluate_segment(levels: list, cfg: dict, seg: dict, by_level: dict,
             out['churn_fail'][i] += pending.sum()       # attempt budget exhausted
 
         # Cosmetic purchases by rich winners, then churn after the win.
-        buy = winners * cosmetic_rich * seg['cosmetic_rate']
-        out['coins_out'][i] += cosmetic['price'] * buy.sum()
-        winners = winners - buy + shift(buy, -cosmetic['price'], quantum)
-        if number in shows:
-            out['interstitial'][i] = winners.sum()
-        out['churn_win'][i] = winners.sum() * min(1.0, win_hazard)
-        winners *= 1 - min(1.0, win_hazard)
+        winners = np.zeros((n_p, n_s, nb))
+        for group, hazard_win in ((winners_easy, hazard_easy), (winners_effort, hazard_effort)):
+            buy = group * cosmetic_rich * seg['cosmetic_rate']
+            out['coins_out'][i] += cosmetic['price'] * buy.sum()
+            group = group - buy + shift(buy, -cosmetic['price'], quantum)
+            if number in shows:
+                out['interstitial'][i] += group.sum()
+            out['churn_win'][i] += group.sum() * hazard_win
+            winners += group * (1 - hazard_win)
         histograms[i] = winners.sum(axis=(0, 1))
         state = winners
 
