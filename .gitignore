@@ -37,3 +37,6 @@ export_credentials.cfg
 *.key
 *.mobileprovision
 *.provisionprofile
+
+# Economy model output (re-created by level-design/economy/run_economy.py)
+/level-design/economy/out/

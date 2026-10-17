@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "achievements": [
+    {"id": "dispatcher_1", "name": "Диспетчер стройки I", "category": "progression", "difficulty": "easy",
+     "trigger": {"counter": "levels_completed", "at_least": 10}, "reward": {"coins": 50}, "tracking_event": "level_complete"},
+    {"id": "dispatcher_2", "name": "Диспетчер стройки II", "category": "progression", "difficulty": "medium",
+     "trigger": {"counter": "levels_completed", "at_least": 50}, "reward": {"coins": 100}, "tracking_event": "level_complete"},
+    {"id": "dispatcher_3", "name": "Диспетчер стройки III", "category": "progression", "difficulty": "hard",
+     "trigger": {"counter": "levels_completed", "at_least": 100}, "reward": {"coins": 250}, "tracking_event": "level_complete"},
+    {"id": "dispatcher_4", "name": "Диспетчер стройки IV", "category": "progression", "difficulty": "epic",
+     "trigger": {"counter": "levels_completed", "at_least": 500}, "reward": {"coins": 500}, "tracking_event": "level_complete"},
+    {"id": "cargo_1000", "name": "Тысяча грузов", "category": "progression", "difficulty": "medium",
+     "trigger": {"counter": "cargo_delivered", "at_least": 1000}, "reward": {"coins": 40}, "tracking_event": "cargo_loaded"},
+    {"id": "flawless_loading", "name": "Безупречная погрузка", "category": "mastery", "difficulty": "medium",
+     "trigger": {"counter": "speed_win_streak", "at_least": 5}, "reward": {"coins": 40, "boosters": {"shuffle": 1}},
+     "tracking_event": "level_complete"},
+    {"id": "no_mistakes_10", "name": "Без единой ошибки", "category": "mastery", "difficulty": "hard",
+     "trigger": {"counter": "win_streak", "at_least": 10}, "reward": {"coins": 60}, "tracking_event": "level_complete"},
+    {"id": "on_the_edge", "name": "На волоске", "category": "clutch", "difficulty": "medium",
+     "trigger": {"counter": "clutch_wins", "at_least": 1}, "reward": {"coins": 30}, "tracking_event": "level_complete"},
+    {"id": "comeback", "name": "Не сдаваться", "category": "clutch", "difficulty": "medium",
+     "trigger": {"counter": "comeback_wins", "at_least": 1}, "reward": {"coins": 30}, "tracking_event": "level_complete"},
+    {"id": "dream_fleet", "name": "Автопарк мечты", "category": "collection", "difficulty": "hard",
+     "trigger": {"counter": "skins_owned", "at_least": 5}, "reward": {"coins": 150}, "tracking_event": "skin_unlocked"}
+  ],
+  "counters": {
+    "levels_completed": "Пройденные уровни (каждый уровень учитывается один раз)",
+    "cargo_delivered": "Погруженные единицы груза",
+    "speed_win_streak": "Победы подряд с бонусом скорости (буфер не заполнялся больше чем на 50 %)",
+    "win_streak": "Победы подряд без проигрыша (спасение серию не прерывает)",
+    "clutch_wins": "Победы, когда в буфере оставался ровно 1 свободный слот",
+    "comeback_wins": "Победы после 3 и более проигрышей на этом уровне",
+    "skins_owned": "Открытые скины машин"
+  }
+}
