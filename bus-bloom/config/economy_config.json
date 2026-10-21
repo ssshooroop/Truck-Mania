@@ -20,7 +20,7 @@
   },
   "booster": {"id": "extra_slot", "price": 150, "unlock_level": 12, "rich_multiplier": 2.0},
   "cosmetic": {"price": 400, "reserve": 100},
-  "rewarded_video": {"double_reward": true, "double_unlock_level": 3, "rescue": true},
+  "rewarded_video": {"double_reward": true, "double_unlock_level": 3, "rescue": true, "coins": 25},
   "interstitial": {"enabled": true, "start_level": 8, "every_levels": 3, "min_seconds": 60},
   "daily_login": [20, 30, 40, 50, 60, 80, 150],
   "daily_login_scale": 1.0,

@@ -2,10 +2,8 @@ extends Node2D
 
 const Model = preload("res://scripts/game_model.gd")
 const Contact = preload("res://scripts/collision_feedback.gd")
-const ParkingFull = preload("res://scripts/parking_full.gd")
 var daily_screen
 var daily_rewards=preload("res://scripts/daily_rewards.gd").new()
-var parking_full
 var crane_preview
 const SlotOffer = preload("res://scripts/slot_offer.gd")
 const AD_ICON = preload("res://assets/artwork/menu/ad-player.png")
@@ -16,6 +14,16 @@ const CoinBadge = preload("res://scripts/coin_badge.gd")
 const WinCelebration = preload("res://scripts/win_celebration.gd")
 const Economy = preload("res://scripts/runtime_economy.gd")
 const Boosters = preload("res://scripts/level_boosters.gd")
+const GameModal = preload("res://scripts/ui/game_modal.gd")
+const Modals = preload("res://scripts/ui/modal_catalog.gd")
+const AdService = preload("res://scripts/ui/ad_service.gd")
+const UNDO_PRICE = 20
+var modal_layer: CanvasLayer
+var modal: Control
+var modal_scope: Array = []
+var ads = AdService.new()
+var tutorial_step = 0
+var reward_doubled = false
 const INK = Color("152b46")
 const MUTED = Color("536780")
 const PAPER = Color("b2b0b6")
@@ -181,6 +189,10 @@ func _ready() -> void:
 	coin_badge.position = Vector2(388,18)
 	coin_badge.size = Vector2(134,44)
 	add_child(coin_badge)
+	modal_layer = CanvasLayer.new()
+	modal_layer.layer = 20
+	add_child(modal_layer)
+	ads.simulate = "--fake-ads" in args
 	_sync_coins()
 	road_menu.settings_requested.connect(_open_settings)
 	road_menu.resume_requested.connect(_resume_from_menu)
@@ -193,10 +205,7 @@ func _ready() -> void:
 	if "--demo" in args: _demo.call_deferred()
 
 func _process(delta:float) -> void:
-	if parking_full==null:
-		parking_full=ParkingFull.new()
-		add_child(parking_full)
-	parking_full.sync(self)
+	_sync_modals()
 	if overlay=="crane_preview" and crane_preview==null:
 		crane_preview=preload("res://scripts/crane_offer.gd").new()
 		add_child(crane_preview)
@@ -209,7 +218,7 @@ func _process(delta:float) -> void:
 		intro_age += delta
 		if intro_age >= 1.05: intro_delays.clear()
 	_sync_audio_preferences()
-	coin_badge.visible = overlay in ["","win","stuck","crane_preview"]
+	coin_badge.visible = overlay in ["","win","stuck","crane_preview","tutorial"] and (modal==null or int(modal.spec.get("balance",-1))<0)
 	if overlay=="win":
 		win_age += delta
 		coin_badge.amount = WinCelebration.displayed_balance(win_balance_before,coins,win_age,reduced_motion)
@@ -296,6 +305,9 @@ func _notification(what:int) -> void:
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST and is_node_ready(): _back()
 
 func _back() -> void:
+	if modal != null:
+		modal.back()
+		return
 	if overlay == "road_menu":
 		if road_menu.can_resume: _resume_from_menu()
 		return
@@ -342,7 +354,9 @@ func _load_level(index:int) -> void:
 	peak_bays = 0
 	reward_details.clear()
 	level_reward = 0
+	reward_doubled = false
 	win_age = 0.0
+	_close_modal(true)
 	_sync_coins()
 	completion_handled = false
 	menu_settings = false
@@ -383,6 +397,7 @@ func _load_level(index:int) -> void:
 		ordered.sort_custom(func(a,b): return a.position.y+a.position.x*0.3 < b.position.y+b.position.x*0.3)
 		for i in ordered.size():
 			intro_delays[ordered[i].id] = float(i)/maxi(1,ordered.size()-1)*0.5
+	if index==0 and not automation and not bool(economy.state.get("intro_seen",false)): _start_tutorial.call_deferred(generation)
 
 
 func _sync_visuals() -> void:
@@ -997,12 +1012,18 @@ func _resume() -> void:
 	paused_motion_tween = null
 
 func _message(value:String) -> void:
+	if modal!=null:
+		modal.flash(value)
+		return
 	toast = value
 	toast_time = 3.0
 
 func _input(event:InputEvent) -> void:
 	if daily_screen!=null:
 		if event is InputEventKey and event.pressed and event.keycode==KEY_ESCAPE: daily_screen.closed.emit()
+		return
+	if modal!=null:
+		if event is InputEventKey and event.pressed and event.keycode==KEY_ESCAPE: modal.back()
 		return
 	if (event is InputEventMouseButton or event is InputEventKey or event is InputEventScreenTouch) and event.pressed:
 		_reset_truck_idle()
@@ -1017,7 +1038,7 @@ func _input(event:InputEvent) -> void:
 	if overlay=="":
 		for bay in range(model.open_bay_count,Model.BAY_COUNT):
 			if world_p.distance_to(_cone_position(bay))<36:
-				_open_slot_offer(bay)
+				_tap_cone(bay)
 				return
 	if overlay != "":
 		_overlay_input(_panel_transform().affine_inverse()*p)
@@ -1084,29 +1105,13 @@ func _overlay_input(p:Vector2) -> void:
 		for i in model.level_count():
 			if Rect2(83+(i%3)*129,350+floori(i/3.0)*117,116,98).has_point(p) and i <= unlocked: _load_level(i)
 	elif overlay == "win":
-		if WinCelebration.NEXT.has_point(p):
+		if WinCelebration.DOUBLE.has_point(p): _open_double_offer()
+		elif WinCelebration.NEXT.has_point(p):
 			if model.level_index+1 < model.level_count(): _load_level(model.level_index+1)
 			else:
 				levels_origin = "win"
 				_show_road_menu(false)
 		elif WinCelebration.REPLAY.has_point(p): _load_level(model.level_index)
-	elif overlay == "stuck":
-		if ParkingFull.BUY.has_point(p):
-			if model.open_bay_count<Model.BAY_COUNT: _open_slot_offer(model.open_bay_count)
-			else: _message("Все места уже открыты")
-		elif ParkingFull.VIDEO.has_point(p): _message("Реклама пока недоступна")
-		elif ParkingFull.UNDO.has_point(p):
-			if history.is_empty(): _message("Нет хода для отмены")
-			elif coins<20 and int(economy.state.inventory.get("undo",0))==0: _message("Нужно 20 монет")
-			else:
-				var before:int=history.size()
-				_undo()
-				if history.size()<before:
-					if int(economy.state.inventory.get("undo",0))>0: economy.state.inventory.undo-=1
-					else: coins-=20
-					_sync_coins()
-					_save()
-		elif ParkingFull.RETRY.has_point(p): _load_level(model.level_index)
 
 func _cone_position(bay:int) -> Vector2:
 	return _bay_front(bay)+_bay_back()*43.0
@@ -1136,7 +1141,7 @@ func _can_rescue(tool:String) -> bool:
 	return model.bays.count(-1)<Model.BAY_COUNT
 
 func _purchase_rescue(tool:String) -> void:
-	if overlay!="rescue_menu" or not _can_rescue(tool): return
+	if overlay not in ["rescue_menu","stuck"] or not _can_rescue(tool): return
 	var price := _rescue_price(tool)
 	if coins<price: return
 	var ticket: int = generation
@@ -1216,10 +1221,10 @@ func _close_slot_offer() -> void:
 	overlay = slot_return_overlay
 	offered_bay = -1
 
-func _purchase_slot() -> void:
+func _purchase_slot(by_ad:bool=false) -> void:
 	if offered_bay!=model.open_bay_count: return
 	var tutorial: bool = _free_tutorial_slot()
-	var price: int = _slot_price()
+	var price: int = 0 if by_ad else _slot_price()
 	if not tutorial and coins<price:
 		_message("Нужно %d монет" % price)
 		return
@@ -1231,7 +1236,7 @@ func _purchase_slot() -> void:
 	if tutorial: economy.state.tutorial_done = true
 	else:
 		coins -= price
-		if price==0: economy.state.inventory.extra_slot=int(economy.state.inventory.extra_slot)-1
+		if price==0 and not by_ad: economy.state.inventory.extra_slot=int(economy.state.inventory.extra_slot)-1
 		paid_slots += 1
 	rescue_count += 1
 	attempt_rescued = true
@@ -1262,6 +1267,7 @@ func _resume_from_menu() -> void:
 	road_menu.hide()
 	menu_settings = false
 	_resume()
+	if not busy: _check_end() # Back from the map onto a dead end reopens its window.
 
 func _draw() -> void:
 	if overlay == "road_menu": return
@@ -1314,7 +1320,7 @@ func _draw() -> void:
 	if toast_time>0 and overlay=="":
 		_round(Rect2(25,_footer_y()-63,490,31),INK,10)
 		_text(toast,Vector2(270,_footer_y()-42),12,Color.WHITE,true)
-	if overlay!="":
+	if overlay!="" and overlay not in ["stuck","tutorial"]:
 		if overlay!="slot_offer": draw_rect(get_viewport_rect(),Color(0.055,0.10,0.20,0.88) if overlay in ["win","stuck","crane_preview"] else Color(0.12,0.20,0.24,0.47))
 		_draw_space(_panel_transform())
 		_draw_overlay()
@@ -1456,9 +1462,6 @@ func _draw_overlay() -> void:
 	if overlay=="crane_preview":
 		preload("res://scripts/crane_offer.gd").draw_crane(self)
 		return
-	if overlay=="stuck":
-		ParkingFull.draw_ui(self)
-		return
 	if overlay=="win":
 		win_screen.draw(self,win_age,level_reward,_panel_transform().affine_inverse()*(coin_badge.position+Vector2(24,coin_badge.size.y*0.5)),reduced_motion,model.level_index==model.level_count()-1)
 		return
@@ -1495,15 +1498,6 @@ func _draw_overlay() -> void:
 			_text("%02d" % (i+1),rect.position+Vector2(58,49),29,INK if i<=unlocked else MUTED,true)
 			_text("НАЧАТЬ" if i<=unlocked else "ЗАКРЫТ",rect.position+Vector2(58,77),10,INK if i<=unlocked else MUTED,true)
 		_text("Новый склад открывается после полной отгрузки",Vector2(270,642),12,MUTED,true)
-	elif overlay=="stuck":
-		draw_circle(Vector2(270,330),55,Color("f6dfc9"))
-		_text("!",Vector2(270,351),52,Color("cb9261"),true)
-		_text("Погрузка остановилась",Vector2(270,431),27,INK,true)
-		_text("Для следующего груза нет свободного пути.",Vector2(270,473),14,MUTED,true)
-		_button(Rect2(76,510,388,40),"Помощь на стройке",false,rescue_count<int(economy.config.rescue.max_tools))
-		_button(Rect2(76,558,388,62),"Вернуться на ход назад",true)
-		_text("Начать заново",Vector2(270,675),16,INK,true)
-		if model.open_bay_count<Model.BAY_COUNT: _button(Rect2(76,698,388,34),"Открыть дополнительное место",false)
 
 func _close_icon() -> void:
 	for s in [-1,1]: draw_line(Vector2(431,249+s*6),Vector2(443,249-s*6),MUTED,2,true)
@@ -1686,7 +1680,9 @@ func _open_daily_bonus() -> void:
 	var info:Dictionary=daily_rewards.calendar.visit(day)
 	economy.state.daily_calendar=daily_rewards.calendar.state.duplicate(true)
 	_save()
-	if not info.can_claim:return
+	if not info.can_claim:
+		_maybe_show_season()
+		return
 	road_menu.hide()
 	daily_screen=preload("res://scripts/daily_bonus.gd").new()
 	daily_screen.sound_enabled=sound_enabled
@@ -1699,7 +1695,8 @@ func _open_daily_bonus() -> void:
 		get_viewport().size_changed.disconnect(_resize_daily_bonus)
 		daily_screen.queue_free()
 		daily_screen=null
-		road_menu.show())
+		road_menu.show()
+		_maybe_show_season())
 	var result:Dictionary=daily_rewards.claim(day,economy.state.inventory)
 	if result.index>=0:
 		coins+=int(result.coins)
@@ -1710,3 +1707,204 @@ func _open_daily_bonus() -> void:
 
 func _resize_daily_bonus():
 	if daily_screen!=null:daily_screen.size=get_viewport_rect().size
+
+# ------------------------------------------------------------------ modal windows
+# Specs come from scripts/ui/modal_catalog.gd; this section only routes actions.
+# A modal lives while `overlay` stays in its scope, so every existing transition
+# (undo, restart, menu, win) closes it without extra bookkeeping.
+
+func _open_modal(spec:Dictionary,handler:Callable,scope:Array) -> void:
+	_close_modal(true)
+	var opened: Control = GameModal.new(spec)
+	opened.reduced_motion = reduced_motion
+	opened.action.connect(handler)
+	opened.tapped.connect(func():
+		_sound_effect("touch")
+		_vibrate(12))
+	opened.closed.connect(func(): if modal==opened: modal = null)
+	modal = opened
+	modal_scope = scope
+	modal_layer.add_child(opened)
+
+func _close_modal(instant:bool=false) -> void:
+	if modal==null: return
+	if instant:
+		modal.queue_free()
+		modal = null
+	else: modal.close()
+
+func _sync_modals() -> void:
+	if modal_layer==null: return
+	if modal!=null and not modal.is_closing() and overlay not in modal_scope: modal.close()
+	if overlay=="stuck" and modal==null and daily_screen==null: _open_modal(Modals.stuck(_stuck_context()),_on_stuck_action,["stuck"])
+
+func _modal_is(id:String) -> bool:
+	return modal!=null and not modal.is_closing() and modal.spec.get("id","")==id
+
+func _stuck_context() -> Dictionary:
+	return {
+		"coins":coins,
+		"slot_available":model.open_bay_count<Model.BAY_COUNT,
+		"slot_price":_slot_price(),
+		"ad_ready":ads.is_ready() and bool(economy.config.rewarded_video.get("rescue",false)),
+		"undo_price":UNDO_PRICE,
+		"undo_gifts":int(economy.state.inventory.get("undo",0)),
+		"can_undo":not history.is_empty(),
+		"can_shuffle":_can_rescue("shuffle"),
+		"shuffle_price":_rescue_price("shuffle"),
+		"can_crane":_can_rescue("crane"),
+		"crane_price":_rescue_price("crane"),
+		"rescue_left":rescue_count<int(economy.config.rescue.max_tools),
+	}
+
+func _on_stuck_action(id:String) -> void:
+	match id:
+		"slot_coins":
+			if coins<_slot_price():
+				_open_shortfall(_slot_price(),["stuck"])
+				return
+			_open_slot_offer(model.open_bay_count)
+		"slot_ad":
+			_watch_ad(id,func():
+				offered_bay = model.open_bay_count
+				_purchase_slot(true))
+		"undo": _paid_undo()
+		"shuffle","crane":
+			if coins<_rescue_price(id):
+				_open_shortfall(_rescue_price(id),["stuck"])
+				return
+			_purchase_rescue(id)
+		"retry": _load_level(model.level_index)
+		"menu": _show_road_menu(true)
+	if _modal_is("stuck") and overlay=="stuck": modal.update_spec(Modals.stuck(_stuck_context()))
+
+func _paid_undo() -> void:
+	if history.is_empty():
+		_message("Нет хода для отмены")
+		return
+	var gifts := int(economy.state.inventory.get("undo",0))
+	if gifts==0 and coins<UNDO_PRICE:
+		_open_shortfall(UNDO_PRICE,[overlay])
+		return
+	var before := history.size()
+	_undo()
+	if history.size()<before:
+		if gifts>0: economy.state.inventory.undo = gifts-1
+		else: coins -= UNDO_PRICE
+		_sync_coins()
+		_save()
+
+## A paid cone asks first instead of charging on a stray tap.
+func _tap_cone(bay:int) -> void:
+	var price := _slot_price()
+	if bay!=model.open_bay_count or price==0:
+		_open_slot_offer(bay)
+		return
+	var scope := [overlay]
+	_open_modal(Modals.offer("extra_slot",price,coins,ads.is_ready()),func(id:String):
+		match id:
+			"buy":
+				if coins<price:
+					_open_shortfall(price,scope)
+					return
+				_close_modal()
+				_open_slot_offer(bay)
+			"watch_ad":
+				_watch_ad(id,func():
+					_close_modal()
+					offered_bay = model.open_bay_count
+					_purchase_slot(true))
+			"close": _close_modal()
+	,scope)
+
+func _open_shortfall(need:int,scope:Array) -> void:
+	var ad_coins := int(economy.config.rewarded_video.get("coins",25))
+	# No store yet: the coin pack row appears once purchases are connected.
+	_open_modal(Modals.shortfall(need,coins,ad_coins,ads.is_ready()),func(id:String):
+		match id:
+			"watch_ad":
+				_watch_ad(id,func():
+					coins += ad_coins
+					_sync_coins()
+					_save()
+					if modal: modal.update_spec(Modals.ad_reward("done",ad_coins,coins)))
+			"close": _close_modal()
+	,scope)
+
+func _open_double_offer() -> void:
+	if level_reward<=0 or reward_doubled or not ads.is_ready(): return
+	if model.level_index+1<int(economy.config.rewarded_video.get("double_unlock_level",1)): return
+	var amount: int = level_reward
+	_open_modal(Modals.double_reward(amount,coins,true),func(id:String):
+		match id:
+			"watch_ad":
+				_watch_ad(id,func():
+					reward_doubled = true
+					coins += amount
+					_sync_coins()
+					_save()
+					if modal: modal.update_spec(Modals.ad_reward("done",amount,coins)))
+			"close": _close_modal()
+	,["win"])
+
+## Plays a rewarded video for the pressed button; the reward runs only after a
+## finished video.
+func _watch_ad(id:String,reward:Callable) -> void:
+	if not ads.is_ready():
+		_message("Ролик пока не готов — попробуй позже")
+		return
+	var shown := modal
+	if shown: shown.set_busy(id,true)
+	if audio: audio.pause_effects(true)
+	var finished: bool = await ads.show_rewarded()
+	if audio: audio.pause_effects(false)
+	if is_instance_valid(shown): shown.set_busy(id,false)
+	if finished: reward.call()
+	else: _message("Ролик не досмотрен — награды нет")
+
+## `ticket` is the level generation that asked for it; a reload cancels it.
+func _start_tutorial(ticket:int) -> void:
+	await get_tree().create_timer(0.1 if reduced_motion else 1.1).timeout
+	if ticket!=generation or overlay!="" or moves>0 or model.level_index!=0 or modal!=null: return
+	overlay = "tutorial"
+	tutorial_step = 0
+	_show_tutorial_step()
+
+func _show_tutorial_step() -> void:
+	var spot := {}
+	if tutorial_step==0:
+		var id: int = model.find_hint()
+		if id>=0:
+			var bus: Dictionary = model.buses[id]
+			var center: Vector2 = EdgeRoute.position_for(bus.position,bus.angle,model.vehicle_size(bus))
+			spot = {"center":_world_transform()*center,"radius":74.0*_world_transform().get_scale().x}
+	elif tutorial_step==1:
+		spot = {"center":Vector2(306,122),"radius":96.0}
+	var spec := Modals.tutorial(tutorial_step,spot)
+	if _modal_is("tutorial"): modal.update_spec(spec)
+	else: _open_modal(spec,_on_tutorial_action,["tutorial"])
+
+func _on_tutorial_action(id:String) -> void:
+	if id=="tutorial_next" and tutorial_step<Modals.TUTORIAL_STEPS.size()-1:
+		tutorial_step += 1
+		_show_tutorial_step()
+		return
+	economy.state.intro_seen = true
+	_save()
+	overlay = ""
+
+func _maybe_show_season() -> void:
+	if automation or modal!=null or daily_screen!=null: return
+	var now := int(Time.get_unix_time_from_system())
+	var event := Modals.active_event(Modals.load_events(),now)
+	if event.is_empty(): return
+	var day := now/86400
+	var seen: Dictionary = economy.state.season_seen
+	if int(seen.get(event.id,-1))==day: return
+	seen[event.id] = day
+	_save()
+	_open_modal(Modals.seasonal(event),func(id:String):
+		match id:
+			"buy_bundle": _message("Покупки появятся в следующей версии")
+			"close": _close_modal()
+	,["road_menu"])
