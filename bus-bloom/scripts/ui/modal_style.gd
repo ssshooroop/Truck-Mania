@@ -1,5 +1,5 @@
 extends RefCounted
-## Shared look of every modal window: "a foreman's sign board".
+## Shared look of every modal window: "a construction-site sign board".
 ## Rules (keep them when adding new windows):
 ## - Card: warm paper body, navy frame with a pressed "lip", navy header plate,
 ##   hazard-tape strip under the header. Corner scale: card 30, button 26,

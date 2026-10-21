@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ceo1cvd10q5fc"
-path="res://.godot/imported/foreman-thinking.png-53ee57d11fba486cf38a7a087bbcdbdf.ctex"
+uid="uid://4punbrlyxjis"
+path="res://.godot/imported/billy-happy.png-009dde9a49025ec60fb43bdd1bfb8e3f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/artwork/foreman/foreman-thinking.png"
-dest_files=["res://.godot/imported/foreman-thinking.png-53ee57d11fba486cf38a7a087bbcdbdf.ctex"]
+source_file="res://assets/artwork/billy/billy-happy.png"
+dest_files=["res://.godot/imported/billy-happy.png-009dde9a49025ec60fb43bdd1bfb8e3f.ctex"]
 
 [params]
 
