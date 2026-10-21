@@ -226,13 +226,10 @@ func _draw_spotlight(scrim:Color) -> void:
 		draw_colored_polygon(PackedVector2Array([center+a*r,center+b*r,center+b*4000,center+a*4000]),scrim)
 	var pulse := 0.5 if reduced_motion else (sin(age*TAU/1.3)+1.0)*0.5
 	draw_arc(center,r+2+pulse*4,0,TAU,72,Color(1,0.88,0.35,0.55+0.4*pulse),4,true)
-	var bob := 0.0 if reduced_motion else pulse*10.0
-	var tip := center-Vector2(0,r+14+bob)
-	var shaft := PackedVector2Array([tip+Vector2(-12,-20),tip,tip+Vector2(12,-20)])
-	draw_line(tip+Vector2(0,-48),tip+Vector2(0,-4),Style.INK,14,true)
-	draw_polyline(shaft,Style.INK,14,true)
-	draw_line(tip+Vector2(0,-48),tip+Vector2(0,-4),Style.GOLD_TEXT,8,true)
-	draw_polyline(shaft,Style.GOLD_TEXT,8,true)
+	var away := Vector2.DOWN if (base*card_rect.get_center()).y<center.y else Vector2.UP
+	if center.y+away.y*(r+110)<0 or center.y+away.y*(r+110)>size.y:
+		away = Vector2.LEFT if center.x>size.x*0.5 else Vector2.RIGHT
+	preload("res://scripts/ui/tutorial_pointer.gd").draw(self,center+away*(r+18),-away,age,reduced_motion)
 
 func _draw_ribbon(label:String) -> void:
 	# Sits on the top-left corner of the first picture, clear of the title.

@@ -1443,13 +1443,7 @@ func _draw_slot_spotlight() -> void:
 	draw_arc(Vector2.ZERO,49+pulse*2,0,TAU,96,Color(1.0,0.88,0.35,0.55+0.35*pulse),2.5,true)
 	art_transform(Vector2.ZERO)
 	var arrow_side:float = -1.0 if get_viewport_rect().size.y<1000 else 1.0
-	var arrow_y: float = center.y+arrow_side*(91+(0.0 if reduced_motion else pulse*7))
-	var tip := Vector2(center.x,arrow_y)
-	draw_line(tip+Vector2(0,40*arrow_side),tip,Color("122b4a"),13,true)
-	draw_line(tip+Vector2(0,40*arrow_side),tip,Color("ffe04d"),8,true)
-	var arrow := PackedVector2Array([tip+Vector2(-13,14*arrow_side),tip,tip+Vector2(13,14*arrow_side)])
-	draw_polyline(arrow,Color("122b4a"),13,true)
-	draw_polyline(arrow,Color("ffe04d"),8,true)
+	preload("res://scripts/ui/tutorial_pointer.gd").draw(self,center+Vector2(0,arrow_side*84),Vector2(0,-arrow_side),spotlight_time,reduced_motion,draw_base)
 	if _free_tutorial_slot():
 		_juicy_text("НАЖМИ НА КОНУС",475,37,Color.WHITE)
 		_juicy_text("ОТКРОЙ МЕСТО!",529,43,Color.WHITE)
