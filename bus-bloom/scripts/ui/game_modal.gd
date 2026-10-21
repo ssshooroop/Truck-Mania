@@ -121,7 +121,7 @@ func _layout() -> void:
 		var bh := _block_height(b)
 		heights.append(bh)
 		h += bh+BLOCK_GAP
-		if b.get("type","") in ["art","hero"]: flexible += maxf(0.0,bh-110.0)
+		if b.get("type","") in ["art","hero"]: flexible += maxf(0.0,bh-(240.0 if b.get("fit","")=="contain" else 110.0))
 	h += Style.PAD-BLOCK_GAP+6.0
 	var view := size if size.x>0 else Vector2(540,960)
 	var zoom := view.x/Style.WIDTH
@@ -134,7 +134,8 @@ func _layout() -> void:
 		var blocks: Array = spec.get("blocks",[])
 		for i in blocks.size():
 			if blocks[i].get("type","") in ["art","hero"]:
-				var cut: float = maxf(0.0,heights[i]-110.0)*k
+				var minimum := 240.0 if blocks[i].get("fit","")=="contain" else 110.0
+				var cut: float = maxf(0.0,heights[i]-minimum)*k
 				heights[i] -= cut
 				h -= cut
 		needed = h+top_margin+40.0
@@ -313,9 +314,16 @@ func _draw_block(b:Dictionary,rect:Rect2) -> void:
 				Style.spinner(self,c+Vector2(-Style.BOLD.get_string_size(b.text,HORIZONTAL_ALIGNMENT_LEFT,-1,20).x*0.5-26,0),14,age,Color("3d8ef0"))
 			Style.text(self,b.text,c+Vector2(8 if b.get("spinner",false) else 0,7),20,b.get("color",Style.MUTED))
 
+static func contained_art_rect(texture_size:Vector2,rect:Rect2) -> Rect2:
+	var fitted := texture_size*minf(rect.size.x/texture_size.x,rect.size.y/texture_size.y)
+	return Rect2(rect.get_center()-fitted*0.5,fitted)
+
 func _draw_art(b:Dictionary,rect:Rect2) -> void:
 	var tex: Texture2D = b.texture
 	var tex_size := tex.get_size()
+	if b.get("fit","")=="contain":
+		draw_texture_rect(tex,contained_art_rect(tex_size,rect),false)
+		return
 	# Cover-crop around an optional focus point (0..1), keeping the art's aspect.
 	var focus: Vector2 = b.get("focus",Vector2(0.5,0.5))
 	var scale := maxf(rect.size.x/tex_size.x,rect.size.y/tex_size.y)

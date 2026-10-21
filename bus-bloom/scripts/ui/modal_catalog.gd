@@ -167,7 +167,7 @@ static func ad_reward(state:String,amount:int,coins:int) -> Dictionary:
 ## can_double (bool), details (runtime_economy completion() result).
 static func win(ctx:Dictionary) -> Dictionary:
 	var reward := int(ctx.get("reward",0))
-	var blocks: Array = [{"type":"art","texture":WIN_ART,"height":250,"focus":Vector2(0.5,0.30)}]
+	var blocks: Array = [{"type":"art","texture":WIN_ART,"height":360,"fit":"contain"}]
 	if reward>0:
 		blocks.append({"type":"reward","amount":reward})
 		var parts := reward_parts(ctx.get("details",{}))
