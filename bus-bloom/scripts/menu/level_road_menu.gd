@@ -24,6 +24,7 @@ var decoration_first = 2147483647
 var unlocked = 0
 var reduced_motion = false
 var can_resume = false
+var input_blocked := false
 var touch_id = -1
 var pressed = false
 var start_point = Vector2.ZERO
@@ -184,8 +185,16 @@ func _place(item:Node2D,world:float,lateral:float,area:Rect2) -> void:
 	var edge = -(world-road.scroll)*2.0/projection.span
 	item.modulate.a = 1.0-smoothstep(0.83,1.0,edge)
 
+func set_input_blocked(value:bool) -> void:
+	input_blocked = value
+	if value:
+		pressed = false
+		touch_id = -1
+		road.dragging = false
+		road.velocity = 0
+
 func _input(event:InputEvent) -> void:
-	if not visible: return
+	if not visible or input_blocked: return
 	if event is InputEventScreenTouch:
 		if event.pressed and touch_id==-1:
 			touch_id = event.index

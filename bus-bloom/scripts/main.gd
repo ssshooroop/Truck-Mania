@@ -1727,8 +1727,12 @@ func _open_modal(spec:Dictionary,handler:Callable,scope:Array) -> void:
 	opened.tapped.connect(func():
 		_sound_effect("touch")
 		_vibrate(12))
-	opened.closed.connect(func(): if modal==opened: modal = null)
+	opened.closed.connect(func():
+		if modal==opened:
+			modal = null
+			road_menu.set_input_blocked(false))
 	modal = opened
+	road_menu.set_input_blocked(true)
 	modal_scope = scope
 	modal_layer.add_child(opened)
 
@@ -1737,6 +1741,7 @@ func _close_modal(instant:bool=false) -> void:
 	if instant:
 		modal.queue_free()
 		modal = null
+		road_menu.set_input_blocked(false)
 	else: modal.close()
 
 func _sync_modals() -> void:

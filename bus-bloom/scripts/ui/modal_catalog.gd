@@ -72,6 +72,12 @@ static func stuck(ctx:Dictionary) -> Dictionary:
 		blocks.append({"type":"button","id":"crane","kind":"primary","label":"Вызвать кран","pulse":true,"price":{"coins":int(ctx.get("crane_price",150))}})
 	else:
 		blocks.append({"type":"text","text":"Помощь в этой попытке закончилась.\nОтмени ход или начни заново.","size":21})
+	# A crane also needs a closed bay, so offer it alongside the slot purchase.
+	if ctx.get("slot_available",false) and ctx.get("can_crane",false) and help:
+		var price := int(ctx.get("crane_price",150))
+		blocks.append({"type":"row","id":"crane","icon":ITEM_ICONS.crane,"title":"Вызвать кран",
+			"subtitle":"Место и нужная машина","kind":"primary",
+			"price":{} if price==0 else {"coins":price},"action_label":"Взять"})
 	var gifts := int(ctx.get("undo_gifts",0))
 	blocks.append({"type":"row","id":"undo","icon":UNDO,"title":"Отменить ход",
 		"subtitle":("Бесплатно: ещё %d" % gifts) if gifts>0 else "Вернуть последнюю машину",
