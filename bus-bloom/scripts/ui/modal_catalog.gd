@@ -9,9 +9,10 @@ extends RefCounted
 
 const Style := preload("res://scripts/ui/modal_style.gd")
 const STUCK_ART := preload("res://assets/artwork/menu/modals/open-extra-slot.png")
-const FOREMAN_HAPPY := preload("res://assets/artwork/foreman/foreman-happy.png")
-const FOREMAN_THINKING := preload("res://assets/artwork/foreman/foreman-thinking.png")
-const FOREMAN_SURPRISED := preload("res://assets/artwork/foreman/foreman-surprised.png")
+const WIN_ART := preload("res://assets/artwork/menu/Contented Construction Worker’s Ice Cream Break.png")
+const BILLY_HAPPY := preload("res://assets/artwork/billy/billy-happy.png")
+const BILLY_THINKING := preload("res://assets/artwork/billy/billy-thinking.png")
+const BILLY_SURPRISED := preload("res://assets/artwork/billy/billy-surprised.png")
 const CONE := preload("res://assets/artwork/cargo/traffic-cone.png")
 const UNDO := preload("res://assets/artwork/menu/undo.png")
 const GIFT := preload("res://assets/artwork/menu/gift.png")
@@ -31,9 +32,9 @@ const ITEM_ICONS := {
 # ------------------------------------------------------------- tutorial
 
 const TUTORIAL_STEPS := [
-	{"title":"Привет, я прораб!","text":"Нажми на машину — она выедет по стрелке к складу.","cta":"Дальше","avatar":FOREMAN_HAPPY},
-	{"title":"Цвет — это груз","text":"Машина берёт только свой материал. Следи за лентой сверху!","cta":"Дальше","avatar":FOREMAN_THINKING},
-	{"title":"Мест всего три","text":"Не занимай места машинами, которым груз пока не нужен.","cta":"Начать работу","avatar":FOREMAN_HAPPY},
+	{"title":"Привет, я Билли!","text":"Нажми на машину — она выедет по стрелке к складу.","cta":"Дальше","avatar":BILLY_HAPPY},
+	{"title":"Цвет — это груз","text":"Машина берёт только свой материал. Следи за лентой сверху!","cta":"Дальше","avatar":BILLY_THINKING},
+	{"title":"Мест всего три","text":"Не занимай места машинами, которым груз пока не нужен.","cta":"Начать работу","avatar":BILLY_HAPPY},
 ]
 
 ## Coach card at the bottom, optional spotlight (screen coordinates) on a truck.
@@ -115,7 +116,7 @@ static func offer(item:String,price:int,coins:int,ad_ready:bool) -> Dictionary:
 static func shortfall(need:int,coins:int,ad_coins:int,ad_ready:bool,pack:Dictionary={}) -> Dictionary:
 	var missing := maxi(0,need-coins)
 	var blocks: Array = [
-		{"type":"hero","texture":FOREMAN_SURPRISED,"size":150,"rays":false},
+		{"type":"hero","texture":BILLY_SURPRISED,"size":150,"rays":false},
 		{"type":"text","text":"Нужно ещё %d %s." % [missing,coin_word(missing)],"size":24},
 		{"type":"button","id":"watch_ad","kind":"ad","label":("+%d за рекламу" % ad_coins) if ad_ready else "Ролик готовится…","pulse":true,"enabled":ad_ready},
 	]
@@ -146,7 +147,7 @@ static func ad_reward(state:String,amount:int,coins:int) -> Dictionary:
 			]
 		"failed":
 			blocks = [
-				{"type":"hero","texture":FOREMAN_THINKING,"size":140,"rays":false},
+				{"type":"hero","texture":BILLY_THINKING,"size":140,"rays":false},
 				{"type":"text","text":"Ролик не загрузился.\nПроверь интернет и попробуй ещё раз.","size":21},
 				{"type":"button","id":"watch_ad","kind":"ad","label":"Попробовать ещё","pulse":false},
 				{"type":"link","id":"close","label":"Закрыть"},
@@ -160,14 +161,33 @@ static func ad_reward(state:String,amount:int,coins:int) -> Dictionary:
 			]
 	return {"id":"ad_reward","title":"Бесплатные монеты","close":state!="loading","back":"close","balance":coins,"blocks":blocks}
 
-## Double the level reward after a win.
-static func double_reward(amount:int,coins:int,ad_ready:bool) -> Dictionary:
-	return {"id":"double","title":"Удвоить награду?","balance":coins,"back":"close","close":true,"blocks":[
-		{"type":"reward","amount":amount*2},
-		{"type":"text","text":"Посмотри ролик — и заработок\nза уровень станет вдвое больше.","size":21},
-		{"type":"button","id":"watch_ad","kind":"ad","label":"Удвоить","pulse":true,"enabled":ad_ready},
-		{"type":"link","id":"close","label":"Забрать %d" % amount},
-	]}
+# ------------------------------------------------------------- level complete
+
+## ctx: reward, before (balance before the reward), coins, last (bool),
+## can_double (bool), details (runtime_economy completion() result).
+static func win(ctx:Dictionary) -> Dictionary:
+	var reward := int(ctx.get("reward",0))
+	var blocks: Array = [{"type":"art","texture":WIN_ART,"height":360,"fit":"contain"}]
+	if reward>0:
+		blocks.append({"type":"reward","amount":reward})
+		var parts := reward_parts(ctx.get("details",{}))
+		if parts!="": blocks.append({"type":"text","text":parts,"size":18,"color":Style.MUTED})
+		if ctx.get("can_double",false):
+			blocks.append({"type":"button","id":"double","kind":"ad","label":"Удвоить награду","price":{"coins":reward}})
+	else: blocks.append({"type":"text","text":"Награда за этот уровень\nуже получена.","size":21})
+	blocks.append({"type":"button","id":"next","kind":"primary","pulse":true,
+		"label":"Карта уровней" if ctx.get("last",false) else "Следующий уровень"})
+	blocks.append({"type":"link","id":"replay","label":"Сыграть ещё раз"})
+	return {"id":"win","title":"Груз отправлен!","balance":int(ctx.get("coins",0)),
+		"balance_from":int(ctx.get("before",ctx.get("coins",0))),"fly":reward>0,"back":"map","blocks":blocks}
+
+## "Уровень +20 · Серия +10" when the reward has more than one source.
+static func reward_parts(details:Dictionary) -> String:
+	var parts: Array = []
+	for key in ["base","streak","chest","achievements"]:
+		var n := int(details.get(key,0))
+		if n>0: parts.append("%s +%d" % [{"base":"Уровень","streak":"Серия","chest":"Сундук","achievements":"Достижения"}[key],n])
+	return " · ".join(parts) if parts.size()>1 else ""
 
 # ------------------------------------------------------------- seasonal
 
@@ -252,7 +272,7 @@ static func shop(ctx:Dictionary) -> Dictionary:
 ## After a successful purchase: what arrived.
 static func received(contents:Dictionary,coins:int) -> Dictionary:
 	return {"id":"received","title":"Готово!","balance":coins,"back":"close","blocks":[
-		{"type":"hero","texture":FOREMAN_HAPPY,"size":150},
+		{"type":"hero","texture":BILLY_HAPPY,"size":150},
 		{"type":"text","text":"Всё уже на складе. За работу!","size":22},
 		{"type":"bundle","items":items_for(contents)},
 		{"type":"button","id":"close","kind":"primary","label":"Отлично!","pulse":true},
