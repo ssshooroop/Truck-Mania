@@ -35,7 +35,8 @@ func run():
 		"ad-loading":Catalog.ad_reward("loading",25,40),
 		"ad-failed":Catalog.ad_reward("failed",25,40),
 		"ad-done":Catalog.ad_reward("done",25,65),
-		"double":Catalog.double_reward(32,120,true),
+		"win":Catalog.win({"reward":32,"before":88,"coins":120,"can_double":true,"details":{"base":22,"streak":10}}),
+		"win-replay":Catalog.win({"reward":0,"coins":120}),
 		"seasonal":Catalog.seasonal(event,store,now),
 		"seasonal-winter":Catalog.seasonal(winter,store,int(Time.get_unix_time_from_datetime_string("2026-12-25T12:00:00"))),
 		"shop":Catalog.shop({"coins":120,"store":store,"event":event,"ad_ready":true,"ad_coins":25,"frozen_now":now}),
@@ -48,7 +49,7 @@ func run():
 	for key in specs:
 		var m = Modal.new(specs[key])
 		layer.add_child(m)
-		m.age = 2.0
+		m.age = 4.0
 		if key=="ad-failed": m.flash("Ролик не загрузился")
 		game.coin_badge.visible=false
 		await process_frame

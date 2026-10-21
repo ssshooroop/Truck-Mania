@@ -14,6 +14,7 @@ const INNER_W := Style.CARD_W-Style.PAD*2
 const OPEN_TIME := 0.30
 const CLOSE_TIME := 0.16
 const PACK_H := 196.0
+const FLIGHT_COINS := 14
 
 var spec: Dictionary = {}
 var reduced_motion := false
@@ -30,6 +31,8 @@ var flash_text := ""
 var flash_time := 0.0
 var base := Transform2D.IDENTITY
 var _laid_out_for := Vector2.ZERO
+var flight_start := 0.0
+var reward_coin := Vector2.ZERO
 
 func _init(value:Dictionary={}) -> void:
 	spec = value
@@ -42,6 +45,7 @@ func _ready() -> void:
 ## Replace the content without replaying the entrance (e.g. ad finished).
 func update_spec(value:Dictionary) -> void:
 	spec = value
+	if value.get("replay_flight",false): flight_start = age
 	_laid_out_for = Vector2.ZERO
 	queue_redraw()
 
@@ -197,7 +201,11 @@ func _draw() -> void:
 	if spec.has("ribbon"): _draw_ribbon(spec.ribbon)
 	if flash_time>0.0: _draw_flash()
 	draw_set_transform_matrix(Transform2D.IDENTITY)
-	if int(spec.get("balance",-1))>=0 and not coach: Style.balance(self,int(spec.balance))
+	if int(spec.get("balance",-1))>=0 and not coach:
+		var shown := int(spec.balance)
+		if spec.has("balance_from"): shown = displayed_balance(int(spec.balance_from),shown,age-flight_start,reduced_motion)
+		Style.balance(self,shown)
+	if spec.get("fly",false) and not reduced_motion: _draw_flight()
 
 func _draw_coach_frame() -> void:
 	Style.card(self,card_rect,false)
@@ -289,8 +297,9 @@ func _draw_block(b:Dictionary,rect:Rect2) -> void:
 			var label := "+%d" % int(b.amount)
 			var w := Style.BLACK.get_string_size(label,HORIZONTAL_ALIGNMENT_LEFT,-1,56).x
 			var start := c.x-(w+84)*0.5
-			Style.rays(self,Vector2(start+36,c.y),70,0.0 if reduced_motion else age*0.4,0.8)
-			Style.icon(self,Style.COIN,Vector2(start+36,c.y),78)
+			reward_coin = Vector2(start+36,c.y)
+			Style.rays(self,reward_coin,70,0.0 if reduced_motion else age*0.4,0.8)
+			Style.icon(self,Style.COIN,reward_coin,78)
 			Style.juicy(self,label,Vector2(start+84+w*0.5,c.y+20),56,Color("7cf08a"),300,Color("17602a"))
 		"steps":
 			var n := int(b.count)
@@ -466,6 +475,35 @@ func _tag(label:String,pos:Vector2,angle:float) -> void:
 	Style.round_rect(self,r,Color("f04b3a"),12,Color.WHITE,2)
 	Style.text(self,label,r.get_center()+Vector2(0,6),17,Color.WHITE,Style.BLACK,r.size.x-8)
 	draw_set_transform_matrix(prev)
+
+## Coins leave the reward and land in the balance counter, which counts up as
+## they arrive (see displayed_balance). Drawn in screen space over everything.
+func _draw_flight() -> void:
+	var t := age-flight_start
+	var from: Vector2 = base*reward_coin
+	var to: Vector2 = Style.BALANCE_RECT.position+Vector2(24,22)
+	var zoom := base.get_scale().x
+	for i in FLIGHT_COINS:
+		var p := coin_progress(i,t)
+		if p<0.0: continue
+		var eased := p*p*(2.0-p)
+		var pos := from.lerp(to,eased)+Vector2(48+(i%4)*9,0)*zoom*sin(PI*p)
+		var size := lerpf(48*zoom,30,p)
+		draw_set_transform(pos,sin(p*TAU+i)*0.18)
+		Style.icon(self,Style.COIN,Vector2.ZERO,size)
+	draw_set_transform_matrix(Transform2D.IDENTITY)
+
+## Flight progress 0..1 of coin `i` at time `t`, or -1 when not flying.
+static func coin_progress(i:int,t:float) -> float:
+	var p := (t-(0.5+i*0.065))/(0.68+i*0.018)
+	return p if p>=0.0 and p<1.0 else -1.0
+
+## Counter value while coins fly: starts with the first arrival, ends with the last.
+static func displayed_balance(before:int,after:int,t:float,reduced:bool) -> int:
+	if reduced or after<=before: return after
+	var first := 0.5+0.68
+	var last := 0.5+(FLIGHT_COINS-1)*(0.065+0.018)+0.68
+	return roundi(lerpf(before,after,clampf((t-first)/(last-first),0.0,1.0)))
 
 func _draw_bundle(b:Dictionary,rect:Rect2) -> void:
 	var items: Array = b.items

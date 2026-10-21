@@ -160,14 +160,33 @@ static func ad_reward(state:String,amount:int,coins:int) -> Dictionary:
 			]
 	return {"id":"ad_reward","title":"Бесплатные монеты","close":state!="loading","back":"close","balance":coins,"blocks":blocks}
 
-## Double the level reward after a win.
-static func double_reward(amount:int,coins:int,ad_ready:bool) -> Dictionary:
-	return {"id":"double","title":"Удвоить награду?","balance":coins,"back":"close","close":true,"blocks":[
-		{"type":"reward","amount":amount*2},
-		{"type":"text","text":"Посмотри ролик — и заработок\nза уровень станет вдвое больше.","size":21},
-		{"type":"button","id":"watch_ad","kind":"ad","label":"Удвоить","pulse":true,"enabled":ad_ready},
-		{"type":"link","id":"close","label":"Забрать %d" % amount},
-	]}
+# ------------------------------------------------------------- level complete
+
+## ctx: reward, before (balance before the reward), coins, last (bool),
+## can_double (bool), details (runtime_economy completion() result).
+static func win(ctx:Dictionary) -> Dictionary:
+	var reward := int(ctx.get("reward",0))
+	var blocks: Array = [{"type":"hero","texture":FOREMAN_HAPPY,"size":170,"rays":false}]
+	if reward>0:
+		blocks.append({"type":"reward","amount":reward})
+		var parts := reward_parts(ctx.get("details",{}))
+		if parts!="": blocks.append({"type":"text","text":parts,"size":18,"color":Style.MUTED})
+		if ctx.get("can_double",false):
+			blocks.append({"type":"button","id":"double","kind":"ad","label":"Удвоить награду","price":{"coins":reward}})
+	else: blocks.append({"type":"text","text":"Награда за этот уровень\nуже получена.","size":21})
+	blocks.append({"type":"button","id":"next","kind":"primary","pulse":true,
+		"label":"Карта уровней" if ctx.get("last",false) else "Следующий уровень"})
+	blocks.append({"type":"link","id":"replay","label":"Сыграть ещё раз"})
+	return {"id":"win","title":"Груз отправлен!","balance":int(ctx.get("coins",0)),
+		"balance_from":int(ctx.get("before",ctx.get("coins",0))),"fly":reward>0,"back":"map","blocks":blocks}
+
+## "Уровень +20 · Серия +10" when the reward has more than one source.
+static func reward_parts(details:Dictionary) -> String:
+	var parts: Array = []
+	for key in ["base","streak","chest","achievements"]:
+		var n := int(details.get(key,0))
+		if n>0: parts.append("%s +%d" % [{"base":"Уровень","streak":"Серия","chest":"Сундук","achievements":"Достижения"}[key],n])
+	return " · ".join(parts) if parts.size()>1 else ""
 
 # ------------------------------------------------------------- seasonal
 

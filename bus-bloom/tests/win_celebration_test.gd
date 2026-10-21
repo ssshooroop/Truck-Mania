@@ -1,6 +1,8 @@
 extends SceneTree
+## Level-complete window: wallet credited once and saved before the animation,
+## counter climbs with the flying coins, Next / Replay / doubling by video.
 const Game = preload("res://scripts/main.gd")
-const Win = preload("res://scripts/win_celebration.gd")
+const Modal = preload("res://scripts/ui/game_modal.gd")
 var checks := 0
 var failures := 0
 func check(value:bool,label:String) -> void:
@@ -10,64 +12,69 @@ func check(value:bool,label:String) -> void:
 		push_error(label)
 func _initialize() -> void:
 	_run.call_deferred()
+func finish(game) -> void:
+	game.model.queue.clear()
+	for bus: Dictionary in game.model.buses: bus.status = "gone"
+	game._check_end()
 func _run() -> void:
 	root.size = Vector2i(540,1171)
 	var game = Game.new()
 	game.save_path = "user://win-celebration-test.cfg"
-	root.add_child(game)
 	game.automation = true
+	root.add_child(game)
 	game.save_enabled = true
-	game._sync_audio_preferences()
-	game.set_process(false)
 	game._load_level(0)
 	game.rewarded_levels.clear()
 	game.coins = 120
 	game.reduced_motion = false
-	game.model.queue.clear()
-	for bus: Dictionary in game.model.buses: bus.status = "gone"
-	game._check_end()
+	finish(game)
 	var target: int = game.coins
 	check(game.level_reward>0 and target==120+game.level_reward,"Wallet credited once before animation")
-	check(game.coin_badge.amount==120,"Counter begins at previous balance")
 	game._check_end()
 	check(game.coins==target,"Repeated end check cannot duplicate coins")
 	var saved := ConfigFile.new()
 	saved.load(game.save_path)
 	check(saved.get_value("economy","coins")==target,"Full reward saved before animation finishes")
+	await process_frame
+	await process_frame
+	check(game._modal_is("win"),"Win window opens")
+	check(int(game.modal.spec.balance_from)==120 and int(game.modal.spec.balance)==target,"Counter animates from the old balance")
+	check(not game.coin_badge.visible,"The window shows the balance instead of the game badge")
 	var previous := 120
-	for i in range(241):
-		var amount := Win.displayed_balance(120,target,i/100.0,false)
+	for i in range(301):
+		var amount := Modal.displayed_balance(120,target,i/100.0,false)
 		check(amount>=previous and amount<=target,"Counter monotonically approaches balance")
 		previous = amount
 	check(previous==target,"Counter reaches exact wallet value")
-	check(Win.displayed_balance(120,target,0,true)==target,"Reduced motion credits display immediately")
-	var destination: Vector2 = game.coin_badge.position+Vector2(24,22)
-	for i in Win.PARTICLES:
-		var start: float = 0.50+i*0.065
-		var duration: float = 0.68+i*0.018
-		var first: Dictionary = Win.flight(i,start,destination)
-		var last: Dictionary = Win.flight(i,start+duration-0.00001,destination)
-		check(first.position.distance_to(Win.ORIGIN)<20,"Duplicate begins at reward coin")
-		check(last.position.distance_to(destination)<0.1 and last.size<first.size,"Coin shrinks into badge")
-		check(Win.flight(i,start+duration+0.01,destination).is_empty(),"Arrived coin disappears")
-	for age in [0.22,1.12,2.5]:
-		game.win_age = age
-		game._process(0)
+	check(Modal.displayed_balance(120,target,0,true)==target,"Reduced motion credits display immediately")
+	check(Modal.coin_progress(0,0.5)==0.0 and Modal.coin_progress(13,10.0)<0.0,"Coins start after the card settles and all land")
+	for age in [0.3,1.2,3.0]:
+		game.modal.age = age
 		await process_frame
 		await RenderingServer.frame_post_draw
 		root.get_texture().get_image().save_png("res://artifacts/win-celebration-%d.png" % roundi(age*100))
-	check(game.coin_badge.visible and game.coin_badge.amount==target,"Badge remains visible on results")
-	game.win_age = 0.3
-	game._process(0)
-	game._overlay_input(Win.NEXT.get_center())
-	check(game.model.level_index==1 and game.coins==target and game.coin_badge.amount==target,"Early Next preserves reward and settles displayed balance")
+	check(game.modal.tap("next") and game.model.level_index==1 and game.coins==target,"Next keeps the reward and opens the next level")
 	game._load_level(0)
-	game.model.queue.clear()
-	for bus: Dictionary in game.model.buses: bus.status = "gone"
-	game._check_end()
+	finish(game)
+	await process_frame
+	await process_frame
 	check(game.level_reward==0 and game.coins==target,"Replay has no new coin award")
-	game._overlay_input(Win.REPLAY.get_center())
-	check(game.overlay=="" and game.model.level_index==0,"Replay button restarts level")
+	check(not game.modal.hits.has("double"),"Nothing to double without a reward")
+	game.modal.tap("replay")
+	check(game.overlay=="" and game.model.level_index==0,"Replay restarts the level")
+	# Doubling by rewarded video (simulated) from level 3, where it unlocks.
+	game.ads.simulate = true
+	game._load_level(2)
+	game.rewarded_levels.erase(2)
+	var before: int = game.coins
+	finish(game)
+	await process_frame
+	await process_frame
+	var reward: int = game.level_reward
+	check(game.modal.tap("double"),"Double offered once the video is ready")
+	await create_timer(1.5).timeout
+	check(game.coins==before+reward*2 and game.reward_doubled and not game.modal.hits.has("double"),"Video doubles the reward exactly once")
+	game.ads.simulate = false
 	game.save_enabled = false
 	game._cancel_animation()
 	game.free()

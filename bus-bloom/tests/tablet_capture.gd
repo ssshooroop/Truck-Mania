@@ -19,7 +19,6 @@ func run():
 	root.get_texture().get_image().save_png("res://artifacts/tablet-slot.png")
 	g._close_slot_offer()
 	g.overlay="win"
-	g.win_age=0.8
 	g.level_reward=20
 	await process_frame
 	await RenderingServer.frame_post_draw

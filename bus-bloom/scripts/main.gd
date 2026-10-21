@@ -11,7 +11,7 @@ const EdgeRoute = preload("res://scripts/edge_route.gd")
 const TruckRoute = preload("res://scripts/truck_route.gd")
 const Art = preload("res://scripts/cargo_art.gd")
 const CoinBadge = preload("res://scripts/coin_badge.gd")
-const WinCelebration = preload("res://scripts/win_celebration.gd")
+const PRIZE = preload("res://assets/sound/fx/prize.wav")
 const Economy = preload("res://scripts/runtime_economy.gd")
 const Boosters = preload("res://scripts/level_boosters.gd")
 const GameModal = preload("res://scripts/ui/game_modal.gd")
@@ -110,8 +110,6 @@ var reward_details: Dictionary = {}
 var rewarded_levels: Array[int] = []
 var level_reward = 0
 var completion_handled = false
-var win_screen = WinCelebration.new()
-var win_age = 0.0
 var win_balance_before = 0
 var coin_badge
 var sound_enabled = true
@@ -146,8 +144,6 @@ var last_horn_bus := -1
 var load_feedback: Array = []
 var cargo_trips = 0
 var confetti: Array = []
-var sfx: AudioStreamPlayer
-var notes: Dictionary = {}
 var save_enabled = true
 var save_path = SAVE_PATH
 var speed_factor = 1.0
@@ -167,10 +163,6 @@ func _ready() -> void:
 	RenderingServer.set_default_clear_color(PAPER)
 	Input.set_emulate_mouse_from_touch(true)
 	Input.set_emulate_touch_from_mouse(false)
-	sfx = AudioStreamPlayer.new()
-	sfx.volume_db = -18.0
-	add_child(sfx)
-	_make_notes()
 	var args = OS.get_cmdline_user_args()
 	automation = automation or "--capture" in args or "--smoke-test" in args or "--demo" in args
 	save_enabled = save_enabled and not automation
@@ -225,9 +217,6 @@ func _process(delta:float) -> void:
 	var modal_balance: bool = modal!=null and int(modal.spec.get("balance",-1))>=0
 	coin_badge.visible = overlay in ["","win","stuck","crane_preview","tutorial"] and not modal_balance
 	if road_menu: road_menu.coin_badge.visible = not modal_balance
-	if overlay=="win":
-		win_age += delta
-		coin_badge.amount = WinCelebration.displayed_balance(win_balance_before,coins,win_age,reduced_motion)
 	if overlay=="slot_offer": spotlight_time += delta
 	if overlay not in ["settings","levels","road_menu","slot_offer"]:
 		traffic.advance(self,delta)
@@ -361,7 +350,6 @@ func _load_level(index:int) -> void:
 	reward_details.clear()
 	level_reward = 0
 	reward_doubled = false
-	win_age = 0.0
 	_close_modal(true)
 	_sync_coins()
 	completion_handled = false
@@ -904,12 +892,10 @@ func _check_end() -> void:
 		completion_handled = true
 		win_balance_before = coins
 		level_reward = _claim_level_reward(model.level_index)
-		win_age = 0.0
-		if coin_badge: coin_badge.amount = WinCelebration.displayed_balance(win_balance_before,coins,win_age,reduced_motion)
 		overlay = "win"
 		unlocked = maxi(unlocked,mini(model.level_index+1,model.level_count()-1))
 		_save()
-		_play("win")
+		if sound_enabled and audio: audio.play_stream(PRIZE,1,-6.0)
 
 	elif model.is_stuck():
 		overlay = "stuck"
@@ -1110,14 +1096,6 @@ func _overlay_input(p:Vector2) -> void:
 		if Rect2(415,234,50,50).has_point(p): overlay = levels_origin
 		for i in model.level_count():
 			if Rect2(83+(i%3)*129,350+floori(i/3.0)*117,116,98).has_point(p) and i <= unlocked: _load_level(i)
-	elif overlay == "win":
-		if WinCelebration.DOUBLE.has_point(p): _open_double_offer()
-		elif WinCelebration.NEXT.has_point(p):
-			if model.level_index+1 < model.level_count(): _load_level(model.level_index+1)
-			else:
-				levels_origin = "win"
-				_show_road_menu(false)
-		elif WinCelebration.REPLAY.has_point(p): _load_level(model.level_index)
 
 func _cone_position(bay:int) -> Vector2:
 	return _bay_front(bay)+_bay_back()*43.0
@@ -1326,7 +1304,7 @@ func _draw() -> void:
 	if toast_time>0 and overlay=="":
 		_round(Rect2(25,_footer_y()-63,490,31),INK,10)
 		_text(toast,Vector2(270,_footer_y()-42),12,Color.WHITE,true)
-	if overlay!="" and overlay not in ["stuck","tutorial"]:
+	if overlay!="" and overlay not in ["stuck","tutorial","win"]:
 		if overlay!="slot_offer": draw_rect(get_viewport_rect(),Color(0.055,0.10,0.20,0.88) if overlay in ["win","stuck","crane_preview"] else Color(0.12,0.20,0.24,0.47))
 		_draw_space(_panel_transform())
 		_draw_overlay()
@@ -1468,9 +1446,6 @@ func _draw_overlay() -> void:
 	if overlay=="crane_preview":
 		preload("res://scripts/crane_offer.gd").draw_crane(self)
 		return
-	if overlay=="win":
-		win_screen.draw(self,win_age,level_reward,_panel_transform().affine_inverse()*(coin_badge.position+Vector2(24,coin_badge.size.y*0.5)),reduced_motion,model.level_index==model.level_count()-1)
-		return
 	if overlay=="slot_offer":
 		_draw_slot_spotlight()
 		return
@@ -1581,9 +1556,7 @@ func _save() -> void:
 func _set_preference(key:String,enabled:bool) -> void:
 	match key:
 		"music": music_enabled = enabled
-		"sound":
-			sound_enabled = enabled
-			if not enabled: sfx.stop()
+		"sound": sound_enabled = enabled
 		"vibration": vibration_enabled = enabled
 	_sync_audio_preferences()
 	if road_menu: road_menu.sync_preferences(music_enabled,sound_enabled,vibration_enabled)
@@ -1602,27 +1575,6 @@ func _sound_effect(key:String) -> void:
 
 func _vibrate(milliseconds:int) -> void:
 	if vibration_enabled and not automation: Input.vibrate_handheld(milliseconds)
-
-func _make_notes() -> void:
-	for key in ["move","board","leave","win"]:
-		var frequency = {"move":190.0,"board":570.0,"leave":380.0,"win":760.0}[key]
-		var data = PackedByteArray()
-		var count = 6615 if key=="win" else 2205
-		data.resize(count*2)
-		for i in count:
-			var t = float(i)/22050.0
-			var envelope = sin(PI*float(i)/count)*0.24
-			data.encode_s16(i*2,int(sin(TAU*frequency*t)*envelope*32767))
-		var stream = AudioStreamWAV.new()
-		stream.format = AudioStreamWAV.FORMAT_16_BITS
-		stream.mix_rate = 22050
-		stream.data = data
-		notes[key] = stream
-
-func _play(key:String) -> void:
-	if sound_enabled:
-		sfx.stream = notes[key]
-		sfx.play()
 
 func _capture() -> void:
 	_load_level(4)
@@ -1747,7 +1699,9 @@ func _close_modal(instant:bool=false) -> void:
 func _sync_modals() -> void:
 	if modal_layer==null: return
 	if modal!=null and not modal.is_closing() and overlay not in modal_scope: modal.close()
-	if overlay=="stuck" and modal==null and daily_screen==null: _open_modal(Modals.stuck(_stuck_context()),_on_stuck_action,["stuck"])
+	if modal!=null or daily_screen!=null: return
+	if overlay=="stuck": _open_modal(Modals.stuck(_stuck_context()),_on_stuck_action,["stuck"])
+	elif overlay=="win": _open_modal(_win_spec(),_on_win_action,["win"])
 
 func _modal_is(id:String) -> bool:
 	return modal!=null and not modal.is_closing() and modal.spec.get("id","")==id
@@ -1846,21 +1800,33 @@ func _open_shortfall(need:int,scope:Array) -> void:
 			"close": _close_modal()
 	,scope)
 
-func _open_double_offer() -> void:
-	if level_reward<=0 or reward_doubled or not ads.is_ready(): return
-	if model.level_index+1<int(economy.config.rewarded_video.get("double_unlock_level",1)): return
-	var amount: int = level_reward
-	_open_modal(Modals.double_reward(amount,coins,true),func(id:String):
-		match id:
-			"watch_ad":
-				_watch_ad(id,func():
-					reward_doubled = true
-					coins += amount
-					_sync_coins()
-					_save()
-					if modal: modal.update_spec(Modals.ad_reward("done",amount,coins)))
-			"close": _close_modal()
-	,["win"])
+func _win_spec(replay:bool=false) -> Dictionary:
+	var spec := Modals.win({"reward":level_reward,"before":win_balance_before,"coins":coins,
+		"last":model.level_index>=model.level_count()-1,"details":reward_details,
+		"can_double":ads.is_ready() and not reward_doubled and level_reward>0
+			and model.level_index+1>=int(economy.config.rewarded_video.get("double_unlock_level",1))})
+	if replay: spec.replay_flight = true
+	return spec
+
+func _on_win_action(id:String) -> void:
+	match id:
+		"next":
+			if model.level_index+1<model.level_count(): _load_level(model.level_index+1)
+			else: _on_win_action("map")
+		"replay": _load_level(model.level_index)
+		"map":
+			levels_origin = "win"
+			_show_road_menu(false)
+		"double":
+			_watch_ad(id,func():
+				if reward_doubled or overlay!="win": return
+				reward_doubled = true
+				win_balance_before = coins
+				coins += level_reward
+				level_reward *= 2
+				_sync_coins()
+				_save()
+				if _modal_is("win"): modal.update_spec(_win_spec(true)))
 
 ## Plays a rewarded video for the pressed button; the reward runs only after a
 ## finished video.
