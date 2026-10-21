@@ -9,6 +9,7 @@ extends RefCounted
 
 const Style := preload("res://scripts/ui/modal_style.gd")
 const STUCK_ART := preload("res://assets/artwork/menu/modals/open-extra-slot.png")
+const WIN_ART := preload("res://assets/artwork/menu/Contented Construction Worker’s Ice Cream Break.png")
 const FOREMAN_HAPPY := preload("res://assets/artwork/foreman/foreman-happy.png")
 const FOREMAN_THINKING := preload("res://assets/artwork/foreman/foreman-thinking.png")
 const FOREMAN_SURPRISED := preload("res://assets/artwork/foreman/foreman-surprised.png")
@@ -166,7 +167,7 @@ static func ad_reward(state:String,amount:int,coins:int) -> Dictionary:
 ## can_double (bool), details (runtime_economy completion() result).
 static func win(ctx:Dictionary) -> Dictionary:
 	var reward := int(ctx.get("reward",0))
-	var blocks: Array = [{"type":"hero","texture":FOREMAN_HAPPY,"size":170,"rays":false}]
+	var blocks: Array = [{"type":"art","texture":WIN_ART,"height":250,"focus":Vector2(0.5,0.30)}]
 	if reward>0:
 		blocks.append({"type":"reward","amount":reward})
 		var parts := reward_parts(ctx.get("details",{}))
