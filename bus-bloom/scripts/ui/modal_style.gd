@@ -15,7 +15,6 @@ const HEAVY := preload("res://assets/fonts/MPLUSRounded1c-ExtraBold.ttf")
 const BOLD := preload("res://assets/fonts/MPLUSRounded1c-Bold.ttf")
 const COIN := preload("res://assets/artwork/menu/coin.png")
 const AD := preload("res://assets/artwork/menu/ad-player.png")
-const TAPE := preload("res://assets/artwork/menu/yellow-black-tape.png")
 
 const WIDTH := 540.0
 const CARD_X := 30.0
@@ -108,15 +107,19 @@ static func paragraph_height(value:String,width:float,size:int) -> float:
 static func paragraph(c:CanvasItem,value:String,top_left:Vector2,width:float,size:int,color:Color,align:=HORIZONTAL_ALIGNMENT_CENTER) -> void:
 	c.draw_multiline_string(BOLD,top_left+Vector2(0,BOLD.get_ascent(size)),value,align,width,size,-1,color)
 
-## Hazard tape strip cropped from the supplied artwork (skips its baked checkerboard).
+## Continuous opaque hazard band; geometry fits the exact window width.
 static func tape(c:CanvasItem,rect:Rect2) -> void:
-	var src := Rect2(150,40,620,55)
-	var step := src.size.x*rect.size.y/src.size.y
-	var x := rect.position.x
-	while x<rect.end.x:
-		var w := minf(step,rect.end.x-x)
-		c.draw_texture_rect_region(TAPE,Rect2(x,rect.position.y,w,rect.size.y),Rect2(src.position,Vector2(src.size.x*w/step,src.size.y)))
-		x += step
+	if rect.size.x<=0 or rect.size.y<=0: return
+	c.draw_rect(rect,Color("ffd500"))
+	var h := rect.size.y
+	var stripe := h*0.85
+	var boundary := PackedVector2Array([rect.position,Vector2(rect.end.x,rect.position.y),rect.end,Vector2(rect.position.x,rect.end.y)])
+	var x := rect.position.x-h
+	while x<rect.end.x+h:
+		var diagonal := PackedVector2Array([Vector2(x,rect.position.y),Vector2(x+stripe,rect.position.y),Vector2(x+stripe-h,rect.end.y),Vector2(x-h,rect.end.y)])
+		for polygon in Geometry2D.intersect_polygons(diagonal,boundary):
+			c.draw_colored_polygon(polygon,Color("101010"))
+		x+=stripe*2.0
 
 ## The sign board: frame, lip, paper, header plate, tape and bolts.
 static func card(c:CanvasItem,rect:Rect2,header:bool=true) -> void:
