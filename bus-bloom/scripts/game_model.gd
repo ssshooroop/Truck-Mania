@@ -112,64 +112,79 @@ const LAYOUTS := [
 	],
 ]
 static var _level_cache: Dictionary = {}
+static var campaign: Array = []
+
+static func campaign_levels() -> Array:
+	if campaign.is_empty():
+		var data = JSON.parse_string(FileAccess.get_file_as_string("res://config/campaign.json"))
+		if data is Dictionary: campaign = data.get("levels",[])
+	return campaign
+
+func level_title(index:int) -> String:
+	return "Склад %d" % (index+1)
+
 
 var buses: Array = []
+var tablet_layout := false
+var layout_transform := Transform2D.IDENTITY
+var layout_scale := 1.0
+var yard_rect := YARD_RECT
 var queue: Array = []
+var open_bay_count := 3
 var bays: Array = [-1, -1, -1, -1, -1]
 var level_index := -1
 var level_name := ""
 var _search_deadline := 0
 var _search_aborted := false
+var _maneuver_cache:Dictionary = {}
+const YardManeuver = preload("res://scripts/yard_maneuver.gd")
 
 func level_count() -> int:
-	return LEVELS.size()
+	return campaign_levels().size()
 
 func load_level(index: int) -> bool:
-	if index < 0 or index >= LEVELS.size():
+	if index < 0 or index >= level_count():
 		return false
+	layout_transform = preload("res://scripts/responsive_layout.gd").yard(_raw_level_template(index).buses,Rect2(45,390,450,235)) if tablet_layout else Transform2D.IDENTITY
+	layout_scale = layout_transform.get_scale().x
+	yard_rect = Rect2(35,380,470,255) if tablet_layout else YARD_RECT
 	var template := _level_template(index)
 	level_index = index
-	level_name = LEVELS[index]["name"]
+	_maneuver_cache.clear()
+	level_name = level_title(index)
 	buses = template["buses"].duplicate(true)
 	queue = template["queue"].duplicate()
 	bays = [-1, -1, -1, -1, -1]
+	open_bay_count = 3
 	return true
 
 func _level_template(index: int) -> Dictionary:
+	var template:Dictionary = _raw_level_template(index).duplicate(true)
+	for bus:Dictionary in template.buses:
+		bus.position=layout_transform*bus.position
+		bus.angle+=layout_transform.get_rotation()
+	return template
+
+func _raw_level_template(index: int) -> Dictionary:
 	if _level_cache.has(index):
 		return _level_cache[index]
+	var data: Dictionary = campaign_levels()[index]
 	var result: Array = []
-	for packed: Vector4 in LAYOUTS[index]:
-		var id := result.size()
-		var kind := int(packed.w)
-		var candidate := {"id": id, "color": int((id * 5 + index * 2 + id / 4) % COLORS),
-			"position": YARD_RECT.position + Vector2(packed.x, packed.y),
-			"angle": packed.z * PI / 4.0, "kind": kind, "capacity": CAPACITIES[kind],
-			"load": 0, "status": "yard", "bay": -1}
-		result.append(candidate)
+	for v: Dictionary in data.vehicles:
+		result.append({"id":int(v.id),"color":int(v.color),"position":Vector2(v.x,v.y),
+			"angle":float(v.angle),"kind":int(v.kind),"capacity":int(v.capacity),
+			"load":0,"status":"yard","bay":-1})
 	var cargo: Array = []
-	# Alternating material batches gradually introduce all five loading bays.
-	# Every group follows the certified order, preserving solvability.
-	var group_size := mini(BAY_COUNT, index + 2)
-	var start := 0
-	while start < result.size():
-		var stop := mini(start + group_size, result.size())
-		for id in range(start, stop):
-			cargo.append(result[id]["color"])
-		for id in range(stop - 1, start - 1, -1):
-			for unit in range(int(result[id]["capacity"]) - 1):
-				cargo.append(result[id]["color"])
-		start = stop
-	var template := {"buses": result, "queue": cargo}
-	_level_cache[index] = template
-	return template
+	for color in data.queue: cargo.append(int(color))
+	_level_cache[index] = {"buses":result,"queue":cargo}
+	return _level_cache[index]
 
 func get_bus(id: int) -> Dictionary:
 	return buses[id] if id >= 0 and id < buses.size() else {}
 
 func vehicle_size(bus: Dictionary) -> Vector2:
 	var kind: int = bus.get("kind", 0)
-	return Vector2(WIDTHS[kind], LENGTHS[kind])
+	return Vector2(WIDTHS[kind], LENGTHS[kind])*layout_scale
 
 func forward(bus: Dictionary) -> Vector2:
 	var angle: float = bus["angle"]
@@ -182,7 +197,7 @@ func exit_position(id: int) -> Vector2:
 func _exit_for(bus: Dictionary) -> Vector2:
 	var point: Vector2 = bus["position"]
 	var direction := forward(bus)
-	var safe_rect := YARD_RECT.grow(vehicle_size(bus).length() * 0.5 + 10.0)
+	var safe_rect := yard_rect.grow(vehicle_size(bus).length() * 0.5 + 10.0)
 	var distance := INF
 	if direction.x > 0.0001:
 		distance = minf(distance, (safe_rect.end.x - point.x) / direction.x)
@@ -230,14 +245,54 @@ func blocking_ids(id: int) -> Array:
 			result.append(other["id"])
 	return result
 
+func maneuver_paths(id:int, mask:int=-1) -> Array:
+	# Limit this gameplay experiment to level 4 until the playtest is approved.
+	if level_index!=3: return []
+	if mask<0:
+		mask=0
+		for bus:Dictionary in buses:
+			if bus.status=="yard": mask |= 1<<int(bus.id)
+	var key := Vector2i(id,mask)
+	if not _maneuver_cache.has(key):
+		if tablet_layout:
+			# Evaluate the exact same puzzle in canonical coordinates, then map
+			# its legal manoeuvres rigidly with the rest of the arrangement.
+			var canonical = get_script().new()
+			canonical.load_level(level_index)
+			var paths:Array = YardManeuver.paths(canonical,id,mask)
+			var mapped:Array = []
+			for path:Array in paths:
+				var mapped_path:Array = []
+				for pose:Dictionary in path:
+					var point:Dictionary=pose.duplicate()
+					point.position=layout_transform*pose.position
+					point.angle+=layout_transform.get_rotation()
+					point.distance*=layout_scale
+					mapped_path.append(point)
+				mapped.append(mapped_path)
+			_maneuver_cache[key]=mapped
+		else: _maneuver_cache[key]=YardManeuver.paths(self,id,mask)
+	return _maneuver_cache[key]
+
+func free_bay(slots:Array=[]) -> int:
+	if slots.is_empty(): slots = bays
+	for index in range(open_bay_count):
+		if slots[index]==-1: return index
+	return -1
+
+func unlock_next_bay() -> bool:
+	if open_bay_count>=BAY_COUNT: return false
+	open_bay_count += 1
+	return true
+
 func can_dispatch(id: int) -> bool:
 	var bus := get_bus(id)
-	return not bus.is_empty() and bus["status"] == "yard" and bays.has(-1) and blocking_ids(id).is_empty()
+	return not bus.is_empty() and bus["status"] == "yard" and free_bay()>=0 and (blocking_ids(id).is_empty() or not maneuver_paths(id).is_empty())
 
 func dispatch(id: int) -> bool:
 	if not can_dispatch(id):
 		return false
-	var bay: int = bays.find(-1)
+	var bay: int = free_bay()
 	bays[bay] = id
 	buses[id]["bay"] = bay
 	buses[id]["status"] = "arriving"
@@ -332,11 +387,24 @@ func snapshot() -> Dictionary:
 	return {"level_index": level_index, "buses": buses.duplicate(true),
 		"queue": queue.duplicate(), "bays": bays.duplicate()}
 
+func undo_snapshot() -> Dictionary:
+	# Record committed cargo only. Earlier accepted arrivals retain their bays;
+	# on restoration they are already parked, rather than stranded mid-route.
+	var state := {"level_index": level_index, "buses": buses.duplicate(true),
+		"queue": queue.duplicate(), "bays": bays.duplicate()}
+	for bus:Dictionary in state.buses:
+		if bus.status == "arriving": bus.status = "docked"
+		elif bus.status == "leaving":
+			state.bays[bus.bay] = -1
+			bus.bay = -1
+			bus.status = "gone"
+	return state
+
 func restore(state: Dictionary) -> bool:
 	if not _valid_snapshot(state):
 		return false
 	level_index = state["level_index"]
-	level_name = LEVELS[level_index]["name"]
+	level_name = level_title(level_index)
 	buses = state["buses"].duplicate(true)
 	queue = state["queue"].duplicate()
 	bays = state["bays"].duplicate()
@@ -346,7 +414,7 @@ func _valid_snapshot(state: Dictionary) -> bool:
 	if not state.has_all(["level_index", "buses", "queue", "bays"]) or typeof(state["level_index"]) != TYPE_INT:
 		return false
 	var index: int = state["level_index"]
-	if index < 0 or index >= LEVELS.size():
+	if index < 0 or index >= level_count():
 		return false
 	if not state["buses"] is Array or not state["queue"] is Array or not state["bays"] is Array:
 		return false
@@ -392,23 +460,19 @@ func _valid_snapshot(state: Dictionary) -> bool:
 		var id = saved_bays[bay]
 		if typeof(id) != TYPE_INT or id < -1 or id >= saved_buses.size():
 			return false
+		if id != -1 and bay>=open_bay_count: return false
 		if id != -1 and (saved_buses[id]["status"] != "docked" or saved_buses[id]["bay"] != bay):
 			return false
 	if total_loaded + saved_queue.size() != original_queue.size():
 		return false
 	for offset in range(saved_queue.size()):
 		var color = saved_queue[offset]
-		if typeof(color) != TYPE_INT or color < 0 or color >= COLORS or color != original_queue[total_loaded + offset]:
+		if typeof(color) != TYPE_INT or color < 0 or color >= COLORS:
 			return false
 		remaining[color] -= 1
 	for count in remaining:
 		if count != 0:
 			return false
-	for bus in saved_buses:
-		if bus["status"] != "yard":
-			for other in saved_buses:
-				if other["status"] == "yard" and _sweep_hits(bus, other):
-					return false
 	return true
 
 func find_hint() -> int:
@@ -455,7 +519,7 @@ func _solve_compact(state: Dictionary, masks: Array, seen: Dictionary) -> Array:
 	_settle_compact(state)
 	if state["yard"] == 0 and state["bays"] == [-1, -1, -1, -1, -1] and state["offset"] == queue.size():
 		return [-2]
-	var free: int = state["bays"].find(-1)
+	var free: int = free_bay(state["bays"])
 	if free == -1:
 		return []
 	var key := str([state["yard"], state["offset"], state["bays"], state["loads"]])
@@ -465,7 +529,9 @@ func _solve_compact(state: Dictionary, masks: Array, seen: Dictionary) -> Array:
 	# Ascending ID follows the layout certificate; alternate legal moves are
 	# explored when earlier player choices require a different recovery path.
 	for id in range(buses.size()):
-		if (int(state["yard"]) & (1 << id)) == 0 or (masks[id] & int(state["yard"])) != 0:
+		if (int(state["yard"]) & (1 << id)) == 0:
+			continue
+		if (masks[id] & int(state["yard"])) != 0 and maneuver_paths(id,int(state["yard"])).is_empty():
 			continue
 		var child: Dictionary = state.duplicate(true)
 		child["yard"] = int(child["yard"]) & ~(1 << id)

@@ -20,7 +20,7 @@ func _draw() -> void:
 	var fit: float = minf(34.0/region.size.x,34.0/region.size.y)
 	var drawn := region.size*fit
 	draw_texture_rect_region(ICON,Rect2(Vector2(24,size.y/2)-drawn/2,drawn),region)
-	var font := ThemeDB.fallback_font
+	var font := preload("res://assets/fonts/MPLUSRounded1c-Bold.ttf")
 	var value := str(amount)
 	var font_size := 22
 	while font_size>12 and font.get_string_size(value,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size).x>size.x-54:

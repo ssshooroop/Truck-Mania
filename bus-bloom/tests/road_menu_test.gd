@@ -41,6 +41,19 @@ func _run() -> void:
 			var half_width:float = prop.drawn_size().x*prop.size_factor/1080.0
 			check(absf(prop.lateral)-half_width>=0.1299,"Large decorations leave the road clear")
 	check(scenery_before==scenery_after,"Returning restores the same tree groups and offsets")
+	for step in 48:
+		menu.road.scroll = -step/16.0
+		menu._process(0)
+		for prop in menu.decorations:
+			if not prop.enabled: continue
+			var bounds:Vector2 = menu.projection.scenery_edges(prop.world)
+			var x:float = menu.projection.center_x(prop.world)+prop.lateral
+			var half:float = prop.drawn_size().x*prop.size_factor/1080.0
+			check(x+half<=bounds.x-0.0199 or x-half>=bounds.y+0.0199,"Decoration clears measured road shoulders")
+			check(x-half>=0.0199 and x+half<=0.9801,"Decoration fits grass")
+	menu.road.scroll = original_scroll
+	menu._process(0)
+
 	var selected:Array = []
 	var callback = func(index:int): selected.append(index)
 	menu.level_selected.disconnect(game._load_level)

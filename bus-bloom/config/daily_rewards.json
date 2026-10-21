@@ -1,0 +1,97 @@
+{
+  "items": {
+    "coins": {
+      "label": "Монеты",
+      "icon": "coins-stack-medium.png"
+    },
+    "undo": {
+      "label": "Отмена хода",
+      "icon": "undo.png"
+    },
+    "crane": {
+      "label": "Кран",
+      "icon": "gift.png",
+      "coin_value": 150
+    },
+    "extra_slot": {
+      "label": "Место",
+      "icon": "gift.png",
+      "coin_value": 100
+    },
+    "shuffle": {
+      "label": "Перемешивание",
+      "icon": "gift.png"
+    },
+    "swap": {
+      "label": "Обмен",
+      "icon": "gift.png"
+    }
+  },
+  "weeks": [
+    {
+      "id": "week_01",
+      "days": [
+        {
+          "rewards": [
+            {
+              "item": "coins",
+              "quantity": 20
+            }
+          ]
+        },
+        {
+          "rewards": [
+            {
+              "item": "coins",
+              "quantity": 30
+            }
+          ]
+        },
+        {
+          "rewards": [
+            {
+              "item": "undo",
+              "quantity": 2
+            }
+          ]
+        },
+        {
+          "rewards": [
+            {
+              "item": "coins",
+              "quantity": 50
+            }
+          ]
+        },
+        {
+          "rewards": [
+            {
+              "item": "coins",
+              "quantity": 50
+            },
+            {
+              "item": "undo",
+              "quantity": 1
+            }
+          ]
+        },
+        {
+          "rewards": [
+            {
+              "item": "coins",
+              "quantity": 100
+            }
+          ]
+        },
+        {
+          "rewards": [
+            {
+              "item": "coins",
+              "quantity": 150
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

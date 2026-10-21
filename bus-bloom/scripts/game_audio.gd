@@ -13,6 +13,10 @@ const PICKUP = [
 	preload("res://assets/sound/fx/pipe-download-single.wav") # Sheet metal fallback.
 ]
 const FX = {
+	"horn":preload("res://assets/sound/fx/truck_air_horn_01.wav"),
+	"skid":preload("res://assets/sound/fx/skid_short_01.wav"),
+	"start":preload("res://assets/sound/fx/truck_start.wav"),
+	"touch":preload("res://assets/sound/fx/touch-truck.wav"),
 	"bump":preload("res://assets/sound/fx/bump.wav"),
 	"full":preload("res://assets/sound/fx/truck-full.wav"),
 	"one":preload("res://assets/sound/fx/upload-one.wav"),
@@ -67,12 +71,13 @@ func _update_music() -> void:
 		music.play()
 	elif not music.playing: music.play()
 
-func play_stream(stream:AudioStream,repeats:int=1) -> void:
+func play_stream(stream:AudioStream,repeats:int=1,volume_db:float=-9.0) -> void:
 	if not effects_enabled or not stream: return
 	var player = voices[next_voice]
 	next_voice = (next_voice+1)%voices.size()
 	player.stop()
 	player.stream = stream
+	player.volume_db = volume_db
 	repeat_left[player] = repeats-1
 	player.play()
 
@@ -84,7 +89,7 @@ func deposit(count:int) -> void:
 	play_stream(FX[key],2 if count==2 else 1)
 
 func effect(key:String) -> void:
-	play_stream(FX[key])
+	play_stream(FX[key],1,0.0 if key=="bump" else -9.0)
 
 func stop_effects() -> void:
 	repeat_left.clear()

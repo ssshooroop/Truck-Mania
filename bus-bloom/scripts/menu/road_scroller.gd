@@ -2,7 +2,7 @@ extends Control
 
 const RoadProjection = preload("res://scripts/menu/road_projection.gd")
 @export var projection: Resource = RoadProjection.new()
-@export var road_texture: Texture2D = preload("res://assets/artwork/menu/road.png")
+@export var road_texture: Texture2D = preload("res://assets/artwork/menu/road-1.png")
 @export var friction: float = 5.0
 @export var scroll_speed: float = 1.0
 @export var level_spacing: float = 0.19

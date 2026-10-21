@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "reward.base.a":              {"min": 6,    "max": 30,  "step": 2},
+    "reward.base.b":              {"min": 0.0,  "max": 3.0, "step": 0.5},
+    "reward.clean_streak.step":   {"min": 0,    "max": 10,  "step": 1},
+    "reward.clean_streak.cap":    {"min": 1,    "max": 10,  "step": 1},
+    "rescue.cost":                {"min": 50,   "max": 200, "step": 10},
+    "rescue.escalation":          {"min": 1.0,  "max": 3.0, "step": 0.5},
+    "rescue.shuffle_cost":        {"min": 10,   "max": 50,  "step": 5},
+    "rescue.swap_cost":           {"min": 150,  "max": 500, "step": 25},
+    "rescue.crane_cost":          {"min": 80,   "max": 400, "step": 20},
+    "rescue.shuffle_strength_log2": {"min": 0,  "max": 4,   "step": 1},
+    "booster.price":              {"min": 50,   "max": 400, "step": 25},
+    "start_balance":              {"min": 0,    "max": 300, "step": 50},
+    "daily_login_scale":          {"min": 0.0,  "max": 2.0, "step": 0.25},
+    "interstitial.every_levels":  {"min": 3,    "max": 8,   "step": 1},
+    "interstitial.start_level":   {"min": 5,    "max": 15,  "step": 1},
+    "difficulty_shift":           {"min": -0.6, "max": 0.8, "step": 0.2}
+  },
+  "objective": {
+    "lambdas": [0.0, 0.005, 0.01, 0.02, 0.04, 0.08],
+    "constraints": {"retention_level_10_min": 0.70, "wall_share_max": 0.25, "early_max_attempts": 3.5}
+  }
+}

@@ -20,7 +20,7 @@ func _draw() -> void:
 	draw_circle(Vector2.ZERO,radius,Color("9daab8") if locked else Color("ffc626") if current else Color("2ebc85"))
 	draw_arc(Vector2.ZERO,radius-3,0,TAU,48,Color(1,1,1,0.65),2,true)
 	var label = str(level_index+1)
-	var font = ThemeDB.fallback_font
+	var font = preload("res://assets/fonts/MPLUSRounded1c-ExtraBold.ttf")
 	var width = font.get_string_size(label,HORIZONTAL_ALIGNMENT_LEFT,-1,27).x
 	draw_string(font,Vector2(-width/2,9),label,HORIZONTAL_ALIGNMENT_LEFT,-1,27,Color("243449"))
 	if locked:

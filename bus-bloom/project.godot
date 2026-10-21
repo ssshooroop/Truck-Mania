@@ -11,11 +11,11 @@ config/icon="res://icon.svg"
 
 [display]
 window/size/viewport_width=540
-window/size/viewport_height=1171
+window/size/viewport_height=720
 window/size/window_width_override=540
 window/size/window_height_override=1171
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep"
+window/stretch/aspect="expand"
 window/handheld/orientation=1
 window/dpi/allow_hidpi=true
 
@@ -27,8 +27,13 @@ pointing/emulate_touch_from_mouse=false
 pointing/emulate_mouse_from_touch=true
 
 [rendering]
+textures/vram_compression/import_etc2_astc=true
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/default_filters/use_nearest_mipmap_filter=false
 anti_aliasing/quality/msaa_2d=0
 environment/defaults/default_clear_color=Color(0.698039, 0.690196, 0.713725, 1)
+
+[gui]
+
+theme/custom="res://assets/fonts/game_theme.tres"

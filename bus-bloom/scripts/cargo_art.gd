@@ -48,7 +48,7 @@ func _poly(points: Array, fill: Color) -> void:
 func _line(from: Vector2, to: Vector2, color: Color, width: float = 1.0) -> void:
 	canvas.draw_line(from, to, color, width, true)
 
-func vehicle(bus: Dictionary, position: Vector2, angle: float, scale: float = 1.0, selected: bool = false, _blocked: bool = false) -> void:
+func vehicle(bus: Dictionary, position: Vector2, angle: float, scale: float = 1.0, _selected: bool = false, _blocked: bool = false) -> void:
 	var kind: int = clampi(int(bus.get("kind", 0)), 0, 2)
 	var material_id: int = clampi(int(bus.get("color", 0)), 0, 5)
 	var tint: Color = COLORS[material_id]
@@ -57,9 +57,7 @@ func vehicle(bus: Dictionary, position: Vector2, angle: float, scale: float = 1.
 	var size: Vector2 = body.size
 	var capacity: int = int(bus.get("capacity", 4))
 	var load_count: int = int(bus.get("load", 0))
-	canvas.draw_set_transform(position, angle, Vector2.ONE * scale)
-	if selected:
-		_box(body.grow(4), Color(1,0.9,0.15,0.3), 7, Color("ffcb00"), 2)
+	canvas.art_transform(position, angle, Vector2.ONE * scale)
 	# Preserve the complete supplied silhouette, including mirrors and wheels.
 	canvas.draw_texture_rect(Vehicles.get_texture(kind,material_id),Rect2(body.position+Vector2(1.8,2.2),body.size),false,Color(0.12,0.20,0.3,0.22))
 	canvas.draw_texture_rect(Vehicles.get_texture(kind,material_id),body,false)
@@ -77,19 +75,19 @@ func vehicle(bus: Dictionary, position: Vector2, angle: float, scale: float = 1.
 	# Project the screen-aligned pill into the vehicle axis to retain its rear inset.
 	var label_depth: float = absf(sin(angle)) * 12.0 + absf(cos(angle)) * 5.5
 	var label_y: float = half.y - maxf(6.0, label_depth + 0.6)
-	if scale >= 0.95 and state not in ["docked","leaving"]:
+	if scale >= 0.35 and state not in ["docked","leaving"]:
 		var label_anchor: Vector2 = position + Vector2(0, label_y).rotated(angle) * scale
-		canvas.draw_set_transform(label_anchor, 0, Vector2.ONE * scale)
+		canvas.art_transform(label_anchor, 0, Vector2.ONE * scale)
 		_box(Rect2(-12, -5.5, 24, 11), Color("fff9e9"), 3, tint.darkened(0.2), 1)
 		_material_at(Vector2(-6.4, 0), material_id, 0.31)
 		if font != null:
 			canvas.draw_string(font, Vector2(-0.5, 3.6), str(capacity), HORIZONTAL_ALIGNMENT_CENTER, 10, 10, INK)
-		canvas.draw_set_transform(position, angle, Vector2.ONE * scale)
+		canvas.art_transform(position, angle, Vector2.ONE * scale)
 	if load_count > 0:
 		var ratio: float = clampf(float(load_count) / maxi(capacity, 1), 0.0, 1.0)
 		_box(Rect2(-half.x + 3, half.y + 1.5, size.x - 6, 2.8), INK, 1)
 		_box(Rect2(-half.x + 3, half.y + 1.5, (size.x - 6) * ratio, 2.8), Color("a7ed8c"), 1)
-	canvas.draw_set_transform(Vector2.ZERO)
+	canvas.art_transform(Vector2.ZERO)
 
 
 func _draw_loaded_cargo(bus: Dictionary, position: Vector2, angle: float, scale: float, kind: int, material_id: int, load_count: int) -> void:
@@ -106,9 +104,9 @@ func _draw_loaded_cargo(bus: Dictionary, position: Vector2, angle: float, scale:
 		if animate and index >= int(_cargo_pop[id].from):
 			var progress: float = clampf((now - float(_cargo_pop[id].time)) / 0.22, 0.0, 1.0)
 			icon_scale *= lerpf(0.38, 1.0, 1.0 - pow(1.0 - progress, 3.0))
-		canvas.draw_set_transform(position + slots[index].rotated(angle) * scale, angle, Vector2.ONE * scale * icon_scale)
+		canvas.art_transform(position + slots[index].rotated(angle) * scale, angle, Vector2.ONE * scale * icon_scale)
 		_draw_material(material_id)
-	canvas.draw_set_transform(position, angle, Vector2.ONE * scale)
+	canvas.art_transform(position, angle, Vector2.ONE * scale)
 
 func _arrow(offset: Vector2, fill: Color) -> void:
 	_poly([offset + Vector2(0, -9), offset + Vector2(6.5, -2.5), offset + Vector2(2.4, -2.5),
@@ -116,9 +114,9 @@ func _arrow(offset: Vector2, fill: Color) -> void:
 		offset + Vector2(-6.5, -2.5)], fill)
 
 func material(position: Vector2, index: int, scale: float = 1.0) -> void:
-	canvas.draw_set_transform(position, 0, Vector2.ONE * scale)
+	canvas.art_transform(position, 0, Vector2.ONE * scale)
 	_draw_material(clampi(index, 0, 5))
-	canvas.draw_set_transform(Vector2.ZERO)
+	canvas.art_transform(Vector2.ZERO)
 
 func _material_at(position: Vector2, index: int, scale: float) -> void:
 	# Draw in the caller's current transform, including upright capacity badges.
@@ -128,38 +126,33 @@ func _material_at(position: Vector2, index: int, scale: float) -> void:
 func _draw_material(index: int) -> void:
 	canvas.draw_texture_rect(Cargo.get_texture(index),Cargo.draw_rect(index),false)
 
-func worker(position: Vector2, carrying: int = -1, walking: bool = false, phase: float = 0.0, count: int = 1) -> void:
-	var step: float = sin(phase) * 2.4 if walking else 0.0
-	canvas.draw_set_transform(position, 0, Vector2.ONE * 1.15)
-	canvas.draw_circle(Vector2(1,9),8,Color(0.12,0.23,0.28,0.15))
-	_box(Rect2(-5,4+step,4,7),Color("16416b"),2)
-	_box(Rect2(1,4-step,4,7),Color("16416b"),2)
-	_box(Rect2(-6,9+step,5,3),TYRE,1)
-	_box(Rect2(1,9-step,5,3),TYRE,1)
-	_box(Rect2(-7,-7,14,14),Color("d5f000"),4,Color("526514"),1)
-	_line(Vector2(-3,-5),Vector2(-3,5),Color("ffffff"),1.8)
-	_line(Vector2(3,-5),Vector2(3,5),Color("ffffff"),1.8)
-	_line(Vector2(-6,1),Vector2(6,1),Color("ffffff"),1.5)
-	_line(Vector2(-7,-4),Vector2(-9,2+step),Color("efaf7b"),4)
-	_line(Vector2(7,-4),Vector2(11,0) if carrying>=0 else Vector2(9,2-step),Color("efaf7b"),4)
-	canvas.draw_circle(Vector2(0,-10),5.2,Color("f4c69b"))
-	canvas.draw_circle(Vector2(-1.8,-9),0.7,INK)
-	canvas.draw_circle(Vector2(1.8,-9),0.7,INK)
-	_line(Vector2(-1,-6.8),Vector2(1,-6.8),Color("b97963"),0.7)
-	canvas.draw_circle(Vector2(0,-13),6,Color("b83f00"))
-	canvas.draw_circle(Vector2(-0.5,-14),5.3,Color("ff6400"))
-	_box(Rect2(-7,-12,14,3),Color("ff8100"),2,Color("b83f00"),1)
-	_line(Vector2(-1,-18),Vector2(-1,-14),Color("fff3a8"),1.4)
-	if carrying >= 0:
-		# A compact stack communicates the batch without obscuring the orange helmet.
-		var visible_layers: int = mini(maxi(count,1),3)
-		for layer in range(visible_layers):
-			var cargo_offset := Vector2(13 + layer * 0.4, -1 - layer * 3.8)
-			canvas.draw_set_transform(position + cargo_offset * 1.15, -0.10, Vector2.ONE * 0.50 * 1.15)
+const WORKER_IDLE = preload("res://assets/artwork/builder/run/run2/idle.png")
+const WORKER_RUN = [preload("res://assets/artwork/builder/run/run2/run1.png"),preload("res://assets/artwork/builder/run/run2/run2.png"),preload("res://assets/artwork/builder/run/run2/run3.png"),preload("res://assets/artwork/builder/run/run2/run4.png")]
+const WORKER_PICKUP = preload("res://assets/artwork/builder/carry/turn-to-line.png")
+const WORKER_CARRY = [preload("res://assets/artwork/builder/carry/carry1.png"),preload("res://assets/artwork/builder/carry/carry2.png"),preload("res://assets/artwork/builder/carry/carry3.png"),preload("res://assets/artwork/builder/carry/carry4.png")]
+
+func worker(position: Vector2, carrying: int = -1, walking: bool = false, phase: float = 0.0, count: int = 1, panicking: bool = false, facing:float=1.0, picking:bool=false) -> void:
+	var frames = WORKER_CARRY if carrying>=0 else WORKER_RUN
+	var frame: int = int(floor(phase/TAU*frames.size()))%frames.size() if walking else 0
+	var bounce: float = absf(sin(phase))*1.0 if walking else 0.0
+	var texture: Texture2D = WORKER_PICKUP if picking else (WORKER_IDLE if not walking and carrying<0 else frames[frame])
+	canvas.art_transform(position,0,Vector2.ONE)
+	canvas.draw_circle(Vector2(0,10),7,Color(0.12,0.23,0.28,0.12))
+	canvas.art_transform(position-Vector2(0,bounce),0,Vector2(facing,1))
+	if not picking: canvas.draw_texture_rect(texture,Rect2(-24,-35,48,48),false)
+	if panicking:
+		for side in [-1,1]:
+			_line(Vector2(side*14,-32),Vector2(side*18,-36),Color("fff3a8"),2.0)
+	if carrying>=0:
+		for layer in range(mini(maxi(count,1),3)):
+			var offset := Vector2(0,-17-layer*3.8) if picking else Vector2(facing*(10+layer*0.4),-9-layer*3.8-bounce)
+			canvas.art_transform(position+offset,-0.10,Vector2.ONE*0.48)
 			_draw_material(clampi(carrying,0,5))
-		if count > 1:
-			canvas.draw_set_transform(position, 0, Vector2.ONE * 1.15)
-			_box(Rect2(12,3,18,11),INK,4,Color.WHITE,1)
-			if font != null:
-				canvas.draw_string(font,Vector2(13,11),"×%d" % count,HORIZONTAL_ALIGNMENT_CENTER,16,9,Color.WHITE)
-	canvas.draw_set_transform(Vector2.ZERO)
+		if count>1:
+			canvas.art_transform(position+Vector2(facing*13,0),0,Vector2.ONE)
+			_box(Rect2(-9,0,18,11),INK,4,Color.WHITE,1)
+			if font!=null: canvas.draw_string(font,Vector2(-8,8),"×%d" % count,HORIZONTAL_ALIGNMENT_CENTER,16,9,Color.WHITE)
+	if picking:
+		canvas.art_transform(position,0,Vector2.ONE)
+		canvas.draw_texture_rect(texture,Rect2(-24,-35,48,48),false)
+	canvas.art_transform(Vector2.ZERO)

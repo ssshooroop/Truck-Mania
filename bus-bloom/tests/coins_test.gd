@@ -22,34 +22,35 @@ func _run() -> void:
 	game.reduced_motion = true
 	game.save_path = "res://artifacts/coins-test.cfg"
 	game.save_enabled = true
-	# Legacy saves have progress/settings but no currency; avoid inventing past rewards.
+	# Legacy progress without a wallet receives the configured initial balance.
+	game.economy = preload("res://scripts/runtime_economy.gd").new()
 	var old := ConfigFile.new()
 	old.set_value("game","unlocked",2)
 	old.set_value("settings","sound",false)
 	old.save(game.save_path)
 	game._load_save()
-	check(game.coins==0 and game.rewarded_levels.is_empty() and game.unlocked==2,"Legacy save retains progress and starts at zero coins")
+	check(game.coins==50 and game.rewarded_levels.is_empty() and game.unlocked==2,"Legacy save retains progress and receives initial balance")
 	game._load_level(0)
 	game._check_end()
-	check(game.coins==0,"Unfinished level earns nothing")
+	check(game.coins==50,"Unfinished level earns nothing")
 	finish_level(game)
-	check(game.coins==20 and game.level_reward==20,"First victory awards 20")
+	check(game.coins==76 and game.level_reward==26,"First victory awards base plus clean streak")
 	game._check_end()
-	check(game.coins==20 and game.level_reward==20,"Repeated victory callback is idempotent")
+	check(game.coins==76 and game.level_reward==26,"Repeated victory callback is idempotent")
 	game._load_level(0)
 	finish_level(game)
-	check(game.coins==20 and game.level_reward==0,"Replaying a completed level earns nothing")
+	check(game.coins==76 and game.level_reward==0,"Replaying a completed level earns nothing")
 	game.coins = 0
 	game.rewarded_levels.clear()
 	game._load_save()
-	check(game.coins==20 and 0 in game.rewarded_levels and not game.sound_enabled,"Balance, claims and settings survive reload")
+	check(game.coins==76 and 0 in game.rewarded_levels and not game.sound_enabled,"Balance, claims and settings survive reload")
 	game._load_level(0)
 	finish_level(game)
-	check(game.coins==20,"Reload cannot repeat a reward")
+	check(game.coins==76,"Reload cannot repeat a reward")
 	game._load_level(1)
 	finish_level(game)
-	check(game.coins==40 and game.level_reward==20,"Different level adds its own reward")
-	check(game.coin_badge.amount==40 and game.road_menu.coin_badge.amount==40,"Both screens show current balance")
+	check(game.coins==108 and game.level_reward==32,"Different level adds its own reward")
+	check(game.coin_badge.amount==108 and game.road_menu.coin_badge.amount==108,"Both screens show current balance")
 	await process_frame
 	await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png("res://artifacts/coins-win.png")

@@ -6,16 +6,44 @@ extends Resource
 # Normalized texture coordinates; editable in the inspector.
 @export var centerline: PackedVector2Array = PackedVector2Array()
 
-func center_x(world: float) -> float:
-	var v = fposmod(world,1.0)
-	if centerline.is_empty(): return 0.5
-	for i in range(1,centerline.size()):
-		if v <= centerline[i].y:
-			var a = centerline[i-1]
-			var b = centerline[i]
-			var correction = 0.0029686*(smoothstep(0.94,1.0,v)-(1.0-smoothstep(0.0,0.06,v)))
-			return lerpf(a.x,b.x,inverse_lerp(a.y,b.y,v))-correction
-	return centerline[-1].x
+@export var edges: PackedVector2Array = PackedVector2Array()
+# Inverse of road.gdshader's piecewise seam alignment, for markers and scenery.
+const SEAM_TOP = [0.0,516.0,600.0,782.0,819.0,1008.0,1082.0,1536.0]
+const SEAM_BOTTOM = [0.0,498.0,574.0,755.0,792.0,1012.0,1095.0,1536.0]
+
+func _aligned_x(x:float,v:float) -> float:
+	var weight:float = 1.0-smoothstep(0.0,0.06,minf(v,1.0-v))
+	var source:Array = SEAM_TOP if v<0.5 else SEAM_BOTTOM
+	var px:float = x*1536.0
+	for i in 7:
+		var left:float = (SEAM_TOP[i]+SEAM_BOTTOM[i])*0.5
+		var right:float = (SEAM_TOP[i+1]+SEAM_BOTTOM[i+1])*0.5
+		var a:float = lerpf(left,source[i],weight)
+		var b:float = lerpf(right,source[i+1],weight)
+		if px<=b:
+			return lerpf(left,right,(px-a)/(b-a))/1536.0
+	return x
+
+func center_x(world:float) -> float:
+	var bounds := road_edges(world)
+	return (bounds.x+bounds.y)*0.5
+
+func road_edges(world:float) -> Vector2:
+	var v:float = fposmod(world,1.0)
+	if edges.is_empty(): return Vector2(0.37,0.63)
+	var sample:float = v*(edges.size()-1)
+	var i:int = mini(floori(sample),edges.size()-2)
+	var bounds:Vector2 = edges[i].lerp(edges[i+1],sample-i)
+	return Vector2(_aligned_x(bounds.x,v),_aligned_x(bounds.y,v))
+
+# Include the road underneath a tall decoration's upper silhouette.
+func scenery_edges(world:float) -> Vector2:
+	var bounds := road_edges(world)
+	for i in range(1,9):
+		var above := road_edges(world-i*0.016)
+		bounds.x = minf(bounds.x,above.x)
+		bounds.y = maxf(bounds.y,above.y)
+	return bounds
 
 func project(world: float, lateral: float, scroll: float, area: Rect2) -> Vector3:
 	var t = (world-scroll)*2.0/span

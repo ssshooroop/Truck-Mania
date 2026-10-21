@@ -19,4 +19,3 @@ func _draw() -> void:
 		var b = Vector2(size.x*0.81,size.y*0.19)
 		draw_line(a,b,Color(1,1,1,0.9),7,true)
 		draw_line(a,b,Color("f02d32"),4,true)
-	if has_focus(): draw_style_box(get_theme_stylebox("focus","Button"),Rect2(Vector2.ZERO,size))

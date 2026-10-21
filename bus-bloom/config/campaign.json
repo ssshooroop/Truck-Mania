@@ -1,0 +1,2940 @@
+{
+	"base_slots": 3.0,
+	"levels": [
+		{
+			"boosters": {
+				"extra_slot_limit": 2.0,
+				"shuffle_mode": "uniform_random_remaining_queue"
+			},
+			"campaign": {
+				"blocking_depth": 3.0,
+				"clutch_rate": 0.74,
+				"color_count": 3.0,
+				"crane_again": [
+					0.036036036036036,
+					0.0
+				],
+				"critical_share": 0.25,
+				"expected_rescues": 0.285,
+				"fail_by_skill": {
+					"0.0": 0.67,
+					"0.35": 0.44,
+					"0.7": 0.26,
+					"0.9": 0.0533333333333333,
+					"0.95": 0.02,
+					"1.0": 0.0
+				},
+				"fail_by_slots": {
+					"3": 0.233333333333333,
+					"4": 0.02,
+					"5": 0.0
+				},
+				"fail_rate": 0.26,
+				"fallback": false,
+				"interest": 0.555,
+				"level": 1.0,
+				"measure": 1.056,
+				"min_slots": 3.0,
+				"near_miss": 0.43,
+				"novice_attempts": 1.79,
+				"onboarding_deadlock_rate": 0.058,
+				"onboarding_post_win": 1.0,
+				"ordinary_attempts": 1.06,
+				"planned": "easy",
+				"post_rescue_fail": 0.025,
+				"queue_window": 3.0,
+				"record_index": 1122.0,
+				"same_color_overlaps": 4.0,
+				"seed": 90114.0,
+				"shuffle_again": [
+					0.792792792792793,
+					0.833333333333333
+				],
+				"shuffle_by_strength": {
+					"1": {
+						"again": [
+							0.792792792792793,
+							0.833333333333333
+						],
+						"hopeless": 0.384615384615385,
+						"spread": 0.262650567213534
+					},
+					"16": {
+						"again": [
+							0.369369369369369,
+							0.0
+						],
+						"hopeless": 0.0256410256410256,
+						"spread": 0.288623389954923
+					},
+					"2": {
+						"again": [
+							0.720720720720721,
+							0.583333333333333
+						],
+						"hopeless": 0.205128205128205,
+						"spread": 0.347994852463437
+					},
+					"4": {
+						"again": [
+							0.603603603603604,
+							0.5
+						],
+						"hopeless": 0.205128205128205,
+						"spread": 0.318995517189999
+					},
+					"8": {
+						"again": [
+							0.445945945945946,
+							0.0833333333333333
+						],
+						"hopeless": 0.0256410256410256,
+						"spread": 0.367839761994434
+					}
+				},
+				"shuffle_hopeless": 0.385,
+				"shuffle_spread": 0.263,
+				"slot_again": [
+					0.0540540540540541,
+					0.0
+				],
+				"speed_bonus_rate": 0.0,
+				"strong_attempts": 1.0,
+				"swap_again": [
+					0.405405405405405,
+					0.0
+				],
+				"target": 1.05,
+				"trap_ratio": 0.125,
+				"tutorial_mean_tries": 0.0,
+				"tutorial_post_win": 0.0,
+				"type": "easy",
+				"vehicle_count": 10.0
+			},
+			"dispatch_order": [
+				5.0,
+				3.0,
+				6.0,
+				1.0,
+				8.0,
+				0.0,
+				7.0,
+				2.0,
+				4.0,
+				9.0
+			],
+			"initial_bay_count": 3.0,
+			"max_bay_count": 5.0,
+			"metrics": {
+				"cargo_count": 34.0,
+				"color_count": 3.0,
+				"color_switches": 19.0,
+				"initially_dispatchable": 6.0,
+				"placement_attempts": 188.0,
+				"queue_window": 3.0,
+				"same_color_chance": 0.27,
+				"same_color_overlaps": 4.0,
+				"vehicle_count": 10.0
+			},
+			"min_slots": 3.0,
+			"queue": [
+				2.0,
+				2.0,
+				0.0,
+				2.0,
+				2.0,
+				0.0,
+				0.0,
+				0.0,
+				2.0,
+				2.0,
+				2.0,
+				2.0,
+				2.0,
+				2.0,
+				0.0,
+				0.0,
+				2.0,
+				1.0,
+				2.0,
+				2.0,
+				2.0,
+				1.0,
+				2.0,
+				0.0,
+				0.0,
+				2.0,
+				0.0,
+				2.0,
+				0.0,
+				1.0,
+				0.0,
+				0.0,
+				2.0,
+				1.0
+			],
+			"schema_version": 1.0,
+			"seed": 90114.0,
+			"solution": [
+				1.0,
+				3.0,
+				2.0,
+				5.0,
+				4.0,
+				6.0,
+				7.0,
+				0.0,
+				8.0,
+				9.0
+			],
+			"solver_verified": true,
+			"vehicles": [
+				{
+					"angle": 3.141593,
+					"capacity": 4.0,
+					"color": 2.0,
+					"id": 0.0,
+					"kind": 1.0,
+					"x": 287.290191650391,
+					"y": 746.563110351563
+				},
+				{
+					"angle": 3.926991,
+					"capacity": 2.0,
+					"color": 2.0,
+					"id": 1.0,
+					"kind": 0.0,
+					"x": 370.113037109375,
+					"y": 940.98388671875
+				},
+				{
+					"angle": 4.712389,
+					"capacity": 2.0,
+					"color": 2.0,
+					"id": 2.0,
+					"kind": 0.0,
+					"x": 209.732467651367,
+					"y": 974.91015625
+				},
+				{
+					"angle": 2.356194,
+					"capacity": 4.0,
+					"color": 0.0,
+					"id": 3.0,
+					"kind": 1.0,
+					"x": 391.704254150391,
+					"y": 776.958740234375
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 6.0,
+					"color": 0.0,
+					"id": 4.0,
+					"kind": 2.0,
+					"x": 151.139572143555,
+					"y": 786.865417480469
+				},
+				{
+					"angle": 4.712389,
+					"capacity": 6.0,
+					"color": 2.0,
+					"id": 5.0,
+					"kind": 2.0,
+					"x": 229.039428710938,
+					"y": 912.752014160156
+				},
+				{
+					"angle": 1.570796,
+					"capacity": 4.0,
+					"color": 2.0,
+					"id": 6.0,
+					"kind": 1.0,
+					"x": 317.175323486328,
+					"y": 850.55126953125
+				},
+				{
+					"angle": 0.0,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 7.0,
+					"kind": 0.0,
+					"x": 213.358993530273,
+					"y": 829.007019042969
+				},
+				{
+					"angle": 3.926991,
+					"capacity": 2.0,
+					"color": 0.0,
+					"id": 8.0,
+					"kind": 0.0,
+					"x": 426.280639648438,
+					"y": 973.417419433594
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 9.0,
+					"kind": 0.0,
+					"x": 447.748962402344,
+					"y": 705.285339355469
+				}
+			]
+		},
+		{
+			"boosters": {
+				"extra_slot_limit": 2.0,
+				"shuffle_mode": "uniform_random_remaining_queue"
+			},
+			"campaign": {
+				"blocking_depth": 3.0,
+				"clutch_rate": 0.445,
+				"color_count": 4.0,
+				"crane_again": [
+					0.114814814814815,
+					0.0645161290322581
+				],
+				"critical_share": 0.875,
+				"expected_rescues": 0.715,
+				"fail_by_skill": {
+					"0.0": 0.99,
+					"0.35": 0.87,
+					"0.7": 0.555,
+					"0.9": 0.0133333333333333,
+					"0.95": 0.2,
+					"1.0": 0.0
+				},
+				"fail_by_slots": {
+					"3": 0.613333333333333,
+					"4": 0.126666666666667,
+					"5": 0.1
+				},
+				"fail_rate": 0.555,
+				"fallback": false,
+				"interest": 0.741,
+				"level": 2.0,
+				"measure": 1.014,
+				"min_slots": 3.0,
+				"near_miss": 0.363,
+				"novice_attempts": 7.69,
+				"onboarding_deadlock_rate": 0.0,
+				"onboarding_post_win": 0.0,
+				"ordinary_attempts": 1.01,
+				"planned": "easy",
+				"post_rescue_fail": 0.16,
+				"queue_window": 3.0,
+				"record_index": 1353.0,
+				"same_color_overlaps": 2.0,
+				"seed": 90346.0,
+				"shuffle_again": [
+					0.861111111111111,
+					0.548387096774194
+				],
+				"shuffle_by_strength": {
+					"1": {
+						"again": [
+							0.861111111111111,
+							0.548387096774194
+						],
+						"hopeless": 0.347107438016529,
+						"spread": 0.270527011866922
+					},
+					"16": {
+						"again": [
+							0.557407407407407,
+							0.0860215053763441
+						],
+						"hopeless": 0.0330578512396694,
+						"spread": 0.331902402074184
+					},
+					"2": {
+						"again": [
+							0.761111111111111,
+							0.381720430107527
+						],
+						"hopeless": 0.190082644628099,
+						"spread": 0.330306786016667
+					},
+					"4": {
+						"again": [
+							0.7,
+							0.236559139784946
+						],
+						"hopeless": 0.115702479338843,
+						"spread": 0.342467153957088
+					},
+					"8": {
+						"again": [
+							0.611111111111111,
+							0.123655913978495
+						],
+						"hopeless": 0.0495867768595041,
+						"spread": 0.346966792005259
+					}
+				},
+				"shuffle_hopeless": 0.347,
+				"shuffle_spread": 0.271,
+				"slot_again": [
+					0.344444444444444,
+					0.354838709677419
+				],
+				"speed_bonus_rate": 0.0,
+				"strong_attempts": 1.0,
+				"swap_again": [
+					0.235185185185185,
+					0.134408602150538
+				],
+				"target": 1.055,
+				"trap_ratio": 0.414,
+				"tutorial_mean_tries": 0.0,
+				"tutorial_post_win": 0.0,
+				"type": "easy",
+				"vehicle_count": 9.0
+			},
+			"dispatch_order": [
+				2.0,
+				4.0,
+				3.0,
+				1.0,
+				6.0,
+				7.0,
+				5.0,
+				0.0,
+				8.0
+			],
+			"initial_bay_count": 3.0,
+			"max_bay_count": 5.0,
+			"metrics": {
+				"cargo_count": 24.0,
+				"color_count": 4.0,
+				"color_switches": 12.0,
+				"initially_dispatchable": 6.0,
+				"placement_attempts": 61.0,
+				"queue_window": 3.0,
+				"same_color_chance": 0.43,
+				"same_color_overlaps": 2.0,
+				"vehicle_count": 9.0
+			},
+			"min_slots": 3.0,
+			"queue": [
+				2.0,
+				2.0,
+				2.0,
+				2.0,
+				2.0,
+				0.0,
+				2.0,
+				2.0,
+				2.0,
+				3.0,
+				0.0,
+				2.0,
+				2.0,
+				1.0,
+				0.0,
+				1.0,
+				0.0,
+				0.0,
+				0.0,
+				3.0,
+				0.0,
+				0.0,
+				2.0,
+				2.0
+			],
+			"schema_version": 1.0,
+			"seed": 90346.0,
+			"solution": [
+				3.0,
+				4.0,
+				0.0,
+				6.0,
+				1.0,
+				7.0,
+				2.0,
+				5.0,
+				8.0
+			],
+			"solver_verified": true,
+			"vehicles": [
+				{
+					"angle": 3.141593,
+					"capacity": 2.0,
+					"color": 0.0,
+					"id": 0.0,
+					"kind": 0.0,
+					"x": 226.580963134766,
+					"y": 840.34814453125
+				},
+				{
+					"angle": 2.356194,
+					"capacity": 2.0,
+					"color": 3.0,
+					"id": 1.0,
+					"kind": 0.0,
+					"x": 120.339202880859,
+					"y": 931.945556640625
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 2.0,
+					"color": 0.0,
+					"id": 2.0,
+					"kind": 0.0,
+					"x": 367.412994384766,
+					"y": 974.142150878906
+				},
+				{
+					"angle": 2.356194,
+					"capacity": 4.0,
+					"color": 2.0,
+					"id": 3.0,
+					"kind": 1.0,
+					"x": 242.229354858398,
+					"y": 965.895080566406
+				},
+				{
+					"angle": 4.712389,
+					"capacity": 2.0,
+					"color": 2.0,
+					"id": 4.0,
+					"kind": 0.0,
+					"x": 148.697479248047,
+					"y": 1022.06927490234
+				},
+				{
+					"angle": 0.785398,
+					"capacity": 4.0,
+					"color": 0.0,
+					"id": 5.0,
+					"kind": 1.0,
+					"x": 324.141479492188,
+					"y": 890.386291503906
+				},
+				{
+					"angle": 0.0,
+					"capacity": 4.0,
+					"color": 2.0,
+					"id": 6.0,
+					"kind": 1.0,
+					"x": 164.042495727539,
+					"y": 828.057373046875
+				},
+				{
+					"angle": 0.0,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 7.0,
+					"kind": 0.0,
+					"x": 242.240615844727,
+					"y": 702.197631835938
+				},
+				{
+					"angle": 4.712389,
+					"capacity": 2.0,
+					"color": 2.0,
+					"id": 8.0,
+					"kind": 0.0,
+					"x": 309.940795898438,
+					"y": 785.817077636719
+				}
+			]
+		},
+		{
+			"boosters": {
+				"extra_slot_limit": 2.0,
+				"shuffle_mode": "uniform_random_remaining_queue"
+			},
+			"campaign": {
+				"blocking_depth": 4.0,
+				"clutch_rate": 0.12,
+				"color_count": 3.0,
+				"crane_again": [
+					0.00757575757575758,
+					0.0
+				],
+				"critical_share": 0.3,
+				"expected_rescues": 0.9,
+				"fail_by_skill": {
+					"0.0": 0.97,
+					"0.35": 0.88,
+					"0.7": 0.88,
+					"0.9": 0.76,
+					"0.95": 0.82,
+					"1.0": 0.5875
+				},
+				"fail_by_slots": {
+					"3": 0.9,
+					"4": 0.0333333333333333,
+					"5": 0.00666666666666671
+				},
+				"fail_rate": 0.88,
+				"fallback": false,
+				"interest": 0.405,
+				"level": 3.0,
+				"measure": 0.0,
+				"min_slots": 3.0,
+				"near_miss": 0.59,
+				"novice_attempts": 8.33,
+				"onboarding_deadlock_rate": 0.742,
+				"onboarding_post_win": 1.0,
+				"ordinary_attempts": 4.17,
+				"planned": "booster_tutorial",
+				"post_rescue_fail": 0.02,
+				"queue_window": 3.0,
+				"record_index": 1199.0,
+				"same_color_overlaps": 3.0,
+				"seed": 90191.0,
+				"shuffle_again": [
+					0.752525252525252,
+					0.8
+				],
+				"shuffle_by_strength": {
+					"1": {
+						"again": [
+							0.752525252525252,
+							0.8
+						],
+						"hopeless": 0.226277372262774,
+						"spread": 0.33018566888058
+					},
+					"16": {
+						"again": [
+							0.218434343434343,
+							0.233333333333333
+						],
+						"hopeless": 0.0437956204379562,
+						"spread": 0.162697054933565
+					},
+					"2": {
+						"again": [
+							0.588383838383838,
+							0.833333333333333
+						],
+						"hopeless": 0.145985401459854,
+						"spread": 0.365351188890281
+					},
+					"4": {
+						"again": [
+							0.443181818181818,
+							0.533333333333333
+						],
+						"hopeless": 0.0802919708029197,
+						"spread": 0.355640159722994
+					},
+					"8": {
+						"again": [
+							0.295454545454545,
+							0.366666666666667
+						],
+						"hopeless": 0.0437956204379562,
+						"spread": 0.252225484794275
+					}
+				},
+				"shuffle_hopeless": 0.226,
+				"shuffle_spread": 0.33,
+				"slot_again": [
+					0.0378787878787879,
+					0.0
+				],
+				"speed_bonus_rate": 0.0,
+				"strong_attempts": 2.42,
+				"swap_again": [
+					0.848484848484849,
+					0.0
+				],
+				"target": 0.002,
+				"trap_ratio": 0.3,
+				"tutorial_mean_tries": 0.0,
+				"tutorial_post_win": 0.0,
+				"type": "booster_tutorial",
+				"vehicle_count": 11.0
+			},
+			"dispatch_order": [
+				1.0,
+				9.0,
+				2.0,
+				8.0,
+				4.0,
+				5.0,
+				0.0,
+				7.0,
+				3.0,
+				6.0,
+				10.0
+			],
+			"initial_bay_count": 3.0,
+			"max_bay_count": 5.0,
+			"metrics": {
+				"cargo_count": 44.0,
+				"color_count": 3.0,
+				"color_switches": 19.0,
+				"initially_dispatchable": 4.0,
+				"placement_attempts": 288.0,
+				"queue_window": 3.0,
+				"same_color_chance": 0.54,
+				"same_color_overlaps": 3.0,
+				"vehicle_count": 11.0
+			},
+			"min_slots": 3.0,
+			"queue": [
+				1.0,
+				2.0,
+				2.0,
+				2.0,
+				1.0,
+				2.0,
+				2.0,
+				1.0,
+				1.0,
+				1.0,
+				1.0,
+				2.0,
+				2.0,
+				2.0,
+				0.0,
+				0.0,
+				2.0,
+				1.0,
+				0.0,
+				0.0,
+				2.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				1.0,
+				1.0,
+				0.0,
+				1.0,
+				1.0,
+				0.0,
+				1.0,
+				1.0,
+				1.0,
+				1.0,
+				2.0,
+				2.0,
+				1.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0
+			],
+			"schema_version": 1.0,
+			"seed": 90191.0,
+			"solution": [
+				3.0,
+				1.0,
+				8.0,
+				9.0,
+				4.0,
+				5.0,
+				0.0,
+				7.0,
+				6.0,
+				10.0,
+				2.0
+			],
+			"solver_verified": true,
+			"tutorial": {
+				"booster": "slot",
+				"free": true,
+				"hint": "first_deadlock",
+				"novice_deadlock_rate": 0.742,
+				"post_booster_win": 1.0
+			},
+			"vehicles": [
+				{
+					"angle": 0.0,
+					"capacity": 4.0,
+					"color": 0.0,
+					"id": 0.0,
+					"kind": 1.0,
+					"x": 323.533447265625,
+					"y": 805.740600585938
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 4.0,
+					"color": 2.0,
+					"id": 1.0,
+					"kind": 1.0,
+					"x": 386.002197265625,
+					"y": 882.339477539063
+				},
+				{
+					"angle": 0.0,
+					"capacity": 2.0,
+					"color": 2.0,
+					"id": 2.0,
+					"kind": 0.0,
+					"x": 199.241744995117,
+					"y": 855.166198730469
+				},
+				{
+					"angle": 3.926991,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 3.0,
+					"kind": 0.0,
+					"x": 170.592514038086,
+					"y": 966.273254394531
+				},
+				{
+					"angle": 0.0,
+					"capacity": 6.0,
+					"color": 0.0,
+					"id": 4.0,
+					"kind": 2.0,
+					"x": 261.329406738281,
+					"y": 897.555847167969
+				},
+				{
+					"angle": 4.712389,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 5.0,
+					"kind": 0.0,
+					"x": 338.736236572266,
+					"y": 701.533386230469
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 6.0,
+					"color": 0.0,
+					"id": 6.0,
+					"kind": 2.0,
+					"x": 136.693161010742,
+					"y": 830.179870605469
+				},
+				{
+					"angle": 0.0,
+					"capacity": 4.0,
+					"color": 1.0,
+					"id": 7.0,
+					"kind": 1.0,
+					"x": 323.963012695313,
+					"y": 951.177917480469
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 6.0,
+					"color": 2.0,
+					"id": 8.0,
+					"kind": 2.0,
+					"x": 448.632965087891,
+					"y": 903.79052734375
+				},
+				{
+					"angle": 5.497787,
+					"capacity": 6.0,
+					"color": 1.0,
+					"id": 9.0,
+					"kind": 2.0,
+					"x": 203.528930664063,
+					"y": 712.561950683594
+				},
+				{
+					"angle": 4.712389,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 10.0,
+					"kind": 0.0,
+					"x": 407.122985839844,
+					"y": 777.97802734375
+				}
+			]
+		},
+		{
+			"boosters": {
+				"extra_slot_limit": 2.0,
+				"shuffle_mode": "uniform_random_remaining_queue"
+			},
+			"campaign": {
+				"blocking_depth": 5.0,
+				"clutch_rate": 0.34,
+				"color_count": 4.0,
+				"crane_again": [
+					0.0368731563421829,
+					0.0
+				],
+				"critical_share": 0.5,
+				"expected_rescues": 0.725,
+				"fail_by_skill": {
+					"0.0": 0.97,
+					"0.35": 0.82,
+					"0.7": 0.66,
+					"0.9": 0.0533333333333333,
+					"0.95": 0.52,
+					"1.0": 0.0
+				},
+				"fail_by_slots": {
+					"3": 0.66,
+					"4": 0.0666666666666667,
+					"5": 0.0
+				},
+				"fail_rate": 0.66,
+				"fallback": false,
+				"interest": 0.459,
+				"level": 4.0,
+				"measure": 1.056,
+				"min_slots": 3.0,
+				"near_miss": 0.394,
+				"novice_attempts": 5.56,
+				"onboarding_deadlock_rate": 0.042,
+				"onboarding_post_win": 1.0,
+				"ordinary_attempts": 1.06,
+				"planned": "easy",
+				"post_rescue_fail": 0.065,
+				"queue_window": 3.0,
+				"record_index": 1213.0,
+				"same_color_overlaps": 2.0,
+				"seed": 90205.0,
+				"shuffle_again": [
+					0.943952802359882,
+					0.604166666666667
+				],
+				"shuffle_by_strength": {
+					"1": {
+						"again": [
+							0.943952802359882,
+							0.604166666666667
+						],
+						"hopeless": 0.710743801652893,
+						"spread": 0.116431289856011
+					},
+					"16": {
+						"again": [
+							0.519174041297935,
+							0.0
+						],
+						"hopeless": 0.173553719008264,
+						"spread": 0.306919265412012
+					},
+					"2": {
+						"again": [
+							0.911504424778761,
+							0.4375
+						],
+						"hopeless": 0.636363636363636,
+						"spread": 0.149755649782648
+					},
+					"4": {
+						"again": [
+							0.809734513274336,
+							0.208333333333333
+						],
+						"hopeless": 0.355371900826446,
+						"spread": 0.261735576593885
+					},
+					"8": {
+						"again": [
+							0.666666666666667,
+							0.0416666666666667
+						],
+						"hopeless": 0.223140495867769,
+						"spread": 0.299080877108969
+					}
+				},
+				"shuffle_hopeless": 0.711,
+				"shuffle_spread": 0.116,
+				"slot_again": [
+					0.0707964601769911,
+					0.0
+				],
+				"speed_bonus_rate": 0.0,
+				"strong_attempts": 1.0,
+				"swap_again": [
+					0.883480825958702,
+					1.0
+				],
+				"target": 1.064,
+				"trap_ratio": 0.333,
+				"tutorial_mean_tries": 0.0,
+				"tutorial_post_win": 0.0,
+				"type": "easy",
+				"vehicle_count": 9.0
+			},
+			"dispatch_order": [
+				0.0,
+				4.0,
+				8.0,
+				2.0,
+				1.0,
+				5.0,
+				6.0,
+				7.0,
+				3.0
+			],
+			"initial_bay_count": 3.0,
+			"max_bay_count": 5.0,
+			"metrics": {
+				"cargo_count": 26.0,
+				"color_count": 4.0,
+				"color_switches": 15.0,
+				"initially_dispatchable": 4.0,
+				"placement_attempts": 183.0,
+				"queue_window": 3.0,
+				"same_color_chance": 0.41,
+				"same_color_overlaps": 2.0,
+				"vehicle_count": 9.0
+			},
+			"min_slots": 3.0,
+			"queue": [
+				3.0,
+				2.0,
+				3.0,
+				2.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				2.0,
+				2.0,
+				3.0,
+				1.0,
+				1.0,
+				1.0,
+				1.0,
+				2.0,
+				0.0,
+				2.0,
+				3.0,
+				0.0,
+				3.0,
+				3.0,
+				0.0,
+				3.0,
+				3.0
+			],
+			"schema_version": 1.0,
+			"seed": 90205.0,
+			"solution": [
+				0.0,
+				4.0,
+				8.0,
+				2.0,
+				1.0,
+				5.0,
+				6.0,
+				7.0,
+				3.0
+			],
+			"solver_verified": true,
+			"vehicles": [
+				{
+					"angle": 0,
+					"capacity": 2.0,
+					"color": 3.0,
+					"id": 0.0,
+					"kind": 0.0,
+					"x": 80,
+					"y": 680
+				},
+				{
+					"angle": 0,
+					"capacity": 6.0,
+					"color": 0.0,
+					"id": 1.0,
+					"kind": 2.0,
+					"x": 390,
+					"y": 870
+				},
+				{
+					"angle": 5.49778714,
+					"capacity": 4.0,
+					"color": 1.0,
+					"id": 2.0,
+					"kind": 1.0,
+					"x": 316,
+					"y": 700
+				},
+				{
+					"angle": 3.14159265,
+					"capacity": 2.0,
+					"color": 3.0,
+					"id": 3.0,
+					"kind": 0.0,
+					"x": 150,
+					"y": 681
+				},
+				{
+					"angle": 0.78539816,
+					"capacity": 2.0,
+					"color": 2.0,
+					"id": 4.0,
+					"kind": 0.0,
+					"x": 445,
+					"y": 710
+				},
+				{
+					"angle": 1.57079633,
+					"capacity": 2.0,
+					"color": 2.0,
+					"id": 5.0,
+					"kind": 0.0,
+					"x": 303,
+					"y": 895
+				},
+				{
+					"angle": 2.35619449,
+					"capacity": 4.0,
+					"color": 3.0,
+					"id": 6.0,
+					"kind": 1.0,
+					"x": 194,
+					"y": 811
+				},
+				{
+					"angle": 1.57079633,
+					"capacity": 2.0,
+					"color": 2.0,
+					"id": 7.0,
+					"kind": 0.0,
+					"x": 303,
+					"y": 957
+				},
+				{
+					"angle": 3.14159265,
+					"capacity": 2.0,
+					"color": 0.0,
+					"id": 8.0,
+					"kind": 0.0,
+					"x": 460,
+					"y": 940
+				}
+			],
+			"playtest": {
+				"layout_revision": "maneuver-chain-1",
+				"previous_balance_estimates_current": false,
+				"balance_status": "awaiting_player_feedback",
+				"geometry_audit": {
+					"available_counts": [
+						4,
+						3,
+						2,
+						1,
+						1,
+						2,
+						2,
+						2,
+						1
+					],
+					"failures": 0,
+					"initial_blocked": 5,
+					"initial_free": [
+						0,
+						2,
+						4,
+						8
+					],
+					"max_newly_released_by_one_move": 2,
+					"reachable_yard_states": 34,
+					"reference_order": [
+						0,
+						4,
+						8,
+						2,
+						1,
+						5,
+						6,
+						7,
+						3
+					]
+				}
+			}
+		},
+		{
+			"boosters": {
+				"extra_slot_limit": 2.0,
+				"shuffle_mode": "uniform_random_remaining_queue"
+			},
+			"campaign": {
+				"blocking_depth": 4.0,
+				"clutch_rate": 0.165,
+				"color_count": 4.0,
+				"crane_again": [
+					0.111979166666667,
+					0.0394736842105263
+				],
+				"critical_share": 0.667,
+				"expected_rescues": 1.075,
+				"fail_by_skill": {
+					"0.0": 1.0,
+					"0.35": 1.0,
+					"0.7": 0.835,
+					"0.9": 0.68,
+					"0.95": 0.7,
+					"1.0": 0.375
+				},
+				"fail_by_slots": {
+					"3": 0.806666666666667,
+					"4": 0.213333333333333,
+					"5": 0.0600000000000001
+				},
+				"fail_rate": 0.835,
+				"fallback": false,
+				"interest": 0.434,
+				"level": 5.0,
+				"measure": 3.125,
+				"min_slots": 3.0,
+				"near_miss": 0.311,
+				"novice_attempts": 100.0,
+				"onboarding_deadlock_rate": 0.0,
+				"onboarding_post_win": 0.0,
+				"ordinary_attempts": 3.13,
+				"planned": "hard",
+				"post_rescue_fail": 0.24,
+				"queue_window": 3.0,
+				"record_index": 1575.0,
+				"same_color_overlaps": 3.0,
+				"seed": 130269.0,
+				"shuffle_again": [
+					0.983072916666667,
+					0.87719298245614
+				],
+				"shuffle_by_strength": {
+					"1": {
+						"again": [
+							0.983072916666667,
+							0.87719298245614
+						],
+						"hopeless": 0.819277108433735,
+						"spread": 0.072626135671412
+					},
+					"16": {
+						"again": [
+							0.884114583333333,
+							0.482456140350877
+						],
+						"hopeless": 0.451807228915663,
+						"spread": 0.213962285282019
+					},
+					"2": {
+						"again": [
+							0.954427083333333,
+							0.802631578947368
+						],
+						"hopeless": 0.746987951807229,
+						"spread": 0.101234617987159
+					},
+					"4": {
+						"again": [
+							0.932291666666667,
+							0.679824561403509
+						],
+						"hopeless": 0.590361445783133,
+						"spread": 0.16760403722232
+					},
+					"8": {
+						"again": [
+							0.907552083333333,
+							0.539473684210526
+						],
+						"hopeless": 0.506024096385542,
+						"spread": 0.193873161775749
+					}
+				},
+				"shuffle_hopeless": 0.819,
+				"shuffle_spread": 0.073,
+				"slot_again": [
+					0.296875,
+					0.263157894736842
+				],
+				"speed_bonus_rate": 0.0,
+				"strong_attempts": 1.6,
+				"swap_again": [
+					0.6171875,
+					0.179824561403509
+				],
+				"target": 3.081,
+				"trap_ratio": 0.36,
+				"tutorial_mean_tries": 0.0,
+				"tutorial_post_win": 0.0,
+				"type": "hard",
+				"vehicle_count": 13.0
+			},
+			"dispatch_order": [
+				1.0,
+				8.0,
+				3.0,
+				9.0,
+				6.0,
+				10.0,
+				12.0,
+				0.0,
+				7.0,
+				2.0,
+				11.0,
+				5.0,
+				4.0
+			],
+			"initial_bay_count": 3.0,
+			"max_bay_count": 5.0,
+			"metrics": {
+				"cargo_count": 40.0,
+				"color_count": 4.0,
+				"color_switches": 24.0,
+				"initially_dispatchable": 5.0,
+				"placement_attempts": 2608.0,
+				"queue_window": 3.0,
+				"same_color_chance": 0.36,
+				"same_color_overlaps": 3.0,
+				"vehicle_count": 13.0
+			},
+			"min_slots": 3.0,
+			"queue": [
+				0.0,
+				0.0,
+				0.0,
+				3.0,
+				0.0,
+				3.0,
+				3.0,
+				3.0,
+				2.0,
+				3.0,
+				3.0,
+				1.0,
+				0.0,
+				0.0,
+				2.0,
+				2.0,
+				0.0,
+				1.0,
+				3.0,
+				2.0,
+				0.0,
+				3.0,
+				2.0,
+				2.0,
+				2.0,
+				1.0,
+				0.0,
+				0.0,
+				2.0,
+				2.0,
+				1.0,
+				2.0,
+				2.0,
+				2.0,
+				0.0,
+				0.0,
+				0.0,
+				1.0,
+				0.0,
+				1.0
+			],
+			"schema_version": 1.0,
+			"seed": 130269.0,
+			"solution": [
+				3.0,
+				1.0,
+				9.0,
+				8.0,
+				10.0,
+				6.0,
+				12.0,
+				7.0,
+				0.0,
+				2.0,
+				11.0,
+				4.0,
+				5.0
+			],
+			"solver_verified": true,
+			"vehicles": [
+				{
+					"angle": 4.712389,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 0.0,
+					"kind": 0.0,
+					"x": 181.085357666016,
+					"y": 1014.73187255859
+				},
+				{
+					"angle": 0.0,
+					"capacity": 4.0,
+					"color": 3.0,
+					"id": 1.0,
+					"kind": 1.0,
+					"x": 240.047576904297,
+					"y": 792.114440917969
+				},
+				{
+					"angle": 2.356194,
+					"capacity": 2.0,
+					"color": 2.0,
+					"id": 2.0,
+					"kind": 0.0,
+					"x": 348.180480957031,
+					"y": 820.002502441406
+				},
+				{
+					"angle": 3.926991,
+					"capacity": 4.0,
+					"color": 0.0,
+					"id": 3.0,
+					"kind": 1.0,
+					"x": 377.705047607422,
+					"y": 987.818054199219
+				},
+				{
+					"angle": 5.497787,
+					"capacity": 2.0,
+					"color": 0.0,
+					"id": 4.0,
+					"kind": 0.0,
+					"x": 310.616851806641,
+					"y": 898.995422363281
+				},
+				{
+					"angle": 2.356194,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 5.0,
+					"kind": 0.0,
+					"x": 323.048065185547,
+					"y": 700.307861328125
+				},
+				{
+					"angle": 0.0,
+					"capacity": 6.0,
+					"color": 0.0,
+					"id": 6.0,
+					"kind": 2.0,
+					"x": 114.713600158691,
+					"y": 862.401794433594
+				},
+				{
+					"angle": 0.0,
+					"capacity": 4.0,
+					"color": 2.0,
+					"id": 7.0,
+					"kind": 1.0,
+					"x": 443.612182617188,
+					"y": 846.387634277344
+				},
+				{
+					"angle": 0.0,
+					"capacity": 2.0,
+					"color": 3.0,
+					"id": 8.0,
+					"kind": 0.0,
+					"x": 170.64501953125,
+					"y": 702.122314453125
+				},
+				{
+					"angle": 2.356194,
+					"capacity": 6.0,
+					"color": 2.0,
+					"id": 9.0,
+					"kind": 2.0,
+					"x": 240.863006591797,
+					"y": 947.320983886719
+				},
+				{
+					"angle": 0.785398,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 10.0,
+					"kind": 0.0,
+					"x": 393.653259277344,
+					"y": 747.607666015625
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 2.0,
+					"color": 0.0,
+					"id": 11.0,
+					"kind": 0.0,
+					"x": 177.529006958008,
+					"y": 806.690979003906
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 2.0,
+					"color": 3.0,
+					"id": 12.0,
+					"kind": 0.0,
+					"x": 97.6048812866211,
+					"y": 1009.74200439453
+				}
+			]
+		},
+		{
+			"boosters": {
+				"extra_slot_limit": 2.0,
+				"shuffle_mode": "uniform_random_remaining_queue"
+			},
+			"campaign": {
+				"blocking_depth": 3.0,
+				"clutch_rate": 0.375,
+				"color_count": 3.0,
+				"crane_again": [
+					0.0603174603174603,
+					0.0
+				],
+				"critical_share": 0.9,
+				"expected_rescues": 0.68,
+				"fail_by_skill": {
+					"0.0": 0.98,
+					"0.35": 0.81,
+					"0.7": 0.625,
+					"0.9": 0.0866666666666667,
+					"0.95": 0.17,
+					"1.0": 0.0125
+				},
+				"fail_by_slots": {
+					"3": 0.593333333333333,
+					"4": 0.0733333333333334,
+					"5": 0.00666666666666671
+				},
+				"fail_rate": 0.625,
+				"fallback": false,
+				"interest": 0.653,
+				"level": 6.0,
+				"measure": 1.095,
+				"min_slots": 3.0,
+				"near_miss": 0.374,
+				"novice_attempts": 5.26,
+				"onboarding_deadlock_rate": 0.108,
+				"onboarding_post_win": 1.0,
+				"ordinary_attempts": 1.09,
+				"planned": "easy",
+				"post_rescue_fail": 0.055,
+				"queue_window": 4.0,
+				"record_index": 153.0,
+				"same_color_overlaps": 4.0,
+				"seed": 20254.0,
+				"shuffle_again": [
+					0.688888888888889,
+					0.520833333333333
+				],
+				"shuffle_by_strength": {
+					"1": {
+						"again": [
+							0.688888888888889,
+							0.520833333333333
+						],
+						"hopeless": 0.264462809917355,
+						"spread": 0.317928184392675
+					},
+					"16": {
+						"again": [
+							0.395238095238095,
+							0.15625
+						],
+						"hopeless": 0.0413223140495868,
+						"spread": 0.314717120583835
+					},
+					"2": {
+						"again": [
+							0.577777777777778,
+							0.416666666666667
+						],
+						"hopeless": 0.107438016528926,
+						"spread": 0.359836138769043
+					},
+					"4": {
+						"again": [
+							0.515873015873016,
+							0.34375
+						],
+						"hopeless": 0.0826446280991736,
+						"spread": 0.34082926566543
+					},
+					"8": {
+						"again": [
+							0.452380952380952,
+							0.166666666666667
+						],
+						"hopeless": 0.0661157024793388,
+						"spread": 0.307848174880307
+					}
+				},
+				"shuffle_hopeless": 0.264,
+				"shuffle_spread": 0.318,
+				"slot_again": [
+					0.152380952380952,
+					0.125
+				],
+				"speed_bonus_rate": 0.0,
+				"strong_attempts": 1.01,
+				"swap_again": [
+					0.414285714285714,
+					0.03125
+				],
+				"target": 1.073,
+				"trap_ratio": 0.538,
+				"tutorial_mean_tries": 0.0,
+				"tutorial_post_win": 0.0,
+				"type": "easy",
+				"vehicle_count": 11.0
+			},
+			"dispatch_order": [
+				3.0,
+				10.0,
+				9.0,
+				6.0,
+				2.0,
+				4.0,
+				1.0,
+				8.0,
+				0.0,
+				5.0,
+				7.0
+			],
+			"initial_bay_count": 3.0,
+			"max_bay_count": 5.0,
+			"metrics": {
+				"cargo_count": 46.0,
+				"color_count": 3.0,
+				"color_switches": 24.0,
+				"initially_dispatchable": 4.0,
+				"placement_attempts": 1138.0,
+				"queue_window": 4.0,
+				"same_color_chance": 0.24,
+				"same_color_overlaps": 4.0,
+				"vehicle_count": 11.0
+			},
+			"min_slots": 3.0,
+			"queue": [
+				0.0,
+				1.0,
+				1.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				1.0,
+				2.0,
+				0.0,
+				1.0,
+				0.0,
+				0.0,
+				1.0,
+				1.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				2.0,
+				2.0,
+				0.0,
+				1.0,
+				1.0,
+				0.0,
+				1.0,
+				0.0,
+				2.0,
+				1.0,
+				1.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				1.0,
+				0.0,
+				1.0,
+				1.0,
+				1.0,
+				2.0,
+				1.0,
+				2.0
+			],
+			"schema_version": 1.0,
+			"seed": 20254.0,
+			"solution": [
+				6.0,
+				2.0,
+				3.0,
+				1.0,
+				0.0,
+				10.0,
+				4.0,
+				5.0,
+				9.0,
+				8.0,
+				7.0
+			],
+			"solver_verified": true,
+			"vehicles": [
+				{
+					"angle": 2.356194,
+					"capacity": 6.0,
+					"color": 1.0,
+					"id": 0.0,
+					"kind": 2.0,
+					"x": 238.013610839844,
+					"y": 818.993774414063
+				},
+				{
+					"angle": 0.785398,
+					"capacity": 6.0,
+					"color": 0.0,
+					"id": 1.0,
+					"kind": 2.0,
+					"x": 329.836517333984,
+					"y": 905.37646484375
+				},
+				{
+					"angle": 1.570796,
+					"capacity": 4.0,
+					"color": 1.0,
+					"id": 2.0,
+					"kind": 1.0,
+					"x": 310.008422851563,
+					"y": 666.239135742188
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 4.0,
+					"color": 2.0,
+					"id": 3.0,
+					"kind": 1.0,
+					"x": 408.341217041016,
+					"y": 975.171813964844
+				},
+				{
+					"angle": 3.926991,
+					"capacity": 4.0,
+					"color": 1.0,
+					"id": 4.0,
+					"kind": 1.0,
+					"x": 188.819686889648,
+					"y": 917.336547851563
+				},
+				{
+					"angle": 2.356194,
+					"capacity": 4.0,
+					"color": 0.0,
+					"id": 5.0,
+					"kind": 1.0,
+					"x": 137.262619018555,
+					"y": 822.201110839844
+				},
+				{
+					"angle": 0.0,
+					"capacity": 6.0,
+					"color": 0.0,
+					"id": 6.0,
+					"kind": 2.0,
+					"x": 442.248687744141,
+					"y": 758.357421875
+				},
+				{
+					"angle": 2.356194,
+					"capacity": 2.0,
+					"color": 2.0,
+					"id": 7.0,
+					"kind": 0.0,
+					"x": 352.201904296875,
+					"y": 756.556030273438
+				},
+				{
+					"angle": 5.497787,
+					"capacity": 2.0,
+					"color": 0.0,
+					"id": 8.0,
+					"kind": 0.0,
+					"x": 268.441986083984,
+					"y": 761.295043945313
+				},
+				{
+					"angle": 3.926991,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 9.0,
+					"kind": 0.0,
+					"x": 127.302719116211,
+					"y": 693.349975585938
+				},
+				{
+					"angle": 4.712389,
+					"capacity": 6.0,
+					"color": 0.0,
+					"id": 10.0,
+					"kind": 2.0,
+					"x": 239.245758056641,
+					"y": 1025.25366210938
+				}
+			]
+		},
+		{
+			"boosters": {
+				"extra_slot_limit": 2.0,
+				"shuffle_mode": "uniform_random_remaining_queue"
+			},
+			"campaign": {
+				"blocking_depth": 2.0,
+				"clutch_rate": 0.435,
+				"color_count": 4.0,
+				"crane_again": [
+					0.0132575757575758,
+					0.0
+				],
+				"critical_share": 0.571,
+				"expected_rescues": 0.6,
+				"fail_by_skill": {
+					"0.0": 0.94,
+					"0.35": 0.76,
+					"0.7": 0.565,
+					"0.9": 0.36,
+					"0.95": 0.32,
+					"1.0": 0.0
+				},
+				"fail_by_slots": {
+					"3": 0.546666666666667,
+					"4": 0.0533333333333333,
+					"5": 0.00666666666666671
+				},
+				"fail_rate": 0.565,
+				"fallback": false,
+				"interest": 0.427,
+				"level": 7.0,
+				"measure": 1.563,
+				"min_slots": 3.0,
+				"near_miss": 0.445,
+				"novice_attempts": 4.17,
+				"onboarding_deadlock_rate": 0.35,
+				"onboarding_post_win": 1.0,
+				"ordinary_attempts": 1.56,
+				"planned": "medium",
+				"post_rescue_fail": 0.035,
+				"queue_window": 3.0,
+				"record_index": 1033.0,
+				"same_color_overlaps": 1.0,
+				"seed": 90024.0,
+				"shuffle_again": [
+					0.867424242424242,
+					0.6875
+				],
+				"shuffle_by_strength": {
+					"1": {
+						"again": [
+							0.867424242424242,
+							0.6875
+						],
+						"hopeless": 0.447916666666667,
+						"spread": 0.234274961610101
+					},
+					"16": {
+						"again": [
+							0.329545454545455,
+							0.208333333333333
+						],
+						"hopeless": 0.0625,
+						"spread": 0.300002577180371
+					},
+					"2": {
+						"again": [
+							0.759469696969697,
+							0.583333333333333
+						],
+						"hopeless": 0.21875,
+						"spread": 0.343822796597895
+					},
+					"4": {
+						"again": [
+							0.626893939393939,
+							0.333333333333333
+						],
+						"hopeless": 0.104166666666667,
+						"spread": 0.404334459728492
+					},
+					"8": {
+						"again": [
+							0.452651515151515,
+							0.208333333333333
+						],
+						"hopeless": 0.0729166666666667,
+						"spread": 0.381184496641231
+					}
+				},
+				"shuffle_hopeless": 0.448,
+				"shuffle_spread": 0.234,
+				"slot_again": [
+					0.0909090909090909,
+					0.125
+				],
+				"speed_bonus_rate": 0.0,
+				"strong_attempts": 1.0,
+				"swap_again": [
+					0.732954545454545,
+					0.229166666666667
+				],
+				"target": 1.561,
+				"trap_ratio": 0.182,
+				"tutorial_mean_tries": 0.0,
+				"tutorial_post_win": 0.0,
+				"type": "medium",
+				"vehicle_count": 8.0
+			},
+			"dispatch_order": [
+				3.0,
+				2.0,
+				1.0,
+				6.0,
+				7.0,
+				5.0,
+				4.0,
+				0.0
+			],
+			"initial_bay_count": 3.0,
+			"max_bay_count": 5.0,
+			"metrics": {
+				"cargo_count": 24.0,
+				"color_count": 4.0,
+				"color_switches": 15.0,
+				"initially_dispatchable": 7.0,
+				"placement_attempts": 50.0,
+				"queue_window": 3.0,
+				"same_color_chance": 0.23,
+				"same_color_overlaps": 1.0,
+				"vehicle_count": 8.0
+			},
+			"min_slots": 3.0,
+			"queue": [
+				3.0,
+				1.0,
+				1.0,
+				1.0,
+				1.0,
+				1.0,
+				1.0,
+				3.0,
+				0.0,
+				1.0,
+				0.0,
+				1.0,
+				3.0,
+				2.0,
+				3.0,
+				0.0,
+				0.0,
+				2.0,
+				1.0,
+				1.0,
+				2.0,
+				3.0,
+				3.0,
+				2.0
+			],
+			"schema_version": 1.0,
+			"seed": 90024.0,
+			"solution": [
+				3.0,
+				1.0,
+				2.0,
+				6.0,
+				5.0,
+				7.0,
+				4.0,
+				0.0
+			],
+			"solver_verified": true,
+			"vehicles": [
+				{
+					"angle": 3.141593,
+					"capacity": 2.0,
+					"color": 3.0,
+					"id": 0.0,
+					"kind": 0.0,
+					"x": 283.282867431641,
+					"y": 890.665161132813
+				},
+				{
+					"angle": 0.0,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 1.0,
+					"kind": 0.0,
+					"x": 408.774749755859,
+					"y": 870.070983886719
+				},
+				{
+					"angle": 0.0,
+					"capacity": 6.0,
+					"color": 1.0,
+					"id": 2.0,
+					"kind": 2.0,
+					"x": 346.111419677734,
+					"y": 829.2734375
+				},
+				{
+					"angle": 0.785398,
+					"capacity": 2.0,
+					"color": 3.0,
+					"id": 3.0,
+					"kind": 0.0,
+					"x": 409.923583984375,
+					"y": 986.29248046875
+				},
+				{
+					"angle": 0.0,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 4.0,
+					"kind": 0.0,
+					"x": 283.793853759766,
+					"y": 786.312194824219
+				},
+				{
+					"angle": 5.497787,
+					"capacity": 2.0,
+					"color": 3.0,
+					"id": 5.0,
+					"kind": 0.0,
+					"x": 193.288879394531,
+					"y": 854.267761230469
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 4.0,
+					"color": 0.0,
+					"id": 6.0,
+					"kind": 1.0,
+					"x": 184.851303100586,
+					"y": 985.903991699219
+				},
+				{
+					"angle": 3.926991,
+					"capacity": 4.0,
+					"color": 2.0,
+					"id": 7.0,
+					"kind": 1.0,
+					"x": 310.906005859375,
+					"y": 997.267028808594
+				}
+			]
+		},
+		{
+			"boosters": {
+				"extra_slot_limit": 2.0,
+				"shuffle_mode": "uniform_random_remaining_queue"
+			},
+			"campaign": {
+				"blocking_depth": 5.0,
+				"clutch_rate": 0.1,
+				"color_count": 6.0,
+				"crane_again": [
+					0.190123456790123,
+					0.042483660130719
+				],
+				"critical_share": 0.786,
+				"expected_rescues": 1.195,
+				"fail_by_skill": {
+					"0.0": 1.0,
+					"0.35": 0.99,
+					"0.7": 0.9,
+					"0.9": 0.686666666666667,
+					"0.95": 0.68,
+					"1.0": 0.6125
+				},
+				"fail_by_slots": {
+					"3": 0.873333333333333,
+					"4": 0.346666666666667,
+					"5": 0.0533333333333333
+				},
+				"fail_rate": 0.9,
+				"fallback": false,
+				"interest": 0.434,
+				"level": 8.0,
+				"measure": 3.191,
+				"min_slots": 3.0,
+				"near_miss": 0.339,
+				"novice_attempts": 100.0,
+				"onboarding_deadlock_rate": 0.0,
+				"onboarding_post_win": 0.0,
+				"ordinary_attempts": 3.19,
+				"planned": "hard",
+				"post_rescue_fail": 0.295,
+				"queue_window": 3.0,
+				"record_index": 2149.0,
+				"same_color_overlaps": 7.0,
+				"seed": 131192.0,
+				"shuffle_again": [
+					0.939506172839506,
+					0.918300653594771
+				],
+				"shuffle_by_strength": {
+					"1": {
+						"again": [
+							0.939506172839506,
+							0.918300653594771
+						],
+						"hopeless": 0.82258064516129,
+						"spread": 0.0781892675637906
+					},
+					"16": {
+						"again": [
+							0.797530864197531,
+							0.784313725490196
+						],
+						"hopeless": 0.698924731182796,
+						"spread": 0.0554831749674978
+					},
+					"2": {
+						"again": [
+							0.882716049382716,
+							0.862745098039216
+						],
+						"hopeless": 0.758064516129032,
+						"spread": 0.101187136077892
+					},
+					"4": {
+						"again": [
+							0.859259259259259,
+							0.84640522875817
+						],
+						"hopeless": 0.768817204301075,
+						"spread": 0.0902268407638189
+					},
+					"8": {
+						"again": [
+							0.814814814814815,
+							0.823529411764706
+						],
+						"hopeless": 0.741935483870968,
+						"spread": 0.0606558443534704
+					}
+				},
+				"shuffle_hopeless": 0.823,
+				"shuffle_spread": 0.078,
+				"slot_again": [
+					0.377777777777778,
+					0.0980392156862745
+				],
+				"speed_bonus_rate": 0.0,
+				"strong_attempts": 2.58,
+				"swap_again": [
+					0.666666666666667,
+					0.189542483660131
+				],
+				"target": 3.141,
+				"trap_ratio": 0.316,
+				"tutorial_mean_tries": 0.0,
+				"tutorial_post_win": 0.0,
+				"type": "hard",
+				"vehicle_count": 16.0
+			},
+			"dispatch_order": [
+				9.0,
+				15.0,
+				4.0,
+				11.0,
+				7.0,
+				3.0,
+				8.0,
+				12.0,
+				14.0,
+				13.0,
+				5.0,
+				0.0,
+				1.0,
+				10.0,
+				2.0,
+				6.0
+			],
+			"initial_bay_count": 3.0,
+			"max_bay_count": 5.0,
+			"metrics": {
+				"cargo_count": 48.0,
+				"color_count": 6.0,
+				"color_switches": 28.0,
+				"initially_dispatchable": 7.0,
+				"placement_attempts": 6947.0,
+				"queue_window": 3.0,
+				"same_color_chance": 0.56,
+				"same_color_overlaps": 7.0,
+				"vehicle_count": 16.0
+			},
+			"min_slots": 3.0,
+			"queue": [
+				5.0,
+				1.0,
+				5.0,
+				5.0,
+				5.0,
+				3.0,
+				5.0,
+				5.0,
+				3.0,
+				3.0,
+				3.0,
+				3.0,
+				3.0,
+				3.0,
+				3.0,
+				3.0,
+				3.0,
+				3.0,
+				3.0,
+				1.0,
+				1.0,
+				1.0,
+				5.0,
+				0.0,
+				5.0,
+				0.0,
+				5.0,
+				0.0,
+				0.0,
+				5.0,
+				3.0,
+				4.0,
+				3.0,
+				4.0,
+				3.0,
+				0.0,
+				0.0,
+				1.0,
+				0.0,
+				3.0,
+				1.0,
+				3.0,
+				0.0,
+				3.0,
+				0.0,
+				0.0,
+				3.0,
+				3.0
+			],
+			"schema_version": 1.0,
+			"seed": 131192.0,
+			"solution": [
+				11.0,
+				9.0,
+				15.0,
+				3.0,
+				4.0,
+				7.0,
+				12.0,
+				14.0,
+				8.0,
+				13.0,
+				1.0,
+				0.0,
+				5.0,
+				6.0,
+				10.0,
+				2.0
+			],
+			"solver_verified": true,
+			"vehicles": [
+				{
+					"angle": 1.570796,
+					"capacity": 2.0,
+					"color": 4.0,
+					"id": 0.0,
+					"kind": 0.0,
+					"x": 132.149780273438,
+					"y": 966.876892089844
+				},
+				{
+					"angle": 4.712389,
+					"capacity": 2.0,
+					"color": 3.0,
+					"id": 1.0,
+					"kind": 0.0,
+					"x": 322.471435546875,
+					"y": 702.132385253906
+				},
+				{
+					"angle": 1.570796,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 2.0,
+					"kind": 0.0,
+					"x": 240.132873535156,
+					"y": 838.708557128906
+				},
+				{
+					"angle": 1.570796,
+					"capacity": 6.0,
+					"color": 3.0,
+					"id": 3.0,
+					"kind": 2.0,
+					"x": 372.55908203125,
+					"y": 932.756530761719
+				},
+				{
+					"angle": 2.356194,
+					"capacity": 2.0,
+					"color": 5.0,
+					"id": 4.0,
+					"kind": 0.0,
+					"x": 413.610260009766,
+					"y": 780.366271972656
+				},
+				{
+					"angle": 4.712389,
+					"capacity": 6.0,
+					"color": 3.0,
+					"id": 5.0,
+					"kind": 2.0,
+					"x": 373.275085449219,
+					"y": 1023.23193359375
+				},
+				{
+					"angle": 0.785398,
+					"capacity": 2.0,
+					"color": 0.0,
+					"id": 6.0,
+					"kind": 0.0,
+					"x": 149.134796142578,
+					"y": 802.015014648438
+				},
+				{
+					"angle": 0.0,
+					"capacity": 6.0,
+					"color": 3.0,
+					"id": 7.0,
+					"kind": 2.0,
+					"x": 239.115982055664,
+					"y": 713.148559570313
+				},
+				{
+					"angle": 1.570796,
+					"capacity": 2.0,
+					"color": 0.0,
+					"id": 8.0,
+					"kind": 0.0,
+					"x": 226.041213989258,
+					"y": 904.388732910156
+				},
+				{
+					"angle": 0.785398,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 9.0,
+					"kind": 0.0,
+					"x": 99.2922897338867,
+					"y": 675.886901855469
+				},
+				{
+					"angle": 0.0,
+					"capacity": 4.0,
+					"color": 0.0,
+					"id": 10.0,
+					"kind": 1.0,
+					"x": 323.811401367188,
+					"y": 805.90380859375
+				},
+				{
+					"angle": 3.926991,
+					"capacity": 2.0,
+					"color": 5.0,
+					"id": 11.0,
+					"kind": 0.0,
+					"x": 231.818939208984,
+					"y": 994.516540527344
+				},
+				{
+					"angle": 0.0,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 12.0,
+					"kind": 0.0,
+					"x": 405.635498046875,
+					"y": 669.254516601563
+				},
+				{
+					"angle": 4.712389,
+					"capacity": 2.0,
+					"color": 0.0,
+					"id": 13.0,
+					"kind": 0.0,
+					"x": 121.70133972168,
+					"y": 892.361572265625
+				},
+				{
+					"angle": 0.785398,
+					"capacity": 4.0,
+					"color": 5.0,
+					"id": 14.0,
+					"kind": 1.0,
+					"x": 134.762100219727,
+					"y": 728.439392089844
+				},
+				{
+					"angle": 1.570796,
+					"capacity": 2.0,
+					"color": 5.0,
+					"id": 15.0,
+					"kind": 0.0,
+					"x": 407.871063232422,
+					"y": 870.484741210938
+				}
+			]
+		},
+		{
+			"boosters": {
+				"extra_slot_limit": 2.0,
+				"shuffle_mode": "uniform_random_remaining_queue"
+			},
+			"campaign": {
+				"blocking_depth": 3.0,
+				"clutch_rate": 0.195,
+				"color_count": 4.0,
+				"crane_again": [
+					0.00136612021857924,
+					0.0
+				],
+				"critical_share": 0.375,
+				"expected_rescues": 0.835,
+				"fail_by_skill": {
+					"0.0": 0.96,
+					"0.35": 0.87,
+					"0.7": 0.805,
+					"0.9": 0.366666666666667,
+					"0.95": 0.98,
+					"1.0": 0.175
+				},
+				"fail_by_slots": {
+					"3": 0.846666666666667,
+					"4": 0.0,
+					"5": 0.0
+				},
+				"fail_rate": 0.805,
+				"fallback": false,
+				"interest": 0.271,
+				"level": 9.0,
+				"measure": 1.579,
+				"min_slots": 3.0,
+				"near_miss": 0.456,
+				"novice_attempts": 7.69,
+				"onboarding_deadlock_rate": 0.183,
+				"onboarding_post_win": 1.0,
+				"ordinary_attempts": 1.58,
+				"planned": "medium",
+				"post_rescue_fail": 0.03,
+				"queue_window": 3.0,
+				"record_index": 84.0,
+				"same_color_overlaps": 2.0,
+				"seed": 20139.0,
+				"shuffle_again": [
+					0.620218579234973,
+					0.0
+				],
+				"shuffle_by_strength": {
+					"1": {
+						"again": [
+							0.620218579234973,
+							0.0
+						],
+						"hopeless": 0.147540983606557,
+						"spread": 0.392019122257941
+					},
+					"16": {
+						"again": [
+							0.0887978142076503,
+							0.0
+						],
+						"hopeless": 0.0491803278688525,
+						"spread": 0.027909225798139
+					},
+					"2": {
+						"again": [
+							0.355191256830601,
+							0.0
+						],
+						"hopeless": 0.0737704918032787,
+						"spread": 0.336264853003562
+					},
+					"4": {
+						"again": [
+							0.183060109289618,
+							0.0
+						],
+						"hopeless": 0.0491803278688525,
+						"spread": 0.191793185258458
+					},
+					"8": {
+						"again": [
+							0.092896174863388,
+							0.0
+						],
+						"hopeless": 0.040983606557377,
+						"spread": 0.0552436069624083
+					}
+				},
+				"shuffle_hopeless": 0.148,
+				"shuffle_spread": 0.392,
+				"slot_again": [
+					0.0,
+					0.0
+				],
+				"speed_bonus_rate": 0.0,
+				"strong_attempts": 1.21,
+				"swap_again": [
+					0.0737704918032787,
+					0.0
+				],
+				"target": 1.581,
+				"trap_ratio": 0.15,
+				"tutorial_mean_tries": 0.0,
+				"tutorial_post_win": 0.0,
+				"type": "medium",
+				"vehicle_count": 9.0
+			},
+			"dispatch_order": [
+				4.0,
+				8.0,
+				2.0,
+				7.0,
+				1.0,
+				5.0,
+				3.0,
+				0.0,
+				6.0
+			],
+			"initial_bay_count": 3.0,
+			"max_bay_count": 5.0,
+			"metrics": {
+				"cargo_count": 24.0,
+				"color_count": 4.0,
+				"color_switches": 11.0,
+				"initially_dispatchable": 4.0,
+				"placement_attempts": 87.0,
+				"queue_window": 3.0,
+				"same_color_chance": 0.19,
+				"same_color_overlaps": 2.0,
+				"vehicle_count": 9.0
+			},
+			"min_slots": 3.0,
+			"queue": [
+				0.0,
+				0.0,
+				1.0,
+				1.0,
+				1.0,
+				3.0,
+				3.0,
+				0.0,
+				0.0,
+				3.0,
+				3.0,
+				2.0,
+				1.0,
+				3.0,
+				3.0,
+				1.0,
+				1.0,
+				1.0,
+				2.0,
+				2.0,
+				2.0,
+				1.0,
+				2.0,
+				2.0
+			],
+			"schema_version": 1.0,
+			"seed": 20139.0,
+			"solution": [
+				2.0,
+				4.0,
+				8.0,
+				1.0,
+				5.0,
+				3.0,
+				7.0,
+				0.0,
+				6.0
+			],
+			"solver_verified": true,
+			"vehicles": [
+				{
+					"angle": 0.0,
+					"capacity": 6.0,
+					"color": 2.0,
+					"id": 0.0,
+					"kind": 2.0,
+					"x": 367.177764892578,
+					"y": 872.941833496094
+				},
+				{
+					"angle": 3.926991,
+					"capacity": 2.0,
+					"color": 3.0,
+					"id": 1.0,
+					"kind": 0.0,
+					"x": 277.179504394531,
+					"y": 882.050537109375
+				},
+				{
+					"angle": 3.926991,
+					"capacity": 2.0,
+					"color": 0.0,
+					"id": 2.0,
+					"kind": 0.0,
+					"x": 168.726211547852,
+					"y": 755.065856933594
+				},
+				{
+					"angle": 2.356194,
+					"capacity": 2.0,
+					"color": 3.0,
+					"id": 3.0,
+					"kind": 0.0,
+					"x": 188.090423583984,
+					"y": 853.563049316406
+				},
+				{
+					"angle": 5.497787,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 4.0,
+					"kind": 0.0,
+					"x": 408.505828857422,
+					"y": 720.16552734375
+				},
+				{
+					"angle": 4.712389,
+					"capacity": 2.0,
+					"color": 0.0,
+					"id": 5.0,
+					"kind": 0.0,
+					"x": 257.240295410156,
+					"y": 686.362243652344
+				},
+				{
+					"angle": 0.0,
+					"capacity": 2.0,
+					"color": 3.0,
+					"id": 6.0,
+					"kind": 0.0,
+					"x": 429.499084472656,
+					"y": 831.76123046875
+				},
+				{
+					"angle": 0.785398,
+					"capacity": 4.0,
+					"color": 1.0,
+					"id": 7.0,
+					"kind": 1.0,
+					"x": 297.723266601563,
+					"y": 772.916015625
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 8.0,
+					"kind": 0.0,
+					"x": 304.524566650391,
+					"y": 981.6845703125
+				}
+			]
+		},
+		{
+			"boosters": {
+				"extra_slot_limit": 2.0,
+				"shuffle_mode": "uniform_random_remaining_queue"
+			},
+			"campaign": {
+				"blocking_depth": 3.0,
+				"clutch_rate": 0.11,
+				"color_count": 4.0,
+				"crane_again": [
+					0.31280193236715,
+					0.0359848484848485
+				],
+				"critical_share": 1.0,
+				"expected_rescues": 1.435,
+				"fail_by_skill": {
+					"0.0": 0.99,
+					"0.35": 0.98,
+					"0.7": 0.89,
+					"0.9": 0.693333333333333,
+					"0.95": 0.81,
+					"1.0": 0.4625
+				},
+				"fail_by_slots": {
+					"3": 0.9,
+					"4": 0.613333333333333,
+					"5": 0.166666666666667
+				},
+				"fail_rate": 0.89,
+				"fallback": false,
+				"interest": 0.371,
+				"level": 10.0,
+				"measure": 3.261,
+				"min_slots": 3.0,
+				"near_miss": 0.314,
+				"novice_attempts": 50.0,
+				"onboarding_deadlock_rate": 0.675,
+				"onboarding_post_win": 0.827,
+				"ordinary_attempts": 3.26,
+				"planned": "hard",
+				"post_rescue_fail": 0.545,
+				"queue_window": 3.0,
+				"record_index": 1063.0,
+				"same_color_overlaps": 2.0,
+				"seed": 90054.0,
+				"shuffle_again": [
+					0.942028985507246,
+					0.575757575757576
+				],
+				"shuffle_by_strength": {
+					"1": {
+						"again": [
+							0.942028985507246,
+							0.575757575757576
+						],
+						"hopeless": 0.597345132743363,
+						"spread": 0.161510409426158
+					},
+					"16": {
+						"again": [
+							0.838164251207729,
+							0.214015151515152
+						],
+						"hopeless": 0.376106194690265,
+						"spread": 0.150647499274443
+					},
+					"2": {
+						"again": [
+							0.907004830917874,
+							0.426136363636364
+						],
+						"hopeless": 0.517699115044248,
+						"spread": 0.168673088288806
+					},
+					"4": {
+						"again": [
+							0.884057971014493,
+							0.314393939393939
+						],
+						"hopeless": 0.491150442477876,
+						"spread": 0.136397886065571
+					},
+					"8": {
+						"again": [
+							0.857487922705314,
+							0.240530303030303
+						],
+						"hopeless": 0.420353982300885,
+						"spread": 0.136552588970455
+					}
+				},
+				"shuffle_hopeless": 0.597,
+				"shuffle_spread": 0.162,
+				"slot_again": [
+					0.63768115942029,
+					0.227272727272727
+				],
+				"speed_bonus_rate": 0.0,
+				"strong_attempts": 1.86,
+				"swap_again": [
+					0.54951690821256,
+					0.0909090909090909
+				],
+				"target": 3.182,
+				"trap_ratio": 0.469,
+				"tutorial_mean_tries": 0.0,
+				"tutorial_post_win": 0.0,
+				"type": "hard",
+				"vehicle_count": 11.0
+			},
+			"dispatch_order": [
+				3.0,
+				10.0,
+				2.0,
+				7.0,
+				9.0,
+				1.0,
+				4.0,
+				8.0,
+				0.0,
+				5.0,
+				6.0
+			],
+			"initial_bay_count": 3.0,
+			"max_bay_count": 5.0,
+			"metrics": {
+				"cargo_count": 40.0,
+				"color_count": 4.0,
+				"color_switches": 20.0,
+				"initially_dispatchable": 6.0,
+				"placement_attempts": 98.0,
+				"queue_window": 3.0,
+				"same_color_chance": 0.51,
+				"same_color_overlaps": 2.0,
+				"vehicle_count": 11.0
+			},
+			"min_slots": 3.0,
+			"queue": [
+				1.0,
+				3.0,
+				1.0,
+				1.0,
+				1.0,
+				1.0,
+				3.0,
+				3.0,
+				1.0,
+				1.0,
+				1.0,
+				0.0,
+				0.0,
+				0.0,
+				2.0,
+				2.0,
+				3.0,
+				3.0,
+				3.0,
+				1.0,
+				0.0,
+				0.0,
+				2.0,
+				0.0,
+				0.0,
+				2.0,
+				2.0,
+				1.0,
+				2.0,
+				1.0,
+				0.0,
+				1.0,
+				1.0,
+				0.0,
+				0.0,
+				1.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0
+			],
+			"schema_version": 1.0,
+			"seed": 90054.0,
+			"solution": [
+				10.0,
+				3.0,
+				2.0,
+				0.0,
+				1.0,
+				7.0,
+				4.0,
+				8.0,
+				9.0,
+				5.0,
+				6.0
+			],
+			"solver_verified": true,
+			"vehicles": [
+				{
+					"angle": 5.497787,
+					"capacity": 2.0,
+					"color": 0.0,
+					"id": 0.0,
+					"kind": 0.0,
+					"x": 188.492279052734,
+					"y": 871.832702636719
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 4.0,
+					"color": 0.0,
+					"id": 1.0,
+					"kind": 1.0,
+					"x": 352.894439697266,
+					"y": 908.196960449219
+				},
+				{
+					"angle": 1.570796,
+					"capacity": 4.0,
+					"color": 1.0,
+					"id": 2.0,
+					"kind": 1.0,
+					"x": 299.864776611328,
+					"y": 1023.75219726563
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 6.0,
+					"color": 3.0,
+					"id": 3.0,
+					"kind": 2.0,
+					"x": 415.5771484375,
+					"y": 995.896850585938
+				},
+				{
+					"angle": 4.712389,
+					"capacity": 4.0,
+					"color": 1.0,
+					"id": 4.0,
+					"kind": 1.0,
+					"x": 248.822006225586,
+					"y": 961.744018554688
+				},
+				{
+					"angle": 0.785398,
+					"capacity": 2.0,
+					"color": 1.0,
+					"id": 5.0,
+					"kind": 0.0,
+					"x": 234.76335144043,
+					"y": 711.134765625
+				},
+				{
+					"angle": 5.497787,
+					"capacity": 6.0,
+					"color": 0.0,
+					"id": 6.0,
+					"kind": 2.0,
+					"x": 374.318908691406,
+					"y": 749.565246582031
+				},
+				{
+					"angle": 5.497787,
+					"capacity": 2.0,
+					"color": 2.0,
+					"id": 7.0,
+					"kind": 0.0,
+					"x": 188.765930175781,
+					"y": 783.618957519531
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 4.0,
+					"color": 2.0,
+					"id": 8.0,
+					"kind": 1.0,
+					"x": 278.592987060547,
+					"y": 857.60400390625
+				},
+				{
+					"angle": 1.570796,
+					"capacity": 2.0,
+					"color": 0.0,
+					"id": 9.0,
+					"kind": 0.0,
+					"x": 436.644012451172,
+					"y": 869.695983886719
+				},
+				{
+					"angle": 3.141593,
+					"capacity": 4.0,
+					"color": 1.0,
+					"id": 10.0,
+					"kind": 1.0,
+					"x": 145.040420532227,
+					"y": 976.423522949219
+				}
+			]
+		}
+	],
+	"revision": "playtest10-level4-maneuver-layout-2026-10-17",
+	"schema_version": 1.0
+}

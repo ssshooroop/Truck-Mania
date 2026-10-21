@@ -140,11 +140,22 @@ func _process(_delta:float) -> void:
 				prop.kind = data.kind
 				prop.world = data.world
 				var center:float = projection.center_x(prop.world)
-				var available:float = center if data.side<0 else 1.0-center
+				var bounds:Vector2 = projection.scenery_edges(prop.world)
+				var side:float = data.side
 				var width:float = prop.drawn_size().x/540.0
-				prop.size_factor = minf(data.size,(available-0.15)/width)
+				var available:float = bounds.x if side<0 else 1.0-bounds.y
+				var opposite:float = 1.0-bounds.y if side<0 else bounds.x
+				if available<width*0.78+0.04 and opposite>available:
+					side = -side
+					available = opposite
+				prop.size_factor = minf(data.size,maxf(0.1,(available-0.04)/width))
 				var half_width:float = width*prop.size_factor*0.5
-				prop.lateral = data.side*lerpf(0.13+half_width,available-0.02-half_width,data.offset)
+				var x:float
+				if side<0:
+					x = lerpf(0.02+half_width,bounds.x-0.02-half_width,data.offset)
+				else:
+					x = lerpf(bounds.y+0.02+half_width,0.98-half_width,data.offset)
+				prop.lateral = x-center
 				prop.queue_redraw()
 	for prop in decorations:
 		if not prop.enabled:
