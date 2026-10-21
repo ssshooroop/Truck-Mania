@@ -38,6 +38,10 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 	check(game._modal_is("win"),"Win window opens")
+	check(game.modal.hits.has("double"),"First level offers doubling even before an ad is ready")
+	game.ads.simulate = false
+	game.modal.tap("double")
+	check(game.coins==target and not game.reward_doubled,"Unavailable ad does not credit a reward or consume the offer")
 	check(int(game.modal.spec.balance_from)==120 and int(game.modal.spec.balance)==target,"Counter animates from the old balance")
 	check(not game.coin_badge.visible,"The window shows the balance instead of the game badge")
 	var previous := 120
@@ -60,6 +64,7 @@ func _run() -> void:
 	await process_frame
 	check(game.level_reward==0 and game.coins==target,"Replay has no new coin award")
 	check(not game.modal.hits.has("double"),"Nothing to double without a reward")
+	check(not game.modal.spec.blocks.any(func(b): return b.type=="reward"),"Replay has no coin reward block")
 	game.modal.tap("replay")
 	check(game.overlay=="" and game.model.level_index==0,"Replay restarts the level")
 	# Doubling by rewarded video (simulated) from level 3, where it unlocks.

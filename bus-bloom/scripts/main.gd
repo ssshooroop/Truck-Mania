@@ -1797,8 +1797,7 @@ func _open_shortfall(need:int,scope:Array) -> void:
 func _win_spec(replay:bool=false) -> Dictionary:
 	var spec := Modals.win({"reward":level_reward,"before":win_balance_before,"coins":coins,
 		"last":model.level_index>=model.level_count()-1,"details":reward_details,
-		"can_double":ads.is_ready() and not reward_doubled and level_reward>0
-			and model.level_index+1>=int(economy.config.rewarded_video.get("double_unlock_level",1))})
+		"can_double":not reward_doubled and level_reward>0})
 	if replay: spec.replay_flight = true
 	return spec
 
@@ -1812,6 +1811,7 @@ func _on_win_action(id:String) -> void:
 			levels_origin = "win"
 			_show_road_menu(false)
 		"double":
+			if reward_doubled or level_reward<=0 or overlay!="win": return
 			_watch_ad(id,func():
 				if reward_doubled or overlay!="win": return
 				reward_doubled = true
