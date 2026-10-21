@@ -13,6 +13,7 @@ const INNER_X := Style.CARD_X+Style.PAD
 const INNER_W := Style.CARD_W-Style.PAD*2
 const OPEN_TIME := 0.30
 const CLOSE_TIME := 0.16
+const PACK_H := 196.0
 
 var spec: Dictionary = {}
 var reduced_motion := false
@@ -97,6 +98,11 @@ func _block_height(b:Dictionary) -> float:
 		"steps": return 16.0
 		"status": return 64.0
 		"gap": return float(b.get("height",8))
+		"label": return 26.0
+		"deal": return 158.0
+		"packs":
+			var rows := ceili(float(b.tiles.size())/float(b.get("columns",3)))
+			return rows*PACK_H+(rows-1)*12.0
 	return 0.0
 
 func _layout() -> void:
@@ -149,14 +155,23 @@ func _layout() -> void:
 		var b: Dictionary = blocks[i]
 		var rect := Rect2(INNER_X,y,INNER_W,heights[i])
 		placed.append({"block":b,"rect":rect})
+		if b.type=="packs":
+			for t in b.tiles.size():
+				if b.tiles[t].get("enabled",true): hits[b.tiles[t].id] = _pack_rect(b,rect,t)
 		var id: String = b.get("id","")
 		if id!="" and b.get("enabled",true):
 			match b.type:
 				"button": hits[id] = Rect2(rect.position,Vector2(rect.size.x,91))
 				"row": hits[id] = _row_button(rect)
 				"link": hits[id] = rect.grow_individual(-90,6,-90,6)
+				"deal": hits[id] = rect
 		y += heights[i]+BLOCK_GAP
 	if spec.get("close",false): hits["close"] = Rect2(_close_center()-Vector2(32,32),Vector2(64,64))
+
+func _pack_rect(b:Dictionary,rect:Rect2,i:int) -> Rect2:
+	var cols := int(b.get("columns",3))
+	var w := (rect.size.x-12.0*(cols-1))/cols
+	return Rect2(rect.position.x+(i%cols)*(w+12.0),rect.position.y+(i/cols)*(PACK_H+12.0),w,PACK_H)
 
 func _row_button(rect:Rect2) -> Rect2:
 	return Rect2(rect.end.x-152,rect.position.y+16,140,57)
@@ -265,6 +280,10 @@ func _draw_block(b:Dictionary,rect:Rect2) -> void:
 			draw_line(rect.get_center()+Vector2(-w*0.5,13),rect.get_center()+Vector2(w*0.5,13),Color(Style.MUTED,0.45),2)
 		"timer": _draw_timer(b,rect)
 		"bundle": _draw_bundle(b,rect)
+		"label": Style.text_left(self,b.text,rect.position+Vector2(4,21),22,Style.TEXT,Style.HEAVY)
+		"deal": _draw_deal(b,rect)
+		"packs":
+			for t in b.tiles.size(): _draw_pack(b.tiles[t],_pack_rect(b,rect,t))
 		"reward":
 			var c := rect.get_center()
 			var label := "+%d" % int(b.amount)
@@ -379,6 +398,74 @@ static func _format_left(seconds:int) -> String:
 	if d>0: return "%d д %d ч" % [d,h]
 	if h>0: return "%d ч %02d мин" % [h,m]
 	return "%d:%02d" % [m,seconds%60]
+
+## Wide offer card: picture left, contents and price right; the whole card is the target.
+func _draw_deal(b:Dictionary,rect:Rect2) -> void:
+	var id: String = b.get("id","")
+	var p: float = press.get(id,0.0)
+	var r := Rect2(rect.position+Vector2(0,p*3),rect.size)
+	Style.round_rect(self,Rect2(rect.position+Vector2(0,5),rect.size),Style.TILE_EDGE,Style.R_TILE)
+	Style.round_rect(self,r,Style.TILE,Style.R_TILE,Style.TILE_EDGE,3)
+	var pic := Rect2(r.position+Vector2(8,8),Vector2(148,r.size.y-16))
+	if b.has("art"): _draw_art({"texture":b.art,"focus":b.get("focus",Vector2(0.5,0.4))},pic)
+	else:
+		Style.round_rect(self,pic,Style.PAPER_DEEP,Style.R_TILE-6)
+		if not reduced_motion: Style.rays(self,pic.get_center(),70,age*0.35,0.7)
+		Style.icon(self,b.icon,pic.get_center(),104)
+	var x := pic.end.x+14
+	var right := r.end.x-12
+	Style.text_left(self,b.title,Vector2(x,r.position.y+32),22,Style.TEXT,Style.HEAVY,right-x)
+	if b.has("subtitle"): Style.text_left(self,b.subtitle,Vector2(x,r.position.y+54),15,Style.MUTED,Style.BOLD,right-x)
+	var ix := x
+	for it: Dictionary in b.get("items",[]):
+		Style.icon(self,it.texture,Vector2(ix+15,r.position.y+78),30)
+		Style.text_left(self,it.count,Vector2(ix+32,r.position.y+85),17,Style.TEXT,Style.HEAVY)
+		ix += 36+Style.HEAVY.get_string_size(it.count,HORIZONTAL_ALIGNMENT_LEFT,-1,17).x+8
+	var btn := Rect2(right-128,r.end.y-54,128,42)
+	var face := Style.button(self,btn,"primary",p)
+	if busy.has(id): Style.spinner(self,face.get_center(),12,age,Color.WHITE)
+	else: Style.button_label(self,b.price,face.get_center(),22,"primary",face.size.x-14)
+	if b.has("old_price"):
+		var old_c := Vector2(btn.position.x-40,face.get_center().y+6)
+		Style.text(self,b.old_price,old_c,16,Style.MUTED,Style.BOLD)
+		var w := Style.BOLD.get_string_size(b.old_price,HORIZONTAL_ALIGNMENT_LEFT,-1,16).x
+		draw_line(old_c+Vector2(-w*0.5-2,-5),old_c+Vector2(w*0.5+2,-5),Color("e0453a"),2.5,true)
+	if b.has("tag"): _tag(b.tag,Vector2(r.position.x+30,r.position.y+6),-0.12)
+
+## Shop tile: tag on top, icon, amount, bonus, price button. Kind "ad" = free tile.
+func _draw_pack(t:Dictionary,r:Rect2) -> void:
+	var id: String = t.id
+	var enabled: bool = t.get("enabled",true)
+	var p: float = press.get(id,0.0)
+	var best: bool = t.has("tag")
+	Style.round_rect(self,r,Color("fff3c4") if best else Style.TILE,Style.R_TILE,Style.GOLD if best else Style.TILE_EDGE,4 if best else 3)
+	var c := r.get_center()
+	Style.icon(self,t.icon,Vector2(c.x,r.position.y+60),84,1.0 if enabled else 0.5)
+	Style.juicy(self,t.amount,Vector2(c.x,r.position.y+128),28,Color.WHITE,r.size.x-16)
+	if t.has("bonus"):
+		var bw := Style.HEAVY.get_string_size(t.bonus,HORIZONTAL_ALIGNMENT_LEFT,-1,15).x+16
+		var br := Rect2(Vector2(r.end.x-bw-6,r.position.y+78),Vector2(bw,24))
+		Style.round_rect(self,br,Color("2f9e47"),12)
+		Style.text(self,t.bonus,br.get_center()+Vector2(0,5.5),15,Color.WHITE,Style.HEAVY)
+	var kind: String = t.get("kind","primary") if enabled else "disabled"
+	var face := Style.button(self,Rect2(r.position.x+8,r.end.y-58,r.size.x-16,46),kind,p)
+	if busy.has(id): Style.spinner(self,face.get_center(),12,age,Color.WHITE)
+	elif t.get("kind","")=="ad":
+		Style.icon(self,Style.AD,Vector2(face.position.x+24,face.get_center().y),38)
+		Style.button_label(self,t.price,face.get_center()+Vector2(16,0),19,kind,face.size.x-56)
+	else: Style.button_label(self,t.price,face.get_center(),21,kind,face.size.x-12)
+	if best: _tag(t.tag,Vector2(r.position.x-6,r.position.y-10),-0.10)
+
+func _tag(label:String,pos:Vector2,angle:float) -> void:
+	var w := Style.BLACK.get_string_size(label,HORIZONTAL_ALIGNMENT_LEFT,-1,17).x+22
+	var r := Rect2(pos,Vector2(maxf(76,w),28))
+	var m := Transform2D(angle,r.get_center())*Transform2D(0,-r.get_center())
+	var prev := base*_card_anim()
+	draw_set_transform_matrix(prev*m)
+	Style.round_rect(self,Rect2(r.position+Vector2(0,3),r.size),Color("b32a1f"),12)
+	Style.round_rect(self,r,Color("f04b3a"),12,Color.WHITE,2)
+	Style.text(self,label,r.get_center()+Vector2(0,6),17,Color.WHITE,Style.BLACK,r.size.x-8)
+	draw_set_transform_matrix(prev)
 
 func _draw_bundle(b:Dictionary,rect:Rect2) -> void:
 	var items: Array = b.items

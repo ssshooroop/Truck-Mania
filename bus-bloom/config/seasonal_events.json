@@ -1,40 +1,29 @@
 {
-  "_comment": "Seasonal promos. Dates are inclusive UTC days. Prices must come from the store SDK once purchases are connected; these strings are placeholders.",
+  "_comment": "Seasonal promos. Dates are inclusive UTC days. Each event sells one bundle from store_catalog.json (product); its price comes from the store.",
   "events": [
     {
-      "id": "autumn_2026",
-      "title": "Осенняя стройка",
+      "id": "halloween_2026",
+      "title": "Ночная смена",
       "starts": "2026-10-15",
-      "ends": "2026-11-05",
-      "art": "res://assets/artwork/menu/Cheerful Crane-Suspended Construction Worker.png",
-      "focus_y": 0.30,
-      "text": "Набор прораба со скидкой —\nтолько до конца сезона!",
-      "bundle": [
-        {"item": "coins", "count": 1000},
-        {"item": "extra_slot", "count": 3},
-        {"item": "undo", "count": 5}
-      ],
-      "cta": "Забрать набор",
-      "price": "199 ₽",
-      "old_price": "499 ₽",
-      "discount": "−60%"
+      "ends": "2026-11-02",
+      "art": "res://assets/artwork/seasonal/halloween.png",
+      "focus_x": 0.40,
+      "focus_y": 0.40,
+      "text": "Тыквы на складе, летучие мыши\nнад краном — набор только до 2 ноября!",
+      "product": "season_halloween_2026",
+      "cta": "Забрать набор"
     },
     {
-      "id": "winter_2026",
-      "title": "Зимний аврал",
+      "id": "newyear_2026",
+      "title": "Новогодний аврал",
       "starts": "2026-12-20",
       "ends": "2027-01-10",
-      "art": "res://assets/artwork/menu/Contented Construction Worker’s Ice Cream Break.png",
-      "text": "Праздничный набор —\nуспей до конца каникул!",
-      "bundle": [
-        {"item": "coins", "count": 1500},
-        {"item": "crane", "count": 2},
-        {"item": "undo", "count": 5}
-      ],
-      "cta": "Забрать набор",
-      "price": "299 ₽",
-      "old_price": "749 ₽",
-      "discount": "−60%"
+      "art": "res://assets/artwork/seasonal/new-year.png",
+      "focus_x": 0.50,
+      "focus_y": 0.45,
+      "text": "Праздничные подарки уже на складе —\nуспей до конца каникул!",
+      "product": "season_newyear_2026",
+      "cta": "Забрать набор"
     }
   ]
 }

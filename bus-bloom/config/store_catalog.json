@@ -1,0 +1,16 @@
+{
+  "_comment": "Products sold for real money. usd / old_usd are DRAFT reference prices for layout only: real prices are set per region in App Store / Google Play and come localized from the store SDK. The first coin pack matches economy_config.json iap_pack (500 coins, 1.99). Bonus badges are computed from coins per dollar against the first pack.",
+  "products": [
+    {"id": "coins_500", "kind": "coins", "contents": {"coins": 500}, "usd": 1.99, "icon": "coins-stack-small.png"},
+    {"id": "coins_1200", "kind": "coins", "contents": {"coins": 1200}, "usd": 3.99, "icon": "coins-stack-medium.png"},
+    {"id": "coins_2600", "kind": "coins", "contents": {"coins": 2600}, "usd": 7.99, "icon": "coins-stack-medium.png", "tag": "Хит"},
+    {"id": "coins_5500", "kind": "coins", "contents": {"coins": 5500}, "usd": 14.99, "icon": "coins-stack-big.png"},
+    {"id": "coins_12000", "kind": "coins", "contents": {"coins": 12000}, "usd": 29.99, "icon": "coins-stack-big.png", "tag": "Выгодно"},
+    {"id": "starter", "kind": "bundle", "once": true, "title": "Набор новичка", "subtitle": "Один раз за всю игру",
+     "contents": {"coins": 600, "extra_slot": 3, "undo": 5}, "usd": 0.99, "old_usd": 2.99},
+    {"id": "season_halloween_2026", "kind": "bundle", "once": true, "title": "Набор ночной смены",
+     "contents": {"coins": 1000, "shuffle": 3, "undo": 5}, "usd": 1.99, "old_usd": 4.99},
+    {"id": "season_newyear_2026", "kind": "bundle", "once": true, "title": "Новогодний набор",
+     "contents": {"coins": 1500, "crane": 2, "undo": 5}, "usd": 2.99, "old_usd": 7.49}
+  ]
+}

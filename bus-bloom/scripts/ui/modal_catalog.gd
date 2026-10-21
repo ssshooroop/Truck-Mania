@@ -9,11 +9,13 @@ extends RefCounted
 
 const Style := preload("res://scripts/ui/modal_style.gd")
 const STUCK_ART := preload("res://assets/artwork/menu/modals/open-extra-slot.png")
-const FOREMAN := preload("res://assets/artwork/store icon/Confident Cartoon Builder Icon.png")
+const FOREMAN_HAPPY := preload("res://assets/artwork/foreman/foreman-happy.png")
+const FOREMAN_THINKING := preload("res://assets/artwork/foreman/foreman-thinking.png")
+const FOREMAN_SURPRISED := preload("res://assets/artwork/foreman/foreman-surprised.png")
 const CONE := preload("res://assets/artwork/cargo/traffic-cone.png")
 const UNDO := preload("res://assets/artwork/menu/undo.png")
 const GIFT := preload("res://assets/artwork/menu/gift.png")
-const CRATE := preload("res://assets/artwork/menu/сrate.png")
+const SHUFFLE := preload("res://assets/artwork/menu/shuffle.png")
 const COINS_SMALL := preload("res://assets/artwork/menu/coins-stack-small.png")
 const COINS_MEDIUM := preload("res://assets/artwork/menu/coins-stack-medium.png")
 const COINS_BIG := preload("res://assets/artwork/menu/coins-stack-big.png")
@@ -22,23 +24,23 @@ const ITEM_ICONS := {
 	"undo": UNDO,
 	"extra_slot": CONE,
 	"crane": GIFT,
-	"shuffle": CRATE,
+	"shuffle": SHUFFLE,
 	"swap": GIFT,
 }
 
 # ------------------------------------------------------------- tutorial
 
 const TUTORIAL_STEPS := [
-	{"title":"Привет, я прораб!","text":"Нажми на машину — она выедет по стрелке к складу.","cta":"Дальше"},
-	{"title":"Цвет — это груз","text":"Машина берёт только свой материал. Следи за лентой сверху!","cta":"Дальше"},
-	{"title":"Мест всего три","text":"Не занимай места машинами, которым груз пока не нужен.","cta":"Начать работу"},
+	{"title":"Привет, я прораб!","text":"Нажми на машину — она выедет по стрелке к складу.","cta":"Дальше","avatar":FOREMAN_HAPPY},
+	{"title":"Цвет — это груз","text":"Машина берёт только свой материал. Следи за лентой сверху!","cta":"Дальше","avatar":FOREMAN_THINKING},
+	{"title":"Мест всего три","text":"Не занимай места машинами, которым груз пока не нужен.","cta":"Начать работу","avatar":FOREMAN_HAPPY},
 ]
 
 ## Coach card at the bottom, optional spotlight (screen coordinates) on a truck.
 static func tutorial(step:int,spotlight:Dictionary={}) -> Dictionary:
 	var s: Dictionary = TUTORIAL_STEPS[clampi(step,0,TUTORIAL_STEPS.size()-1)]
 	var spec := {
-		"id":"tutorial","layout":"coach","avatar":FOREMAN,"title":s.title,"back":"tutorial_skip",
+		"id":"tutorial","layout":"coach","avatar":s.avatar,"title":s.title,"back":"tutorial_skip",
 		"blocks":[
 			{"type":"text","text":s.text,"size":23},
 			{"type":"steps","count":TUTORIAL_STEPS.size(),"index":step},
@@ -76,7 +78,7 @@ static func stuck(ctx:Dictionary) -> Dictionary:
 		"kind":"primary","price":{} if gifts>0 else {"coins":int(ctx.get("undo_price",20))},"action_label":"Взять",
 		"enabled":ctx.get("can_undo",true)})
 	if ctx.get("can_shuffle",false) and help:
-		blocks.append({"type":"row","id":"shuffle","icon":CRATE,"title":"Перемешать груз",
+		blocks.append({"type":"row","id":"shuffle","icon":SHUFFLE,"title":"Перемешать груз",
 			"subtitle":"Новый порядок на ленте","kind":"primary","price":{"coins":int(ctx.get("shuffle_price",30))}})
 	blocks.append({"type":"link","id":"retry","label":"Начать уровень заново"})
 	return {"id":"stuck","title":"Парковка заполнена!","balance":int(ctx.get("coins",0)),"back":"menu","blocks":blocks}
@@ -102,20 +104,19 @@ static func offer(item:String,price:int,coins:int,ad_ready:bool) -> Dictionary:
 
 # ------------------------------------------------------------- not enough coins
 
-## pack: {"coins":500,"price":"199 ₽"} from the store, or {} while no store.
+## pack: {"coins":500,"price":"$1.99"} — the smallest store pack that covers
+## the gap — or {} when no store is configured.
 static func shortfall(need:int,coins:int,ad_coins:int,ad_ready:bool,pack:Dictionary={}) -> Dictionary:
 	var missing := maxi(0,need-coins)
 	var blocks: Array = [
-		{"type":"hero","texture":COINS_BIG,"size":140},
+		{"type":"hero","texture":FOREMAN_SURPRISED,"size":150,"rays":false},
 		{"type":"text","text":"Нужно ещё %d %s." % [missing,coin_word(missing)],"size":24},
-		{"type":"button","id":"watch_ad","kind":"ad","label":"+%d за рекламу" % ad_coins,"pulse":true,"enabled":ad_ready,
-			"note":"" if ad_ready else "Ролик готовится — загляни чуть позже"},
+		{"type":"button","id":"watch_ad","kind":"ad","label":("+%d за рекламу" % ad_coins) if ad_ready else "Ролик готовится…","pulse":true,"enabled":ad_ready},
 	]
 	if not pack.is_empty():
 		blocks.append({"type":"button","id":"buy_pack","kind":"primary","label":"%d монет" % int(pack.coins),"icon":COINS_MEDIUM,"price":{"money":pack.price}})
-	blocks.append({"type":"link","id":"close","label":"Не сейчас"})
-	for b: Dictionary in blocks:
-		if b.get("note","")=="": b.erase("note")
+		blocks.append({"type":"link","id":"shop","label":"Все наборы в магазине"})
+	else: blocks.append({"type":"link","id":"close","label":"Не сейчас"})
 	return {"id":"shortfall","title":"Не хватает монет","close":true,"back":"close","balance":coins,"blocks":blocks}
 
 # ------------------------------------------------------------- rewarded ad
@@ -139,7 +140,7 @@ static func ad_reward(state:String,amount:int,coins:int) -> Dictionary:
 			]
 		"failed":
 			blocks = [
-				{"type":"hero","texture":Style.AD,"size":130,"rays":false},
+				{"type":"hero","texture":FOREMAN_THINKING,"size":140,"rays":false},
 				{"type":"text","text":"Ролик не загрузился.\nПроверь интернет и попробуй ещё раз.","size":21},
 				{"type":"button","id":"watch_ad","kind":"ad","label":"Попробовать ещё","pulse":false},
 				{"type":"link","id":"close","label":"Закрыть"},
@@ -164,26 +165,25 @@ static func double_reward(amount:int,coins:int,ad_ready:bool) -> Dictionary:
 
 # ------------------------------------------------------------- seasonal
 
-## event: an entry returned by active_event(). `frozen_now` (unix seconds) pins
-## the countdown for screenshots; 0 keeps it live.
-static func seasonal(event:Dictionary,frozen_now:int=0) -> Dictionary:
-	var items: Array = []
-	for it: Dictionary in event.get("bundle",[]):
-		items.append({"texture":ITEM_ICONS.get(it.item,GIFT),"count":("×%d" % int(it.count)) if it.item!="coins" else str(int(it.count))})
-	var art: Texture2D = load(event.get("art","res://assets/artwork/menu/Cheerful Crane-Suspended Construction Worker.png"))
+## event: an entry returned by active_event(); store: store_service.gd for the
+## bundle's contents and price. `frozen_now` (unix seconds) pins the countdown
+## for screenshots; 0 keeps it live.
+static func seasonal(event:Dictionary,store,frozen_now:int=0) -> Dictionary:
+	var product: Dictionary = store.product(event.get("product",""))
 	var blocks: Array = [
-		{"type":"art","texture":art,"height":200,"focus":Vector2(event.get("focus_x",0.5),event.get("focus_y",0.35))},
+		{"type":"art","texture":load(event.art),"height":220,"focus":Vector2(event.get("focus_x",0.5),event.get("focus_y",0.4))},
 		{"type":"timer","ends_at":int(event.ends_at),"label":"До конца"},
 		{"type":"text","text":event.get("text",""),"size":21},
-		{"type":"bundle","items":items},
+		{"type":"bundle","items":items_for(product.get("contents",{}))},
 		{"type":"button","id":"buy_bundle","kind":"primary","label":event.get("cta","Забрать набор"),"pulse":true,
-			"price":{"money":event.get("price","")},"note":("Обычная цена %s" % event.old_price) if event.has("old_price") else ""},
+			"price":{"money":store.price(product.id)}},
 		{"type":"link","id":"close","label":"Позже"},
 	]
-	if blocks[4].note=="": blocks[4].erase("note")
+	if product.has("old_usd"): blocks[4].note = "Обычная цена %s" % store.old_price(product.id)
 	if frozen_now>0: blocks[1].now = frozen_now
 	var spec := {"id":"seasonal_"+str(event.get("id","")),"title":event.get("title","Сезонная акция"),"close":true,"back":"close","blocks":blocks}
-	if event.has("discount"): spec.ribbon = event.discount
+	var off := discount(product)
+	if off!="": spec.ribbon = off
 	return spec
 
 ## Active event for a unix time, or {} (dates are inclusive UTC days).
@@ -200,6 +200,78 @@ static func active_event(events:Array,now:int) -> Dictionary:
 static func load_events() -> Array:
 	var data = JSON.parse_string(FileAccess.get_file_as_string("res://config/seasonal_events.json"))
 	return data.get("events",[]) if data is Dictionary else []
+
+# ------------------------------------------------------------- shop
+
+## ctx: coins, store (store_service.gd), owned (Array of once-only product ids),
+## event (active seasonal event or {}), ad_ready, ad_coins, frozen_now.
+static func shop(ctx:Dictionary) -> Dictionary:
+	var store = ctx.store
+	var owned: Array = ctx.get("owned",[])
+	var event: Dictionary = ctx.get("event",{})
+	var now := int(ctx.get("frozen_now",0))
+	if now<=0: now = int(Time.get_unix_time_from_system())
+	var blocks: Array = []
+	var featured: Array = []
+	if not event.is_empty() and event.get("product","") not in owned: featured.append(event.product)
+	if "starter" not in owned and store.products.has("starter"): featured.append("starter")
+	for id: String in featured:
+		var p: Dictionary = store.product(id)
+		var deal := {"type":"deal","id":"buy:"+id,"title":p.get("title",""),"items":items_for(p.contents),"price":store.price(id)}
+		if id==event.get("product",""):
+			deal.art = load(event.art)
+			deal.focus = Vector2(event.get("focus_x",0.5),event.get("focus_y",0.4))
+			deal.subtitle = "%s · ещё %s" % [event.title,_days(int(event.ends_at)-now)]
+		else:
+			deal.icon = GIFT
+			deal.subtitle = p.get("subtitle","")
+		if p.has("old_usd"): deal.old_price = store.old_price(id)
+		var off := discount(p)
+		if off!="": deal.tag = off
+		blocks.append(deal)
+	blocks.append({"type":"label","text":"Монеты"})
+	var ad_ready: bool = ctx.get("ad_ready",false)
+	var tiles: Array = [{"id":"free_coins","icon":Style.COIN,"amount":str(int(ctx.get("ad_coins",25))),"kind":"ad",
+		"price":"Бесплатно" if ad_ready else "Скоро","enabled":ad_ready}]
+	for id: String in store.coin_packs():
+		var p: Dictionary = store.product(id)
+		var tile := {"id":"buy:"+id,"icon":load("res://assets/artwork/menu/"+p.icon),"amount":_thousands(int(p.contents.coins)),"price":store.price(id)}
+		if store.bonus(id)!="": tile.bonus = store.bonus(id)
+		if p.has("tag"): tile.tag = p.tag
+		tiles.append(tile)
+	blocks.append({"type":"packs","columns":3,"tiles":tiles})
+	blocks.append({"type":"link","id":"restore","label":"Восстановить покупки"})
+	return {"id":"shop","title":"Магазин","close":true,"back":"close","balance":int(ctx.get("coins",0)),"blocks":blocks}
+
+## After a successful purchase: what arrived.
+static func received(contents:Dictionary,coins:int) -> Dictionary:
+	return {"id":"received","title":"Готово!","balance":coins,"back":"close","blocks":[
+		{"type":"hero","texture":FOREMAN_HAPPY,"size":150},
+		{"type":"text","text":"Всё уже на складе. За работу!","size":22},
+		{"type":"bundle","items":items_for(contents)},
+		{"type":"button","id":"close","kind":"primary","label":"Отлично!","pulse":true},
+	]}
+
+static func items_for(contents:Dictionary) -> Array:
+	var items: Array = []
+	for key: String in contents:
+		var n := int(contents[key])
+		items.append({"texture":ITEM_ICONS.get(key,GIFT),"count":_thousands(n) if key=="coins" else "×%d" % n})
+	return items
+
+## "−60%" from a product's draft old price, or "".
+static func discount(p:Dictionary) -> String:
+	if not p.has("old_usd") or float(p.old_usd)<=0.0: return ""
+	return "−%d%%" % roundi((1.0-float(p.usd)/float(p.old_usd))*100.0)
+
+static func _thousands(n:int) -> String:
+	var s := str(n)
+	return s if n<10000 else s.substr(0,s.length()-3)+" "+s.substr(s.length()-3)
+
+static func _days(seconds:int) -> String:
+	seconds = maxi(0,seconds)
+	if seconds>=86400: return "%d д" % (seconds/86400)
+	return "%d ч" % maxi(1,seconds/3600)
 
 static func coin_word(n:int) -> String:
 	var m10 := n%10

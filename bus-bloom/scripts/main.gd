@@ -17,11 +17,13 @@ const Boosters = preload("res://scripts/level_boosters.gd")
 const GameModal = preload("res://scripts/ui/game_modal.gd")
 const Modals = preload("res://scripts/ui/modal_catalog.gd")
 const AdService = preload("res://scripts/ui/ad_service.gd")
+const StoreService = preload("res://scripts/ui/store_service.gd")
 const UNDO_PRICE = 20
 var modal_layer: CanvasLayer
 var modal: Control
 var modal_scope: Array = []
 var ads = AdService.new()
+var store = StoreService.new()
 var tutorial_step = 0
 var reward_doubled = false
 const INK = Color("152b46")
@@ -193,8 +195,10 @@ func _ready() -> void:
 	modal_layer.layer = 20
 	add_child(modal_layer)
 	ads.simulate = "--fake-ads" in args
+	store.simulate = "--fake-store" in args
 	_sync_coins()
 	road_menu.settings_requested.connect(_open_settings)
+	road_menu.shop_requested.connect(func(): _open_shop(["road_menu"]))
 	road_menu.resume_requested.connect(_resume_from_menu)
 	road_menu.preference_changed.connect(_set_preference)
 	if not automation:
@@ -218,7 +222,9 @@ func _process(delta:float) -> void:
 		intro_age += delta
 		if intro_age >= 1.05: intro_delays.clear()
 	_sync_audio_preferences()
-	coin_badge.visible = overlay in ["","win","stuck","crane_preview","tutorial"] and (modal==null or int(modal.spec.get("balance",-1))<0)
+	var modal_balance: bool = modal!=null and int(modal.spec.get("balance",-1))>=0
+	coin_badge.visible = overlay in ["","win","stuck","crane_preview","tutorial"] and not modal_balance
+	if road_menu: road_menu.coin_badge.visible = not modal_balance
 	if overlay=="win":
 		win_age += delta
 		coin_badge.amount = WinCelebration.displayed_balance(win_balance_before,coins,win_age,reduced_motion)
@@ -1819,9 +1825,13 @@ func _tap_cone(bay:int) -> void:
 
 func _open_shortfall(need:int,scope:Array) -> void:
 	var ad_coins := int(economy.config.rewarded_video.get("coins",25))
-	# No store yet: the coin pack row appears once purchases are connected.
-	_open_modal(Modals.shortfall(need,coins,ad_coins,ads.is_ready()),func(id:String):
+	var pack_id: String = store.pack_for(need-coins)
+	var pack := {}
+	if pack_id!="": pack = {"coins":int(store.product(pack_id).contents.coins),"price":store.price(pack_id)}
+	_open_modal(Modals.shortfall(need,coins,ad_coins,ads.is_ready(),pack),func(id:String):
 		match id:
+			"buy_pack": _buy(pack_id,id)
+			"shop": _open_shop(scope)
 			"watch_ad":
 				_watch_ad(id,func():
 					coins += ad_coins
@@ -1897,14 +1907,60 @@ func _maybe_show_season() -> void:
 	if automation or modal!=null or daily_screen!=null: return
 	var now := int(Time.get_unix_time_from_system())
 	var event := Modals.active_event(Modals.load_events(),now)
-	if event.is_empty(): return
+	if event.is_empty() or event.get("product","") in economy.state.purchases: return
 	var day := now/86400
 	var seen: Dictionary = economy.state.season_seen
 	if int(seen.get(event.id,-1))==day: return
 	seen[event.id] = day
 	_save()
-	_open_modal(Modals.seasonal(event),func(id:String):
+	_open_modal(Modals.seasonal(event,store),func(id:String):
 		match id:
-			"buy_bundle": _message("Покупки появятся в следующей версии")
+			"buy_bundle": _buy(event.product,id)
 			"close": _close_modal()
 	,["road_menu"])
+
+func _open_shop(scope:Array) -> void:
+	var ad_coins := int(economy.config.rewarded_video.get("coins",25))
+	var spec_now := func() -> Dictionary:
+		return Modals.shop({"coins":coins,"store":store,"owned":economy.state.purchases,
+			"event":Modals.active_event(Modals.load_events(),int(Time.get_unix_time_from_system())),
+			"ad_ready":ads.is_ready(),"ad_coins":ad_coins})
+	_open_modal(spec_now.call(),func(id:String):
+		if id.begins_with("buy:"):
+			_buy(id.substr(4),id)
+			return
+		match id:
+			"free_coins":
+				_watch_ad(id,func():
+					coins += ad_coins
+					_sync_coins()
+					_save()
+					if _modal_is("shop"):
+						modal.update_spec(spec_now.call())
+						modal.flash("+%d %s" % [ad_coins,Modals.coin_word(ad_coins)]))
+			"restore": _message("Покупки появятся в следующей версии" if not store.is_available() else "Покупки восстановлены")
+			"close": _close_modal()
+	,scope)
+
+## Buys a store product for real money; contents arrive only after the store
+## confirms. `button` shows the loading state on the pressed control.
+func _buy(product_id:String,button:String) -> void:
+	if not store.is_available():
+		_message("Покупки появятся в следующей версии")
+		return
+	var product: Dictionary = store.product(product_id)
+	if product.is_empty() or product_id in economy.state.purchases: return
+	var shown := modal
+	if shown: shown.set_busy(button,true)
+	var paid: bool = await store.purchase(product_id)
+	if is_instance_valid(shown): shown.set_busy(button,false)
+	if not paid:
+		_message("Покупка не завершена — деньги не списаны")
+		return
+	for key: String in product.contents:
+		if key=="coins": coins += int(product.contents.coins)
+		else: economy.state.inventory[key] = int(economy.state.inventory.get(key,0))+int(product.contents[key])
+	if product.get("once",false): economy.state.purchases.append(product_id)
+	_sync_coins()
+	_save()
+	if modal: modal.update_spec(Modals.received(product.contents,coins))

@@ -2,6 +2,7 @@ extends Control
 
 signal level_selected(index:int)
 signal settings_requested
+signal shop_requested
 signal resume_requested
 signal preference_changed(key:String,enabled:bool)
 const PreferenceIcon = preload("res://scripts/menu/preference_icon.gd")
@@ -32,6 +33,7 @@ var distance_dragged = 0.0
 var preference_icons: Dictionary = {}
 var resume_level = -1
 var settings_button: TextureButton
+var shop_button: TextureButton
 var coin_badge
 
 func _ready() -> void:
@@ -71,6 +73,12 @@ func _ready() -> void:
 	settings_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 	settings_button.pressed.connect(func(): settings_requested.emit())
 	add_child(settings_button)
+	shop_button = TextureButton.new()
+	shop_button.texture_normal = preload("res://assets/artwork/menu/shop.png")
+	shop_button.ignore_texture_size = true
+	shop_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	shop_button.pressed.connect(func(): shop_requested.emit())
+	add_child(shop_button)
 	coin_badge = preload("res://scripts/coin_badge.gd").new()
 	add_child(coin_badge)
 	resized.connect(_layout)
@@ -91,6 +99,8 @@ func _layout() -> void:
 		index += 1
 	settings_button.position = Vector2(size.x-66,16)
 	settings_button.size = Vector2(48,48)
+	shop_button.position = Vector2(size.x-74,76)
+	shop_button.size = Vector2(64,64)
 	coin_badge.position = Vector2(size.x/2-67,18)
 	coin_badge.size = Vector2(134,44)
 

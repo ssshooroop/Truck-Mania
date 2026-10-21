@@ -18,6 +18,8 @@ func run():
 	game.intro_delays.clear()
 	var now := int(Time.get_unix_time_from_datetime_string("2026-10-21T12:00:00"))
 	var event: Dictionary = Catalog.active_event(Catalog.load_events(),now)
+	var winter: Dictionary = Catalog.active_event(Catalog.load_events(),int(Time.get_unix_time_from_datetime_string("2026-12-25T12:00:00")))
+	var store = preload("res://scripts/ui/store_service.gd").new()
 	var truck: Vector2 = game._world_transform()*game.model.buses[game.model.find_hint()].position
 	game.coin_badge.visible=false
 	var specs := {
@@ -27,14 +29,18 @@ func run():
 		"stuck-crane":Catalog.stuck({"coins":40,"slot_available":false,"can_crane":true,"crane_price":150,"undo_gifts":2,"can_undo":true,"can_shuffle":false}),
 		"stuck-no-help":Catalog.stuck({"coins":5,"rescue_left":false,"can_undo":false}),
 		"offer-cone":Catalog.offer("extra_slot",100,120,true),
-		"shortfall":Catalog.shortfall(150,40,25,true,{"coins":500,"price":"199 ₽"}),
+		"shortfall":Catalog.shortfall(150,40,25,true,{"coins":500,"price":store.price("coins_500")}),
 		"shortfall-no-ad":Catalog.shortfall(150,40,25,false),
 		"ad-offer":Catalog.ad_reward("offer",25,40),
 		"ad-loading":Catalog.ad_reward("loading",25,40),
 		"ad-failed":Catalog.ad_reward("failed",25,40),
 		"ad-done":Catalog.ad_reward("done",25,65),
 		"double":Catalog.double_reward(32,120,true),
-		"seasonal":Catalog.seasonal(event,now),
+		"seasonal":Catalog.seasonal(event,store,now),
+		"seasonal-winter":Catalog.seasonal(winter,store,int(Time.get_unix_time_from_datetime_string("2026-12-25T12:00:00"))),
+		"shop":Catalog.shop({"coins":120,"store":store,"event":event,"ad_ready":true,"ad_coins":25,"frozen_now":now}),
+		"shop-owned":Catalog.shop({"coins":120,"store":store,"owned":["starter"],"ad_ready":false,"ad_coins":25,"frozen_now":now}),
+		"received":Catalog.received(store.product("coins_2600").contents,2720),
 	}
 	var layer := CanvasLayer.new()
 	layer.layer = 10

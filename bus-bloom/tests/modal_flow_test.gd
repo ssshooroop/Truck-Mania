@@ -104,11 +104,37 @@ func run() -> void:
 	await create_timer(0.3).timeout
 	check(g.overlay=="" and g.modal==null and g.economy.state.intro_seen,"Tutorial finishes into play and is remembered")
 
+	# Store unavailable: nothing is charged or granted.
+	g.coins = 10
+	g._open_shop(["road_menu"])
+	g.overlay = "road_menu"
+	await frames()
+	check(modal_id(g)=="shop" and g.modal.tap("buy:coins_500") and g.coins==10,"No store, no coins")
+	# Simulated store: pack arrives after confirmation, then the receipt shows.
+	g.store.simulate = true
+	g.modal.tap("buy:coins_1200")
+	check(g.modal.busy.has("buy:coins_1200"),"Purchase shows a loading state")
+	await create_timer(1.3).timeout
+	check(g.coins==1210 and modal_id(g)=="received","Pack granted once confirmed")
+	g._open_shop(["road_menu"])
+	await frames()
+	g.modal.tap("buy:starter")
+	await create_timer(1.3).timeout
+	check(g.coins==1810 and int(g.economy.state.inventory.get("extra_slot",0))==3 and "starter" in g.economy.state.purchases,"Starter bundle grants items and is remembered")
+	g._open_shop(["road_menu"])
+	await frames()
+	var ids: Array = []
+	for b in g.modal.spec.blocks: if b.type=="deal": ids.append(b.id)
+	check("buy:starter" not in ids,"One-time bundle leaves the shop")
+	check(g.store.bonus("coins_2600")=="+30%" and g.store.pack_for(110)=="coins_500" and g.store.pack_for(99999)=="coins_12000","Pack bonus and best fit")
+	g.store.simulate = false
+	g._close_modal(true)
+
 	# Seasonal schedule.
 	var events: Array = Catalog.load_events()
 	var oct := int(Time.get_unix_time_from_datetime_string("2026-10-21T12:00:00"))
 	var nov := int(Time.get_unix_time_from_datetime_string("2026-11-20T12:00:00"))
-	check(Catalog.active_event(events,oct).get("id","")=="autumn_2026","Autumn promo active in October")
+	check(Catalog.active_event(events,oct).get("id","")=="halloween_2026","Halloween promo active in October")
 	check(Catalog.active_event(events,nov).is_empty(),"No promo between seasons")
 	check(Catalog.coin_word(1)=="монета" and Catalog.coin_word(3)=="монеты" and Catalog.coin_word(11)=="монет","Russian plurals")
 
