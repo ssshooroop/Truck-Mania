@@ -1,0 +1,5 @@
+{
+  "_comment": "Support contact used by the menu's «Поддержка» window. Empty email shows a notice instead of opening mail.",
+  "email": "",
+  "subject": "Грузовой двор: вопрос"
+}

@@ -70,7 +70,7 @@ func _leaving_id() -> int:
 
 func _restart_from_settings() -> void:
 	game._open_settings()
-	game._overlay_input(Vector2(270,620))
+	game._on_menu_action("restart")
 
 func _run() -> void:
 	root.size = Vector2i(540,1171)
@@ -211,9 +211,8 @@ func _run() -> void:
 	game._notification(Node.NOTIFICATION_WM_GO_BACK_REQUEST)
 	check(game.overlay == "", "Android Back resumes paused play")
 	check(not quit_on_go_back, "Android Back automatic quit is disabled")
-	game._open_settings()
-	game._overlay_input(Vector2(270,689))
-	check(game.overlay == "road_menu" and game.road_menu.visible, "The settings level button opens the road menu")
+	game._show_road_menu(true)
+	check(game.overlay == "road_menu" and game.road_menu.visible, "The level exit button opens the road menu")
 	game._notification(Node.NOTIFICATION_WM_GO_BACK_REQUEST)
 	check(game.overlay == "", "Android Back returns from the road menu to paused play")
 
