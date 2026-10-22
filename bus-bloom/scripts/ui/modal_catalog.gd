@@ -165,6 +165,15 @@ static func ad_reward(state:String,amount:int,coins:int) -> Dictionary:
 
 ## ctx: reward, before (balance before the reward), coins, last (bool),
 ## can_double (bool), details (runtime_economy completion() result).
+static func crane_intro(coins:int) -> Dictionary:
+	return {"id":"crane_intro","title":"Закончились ходы?","balance":coins,"back":"menu","blocks":[
+		{"type":"art","texture":preload("res://assets/artwork/menu/Cheerful Crane-Suspended Construction Worker.png"),"height":300,"fit":"contain"},
+		{"type":"text","text":"Вызовите кран!","size":30},
+		{"type":"button","id":"crane","kind":"primary","label":"Вызвать бесплатно","pulse":true},
+		{"type":"text","text":"В первый раз бесплатно, потом — 150 монет.","size":20},
+		{"type":"link","id":"undo","label":"Отмена хода"},
+		{"type":"link","id":"retry","label":"Попробовать заново"}]}
+
 static func win(ctx:Dictionary) -> Dictionary:
 	var reward := int(ctx.get("reward",0))
 	var blocks: Array = [{"type":"art","texture":WIN_ART,"height":360,"fit":"contain"}]

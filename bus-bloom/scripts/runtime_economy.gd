@@ -51,5 +51,6 @@ func daily_reward(day:int) -> int:
 	return amount
 
 func restore(saved:Dictionary) -> void:
+	state.crane_intro_used = bool(saved.get("crane_intro_used",false))
 	for key in state:
 		if saved.has(key) and typeof(saved[key])==typeof(state[key]): state[key] = saved[key]

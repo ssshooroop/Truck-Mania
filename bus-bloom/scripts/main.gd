@@ -5,6 +5,9 @@ const Contact = preload("res://scripts/collision_feedback.gd")
 var daily_screen
 var daily_rewards=preload("res://scripts/daily_rewards.gd").new()
 var crane_preview
+const CraneAnimation = preload("res://scripts/crane_animation.gd")
+var crane_state:Dictionary = {}
+var crane_truck := -1
 const SlotOffer = preload("res://scripts/slot_offer.gd")
 const AD_ICON = preload("res://assets/artwork/menu/ad-player.png")
 const EdgeRoute = preload("res://scripts/edge_route.gd")
@@ -313,6 +316,8 @@ func _back() -> void:
 	elif overlay == "": _open_settings()
 
 func _cancel_animation() -> void:
+	crane_state.clear()
+	crane_truck = -1
 	_reset_truck_idle()
 	intro_delays.clear()
 	_reset_worker_idle()
@@ -430,6 +435,7 @@ func _duration(seconds:float) -> float:
 	return seconds*(0.38 if reduced_motion else 1.0)*speed_factor
 
 func _dispatch(id:int) -> void:
+	if crane_truck>=0: return
 	_reset_truck_idle()
 	# Input can interrupt the presentation without delaying a player's move.
 	intro_delays.clear()
@@ -1105,6 +1111,7 @@ func _open_rescue_menu() -> void:
 	overlay = "rescue_menu"
 
 func _rescue_price(tool:String) -> int:
+	if tool=="crane" and not economy.state.get("crane_intro_used",false): return 0
 	if int(economy.state.inventory.get(tool,0))>0: return 0
 	return int(economy.config.rescue.get(tool+"_cost",0))
 
@@ -1121,7 +1128,7 @@ func _can_rescue(tool:String) -> bool:
 	if tool=="shuffle": return not Boosters.docked_trucks(model).is_empty() and model.queue.size()>1
 	if not bool(economy.config.rescue.get(tool+"_enabled",false)): return false
 	if _rescue_target()<0: return false
-	if tool=="crane": return model.open_bay_count<Model.BAY_COUNT
+	if tool=="crane": return model.level_index+1>=15 and (model.free_bay()>=0 or model.open_bay_count<Model.BAY_COUNT)
 	return model.bays.count(-1)<Model.BAY_COUNT
 
 func _purchase_rescue(tool:String) -> void:
@@ -1137,9 +1144,12 @@ func _purchase_rescue(tool:String) -> void:
 			if id>=0 and (returning<0 or model.buses[id].load<model.buses[returning].load): returning = id
 		if returning<0: return
 		bay = model.buses[returning].bay
-	elif tool=="crane": bay = model.open_bay_count
+	elif tool=="crane":
+		bay = model.free_bay()
+		if bay<0: bay = model.open_bay_count
 	coins -= price
-	if price==0: economy.state.inventory[tool] = maxi(0,int(economy.state.inventory.get(tool,0))-1)
+	if tool=="crane" and not economy.state.get("crane_intro_used",false): economy.state.crane_intro_used = true
+	elif price==0: economy.state.inventory[tool] = maxi(0,int(economy.state.inventory.get(tool,0))-1)
 	rescue_count += 1
 	attempt_rescued = true
 	history.clear() # Paid tools are not refundable or repeatable through Undo.
@@ -1153,7 +1163,7 @@ func _purchase_rescue(tool:String) -> void:
 		rng.randomize()
 		model.queue = Boosters.smart_shuffle(model.queue,rng,0,Boosters.docked_trucks(model),int(economy.config.rescue.shuffle_strength))
 	else:
-		if tool=="crane": model.unlock_next_bay()
+		if tool=="crane" and bay>=model.open_bay_count: model.unlock_next_bay()
 		if returning>=0:
 			var old: Dictionary = model.buses[returning]
 			for unit in int(old.load): model.queue.append(old.color)
@@ -1167,12 +1177,42 @@ func _purchase_rescue(tool:String) -> void:
 		model.bays[bay] = target
 		bus.bay = bay
 		bus.status = "arriving"
-		await _airlift(target,_bay_position(bay,bus.kind),BAY_ANGLE)
+		if tool=="crane": await _crane_airlift(target,_bay_position(bay,bus.kind),BAY_ANGLE)
+		else: await _airlift(target,_bay_position(bay,bus.kind),BAY_ANGLE)
 		if ticket!=generation: return
 		model.arrive(target)
 	road_busy = false
 	await _settle(ticket)
 	if ticket==generation: _refresh_busy()
+
+func _crane_airlift(id:int,end:Vector2,angle:float) -> void:
+	var ticket:int = generation
+	var start:Vector2 = bus_visuals[id].position
+	var initial:float = bus_visuals[id].angle
+	var contacted := [false]
+	crane_truck = id
+	bus_visuals[id].route = true
+	motion_tween = create_tween()
+	motion_tween.tween_method(func(t:float):
+		if generation!=ticket: return
+		crane_state = CraneAnimation.pose(t,start,end)
+		bus_visuals[id].position = crane_state.truck
+		bus_visuals[id].angle = lerp_angle(initial,angle,crane_state.turn)
+		bus_visuals[id].lift = 0.0
+		bus_visuals[id].crane_scale = 1.0+0.12*crane_state.lift
+		if t>=CraneAnimation.CONTACT and not contacted[0]:
+			contacted[0] = true
+			_sound_effect("bump")
+		queue_redraw(),0.0,CraneAnimation.DURATION,_duration(CraneAnimation.DURATION))
+	await motion_tween.finished
+	if generation!=ticket: return
+	bus_visuals[id].position = end
+	bus_visuals[id].angle = angle
+	bus_visuals[id].crane_scale = 1.0
+	bus_visuals[id].route = false
+	crane_state.clear()
+	crane_truck = -1
+	motion_tween = null
 
 func _airlift(id:int,end:Vector2,angle:float) -> void:
 	var start: Vector2 = bus_visuals[id].position
@@ -1277,9 +1317,9 @@ func _draw() -> void:
 	_draw_loading()
 	_draw_yard()
 	for bus in model.buses:
-		if bus.status in ["yard","docked"]: _draw_truck(bus)
+		if bus.id!=crane_truck and bus.status in ["yard","docked"]: _draw_truck(bus)
 	for bus in model.buses:
-		if bus.status in ["arriving","leaving"]: _draw_truck(bus)
+		if bus.id!=crane_truck and bus.status in ["arriving","leaving"]: _draw_truck(bus)
 	_draw_impact()
 	var world:Transform2D = _world_transform()
 	var blend:float = smoothstep(Layout.SPLIT,Layout.SPLIT+65.0,worker_position.y)
@@ -1298,6 +1338,15 @@ func _draw() -> void:
 		_text("+%d" % feedback.count,pos+Vector2(0,5),15,Color.WHITE,true)
 	for pop in slot_pops:
 		SlotOffer.draw_pop(self,pop.position,pop.age,reduced_motion)
+	if not crane_state.is_empty():
+		var crane_screen:Dictionary = crane_state.duplicate()
+		crane_screen.tip = world*Vector2(crane_state.tip)
+		_draw_space(Transform2D.IDENTITY)
+		CraneAnimation.draw_arm(self,crane_screen)
+		_draw_space(world)
+		if crane_truck>=0: _draw_truck(model.buses[crane_truck])
+		_draw_space(Transform2D.IDENTITY)
+		CraneAnimation.draw_magnet(self,crane_screen)
 	_draw_space(Transform2D.IDENTITY)
 	_draw_header()
 	_draw_footer()
@@ -1383,7 +1432,7 @@ func _draw_truck(bus:Dictionary) -> void:
 	if bus.id == horn_bus and bus.status == "yard" and horn_age < 0.85 and not reduced_motion:
 		var p:float = horn_age/0.85
 		sway = sin(p*TAU*2.0)*deg_to_rad(2.0)*sin(p*PI)
-	art.vehicle(bus,visible_position-Vector2(0,lift*30+intro_height),visual.angle+sway,(1.0+lift*0.12)*intro_scale*model.layout_scale,selected,rejected)
+	art.vehicle(bus,visible_position-Vector2(0,lift*30+intro_height),visual.angle+sway,(1.0+lift*0.12)*intro_scale*model.layout_scale*float(visual.get("crane_scale",1.0)),selected,rejected)
 
 func _draw_footer() -> void:
 	# Leave the lower service lane visible behind the three controls.
@@ -1694,7 +1743,10 @@ func _sync_modals() -> void:
 	if modal_layer==null: return
 	if modal!=null and not modal.is_closing() and overlay not in modal_scope: modal.close()
 	if modal!=null or daily_screen!=null: return
-	if overlay=="stuck": _open_modal(Modals.stuck(_stuck_context()),_on_stuck_action,["stuck"])
+	if overlay=="stuck":
+		if _can_rescue("crane") and not economy.state.get("crane_intro_used",false):
+			_open_modal(Modals.crane_intro(coins),_on_stuck_action,["stuck"])
+		else: _open_modal(Modals.stuck(_stuck_context()),_on_stuck_action,["stuck"])
 	elif overlay=="win": _open_modal(_win_spec(),_on_win_action,["win"])
 
 func _modal_is(id:String) -> bool:
