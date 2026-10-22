@@ -145,7 +145,7 @@ func _run() -> void:
 		check(game.worker_position == pickup_position and game.batch_pickup == pickup_progress and game.elapsed == pickup_elapsed and
 			game.collecting and not game.worker_walking and game.worker_batch_count == 1 and game.model.queue == [1, 1, 1, 5, 5],
 			"Pause freezes a single-item pickup while preserving the previously collected brick")
-		game._overlay_input(Vector2(270, 620))
+		game._on_menu_action("restart")
 		var restarted: Dictionary = game.model.snapshot()
 		await create_timer(0.75).timeout
 		check(game.model.snapshot() == restarted and game.worker_batch_count == 0 and game.batch_pickup == 0.0 and

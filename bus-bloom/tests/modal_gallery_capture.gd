@@ -41,6 +41,10 @@ func run():
 		"seasonal-winter":Catalog.seasonal(winter,store,int(Time.get_unix_time_from_datetime_string("2026-12-25T12:00:00"))),
 		"shop":Catalog.shop({"coins":120,"store":store,"event":event,"ad_ready":true,"ad_coins":25,"frozen_now":now}),
 		"shop-owned":Catalog.shop({"coins":120,"store":store,"owned":["starter"],"ad_ready":false,"ad_coins":25,"frozen_now":now}),
+		"menu-map":Catalog.menu({"reduced_motion":false}),
+		"menu-game":Catalog.menu({"in_game":true,"reduced_motion":true}),
+		"languages":Catalog.languages([{"code":"ru","name":"Русский","ready":true},{"code":"en","name":"English","ready":false}],"ru"),
+		"support":Catalog.support({"version":"0.9","player_id":"4F2A-91C3"}),
 		"received":Catalog.received(store.product("coins_2600").contents,2720),
 	}
 	var layer := CanvasLayer.new()

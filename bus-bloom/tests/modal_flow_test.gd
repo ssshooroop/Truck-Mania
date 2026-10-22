@@ -130,6 +130,41 @@ func run() -> void:
 	g.store.simulate = false
 	g._close_modal(true)
 
+	# Menu during a level: pause with Continue / Restart, switch, sub-windows.
+	g._load_level(3)
+	g.intro_delays.clear()
+	g.reduced_motion = false
+	g._open_settings()
+	await frames()
+	check(modal_id(g)=="menu" and g.modal.hits.has("resume") and g.modal.hits.has("restart"),"In-level menu offers Continue and Restart")
+	g.modal.tap("motion")
+	check(g.reduced_motion and g.modal.spec.blocks[1].on,"Switch reduces motion at once")
+	g.modal.tap("motion")
+	g.modal.tap("language")
+	await frames()
+	check(modal_id(g)=="languages" and not g.modal.hits.has("lang:en") and not g.modal.hits.has("lang:ru"),"Only ready, non-current languages are selectable")
+	g.modal.tap("close")
+	await create_timer(0.3).timeout
+	check(modal_id(g)=="menu","Closing a sub-window returns to the menu")
+	g.modal.tap("support")
+	await frames()
+	g.modal.tap("write")
+	check(modal_id(g)=="support" and g.modal.flash_time>0.0,"Support without an address explains instead of failing")
+	check(String(g.economy.state.player_id).length()==9 or String(g.economy.state.player_id)=="","Player id has the XXXX-XXXX shape")
+	g.modal.tap("close")
+	await create_timer(0.3).timeout
+	g.modal.tap("resume")
+	check(g.overlay=="","Continue resumes the level")
+	await create_timer(0.3).timeout
+	# Menu from the map floats over it and closes back to it.
+	g._show_road_menu(false)
+	g._open_settings()
+	await frames()
+	check(modal_id(g)=="menu" and not g.modal.hits.has("resume") and g.road_menu.visible,"Map menu keeps the map and has no Continue")
+	g.modal.tap("close")
+	check(g.overlay=="road_menu","Closing returns to the map")
+	await create_timer(0.3).timeout
+
 	# Seasonal schedule.
 	var events: Array = Catalog.load_events()
 	var oct := int(Time.get_unix_time_from_datetime_string("2026-10-21T12:00:00"))

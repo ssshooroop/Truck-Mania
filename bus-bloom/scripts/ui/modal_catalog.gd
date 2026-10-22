@@ -17,6 +17,8 @@ const CONE := preload("res://assets/artwork/cargo/traffic-cone.png")
 const UNDO := preload("res://assets/artwork/menu/undo.png")
 const GIFT := preload("res://assets/artwork/menu/gift.png")
 const SHUFFLE := preload("res://assets/artwork/menu/shuffle.png")
+const LANGUAGE := preload("res://assets/artwork/menu/language.png")
+const SUPPORT := preload("res://assets/artwork/menu/support.png")
 const COINS_SMALL := preload("res://assets/artwork/menu/coins-stack-small.png")
 const COINS_MEDIUM := preload("res://assets/artwork/menu/coins-stack-medium.png")
 const COINS_BIG := preload("res://assets/artwork/menu/coins-stack-big.png")
@@ -307,6 +309,43 @@ static func _days(seconds:int) -> String:
 	seconds = maxi(0,seconds)
 	if seconds>=86400: return "%d д" % (seconds/86400)
 	return "%d ч" % maxi(1,seconds/3600)
+
+# ------------------------------------------------------------- menu
+
+## ctx: in_game (opened from a level: adds Continue / Restart), reduced_motion,
+## language (display name of the current language).
+static func menu(ctx:Dictionary) -> Dictionary:
+	var blocks: Array = [
+		{"type":"nav","id":"language","icon":LANGUAGE,"title":"Язык","value":ctx.get("language","Русский")},
+		{"type":"toggle","id":"motion","glyph":"motion","title":"Уменьшить анимацию","subtitle":"Меньше движения на экране","on":ctx.get("reduced_motion",false)},
+		{"type":"nav","id":"support","icon":SUPPORT,"title":"Поддержка"},
+	]
+	if ctx.get("in_game",false):
+		blocks.append({"type":"gap","height":4})
+		blocks.append({"type":"button","id":"resume","kind":"primary","label":"Продолжить"})
+		blocks.append({"type":"link","id":"restart","label":"Начать уровень заново"})
+	return {"id":"menu","title":"Меню","close":true,"back":"close","blocks":blocks}
+
+## languages: entries of config/languages.json; current: active code.
+static func languages(list:Array,current:String) -> Dictionary:
+	var blocks: Array = []
+	for l: Dictionary in list:
+		var ready: bool = l.get("ready",false)
+		var row := {"type":"nav","id":"lang:"+str(l.code),"glyph":"check","checked":l.code==current,"title":l.name,"chevron":false,"enabled":ready and l.code!=current}
+		if not ready: row.subtitle = "Скоро"
+		blocks.append(row)
+	blocks.append({"type":"link","id":"close","label":"Назад"})
+	return {"id":"languages","title":"Язык","close":true,"back":"close","blocks":blocks}
+
+## ctx: email (may be empty), version, player_id.
+static func support(ctx:Dictionary) -> Dictionary:
+	return {"id":"support","title":"Поддержка","close":true,"back":"close","blocks":[
+		{"type":"hero","texture":BILLY_THINKING,"size":140,"rays":false},
+		{"type":"text","text":"Нашёл ошибку или есть идея?\nНапиши — читаем каждое письмо.","size":21},
+		{"type":"button","id":"write","kind":"primary","label":"Написать нам","pulse":false},
+		{"type":"text","text":"Версия %s · ID игрока %s" % [ctx.get("version","dev"),ctx.get("player_id","—")],"size":16,"color":Style.MUTED},
+		{"type":"link","id":"close","label":"Назад"},
+	]}
 
 static func coin_word(n:int) -> String:
 	var m10 := n%10

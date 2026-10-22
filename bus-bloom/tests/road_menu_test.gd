@@ -107,7 +107,7 @@ func _run() -> void:
 	game._show_road_menu(false)
 	check(menu.markers.size()==game.model.level_count(),"Uses actual level count")
 	game._open_settings()
-	check(game.overlay=="settings" and not menu.visible,"Settings open")
+	check(game.overlay=="settings" and menu.visible,"Settings open over the map")
 	game._resume()
 	check(game.overlay=="road_menu" and menu.visible,"Settings return to menu")
 	menu.level_selected.emit(0)

@@ -33,6 +33,7 @@ var base := Transform2D.IDENTITY
 var _laid_out_for := Vector2.ZERO
 var flight_start := 0.0
 var reward_coin := Vector2.ZERO
+var switches: Dictionary = {}
 
 func _init(value:Dictionary={}) -> void:
 	spec = value
@@ -103,6 +104,7 @@ func _block_height(b:Dictionary) -> float:
 		"status": return 64.0
 		"gap": return float(b.get("height",8))
 		"label": return 26.0
+		"nav","toggle": return 80.0
 		"deal": return 158.0
 		"packs":
 			var rows := ceili(float(b.tiles.size())/float(b.get("columns",3)))
@@ -169,7 +171,7 @@ func _layout() -> void:
 				"button": hits[id] = Rect2(rect.position,Vector2(rect.size.x,91))
 				"row": hits[id] = _row_button(rect)
 				"link": hits[id] = rect.grow_individual(-90,6,-90,6)
-				"deal": hits[id] = rect
+				"deal","nav","toggle": hits[id] = rect
 		y += heights[i]+BLOCK_GAP
 	if spec.get("close",false): hits["close"] = Rect2(_close_center()-Vector2(32,32),Vector2(64,64))
 
@@ -287,6 +289,7 @@ func _draw_block(b:Dictionary,rect:Rect2) -> void:
 		"timer": _draw_timer(b,rect)
 		"bundle": _draw_bundle(b,rect)
 		"label": Style.text_left(self,b.text,rect.position+Vector2(4,21),22,Style.TEXT,Style.HEAVY)
+		"nav","toggle": _draw_setting(b,rect)
 		"deal": _draw_deal(b,rect)
 		"packs":
 			for t in b.tiles.size(): _draw_pack(b.tiles[t],_pack_rect(b,rect,t))
@@ -509,6 +512,52 @@ static func displayed_balance(before:int,after:int,t:float,reduced:bool) -> int:
 	var first := 0.5+0.68
 	var last := 0.5+(FLIGHT_COINS-1)*(0.065+0.018)+0.68
 	return roundi(lerpf(before,after,clampf((t-first)/(last-first),0.0,1.0)))
+
+## Settings row: icon, title, optional subtitle; right side is either a value
+## with a chevron (nav) or a switch (toggle). The whole row is the target.
+func _draw_setting(b:Dictionary,rect:Rect2) -> void:
+	var id: String = b.get("id","")
+	var enabled: bool = b.get("enabled",true)
+	var p: float = press.get(id,0.0)
+	Style.round_rect(self,rect,Style.TILE.darkened(0.04*p),Style.R_TILE,Style.TILE_EDGE,3)
+	var icon_c := Vector2(rect.position.x+42,rect.get_center().y)
+	if b.has("icon"): Style.icon(self,b.icon,icon_c,52,1.0 if enabled else 0.5)
+	elif b.get("glyph","")=="motion": _motion_glyph(icon_c)
+	elif b.get("glyph","")=="check" and b.get("checked",false):
+		draw_circle(icon_c,18,Color("4ccb5e"))
+		draw_polyline(PackedVector2Array([icon_c+Vector2(-8,0),icon_c+Vector2(-2,6),icon_c+Vector2(9,-6)]),Color.WHITE,4,true)
+	var x := rect.position.x+(80 if b.has("icon") or b.has("glyph") else 20)
+	var right := rect.end.x-16
+	var tint := Style.TEXT if enabled else Style.MUTED
+	if b.has("subtitle"):
+		Style.text_left(self,b.title,Vector2(x,rect.position.y+36),22,tint,Style.HEAVY,right-x-90)
+		Style.text_left(self,b.subtitle,Vector2(x,rect.position.y+60),15,Style.MUTED,Style.BOLD,right-x-90)
+	else: Style.text_left(self,b.title,Vector2(x,rect.get_center().y+8),22,tint,Style.HEAVY,right-x-90)
+	if b.type=="toggle":
+		var on: bool = b.get("on",false)
+		var k: float = switches.get(id,1.0 if on else 0.0)
+		var target := 1.0 if on else 0.0
+		k = target if reduced_motion else move_toward(k,target,get_process_delta_time()/0.15)
+		switches[id] = k
+		var track := Rect2(right-64,rect.get_center().y-18,64,36)
+		Style.round_rect(self,track,Style.TILE_EDGE.lerp(Color("4ccb5e"),k),18)
+		var knob := Vector2(lerpf(track.position.x+18,track.end.x-18,Style.ease_out(k)),track.get_center().y)
+		draw_circle(knob+Vector2(0,2),14,Color(0,0,0,0.18))
+		draw_circle(knob,14,Color.WHITE)
+	elif b.get("chevron",true):
+		var chevron := Vector2(right-6,rect.get_center().y)
+		draw_polyline(PackedVector2Array([chevron+Vector2(-7,-9),chevron,chevron+Vector2(-7,9)]),Style.MUTED,3.5,true)
+		if b.has("value"):
+			var w := Style.BOLD.get_string_size(b.value,HORIZONTAL_ALIGNMENT_LEFT,-1,18).x
+			Style.text_left(self,b.value,Vector2(right-22-w,rect.get_center().y+7),18,Style.MUTED,Style.BOLD)
+
+## Drawn stand-in for a "less motion" icon until artwork exists.
+func _motion_glyph(c:Vector2) -> void:
+	draw_circle(c,24,Color("3d8ef0"))
+	draw_circle(c+Vector2(7,0),9,Color.WHITE)
+	for i in 3:
+		var y := c.y-8+i*8
+		draw_line(Vector2(c.x-15,y),Vector2(c.x-4-(i%2)*3,y),Color.WHITE,3,true)
 
 func _draw_bundle(b:Dictionary,rect:Rect2) -> void:
 	var items: Array = b.items
