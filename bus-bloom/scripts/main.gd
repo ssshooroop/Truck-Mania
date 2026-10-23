@@ -2,7 +2,6 @@ extends Node2D
 
 const Model = preload("res://scripts/game_model.gd")
 const Contact = preload("res://scripts/collision_feedback.gd")
-var daily_screen
 var daily_rewards=preload("res://scripts/daily_rewards.gd").new()
 var crane_preview
 const CraneAnimation = preload("res://scripts/crane_animation.gd")
@@ -1020,9 +1019,6 @@ func _message(value:String) -> void:
 	toast_time = 3.0
 
 func _input(event:InputEvent) -> void:
-	if daily_screen!=null:
-		if event is InputEventKey and event.pressed and event.keycode==KEY_ESCAPE: daily_screen.closed.emit()
-		return
 	if modal!=null:
 		if event is InputEventKey and event.pressed and event.keycode==KEY_ESCAPE: modal.back()
 		return
@@ -1653,40 +1649,41 @@ func _demo() -> void:
 	get_tree().quit()
 
 
+## Shows the calendar when today's reward is waiting; it is granted on
+## «Забрать», so closing the window keeps it for the next launch.
 func _open_daily_bonus() -> void:
-	if not save_enabled or daily_screen!=null:return
-	var date=Time.get_date_dict_from_system()
-	var day:int=int(Time.get_unix_time_from_datetime_dict(date)/86400)
-	var info:Dictionary=daily_rewards.calendar.visit(day)
-	economy.state.daily_calendar=daily_rewards.calendar.state.duplicate(true)
+	if not save_enabled or modal!=null: return
+	var info:Dictionary = daily_rewards.calendar.visit(_today())
+	economy.state.daily_calendar = daily_rewards.calendar.state.duplicate(true)
 	_save()
 	if not info.can_claim:
 		_maybe_show_season()
 		return
-	road_menu.hide()
-	daily_screen=preload("res://scripts/daily_bonus.gd").new()
-	daily_screen.sound_enabled=sound_enabled
-	add_child(daily_screen)
-	daily_screen.z_index=100
-	daily_screen.size=get_viewport_rect().size
-	get_viewport().size_changed.connect(_resize_daily_bonus)
-	daily_screen.configure(daily_rewards.definitions(),info.cards)
-	daily_screen.closed.connect(func():
-		get_viewport().size_changed.disconnect(_resize_daily_bonus)
-		daily_screen.queue_free()
-		daily_screen=null
-		road_menu.show()
-		_maybe_show_season())
-	var result:Dictionary=daily_rewards.claim(day,economy.state.inventory)
-	if result.index>=0:
-		coins+=int(result.coins)
-		economy.state.daily_calendar=daily_rewards.calendar.state.duplicate(true)
-		_save()
-		_sync_coins()
-		daily_screen.reveal(result.index)
+	_open_modal(_daily_spec(info,false,coins),_on_daily_action,["road_menu"])
 
-func _resize_daily_bonus():
-	if daily_screen!=null:daily_screen.size=get_viewport_rect().size
+func _today() -> int:
+	return int(Time.get_unix_time_from_datetime_dict(Time.get_date_dict_from_system())/86400)
+
+func _daily_spec(info:Dictionary,claimed:bool,before:int) -> Dictionary:
+	return Modals.daily({"definitions":daily_rewards.definitions(),"cards":info.cards,"today":info.index,
+		"claimed":claimed,"coins":coins,"before":before})
+
+func _on_daily_action(id:String) -> void:
+	match id:
+		"claim":
+			var before: int = coins
+			var result: Dictionary = daily_rewards.claim(_today(),economy.state.inventory)
+			if result.index<0: return
+			coins += int(result.coins)
+			economy.state.daily_calendar = daily_rewards.calendar.state.duplicate(true)
+			_save()
+			_sync_coins()
+			if sound_enabled and audio: audio.play_stream(PRIZE,1,-6.0)
+			_vibrate(30)
+			modal.update_spec(_daily_spec(daily_rewards.calendar.view(_today()),true,before))
+		"close":
+			_close_modal()
+			get_tree().create_timer(0.25).timeout.connect(_maybe_show_season)
 
 # ------------------------------------------------------------------ modal windows
 # Specs come from scripts/ui/modal_catalog.gd; this section only routes actions.
@@ -1721,7 +1718,7 @@ func _close_modal(instant:bool=false) -> void:
 func _sync_modals() -> void:
 	if modal_layer==null: return
 	if modal!=null and not modal.is_closing() and overlay not in modal_scope: modal.close()
-	if modal!=null or daily_screen!=null: return
+	if modal!=null: return
 	if overlay=="stuck":
 		if _can_rescue("crane") and not economy.state.get("crane_intro_used",false):
 			_open_modal(Modals.crane_intro(coins),_on_stuck_action,["stuck"])
@@ -1901,7 +1898,7 @@ func _on_tutorial_action(id:String) -> void:
 	overlay = ""
 
 func _maybe_show_season() -> void:
-	if automation or modal!=null or daily_screen!=null: return
+	if automation or modal!=null: return
 	var now := int(Time.get_unix_time_from_system())
 	var event := Modals.active_event(Modals.load_events(),now)
 	if event.is_empty() or event.get("product","") in economy.state.purchases: return

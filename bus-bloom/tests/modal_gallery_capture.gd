@@ -20,6 +20,7 @@ func run():
 	var event: Dictionary = Catalog.active_event(Catalog.load_events(),now)
 	var winter: Dictionary = Catalog.active_event(Catalog.load_events(),int(Time.get_unix_time_from_datetime_string("2026-12-25T12:00:00")))
 	var store = preload("res://scripts/ui/store_service.gd").new()
+	var daily_defs: Array = preload("res://scripts/daily_rewards.gd").new().definitions()
 	var truck: Vector2 = game._world_transform()*game.model.buses[game.model.find_hint()].position
 	game.coin_badge.visible=false
 	var specs := {
@@ -45,6 +46,9 @@ func run():
 		"menu-game":Catalog.menu({"in_game":true,"reduced_motion":true}),
 		"languages":Catalog.languages([{"code":"ru","name":"Русский","ready":true},{"code":"en","name":"English","ready":false}],"ru"),
 		"support":Catalog.support({"version":"0.9","player_id":"4F2A-91C3"}),
+		"daily":Catalog.daily({"definitions":daily_defs,"cards":["claimed","claimed","available","locked","locked","locked","locked"],"today":2,"coins":120}),
+		"daily-claimed":Catalog.daily({"definitions":daily_defs,"cards":["claimed","claimed","claimed","locked","locked","locked","locked"],"today":2,"claimed":true,"coins":120,"before":120}),
+		"daily-missed":Catalog.daily({"definitions":daily_defs,"cards":["claimed","missed","claimed","claimed","claimed","claimed","available"],"today":6,"coins":360}),
 		"received":Catalog.received(store.product("coins_2600").contents,2720),
 	}
 	var layer := CanvasLayer.new()

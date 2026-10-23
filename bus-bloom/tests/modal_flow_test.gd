@@ -3,6 +3,7 @@ extends SceneTree
 ## confirmation, rewarded video (simulated), tutorial and seasonal schedule.
 const Game = preload("res://scripts/main.gd")
 const Catalog = preload("res://scripts/ui/modal_catalog.gd")
+const Modal = preload("res://scripts/ui/game_modal.gd")
 var failures := 0
 var checks := 0
 func check(ok:bool,label:String) -> void:
@@ -164,6 +165,28 @@ func run() -> void:
 	g.modal.tap("close")
 	check(g.overlay=="road_menu","Closing returns to the map")
 	await create_timer(0.3).timeout
+
+	# Daily bonus: reward waits for «Забрать», then once per day.
+	g.save_path = "user://modal-flow-daily.cfg"
+	g.save_enabled = true
+	g.daily_rewards = preload("res://scripts/daily_rewards.gd").new()
+	g._show_road_menu(false)
+	g.coins = 100
+	g._open_daily_bonus()
+	await frames()
+	check(modal_id(g)=="daily" and g.coins==100,"Calendar opens with today's reward still waiting")
+	g.modal.tap("claim")
+	await frames()
+	check(g.coins==120 and g.modal.spec.has("balance_from") and g.modal.hits.has("close"),"Claim pays day 1 and shows the receipt state")
+	g.modal.tap("close")
+	await create_timer(0.4).timeout
+	g._open_daily_bonus()
+	await frames()
+	check(modal_id(g)!="daily" and g.coins==120,"Same day cannot open or pay twice")
+	g._close_modal(true)
+	g.save_enabled = false
+	DirAccess.remove_absolute(ProjectSettings.globalize_path("user://modal-flow-daily.cfg"))
+	check(Modal.coin_pile(20)[0].art==0 and Modal.coin_pile(150).size()==2,"Coin piles grow with the amount")
 
 	# Seasonal schedule.
 	var events: Array = Catalog.load_events()

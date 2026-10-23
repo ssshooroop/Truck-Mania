@@ -347,6 +347,52 @@ static func support(ctx:Dictionary) -> Dictionary:
 		{"type":"link","id":"close","label":"Назад"},
 	]}
 
+# ------------------------------------------------------------- daily bonus
+
+## ctx: definitions (daily_rewards.gd days), cards (calendar states), today
+## (index), claimed (bool: today's reward was just taken), coins, before.
+static func daily(ctx:Dictionary) -> Dictionary:
+	var days: Array = []
+	var cards: Array = ctx.cards
+	for i in cards.size():
+		var rewards: Array = []
+		for r: Dictionary in ctx.definitions[i].rewards:
+			rewards.append({"item":r.item,"quantity":int(r.quantity),"texture":ITEM_ICONS.get(r.item,GIFT)})
+		days.append({"state":cards[i],"rewards":rewards})
+	var claimed: bool = ctx.get("claimed",false)
+	var today := int(ctx.get("today",0))
+	var blocks: Array = [
+		{"type":"hero","texture":BILLY_HAPPY,"size":110,"rays":false},
+		{"type":"days","days":days,"pop":today if claimed else -1},
+	]
+	if claimed:
+		var next := "Новая неделя начнётся завтра!" if today>=cards.size()-1 else "Завтра: %s" % reward_text(ctx.definitions[today+1].rewards)
+		blocks.append({"type":"text","text":next,"size":21})
+		blocks.append({"type":"button","id":"close","kind":"primary","label":"Отлично!","pulse":true})
+	else:
+		blocks.append({"type":"text","text":"Заходи каждый день — награды растут!","size":21})
+		blocks.append({"type":"button","id":"claim","kind":"primary","label":"Забрать","pulse":true})
+	var spec := {"id":"daily","title":"Ежедневный бонус","balance":int(ctx.get("coins",0)),"back":"close","blocks":blocks}
+	if claimed:
+		spec.balance_from = int(ctx.get("before",ctx.get("coins",0)))
+		spec.fly = int(ctx.get("coins",0))>int(spec.balance_from)
+		spec.replay_flight = true
+	return spec
+
+## "50 монет и отмена хода ×1"
+static func reward_text(rewards:Array) -> String:
+	var parts: Array = []
+	for r: Dictionary in rewards:
+		var n := int(r.quantity)
+		match r.item:
+			"coins": parts.append("%d %s" % [n,coin_word(n)])
+			"undo": parts.append("отмена хода ×%d" % n)
+			"extra_slot": parts.append("место ×%d" % n)
+			"crane": parts.append("кран ×%d" % n)
+			"shuffle": parts.append("перемешивание ×%d" % n)
+			_: parts.append("подарок ×%d" % n)
+	return " и ".join(parts)
+
 static func coin_word(n:int) -> String:
 	var m10 := n%10
 	var m100 := n%100

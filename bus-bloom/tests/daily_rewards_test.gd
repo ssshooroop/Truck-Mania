@@ -21,7 +21,7 @@ func run():
 	game.save_enabled=false
 	root.add_child(game)
 	await process_frame
-	assert(game.daily_screen==null)
+	assert(game.modal==null)
 	game.queue_free()
 	await process_frame
 	print("Daily rewards: 400 coins, 3 undo, duplicate protection, week templates and game startup passed")
