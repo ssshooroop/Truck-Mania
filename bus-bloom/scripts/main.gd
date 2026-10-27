@@ -3,6 +3,7 @@ extends Node2D
 const Model = preload("res://scripts/game_model.gd")
 const Contact = preload("res://scripts/collision_feedback.gd")
 var daily_rewards=preload("res://scripts/daily_rewards.gd").new()
+var daily_bonus_day := -1
 var crane_preview
 const CraneAnimation = preload("res://scripts/crane_animation.gd")
 var crane_state:Dictionary = {}
@@ -1653,7 +1654,8 @@ func _demo() -> void:
 ## «Забрать», so closing the window keeps it for the next launch.
 func _open_daily_bonus() -> void:
 	if not save_enabled or modal!=null: return
-	var info:Dictionary = daily_rewards.calendar.visit(_today())
+	daily_bonus_day = _today()
+	var info:Dictionary = daily_rewards.calendar.visit(daily_bonus_day)
 	economy.state.daily_calendar = daily_rewards.calendar.state.duplicate(true)
 	_save()
 	if not info.can_claim:
@@ -1669,10 +1671,21 @@ func _daily_spec(info:Dictionary,claimed:bool,before:int) -> Dictionary:
 		"claimed":claimed,"coins":coins,"before":before})
 
 func _on_daily_action(id:String) -> void:
+	if not _modal_is("daily"): return
 	match id:
 		"claim":
+			var day: int = _today()
+			if day!=daily_bonus_day:
+				# A stale click only refreshes the offer; the player must claim
+				# again after seeing the new day's reward.
+				daily_bonus_day = day
+				var info: Dictionary = daily_rewards.calendar.visit(day)
+				economy.state.daily_calendar = daily_rewards.calendar.state.duplicate(true)
+				_save()
+				modal.update_spec(_daily_spec(info,not info.can_claim,coins))
+				return
 			var before: int = coins
-			var result: Dictionary = daily_rewards.claim(_today(),economy.state.inventory)
+			var result: Dictionary = daily_rewards.claim(day,economy.state.inventory)
 			if result.index<0: return
 			coins += int(result.coins)
 			economy.state.daily_calendar = daily_rewards.calendar.state.duplicate(true)
@@ -1680,7 +1693,7 @@ func _on_daily_action(id:String) -> void:
 			_sync_coins()
 			if sound_enabled and audio: audio.play_stream(PRIZE,1,-6.0)
 			_vibrate(30)
-			modal.update_spec(_daily_spec(daily_rewards.calendar.view(_today()),true,before))
+			modal.update_spec(_daily_spec(daily_rewards.calendar.view(day),true,before))
 		"close":
 			_close_modal()
 			get_tree().create_timer(0.25).timeout.connect(_maybe_show_season)
