@@ -15,6 +15,14 @@ const OPEN_TIME := 0.30
 const CLOSE_TIME := 0.16
 const PACK_H := 196.0
 const FLIGHT_COINS := 14
+const DAY_H := 140.0
+const CHECK := preload("res://assets/artwork/menu/green-checkmark.png")
+const COIN_PILES := [
+	preload("res://assets/artwork/menu/coin.png"),
+	preload("res://assets/artwork/menu/coins-stack-small.png"),
+	preload("res://assets/artwork/menu/coins-stack-medium.png"),
+	preload("res://assets/artwork/menu/coins-stack-big.png"),
+]
 
 var spec: Dictionary = {}
 var reduced_motion := false
@@ -33,6 +41,7 @@ var base := Transform2D.IDENTITY
 var _laid_out_for := Vector2.ZERO
 var flight_start := 0.0
 var reward_coin := Vector2.ZERO
+var switches: Dictionary = {}
 
 func _init(value:Dictionary={}) -> void:
 	spec = value
@@ -103,6 +112,8 @@ func _block_height(b:Dictionary) -> float:
 		"status": return 64.0
 		"gap": return float(b.get("height",8))
 		"label": return 26.0
+		"nav","toggle": return 80.0
+		"days": return DAY_H*2.0+130.0+20.0
 		"deal": return 158.0
 		"packs":
 			var rows := ceili(float(b.tiles.size())/float(b.get("columns",3)))
@@ -169,7 +180,7 @@ func _layout() -> void:
 				"button": hits[id] = Rect2(rect.position,Vector2(rect.size.x,91))
 				"row": hits[id] = _row_button(rect)
 				"link": hits[id] = rect.grow_individual(-90,6,-90,6)
-				"deal": hits[id] = rect
+				"deal","nav","toggle": hits[id] = rect
 		y += heights[i]+BLOCK_GAP
 	if spec.get("close",false): hits["close"] = Rect2(_close_center()-Vector2(32,32),Vector2(64,64))
 
@@ -287,6 +298,8 @@ func _draw_block(b:Dictionary,rect:Rect2) -> void:
 		"timer": _draw_timer(b,rect)
 		"bundle": _draw_bundle(b,rect)
 		"label": Style.text_left(self,b.text,rect.position+Vector2(4,21),22,Style.TEXT,Style.HEAVY)
+		"nav","toggle": _draw_setting(b,rect)
+		"days": _draw_days(b,rect)
 		"deal": _draw_deal(b,rect)
 		"packs":
 			for t in b.tiles.size(): _draw_pack(b.tiles[t],_pack_rect(b,rect,t))
@@ -509,6 +522,114 @@ static func displayed_balance(before:int,after:int,t:float,reduced:bool) -> int:
 	var first := 0.5+0.68
 	var last := 0.5+(FLIGHT_COINS-1)*(0.065+0.018)+0.68
 	return roundi(lerpf(before,after,clampf((t-first)/(last-first),0.0,1.0)))
+
+## Settings row: icon, title, optional subtitle; right side is either a value
+## with a chevron (nav) or a switch (toggle). The whole row is the target.
+func _draw_setting(b:Dictionary,rect:Rect2) -> void:
+	var id: String = b.get("id","")
+	var enabled: bool = b.get("enabled",true)
+	var p: float = press.get(id,0.0)
+	Style.round_rect(self,rect,Style.TILE.darkened(0.04*p),Style.R_TILE,Style.TILE_EDGE,3)
+	var icon_c := Vector2(rect.position.x+42,rect.get_center().y)
+	if b.has("icon"): Style.icon(self,b.icon,icon_c,52,1.0 if enabled else 0.5)
+	elif b.get("glyph","")=="motion": _motion_glyph(icon_c)
+	elif b.get("glyph","")=="check" and b.get("checked",false):
+		draw_circle(icon_c,18,Color("4ccb5e"))
+		draw_polyline(PackedVector2Array([icon_c+Vector2(-8,0),icon_c+Vector2(-2,6),icon_c+Vector2(9,-6)]),Color.WHITE,4,true)
+	var x := rect.position.x+(80 if b.has("icon") or b.has("glyph") else 20)
+	var right := rect.end.x-16
+	var tint := Style.TEXT if enabled else Style.MUTED
+	if b.has("subtitle"):
+		Style.text_left(self,b.title,Vector2(x,rect.position.y+36),22,tint,Style.HEAVY,right-x-90)
+		Style.text_left(self,b.subtitle,Vector2(x,rect.position.y+60),15,Style.MUTED,Style.BOLD,right-x-90)
+	else: Style.text_left(self,b.title,Vector2(x,rect.get_center().y+8),22,tint,Style.HEAVY,right-x-90)
+	if b.type=="toggle":
+		var on: bool = b.get("on",false)
+		var k: float = switches.get(id,1.0 if on else 0.0)
+		var target := 1.0 if on else 0.0
+		k = target if reduced_motion else move_toward(k,target,get_process_delta_time()/0.15)
+		switches[id] = k
+		var track := Rect2(right-64,rect.get_center().y-18,64,36)
+		Style.round_rect(self,track,Style.TILE_EDGE.lerp(Color("4ccb5e"),k),18)
+		var knob := Vector2(lerpf(track.position.x+18,track.end.x-18,Style.ease_out(k)),track.get_center().y)
+		draw_circle(knob+Vector2(0,2),14,Color(0,0,0,0.18))
+		draw_circle(knob,14,Color.WHITE)
+	elif b.get("chevron",true):
+		var chevron := Vector2(right-6,rect.get_center().y)
+		draw_polyline(PackedVector2Array([chevron+Vector2(-7,-9),chevron,chevron+Vector2(-7,9)]),Style.MUTED,3.5,true)
+		if b.has("value"):
+			var w := Style.BOLD.get_string_size(b.value,HORIZONTAL_ALIGNMENT_LEFT,-1,18).x
+			Style.text_left(self,b.value,Vector2(right-22-w,rect.get_center().y+7),18,Style.MUTED,Style.BOLD)
+
+## Drawn stand-in for a "less motion" icon until artwork exists.
+func _motion_glyph(c:Vector2) -> void:
+	draw_circle(c,24,Color("3d8ef0"))
+	draw_circle(c+Vector2(7,0),9,Color.WHITE)
+	for i in 3:
+		var y := c.y-8+i*8
+		draw_line(Vector2(c.x-15,y),Vector2(c.x-4-(i%2)*3,y),Color.WHITE,3,true)
+
+## Seven-day calendar: six tiles in two rows and a wide seventh day.
+## Day states come from daily_calendar.gd: claimed, available, locked, missed.
+func _draw_days(b:Dictionary,rect:Rect2) -> void:
+	var w := (rect.size.x-20.0)/3.0
+	for i in 7:
+		var r := Rect2(rect.position.x+(i%3)*(w+10.0),rect.position.y+(i/3)*(DAY_H+10.0),w,DAY_H)
+		if i==6: r = Rect2(rect.position.x,rect.position.y+2*(DAY_H+10.0),rect.size.x,130.0)
+		_draw_day(i,b.days[i],r,b.get("pop",-1)==i)
+
+func _draw_day(i:int,day:Dictionary,r:Rect2,pop:bool) -> void:
+	var state: String = day.state
+	var today: bool = state=="available"
+	Style.round_rect(self,r,Color("fff3c4") if today else Style.TILE,Style.R_TILE,Style.GOLD if today else Style.TILE_EDGE,4 if today else 3)
+	if not today: Style.text_left(self,"День %d" % (i+1),r.position+Vector2(12,24),15,Style.MUTED,Style.HEAVY)
+	var rewards: Array = day.rewards
+	var art_y := r.position.y+(64 if i<6 else 60)
+	for j in rewards.size():
+		var x := r.position.x+r.size.x*(j+1)/(rewards.size()+1)
+		var item: Dictionary = rewards[j]
+		var size := 96.0 if i==6 else (74.0 if rewards.size()==1 else 54.0)
+		var c := Vector2(x,art_y)
+		if today and j==0 and not reduced_motion: Style.rays(self,c,size*0.85,age*0.4,0.6)
+		if item.item=="coins":
+			_coin_pile(int(item.quantity),c,size)
+			if today or pop: reward_coin = c
+		else: Style.icon(self,item.texture,c,size*0.85)
+		var label := str(int(item.quantity)) if item.item=="coins" else "×%d" % int(item.quantity)
+		Style.juicy(self,label,Vector2(x,r.end.y-(18 if i<6 else 16)),24 if rewards.size()==1 else 20,Color.WHITE,r.size.x/rewards.size()-8)
+	if state in ["claimed","missed"]:
+		Style.round_rect(self,r,Color(1,1,1,0.5),Style.R_TILE)
+	if state=="claimed":
+		var k := 1.0
+		if pop and not reduced_motion:
+			var t := clampf((age-flight_start)/0.35,0.0,1.0)
+			k = Style.back_out(t)
+		if k>0.01: Style.icon(self,CHECK,Vector2(r.end.x-20,r.position.y+18),46*k)
+	elif state=="missed":
+		var pill := Rect2(Vector2(r.get_center().x-50,art_y-14),Vector2(100,28))
+		Style.round_rect(self,pill,Color("53617a"),Style.R_PILL)
+		Style.text(self,"Пропущен",pill.get_center()+Vector2(0,6),16,Color.WHITE,Style.HEAVY)
+	elif state=="locked":
+		var angle := -0.22 if i<6 else -0.08
+		var c := r.get_center()+Vector2(0,4)
+		draw_set_transform_matrix(base*_card_anim()*Transform2D(angle,c))
+		Style.tape(self,Rect2(-r.size.x*0.5+6,-9,r.size.x-12,18))
+		draw_set_transform_matrix(base*_card_anim())
+	if today: _tag("Сегодня",Vector2(r.position.x-6,r.position.y-12),-0.10)
+
+## Bigger amounts are shown as bigger piles, combining the coin pictures.
+func _coin_pile(amount:int,c:Vector2,size:float) -> void:
+	for p in coin_pile(amount):
+		Style.icon(self,COIN_PILES[p.art],c+Vector2(p.dx,p.dy)*size,size*p.scale)
+
+## Layout of the pile for an amount: [{art, dx, dy, scale}], back to front.
+static func coin_pile(amount:int) -> Array:
+	if amount<25: return [{"art":0,"dx":0.0,"dy":0.0,"scale":0.8}]
+	if amount<45: return [{"art":1,"dx":0.0,"dy":0.0,"scale":1.0}]
+	if amount<80: return [{"art":2,"dx":0.0,"dy":0.0,"scale":1.0}]
+	if amount<120: return [{"art":3,"dx":0.0,"dy":0.0,"scale":1.05}]
+	if amount<200: return [{"art":3,"dx":-0.28,"dy":-0.04,"scale":1.0},{"art":2,"dx":0.32,"dy":0.08,"scale":0.8}]
+	return [{"art":3,"dx":-0.34,"dy":-0.04,"scale":1.0},{"art":2,"dx":0.36,"dy":0.02,"scale":0.8},{"art":1,"dx":0.0,"dy":0.16,"scale":0.62}]
 
 func _draw_bundle(b:Dictionary,rect:Rect2) -> void:
 	var items: Array = b.items

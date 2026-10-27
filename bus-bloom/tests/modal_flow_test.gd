@@ -3,6 +3,11 @@ extends SceneTree
 ## confirmation, rewarded video (simulated), tutorial and seasonal schedule.
 const Game = preload("res://scripts/main.gd")
 const Catalog = preload("res://scripts/ui/modal_catalog.gd")
+const Modal = preload("res://scripts/ui/game_modal.gd")
+class DailyGame extends Game:
+	var day := 100
+	func _today() -> int:
+		return day
 var failures := 0
 var checks := 0
 func check(ok:bool,label:String) -> void:
@@ -23,7 +28,7 @@ func stuck(g) -> void:
 	await frames()
 func run() -> void:
 	root.size = Vector2i(540,1171)
-	var g = Game.new()
+	var g = DailyGame.new()
 	g.automation = true
 	g.save_enabled = false
 	root.add_child(g)
@@ -130,6 +135,120 @@ func run() -> void:
 	g.store.simulate = false
 	g._close_modal(true)
 
+	# Menu during a level: pause with Continue / Restart, switch, sub-windows.
+	g._load_level(3)
+	g.intro_delays.clear()
+	g.reduced_motion = false
+	g._open_settings()
+	await frames()
+	check(modal_id(g)=="menu" and g.modal.hits.has("resume") and g.modal.hits.has("restart"),"In-level menu offers Continue and Restart")
+	g.modal.tap("motion")
+	check(g.reduced_motion and g.modal.spec.blocks[1].on,"Switch reduces motion at once")
+	g.modal.tap("motion")
+	g.modal.tap("language")
+	await frames()
+	check(modal_id(g)=="languages" and not g.modal.hits.has("lang:en") and not g.modal.hits.has("lang:ru"),"Only ready, non-current languages are selectable")
+	g.modal.tap("close")
+	await create_timer(0.3).timeout
+	check(modal_id(g)=="menu","Closing a sub-window returns to the menu")
+	g.modal.tap("support")
+	await frames()
+	g.modal.tap("write")
+	check(modal_id(g)=="support" and g.modal.flash_time>0.0,"Support without an address explains instead of failing")
+	check(String(g.economy.state.player_id).length()==9 or String(g.economy.state.player_id)=="","Player id has the XXXX-XXXX shape")
+	g.modal.tap("close")
+	await create_timer(0.3).timeout
+	g.modal.tap("resume")
+	check(g.overlay=="","Continue resumes the level")
+	await create_timer(0.3).timeout
+	# Menu from the map floats over it and closes back to it.
+	g._show_road_menu(false)
+	g._open_settings()
+	await frames()
+	check(modal_id(g)=="menu" and not g.modal.hits.has("resume") and g.road_menu.visible,"Map menu keeps the map and has no Continue")
+	g.modal.tap("close")
+	check(g.overlay=="road_menu","Closing returns to the map")
+	await create_timer(0.3).timeout
+
+	# Daily bonus: reward waits for «Забрать», then once per day.
+	g.save_path = "user://modal-flow-daily.cfg"
+	g.save_enabled = true
+	g.daily_rewards = preload("res://scripts/daily_rewards.gd").new()
+	g._show_road_menu(false)
+	g.coins = 100
+	g._open_daily_bonus()
+	await frames()
+	check(modal_id(g)=="daily" and g.coins==100,"Calendar opens with today's reward still waiting")
+	g.modal.tap("claim")
+	await frames()
+	check(g.coins==120 and g.modal.spec.has("balance_from") and g.modal.hits.has("close"),"Claim pays day 1 and shows the receipt state")
+	g.modal.tap("close")
+	await create_timer(0.4).timeout
+	g._open_daily_bonus()
+	await frames()
+	check(modal_id(g)!="daily" and g.coins==120,"Same day cannot open or pay twice")
+	g._close_modal(true)
+	# The offer opened before midnight must not silently pay tomorrow's reward.
+	g.daily_rewards = preload("res://scripts/daily_rewards.gd").new()
+	g.coins = 100
+	g.day = 100
+	g._open_daily_bonus()
+	await frames()
+	check(int(g.modal.spec.blocks[1].days[0].rewards[0].quantity)==20,"Day 1 shows 20 coins")
+	g.day = 101
+	g.modal.tap("claim")
+	check(g.coins==100 and g.daily_rewards.calendar.state.claimed.is_empty(),"Midnight click refreshes without paying")
+	check(g.modal.spec.blocks[1].days[0].state=="missed" and g.modal.spec.blocks[1].days[1].state=="available","Calendar advances to day 2")
+	check(int(g.modal.spec.blocks[1].days[1].rewards[0].quantity)==30 and not g.modal.spec.has("balance_from"),"Refreshed offer shows 30 coins without a receipt")
+	await frames()
+	g.modal.tap("claim")
+	check(g.coins==130 and g.daily_rewards.calendar.state.claimed==[1],"Second click pays the displayed day 2 once")
+	g._on_daily_action("claim")
+	g._on_daily_action("claim")
+	check(g.coins==130,"Repeated claim actions do not pay again")
+
+	# Round-trip the real save file, including the unclaimed midnight refresh.
+	g._close_modal(true)
+	g.daily_rewards = preload("res://scripts/daily_rewards.gd").new()
+	g.day = 200
+	g._open_daily_bonus()
+	g.day = 201
+	g._on_daily_action("claim")
+	g._close_modal(true)
+	g._load_save()
+	g.daily_rewards = preload("res://scripts/daily_rewards.gd").new()
+	g.daily_rewards.restore(g.economy.state.daily_calendar)
+	g._open_daily_bonus()
+	await frames()
+	check(g.daily_rewards.calendar.state.last_visit==201 and g.modal.spec.blocks[1].days[1].state=="available","Saved refreshed calendar restores day 2 as unclaimed")
+	g.modal.tap("claim")
+	check(g.coins==160,"Restored offer pays 30 coins")
+	g._close_modal(true)
+	g._load_save()
+	g.daily_rewards = preload("res://scripts/daily_rewards.gd").new()
+	g.daily_rewards.restore(g.economy.state.daily_calendar)
+	g._open_daily_bonus()
+	check(modal_id(g)!="daily" and g.coins==160 and g.daily_rewards.claim(201,g.economy.state.inventory).index==-1,"Saved claim cannot reopen or pay twice")
+
+	# A week rollover changes definitions too, before any reward is granted.
+	g.daily_rewards = preload("res://scripts/daily_rewards.gd").new()
+	g.day = 300
+	g.daily_rewards.calendar.visit(300)
+	g.daily_rewards.calendar.visit(303)
+	g.daily_rewards.calendar.visit(306)
+	g.day = 306
+	g._open_daily_bonus()
+	g.day = 307
+	g._on_daily_action("claim")
+	check(g.coins==160 and g.daily_rewards.calendar.state.week==1 and g.modal.spec.blocks[1].days[0].state=="available","Week boundary refreshes the offer without payment")
+	var shown := int(g.modal.spec.blocks[1].days[0].rewards[0].quantity)
+	g._on_daily_action("claim")
+	check(g.coins==160+shown and g.daily_rewards.calendar.state.claimed==[0],"Week boundary pays exactly the refreshed reward")
+	g._close_modal(true)
+	g.save_enabled = false
+	DirAccess.remove_absolute(ProjectSettings.globalize_path("user://modal-flow-daily.cfg"))
+	check(Modal.coin_pile(20)[0].art==0 and Modal.coin_pile(150).size()==2,"Coin piles grow with the amount")
+
 	# Seasonal schedule.
 	var events: Array = Catalog.load_events()
 	var oct := int(Time.get_unix_time_from_datetime_string("2026-10-21T12:00:00"))
@@ -142,3 +261,4 @@ func run() -> void:
 	await frames()
 	print("Modal flow: %d checks, %d failures" % [checks,failures])
 	quit(1 if failures else 0)
+

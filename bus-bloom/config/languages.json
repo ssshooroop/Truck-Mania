@@ -1,0 +1,7 @@
+{
+  "_comment": "Languages offered in the menu. ready=false shows the language as «Скоро» until its translation exists.",
+  "languages": [
+    {"code": "ru", "name": "Русский", "ready": true},
+    {"code": "en", "name": "English", "ready": false}
+  ]
+}

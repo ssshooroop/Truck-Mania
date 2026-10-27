@@ -2,8 +2,8 @@ extends Node2D
 
 const Model = preload("res://scripts/game_model.gd")
 const Contact = preload("res://scripts/collision_feedback.gd")
-var daily_screen
 var daily_rewards=preload("res://scripts/daily_rewards.gd").new()
+var daily_bonus_day := -1
 var crane_preview
 const CraneAnimation = preload("res://scripts/crane_animation.gd")
 var crane_state:Dictionary = {}
@@ -120,6 +120,7 @@ var music_enabled = true
 var vibration_enabled = true
 var audio
 var reduced_motion = false
+var language = "ru"
 var hint_bus = -1
 var rejected_bus = -1
 var blockers: Array = []
@@ -172,6 +173,9 @@ func _ready() -> void:
 	if save_enabled:
 		_load_save()
 		daily_rewards.restore(economy.state.daily_calendar)
+		if str(economy.state.player_id)=="":
+			economy.state.player_id = "%04X-%04X" % [randi()%0x10000,randi()%0x10000]
+			_save()
 	audio = preload("res://scripts/game_audio.gd").new()
 	add_child(audio)
 	_sync_audio_preferences()
@@ -984,9 +988,8 @@ func _hint() -> void:
 
 func _open_settings() -> void:
 	if audio: audio.pause_effects(true)
-	if road_menu and road_menu.visible:
-		menu_settings = true
-		road_menu.hide()
+	# From the map the menu floats over it; from a level it pauses the yard.
+	if road_menu and road_menu.visible: menu_settings = true
 	overlay = "settings"
 	if active_tween and active_tween.is_valid() and active_tween.is_running():
 		paused_tween = active_tween
@@ -1017,9 +1020,6 @@ func _message(value:String) -> void:
 	toast_time = 3.0
 
 func _input(event:InputEvent) -> void:
-	if daily_screen!=null:
-		if event is InputEventKey and event.pressed and event.keycode==KEY_ESCAPE: daily_screen.closed.emit()
-		return
 	if modal!=null:
 		if event is InputEventKey and event.pressed and event.keycode==KEY_ESCAPE: modal.back()
 		return
@@ -1086,18 +1086,6 @@ func _overlay_input(p:Vector2) -> void:
 		elif not _free_tutorial_slot() and Rect2(76,550,388,58).has_point(p):
 			offered_bay = model.open_bay_count
 			_purchase_slot()
-	elif overlay == "settings":
-		if Rect2(415,234,50,50).has_point(p): _resume()
-		elif Rect2(76,352,388,54).has_point(p):
-			_set_preference("sound",not sound_enabled)
-		elif Rect2(76,426,388,54).has_point(p):
-			reduced_motion = not reduced_motion
-			_save()
-		elif Rect2(76,516,388,58).has_point(p): _resume()
-		elif Rect2(76,590,388,58).has_point(p): _load_level(model.level_index)
-		elif Rect2(76,663,388,50).has_point(p):
-			levels_origin = "settings"
-			_show_road_menu(true)
 	elif overlay == "levels":
 		if Rect2(415,234,50,50).has_point(p): overlay = levels_origin
 		for i in model.level_count():
@@ -1353,7 +1341,7 @@ func _draw() -> void:
 	if toast_time>0 and overlay=="":
 		_round(Rect2(25,_footer_y()-63,490,31),INK,10)
 		_text(toast,Vector2(270,_footer_y()-42),12,Color.WHITE,true)
-	if overlay!="" and overlay not in ["stuck","tutorial","win"]:
+	if overlay!="" and overlay not in ["stuck","tutorial","win","settings"]:
 		if overlay!="slot_offer": draw_rect(get_viewport_rect(),Color(0.055,0.10,0.20,0.88) if overlay in ["win","stuck","crane_preview"] else Color(0.12,0.20,0.24,0.47))
 		_draw_space(_panel_transform())
 		_draw_overlay()
@@ -1503,15 +1491,6 @@ func _draw_overlay() -> void:
 			_button(Rect2(76,350+i*90,388,60),"%s · %d монет" % [labels[i],price],true,_can_rescue(keys[i]) and coins>=price)
 		_text("Помощь действует в этой попытке",Vector2(270,654),17,MUTED,true)
 		_text("Баланс: %d" % coins,Vector2(270,689),18,INK,true)
-	elif overlay=="settings":
-		_text("Перерыв на стройке",Vector2(270,291),27,INK,true)
-		_text("Груз и машины подождут",Vector2(270,320),15,MUTED,true)
-		_close_icon()
-		_setting_row(352,"Звуки погрузки",sound_enabled)
-		_setting_row(426,"Меньше анимации",reduced_motion)
-		_button(Rect2(76,516,388,58),"Продолжить работу",true)
-		_button(Rect2(76,590,388,58),"Начать уровень заново",false)
-		_text("Выбрать склад",Vector2(270,695),16,INK,true)
 	elif overlay=="levels":
 		_text("Твои склады",Vector2(270,291),29,INK,true)
 		_text("Больше машин — интереснее задача",Vector2(270,320),14,MUTED,true)
@@ -1525,12 +1504,6 @@ func _draw_overlay() -> void:
 
 func _close_icon() -> void:
 	for s in [-1,1]: draw_line(Vector2(431,249+s*6),Vector2(443,249-s*6),MUTED,2,true)
-
-func _setting_row(y:float,label:String,enabled:bool) -> void:
-	_round(Rect2(76,y,388,54),Color("edf1e9"),15)
-	_text(label,Vector2(95,y+34),16,INK)
-	_round(Rect2(391,y+13,52,28),ACCENT if enabled else Color("c6d1c7"),14)
-	draw_circle(Vector2(429 if enabled else 405,y+27),10,Color.WHITE)
 
 func _button(rect:Rect2,label:String,primary:bool,enabled:bool=true,icon:String="") -> void:
 	var base = ACCENT if primary else Color("d9e3f2")
@@ -1582,6 +1555,8 @@ func _load_save() -> void:
 	music_enabled = bool(cfg.get_value("settings","music",true))
 	vibration_enabled = bool(cfg.get_value("settings","vibration",true))
 	reduced_motion = bool(cfg.get_value("settings","reduced_motion",false))
+	language = str(cfg.get_value("settings","language","ru"))
+	TranslationServer.set_locale(language)
 
 func _save() -> void:
 	if not save_enabled: return
@@ -1594,6 +1569,7 @@ func _save() -> void:
 	cfg.set_value("settings","music",music_enabled)
 	cfg.set_value("settings","vibration",vibration_enabled)
 	cfg.set_value("settings","reduced_motion",reduced_motion)
+	cfg.set_value("settings","language",language)
 	if cfg.save(save_path)!=OK: push_warning("Progress could not be saved")
 
 func _set_preference(key:String,enabled:bool) -> void:
@@ -1674,40 +1650,53 @@ func _demo() -> void:
 	get_tree().quit()
 
 
+## Shows the calendar when today's reward is waiting; it is granted on
+## «Забрать», so closing the window keeps it for the next launch.
 func _open_daily_bonus() -> void:
-	if not save_enabled or daily_screen!=null:return
-	var date=Time.get_date_dict_from_system()
-	var day:int=int(Time.get_unix_time_from_datetime_dict(date)/86400)
-	var info:Dictionary=daily_rewards.calendar.visit(day)
-	economy.state.daily_calendar=daily_rewards.calendar.state.duplicate(true)
+	if not save_enabled or modal!=null: return
+	daily_bonus_day = _today()
+	var info:Dictionary = daily_rewards.calendar.visit(daily_bonus_day)
+	economy.state.daily_calendar = daily_rewards.calendar.state.duplicate(true)
 	_save()
 	if not info.can_claim:
 		_maybe_show_season()
 		return
-	road_menu.hide()
-	daily_screen=preload("res://scripts/daily_bonus.gd").new()
-	daily_screen.sound_enabled=sound_enabled
-	add_child(daily_screen)
-	daily_screen.z_index=100
-	daily_screen.size=get_viewport_rect().size
-	get_viewport().size_changed.connect(_resize_daily_bonus)
-	daily_screen.configure(daily_rewards.definitions(),info.cards)
-	daily_screen.closed.connect(func():
-		get_viewport().size_changed.disconnect(_resize_daily_bonus)
-		daily_screen.queue_free()
-		daily_screen=null
-		road_menu.show()
-		_maybe_show_season())
-	var result:Dictionary=daily_rewards.claim(day,economy.state.inventory)
-	if result.index>=0:
-		coins+=int(result.coins)
-		economy.state.daily_calendar=daily_rewards.calendar.state.duplicate(true)
-		_save()
-		_sync_coins()
-		daily_screen.reveal(result.index)
+	_open_modal(_daily_spec(info,false,coins),_on_daily_action,["road_menu"])
 
-func _resize_daily_bonus():
-	if daily_screen!=null:daily_screen.size=get_viewport_rect().size
+func _today() -> int:
+	return int(Time.get_unix_time_from_datetime_dict(Time.get_date_dict_from_system())/86400)
+
+func _daily_spec(info:Dictionary,claimed:bool,before:int) -> Dictionary:
+	return Modals.daily({"definitions":daily_rewards.definitions(),"cards":info.cards,"today":info.index,
+		"claimed":claimed,"coins":coins,"before":before})
+
+func _on_daily_action(id:String) -> void:
+	if not _modal_is("daily"): return
+	match id:
+		"claim":
+			var day: int = _today()
+			if day!=daily_bonus_day:
+				# A stale click only refreshes the offer; the player must claim
+				# again after seeing the new day's reward.
+				daily_bonus_day = day
+				var info: Dictionary = daily_rewards.calendar.visit(day)
+				economy.state.daily_calendar = daily_rewards.calendar.state.duplicate(true)
+				_save()
+				modal.update_spec(_daily_spec(info,not info.can_claim,coins))
+				return
+			var before: int = coins
+			var result: Dictionary = daily_rewards.claim(day,economy.state.inventory)
+			if result.index<0: return
+			coins += int(result.coins)
+			economy.state.daily_calendar = daily_rewards.calendar.state.duplicate(true)
+			_save()
+			_sync_coins()
+			if sound_enabled and audio: audio.play_stream(PRIZE,1,-6.0)
+			_vibrate(30)
+			modal.update_spec(_daily_spec(daily_rewards.calendar.view(day),true,before))
+		"close":
+			_close_modal()
+			get_tree().create_timer(0.25).timeout.connect(_maybe_show_season)
 
 # ------------------------------------------------------------------ modal windows
 # Specs come from scripts/ui/modal_catalog.gd; this section only routes actions.
@@ -1742,12 +1731,13 @@ func _close_modal(instant:bool=false) -> void:
 func _sync_modals() -> void:
 	if modal_layer==null: return
 	if modal!=null and not modal.is_closing() and overlay not in modal_scope: modal.close()
-	if modal!=null or daily_screen!=null: return
+	if modal!=null: return
 	if overlay=="stuck":
 		if _can_rescue("crane") and not economy.state.get("crane_intro_used",false):
 			_open_modal(Modals.crane_intro(coins),_on_stuck_action,["stuck"])
 		else: _open_modal(Modals.stuck(_stuck_context()),_on_stuck_action,["stuck"])
 	elif overlay=="win": _open_modal(_win_spec(),_on_win_action,["win"])
+	elif overlay=="settings": _open_modal(_menu_spec(),_on_menu_action,["settings"])
 
 func _modal_is(id:String) -> bool:
 	return modal!=null and not modal.is_closing() and modal.spec.get("id","")==id
@@ -1921,7 +1911,7 @@ func _on_tutorial_action(id:String) -> void:
 	overlay = ""
 
 func _maybe_show_season() -> void:
-	if automation or modal!=null or daily_screen!=null: return
+	if automation or modal!=null: return
 	var now := int(Time.get_unix_time_from_system())
 	var event := Modals.active_event(Modals.load_events(),now)
 	if event.is_empty() or event.get("product","") in economy.state.purchases: return
@@ -1981,3 +1971,48 @@ func _buy(product_id:String,button:String) -> void:
 	_sync_coins()
 	_save()
 	if modal: modal.update_spec(Modals.received(product.contents,coins))
+
+func _menu_spec() -> Dictionary:
+	var name := "Русский"
+	for l: Dictionary in _languages():
+		if l.code==language: name = l.name
+	return Modals.menu({"in_game":not menu_settings,"reduced_motion":reduced_motion,"language":name})
+
+func _languages() -> Array:
+	return JSON.parse_string(FileAccess.get_file_as_string("res://config/languages.json")).languages
+
+func _on_menu_action(id:String) -> void:
+	match id:
+		"resume","close": _resume()
+		"restart": _load_level(model.level_index)
+		"motion":
+			reduced_motion = not reduced_motion
+			_save()
+			modal.update_spec(_menu_spec())
+		"language":
+			_open_modal(Modals.languages(_languages(),language),func(choice:String):
+				if choice.begins_with("lang:"):
+					language = choice.substr(5)
+					TranslationServer.set_locale(language)
+					_save()
+				_close_modal()
+			,["settings"])
+		"support":
+			_open_modal(Modals.support({"version":_version(),"player_id":economy.state.player_id}),func(choice:String):
+				if choice=="write": _write_support()
+				else: _close_modal()
+			,["settings"])
+
+func _version() -> String:
+	var v := str(ProjectSettings.get_setting("application/config/version",""))
+	return v if v!="" else "dev"
+
+## Opens the mail app with version, device and player id already filled in.
+func _write_support() -> void:
+	var cfg: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://config/support.json"))
+	var email := str(cfg.get("email",""))
+	if email=="":
+		_message("Адрес поддержки скоро появится")
+		return
+	var body := "\n\n—\nВерсия: %s\nУстройство: %s %s\nID игрока: %s" % [_version(),OS.get_name(),OS.get_model_name(),economy.state.player_id]
+	OS.shell_open("mailto:%s?subject=%s&body=%s" % [email,str(cfg.get("subject","")).uri_encode(),body.uri_encode()])
