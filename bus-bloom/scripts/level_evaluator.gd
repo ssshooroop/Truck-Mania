@@ -62,6 +62,16 @@ var onboarding_min_post_win := 0.9
 ## are measured by the ordinary player when tier_measure is "ordinary_attempts".
 var ordinary_player := {"depth": 2, "mistake": 0.1, "runs": 150}
 var strong_player := {"depth": 3, "mistake": 0.05, "runs": 80}
+## Expert: looks `depth` moves ahead without mistakes. Measured only when
+## expert_player.runs > 0; a deep trap is the only thing that stops it.
+var expert_player := {"depth": 5, "mistake": 0.0, "runs": 0}
+## Quick rejection of candidates the ordinary player fails less often than this
+## (measured before the expensive booster profile). 0 disables it.
+var min_ordinary_fail := 0.0
+## Colour balance: at least minimum_colors colours, none on more than
+## max_color_share of the trucks.
+var minimum_colors := 1
+var max_color_share := 1.0
 var tier_measure := "ordinary_attempts"
 ## Ascending upper bounds of expected ordinary-player attempts per tier.
 var attempt_tiers: Array = [
@@ -118,6 +128,10 @@ func configure(settings: Dictionary) -> void:
 	onboarding_planner = bool(onboarding.get("planner", onboarding_planner))
 	ordinary_player.merge(settings.get("ordinary_player", {}), true)
 	strong_player.merge(settings.get("strong_player", {}), true)
+	expert_player.merge(settings.get("expert_player", {}), true)
+	min_ordinary_fail = float(settings.get("min_ordinary_fail", min_ordinary_fail))
+	minimum_colors = int(settings.get("minimum_colors", minimum_colors))
+	max_color_share = float(settings.get("max_color_share", max_color_share))
 	tier_measure = str(settings.get("tier_measure", tier_measure))
 	attempt_tiers = settings.get("attempt_tiers", attempt_tiers)
 	soft_gate_attempts = settings.get("soft_gate_attempts", soft_gate_attempts)
@@ -127,6 +141,11 @@ func configure(settings: Dictionary) -> void:
 	luck_penalty = float(settings.get("luck_penalty", luck_penalty))
 
 func evaluate(candidate: Dictionary, rng_seed: int) -> Dictionary:
+	var counts := {}
+	for vehicle: Dictionary in candidate.vehicles:
+		counts[int(vehicle.color)] = int(counts.get(int(vehicle.color), 0)) + 1
+	if counts.size() < minimum_colors 			or float(counts.values().max()) / candidate.vehicles.size() > max_color_share:
+		return {"seed": candidate.seed, "category": "rejected", "reason": "color_imbalance"}
 	var solver = Solver.new(candidate.vehicles, candidate.queue)
 	var exact: Dictionary = solver.min_slots(max_slots, node_limit)
 	var minimum: int = exact.min_slots
@@ -157,15 +176,19 @@ func evaluate(candidate: Dictionary, rng_seed: int) -> Dictionary:
 		return result
 	var rng := RandomNumberGenerator.new()
 	rng.seed = rng_seed
+	# Planning players extend the skill scale: 0.9 = ordinary, 1.0 = strong.
+	var ordinary: Dictionary = solver.simulate_planner(base_slots, int(ordinary_player.runs),
+		int(ordinary_player.depth), float(ordinary_player.mistake), rng)
+	if minimum <= base_slots and float(ordinary.fail_rate) < min_ordinary_fail:
+		result["category"] = "rejected"
+		result["reason"] = "too_easy"
+		return result
 	result.merge(solver.simulate(base_slots, player_runs, player_skill, max_rescues, max_slots, rng))
 	var fail_by_skill := {}
 	for skill in skill_grid:
 		var runs := player_runs if is_equal_approx(float(skill), player_skill) else maxi(20, player_runs / 2)
 		fail_by_skill[str(skill)] = solver.simulate(base_slots, runs, float(skill), 0, base_slots, rng).fail_rate
 	fail_by_skill[str(player_skill)] = result.fail_rate
-	# Planning players extend the skill scale: 0.9 = ordinary, 1.0 = strong.
-	var ordinary: Dictionary = solver.simulate_planner(base_slots, int(ordinary_player.runs),
-		int(ordinary_player.depth), float(ordinary_player.mistake), rng)
 	var strong: Dictionary = solver.simulate_planner(base_slots, int(strong_player.runs),
 		int(strong_player.depth), float(strong_player.mistake), rng)
 	fail_by_skill["0.9"] = ordinary.fail_rate
@@ -174,6 +197,11 @@ func evaluate(candidate: Dictionary, rng_seed: int) -> Dictionary:
 	result["ordinary_attempts"] = 1.0 / maxf(0.01, 1.0 - float(ordinary.fail_rate))
 	result["strong_fail"] = strong.fail_rate
 	result["strong_attempts"] = 1.0 / maxf(0.01, 1.0 - float(strong.fail_rate))
+	if int(expert_player.runs) > 0:
+		var expert: Dictionary = solver.simulate_planner(base_slots, int(expert_player.runs),
+			int(expert_player.depth), float(expert_player.mistake), rng)
+		result["expert_fail"] = expert.fail_rate
+		result["expert_attempts"] = 1.0 / maxf(0.01, 1.0 - float(expert.fail_rate))
 	result["fail_by_skill"] = fail_by_skill
 	if not exact.path.is_empty():
 		result.merge(solver.trap_profile(maxi(minimum, base_slots), exact.path, trap_node_limit))
@@ -187,8 +215,8 @@ func evaluate(candidate: Dictionary, rng_seed: int) -> Dictionary:
 	elif minimum <= base_slots:
 		var fail: float = result.fail_rate
 		result["category"] = "regular"
-		if tier_measure == "ordinary_attempts":
-			var attempts: float = result.ordinary_attempts
+		if tier_measure.ends_with("_attempts"):
+			var attempts: float = result.get(tier_measure, result.ordinary_attempts)
 			result["tier"] = _tier_by_attempts(attempts)
 			result["soft_gate_eligible"] = attempts >= float(soft_gate_attempts[0]) \
 				and attempts <= float(soft_gate_attempts[1])

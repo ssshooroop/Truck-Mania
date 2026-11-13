@@ -1,0 +1,103 @@
+{
+  "output_dir": "res://generated_levels",
+  "output_suffix": "_101_150",
+  "pool": {
+    "size": 4000,
+    "first_seed": 300000,
+    "vehicles": [13, 18],
+    "colors": [4, 6],
+    "queue_windows": [3, 4],
+    "max_run": [1, 2],
+    "same_color_chance": [0.2, 0.6],
+    "placement_attempts": 60000
+  },
+  "harden": {
+    "seeds": 400,
+    "steps": 500,
+    "node_limit": 200000,
+    "queue_share": 0.8,
+    "swap_reach": 8,
+    "expert_from_strong": 0.5,
+    "quick_runs": {"o": 40, "s": 30, "e": 16},
+    "mix": {"easy": 0.15, "medium": 0.15, "hard": 0.35, "very_hard": 0.35},
+    "tiers": {
+      "easy": {"o": [0.5, 0.67]},
+      "medium": {"o": [0.75, 0.85]},
+      "hard": {"o": [0.88, 1.0], "s": [0.6, 1.0], "e": [0.3, 1.0]},
+      "very_hard": {"o": [0.95, 1.0], "s": [0.85, 1.0], "e": [0.7, 1.0]}
+    }
+  },
+  "evaluation": {
+    "base_slots": 3,
+    "max_slots": 5,
+    "solver_node_limit": 300000,
+    "player_runs": 200,
+    "player_skill": 0.7,
+    "max_rescues": 2,
+    "tiers": [
+      {"name": "easy", "max_fail": 0.15},
+      {"name": "medium", "max_fail": 0.30},
+      {"name": "hard", "max_fail": 0.50},
+      {"name": "very_hard", "max_fail": 1.0}
+    ],
+    "soft_gate_fail": [0.50, 0.85],
+    "tier_measure": "ordinary_attempts",
+    "ordinary_player": {"depth": 2, "mistake": 0.1, "runs": 120},
+    "strong_player": {"depth": 3, "mistake": 0.05, "runs": 80},
+    "expert_player": {"depth": 5, "mistake": 0.0, "runs": 40},
+    "min_ordinary_fail": 0.35,
+    "minimum_colors": 4,
+    "max_color_share": 0.4,
+    "attempt_tiers": [
+      {"name": "easy", "max_attempts": 3.0},
+      {"name": "medium", "max_attempts": 6.0},
+      {"name": "hard", "max_attempts": 15.0},
+      {"name": "very_hard", "max_attempts": 1000.0}
+    ],
+    "soft_gate_attempts": [15.0, 1000.0],
+    "slot_gate_max_post_rescue_fail": 0.40,
+    "skill_grid": [0.0, 0.35, 0.7, 0.95],
+    "trap_node_limit": 20000,
+    "booster_runs": 100,
+    "shuffles_per_deadlock": 6,
+    "shuffle_strengths": [1, 2, 4, 8, 16],
+    "allow_slot_gates": false,
+    "novice_skill": 0.35,
+    "booster_tutorial": {"booster": "slot", "skill": 0.35, "runs": 120, "max_vehicles": 0,
+                         "min_deadlock": 0.5, "min_post_win": 0.9, "planner": true},
+    "shuffle_tutorial": {"enabled": false},
+    "interest_weights": {"gap": 0.35, "traps": 0.25, "near_miss": 0.2, "tension": 0.2},
+    "ideal_trap_ratio": 0.35,
+    "expert_fail_limit": 0.25,
+    "luck_penalty": 0.7
+  },
+  "sequence": {
+    "first_level": 101,
+    "level_count": 50,
+    "onboarding": [],
+    "rhythm": ["medium", "hard", "easy", "hard"],
+    "gate_every": 5,
+    "gate_pattern": ["very_hard"],
+    "first_gate_level": 101,
+    "shuffle_tutorial_levels": [],
+    "booster_tutorial_levels": [],
+    "early_levels": 0,
+    "attempts_key": "ordinary_attempts",
+    "measure_attempts": true,
+    "min_critical_share": 0.3,
+    "min_critical_from_level": 1,
+    "ramp_levels": 50,
+    "targets": {
+      "easy": [2.0, 2.5],
+      "medium": [4.0, 5.0],
+      "hard": [8.0, 12.0],
+      "very_hard": [20.0, 40.0]
+    },
+    "vehicles_start": [14, 18],
+    "vehicles_end": [16, 20],
+    "vehicle_penalty": 0.02,
+    "repeat_penalty": 0.05,
+    "interest_weight": 0.15,
+    "min_interest": 0.0
+  }
+}

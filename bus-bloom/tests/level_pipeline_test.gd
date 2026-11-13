@@ -18,6 +18,8 @@ func _initialize() -> void:
 	_test_evaluator_categories()
 	_test_sequencer_schedule()
 	_test_boosters()
+	_test_trap_depth_and_expert()
+	_test_continuation_schedule()
 	print("Level pipeline checks: %d; failures: %d" % [checks, failures])
 	quit(0 if failures == 0 else 1)
 
@@ -253,6 +255,69 @@ func _test_sequencer_schedule() -> void:
 			check(float(entry.ordinary_attempts) <= 3.5, "Level %d takes an ordinary player at most 3.5 attempts" % entry.level)
 	check(campaign.levels[2].type == "booster_tutorial", "Level 3 is the booster tutorial")
 	check(campaign.summary.by_type.get("soft_gate", 0) == 2, "Forty levels hold two soft gates")
+
+func _test_trap_depth_and_expert() -> void:
+	var generator = Generator.new()
+	var measured := 0
+	for level_seed in range(1000, 1030):
+		var candidate: Dictionary = generator.generate(level_seed, 12, 4, 20000, 3, 1, 0.4)
+		if not candidate.ok:
+			continue
+		var solver = Solver.new(candidate.vehicles, candidate.queue)
+		var exact: Dictionary = solver.solve(3, 300000)
+		if exact.status != "solvable":
+			continue
+		var traps: Dictionary = solver.trap_profile(3, exact.path, 20000)
+		if float(traps.trap_ratio) == 0.0:
+			continue
+		measured += 1
+		check(int(traps.trap_depth_max) >= 0 and int(traps.trap_depth_max) <= Solver.TRAP_DEPTH_CAP
+			and float(traps.trap_depth_mean) <= float(traps.trap_depth_max),
+			"Trap depth is bounded and the mean is below the maximum on %d" % level_seed)
+		# The cached safety check must agree with a fresh one on the start state.
+		var start: Dictionary = solver._initial_state(3)
+		solver._safe_cache.clear()
+		var fresh: bool = solver._safe_for(start.duplicate(true), 4)
+		check(solver._safe_for(start.duplicate(true), 4) == fresh,
+			"Cached safety check repeats its answer on %d" % level_seed)
+		var rng := RandomNumberGenerator.new()
+		rng.seed = level_seed
+		var expert: Dictionary = solver.simulate_planner(3, 20, 5, 0.0, rng)
+		check(float(expert.fail_rate) >= 0.0 and float(expert.fail_rate) <= 1.0,
+			"Expert fail rate is a probability on %d" % level_seed)
+	check(measured >= 5, "Trap depth measured on at least five levels (got %d)" % measured)
+
+func _test_continuation_schedule() -> void:
+	var config = JSON.parse_string(FileAccess.get_file_as_string("res://config/level_pipeline_101_150.json"))
+	var sequencer = Sequencer.new()
+	sequencer.configure(config.sequence)
+	check(sequencer.first_level == 101 and sequencer.level_count == 50, "Continuation covers levels 101-150")
+	check(sequencer.slot_type(105) == "very_hard" and sequencer.slot_type(150) == "very_hard",
+		"Every fifth level of the continuation is very hard")
+	check(sequencer.slot_type(101) == "medium" and sequencer.slot_type(103) == "easy",
+		"Continuation follows its own rhythm from level 101")
+	var path := "res://generated_levels/levels_101_150.json"
+	if FileAccess.file_exists(path):
+		var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(path))
+		check(data.levels.size() == 50, "Continuation file holds 50 levels")
+		for level: Dictionary in data.levels:
+			var candidate: Dictionary = Generator.from_json_data(level)
+			var solver = Solver.new(candidate.vehicles, candidate.queue)
+			var state: Dictionary = solver._initial_state(3)
+			for id in level.solution:
+				solver._settle(state)
+				var free: int = state.bays.find(-1)
+				var movable: bool = free != -1 and solver._available(state).has(int(id))
+				check(movable, "Level %d certificate move %d is legal" % [int(level.campaign.level), int(id)])
+				if not movable:
+					break
+				state.yard = int(state.yard) & ~(1 << int(id))
+				state.bays[free] = int(id)
+			solver._settle(state)
+			check(int(state.yard) == 0 and int(state.offset) == candidate.queue.size(),
+				"Level %d is won with three slots by its certificate" % int(level.campaign.level))
+	check(is_zero_approx(sequencer._progress(101)) and is_equal_approx(sequencer._progress(150), 1.0),
+		"Difficulty ramp runs from level 101 to 150")
 
 func _tier_of(fail: float) -> String:
 	if fail <= 0.15:

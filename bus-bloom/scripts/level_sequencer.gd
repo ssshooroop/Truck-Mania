@@ -17,6 +17,9 @@ const FALLBACKS := {
 }
 
 var level_count := 100
+## Number of the first level, so a continuation (e.g. 101-150) keeps the
+## campaign numbering of gates; onboarding and the ramp count from it.
+var first_level := 1
 var onboarding: Array = ["easy", "easy", "medium", "easy"]
 var rhythm: Array = ["easy", "medium", "hard", "medium"]
 var gate_every := 5
@@ -66,6 +69,7 @@ var min_interest := 0.25
 
 func configure(settings: Dictionary) -> void:
 	level_count = int(settings.get("level_count", level_count))
+	first_level = int(settings.get("first_level", first_level))
 	onboarding = settings.get("onboarding", onboarding)
 	rhythm = settings.get("rhythm", rhythm)
 	gate_every = int(settings.get("gate_every", gate_every))
@@ -96,8 +100,8 @@ func slot_type(number: int) -> String:
 	for tutorial in shuffle_tutorial_levels:
 		if int(tutorial) == number:
 			return "shuffle_tutorial"
-	if number <= onboarding.size():
-		return onboarding[number - 1]
+	if number - first_level < onboarding.size():
+		return onboarding[number - first_level]
 	if gate_every > 0 and number % gate_every == 0:
 		if number < first_gate_level or gate_pattern.is_empty():
 			return "hard"
@@ -113,7 +117,7 @@ func build(records: Array) -> Dictionary:
 	var used := {}
 	var levels: Array = []
 	var previous := {}
-	for number in range(1, level_count + 1):
+	for number in range(first_level, first_level + level_count):
 		var wanted := slot_type(number)
 		var progress := _progress(number)
 		var order: Array = [wanted]
@@ -169,13 +173,18 @@ func build(records: Array) -> Dictionary:
 			"novice_attempts": snappedf(float(evaluation.get("novice_attempts", 0.0)), 0.01),
 			"ordinary_attempts": snappedf(float(evaluation.get("ordinary_attempts", 0.0)), 0.01),
 			"strong_attempts": snappedf(float(evaluation.get("strong_attempts", 0.0)), 0.01),
+			"expert_attempts": snappedf(float(evaluation.get("expert_attempts", 0.0)), 0.01),
+			"trap_depth_mean": snappedf(float(evaluation.get("trap_depth_mean", 0.0)), 0.01),
+			"trap_depth_max": evaluation.get("trap_depth_max", 0),
+			"deep_trap_share": snappedf(float(evaluation.get("deep_trap_share", 0.0)), 0.001),
+			"decisions": evaluation.get("decisions", 0),
 			"onboarding_deadlock_rate": snappedf(float(evaluation.get("onboarding_deadlock_rate", 0.0)), 0.001),
 			"onboarding_post_win": snappedf(float(evaluation.get("onboarding_post_win", 0.0)), 0.001),
 		})
 	return {"levels": levels, "summary": _summary(levels, records.size(), used.size())}
 
 func _progress(number: int) -> float:
-	return clampf(float(number - 1) / maxf(1.0, ramp_levels - 1.0), 0.0, 1.0)
+	return clampf(float(number - first_level) / maxf(1.0, ramp_levels - 1.0), 0.0, 1.0)
 
 func _matches(evaluation: Dictionary, type: String) -> bool:
 	match type:

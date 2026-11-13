@@ -18,6 +18,8 @@ var _nodes := 0
 var _node_limit := 0
 var _aborted := false
 var _seen := {}
+## _safe_for results by state and depth; deterministic, so shared by all runs.
+var _safe_cache := {}
 
 ## Vehicle ids must equal their array index, as in BusGameModel.buses.
 func _init(level_vehicles: Array, level_queue: Array) -> void:
@@ -140,6 +142,7 @@ func trap_profile(slots: int, path: Array, node_limit: int = 20000) -> Dictionar
 	var alternatives := 0
 	var traps := 0
 	var unknown := 0
+	var depths: Array = []
 	for chosen: int in path:
 		_settle(state)
 		var bays: Array = state["bays"]
@@ -159,18 +162,61 @@ func trap_profile(slots: int, path: Array, node_limit: int = 20000) -> Dictionar
 				if status == "unsolvable":
 					traps += 1
 					dead_here = true
+					var probe: Dictionary = state.duplicate(true)
+					probe["yard"] = int(probe["yard"]) & ~(1 << id)
+					probe["bays"][free] = id
+					depths.append(_survival(probe, {}, TRAP_DEPTH_CAP))
 				elif status == "timeout":
 					unknown += 1
 			if dead_here:
 				critical += 1
 		state["yard"] = int(state["yard"]) & ~(1 << chosen)
 		bays[free] = chosen
+	var deep := 0
+	var depth_sum := 0
+	for depth: int in depths:
+		depth_sum += depth
+		if depth >= DEEP_TRAP:
+			deep += 1
 	return {
 		"decisions": decisions,
 		"trap_ratio": float(traps) / alternatives if alternatives > 0 else 0.0,
 		"critical_share": float(critical) / decisions if decisions > 0 else 0.0,
 		"trap_unknown": unknown,
+		"trap_depth_mean": float(depth_sum) / depths.size() if not depths.is_empty() else 0.0,
+		"trap_depth_max": depths.max() if not depths.is_empty() else 0,
+		"deep_trap_share": float(deep) / depths.size() if not depths.is_empty() else 0.0,
 	}
+
+## Trap depth: after a losing move, the most dispatches the player can still
+## make before the deadlock shows. A planner that looks fewer moves ahead
+## cannot see the trap. Capped at `cap`.
+const TRAP_DEPTH_CAP := 12
+## Traps at least this deep fool the strong player (depth 3).
+const DEEP_TRAP := 4
+
+func _survival(state: Dictionary, memo: Dictionary, cap: int) -> int:
+	_settle(state)
+	var bays: Array = state["bays"]
+	var free: int = bays.find(-1)
+	if free == -1 or cap <= 0:
+		return 0
+	var moves := _available(state)
+	if moves.is_empty():
+		return 0
+	var key := _key(state)
+	if memo.has(key) and int(memo[key][1]) >= cap:
+		return mini(int(memo[key][0]), cap)
+	var best := 0
+	for id: int in moves:
+		var child: Dictionary = state.duplicate(true)
+		child["yard"] = int(child["yard"]) & ~(1 << id)
+		child["bays"][free] = id
+		best = maxi(best, 1 + _survival(child, memo, cap - 1))
+		if best >= cap:
+			break
+	memo[key] = [best, cap]
+	return best
 
 ## What each kind of help is worth on this level for a player of `skill`.
 ## - fail_by_slots[n]: deadlock rate when the level starts with n slots
@@ -470,6 +516,7 @@ func _docked(state: Dictionary) -> Array:
 func simulate_planner(slots: int, runs: int, depth: int, mistake: float,
 		rng: RandomNumberGenerator) -> Dictionary:
 	var planner := {"depth": depth, "mistake": mistake}
+	_safe_cache.clear()
 	var wins := 0
 	var near_miss_sum := 0.0
 	for run in runs:
@@ -516,13 +563,21 @@ func _safe_for(state: Dictionary, depth: int) -> bool:
 		return false
 	if depth <= 0:
 		return true
+	# A shuffled state carries its own queue; only the level's queue is cached.
+	var key := "%s:%d" % [_key(state), depth] if not state.has("queue") else ""
+	if key != "" and _safe_cache.has(key):
+		return _safe_cache[key]
+	var safe := false
 	for id: int in moves:
 		var child: Dictionary = state.duplicate(true)
 		child["yard"] = int(child["yard"]) & ~(1 << id)
 		child["bays"][free] = id
 		if _safe_for(child, depth - 1):
-			return true
-	return false
+			safe = true
+			break
+	if key != "":
+		_safe_cache[key] = safe
+	return safe
 
 ## Plays the player policy from `state` (modified in place). True on a win,
 ## false at the first deadlock. A non-empty `planner` ({depth, mistake}) plays

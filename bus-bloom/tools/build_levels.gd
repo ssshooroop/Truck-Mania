@@ -4,6 +4,9 @@ extends SceneTree
 ## campaign and write it out. Run from the repository root:
 ##   godot --headless --path bus-bloom --script res://tools/build_levels.gd
 ## Optional user arguments after "--": --config=res://... --pool=N --levels=N
+## Parallel runs: --shard=K --shards=N evaluates every N-th candidate and,
+## with --dump=PATH, writes the graded pool and stops. --from=PATH1,PATH2
+## sequences the campaign from such dumps instead of generating.
 
 const Generator = preload("res://scripts/level_candidate_generator.gd")
 const Evaluator = preload("res://scripts/level_evaluator.gd")
@@ -37,15 +40,32 @@ func _run() -> void:
 	var records: Array = []
 	var candidates: Array = []
 	var stats := {}
-	_generate_pool(pool, "", generator, evaluator, records, candidates, stats, started)
-	# Small levels for the shuffle onboarding come from a pool of their own.
-	if config.has("tutorial_pool"):
-		_generate_pool(config.tutorial_pool, "tutorial ", generator, evaluator, records, candidates,
-			stats, started)
-	# Further targeted pools, e.g. for hard levels: [{"label": ..., size, first_seed, ...}].
-	for extra: Dictionary in config.get("extra_pools", []):
-		_generate_pool(extra, str(extra.get("label", "extra")) + " ", generator, evaluator, records,
-			candidates, stats, started)
+	_shard = int(args.get("shard", 0))
+	_shards = maxi(1, int(args.get("shards", 1)))
+	if args.has("from"):
+		for path: String in str(args.from).split(","):
+			_load_dump(path, records, candidates, stats)
+	else:
+		if pool.get("size", 0) > 0:
+			_generate_pool(pool, "", generator, evaluator, records, candidates, stats, started)
+		# Small levels for the shuffle onboarding come from a pool of their own.
+		if config.has("tutorial_pool"):
+			_generate_pool(config.tutorial_pool, "tutorial ", generator, evaluator, records, candidates,
+				stats, started)
+		# Further targeted pools, e.g. for hard levels: [{"label": ..., size, first_seed, ...}].
+		for extra: Dictionary in config.get("extra_pools", []):
+			_generate_pool(extra, str(extra.get("label", "extra")) + " ", generator, evaluator, records,
+				candidates, stats, started)
+	if args.has("dump"):
+		var dumped: Array = []
+		for record: Dictionary in records:
+			dumped.append({"evaluation": record.evaluation,
+				"candidate": generator.to_json_data(candidates[record.index])})
+		var saved := _write(str(args.dump), {"stats": stats, "records": dumped,
+			"seconds": snappedf((Time.get_ticks_msec() - started) / 1000.0, 0.1)})
+		print("Dumped %d graded candidates: %s" % [dumped.size(), JSON.stringify(stats)])
+		quit(0 if saved else 1)
+		return
 
 	var campaign: Dictionary = sequencer.build(records)
 	campaign.summary["pool_breakdown"] = stats
@@ -74,18 +94,21 @@ func _run() -> void:
 		exported.append(level)
 
 	var output_dir: String = config.get("output_dir", "res://generated_levels")
+	var suffix: String = config.get("output_suffix", "")
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(output_dir))
 	# Keep the editor from importing generated JSON as resources.
 	FileAccess.open(output_dir.path_join(".gdignore"), FileAccess.WRITE).close()
-	var ok := _write(output_dir.path_join("levels.json"), {"schema_version": 1,
-		"base_slots": evaluator.base_slots, "levels": exported})
-	ok = _write(output_dir.path_join("report.json"), campaign) and ok
+	var ok := _write(output_dir.path_join("levels%s.json" % suffix), {"schema_version": 1,
+		"base_slots": evaluator.base_slots, "first_level": sequencer.first_level, "levels": exported})
+	ok = _write(output_dir.path_join("report%s.json" % suffix), campaign) and ok
 	_print_report(campaign)
 	quit(0 if ok and campaign.summary.missing.is_empty() else 1)
 
 func _generate_pool(pool: Dictionary, label: String, generator, evaluator, records: Array,
 		candidates: Array, stats: Dictionary, started: int) -> void:
 	for offset in int(pool["size"]):
+		if offset % _shards != _shard:
+			continue
 		var level_seed: int = int(pool.first_seed) + offset
 		# Pool parameters use their own stream so they do not correlate with
 		# the generator's first draws for the same seed.
@@ -118,6 +141,22 @@ func _generate_pool(pool: Dictionary, label: String, generator, evaluator, recor
 		if (offset + 1) % 25 == 0:
 			print("  %s%d/%d candidates, %.1f s" % [label, offset + 1, int(pool["size"]),
 				(Time.get_ticks_msec() - started) / 1000.0])
+
+var _shard := 0
+var _shards := 1
+
+func _load_dump(path: String, records: Array, candidates: Array, stats: Dictionary) -> void:
+	var data = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not data is Dictionary:
+		push_error("Cannot read dump: " + path)
+		return
+	for key: String in data.stats:
+		stats[key] = int(stats.get(key, 0)) + int(data.stats[key])
+	for entry: Dictionary in data.records:
+		var evaluation: Dictionary = entry.evaluation
+		evaluation["seed"] = int(evaluation.seed)
+		records.append({"index": candidates.size(), "evaluation": evaluation})
+		candidates.append(Generator.from_json_data(entry.candidate))
 
 func _user_args() -> Dictionary:
 	var result := {}
