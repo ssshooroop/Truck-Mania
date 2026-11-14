@@ -22,7 +22,7 @@ var model = GameModel.new()
 ## window certificate; 0 keeps window colours distinct where colours allow.
 func generate(level_seed: int, vehicle_count: int = 10, color_count: int = 4,
 		placement_attempts: int = 2500, queue_window: int = 1, max_run: int = 3,
-		same_color_chance: float = 0.0) -> Dictionary:
+		same_color_chance: float = 0.0, compact_rounds: int = 0) -> Dictionary:
 	assert(vehicle_count >= 1 and vehicle_count <= 30)
 	assert(color_count >= 1 and color_count <= GameModel.COLORS)
 	rng.seed = level_seed
@@ -30,44 +30,63 @@ func generate(level_seed: int, vehicle_count: int = 10, color_count: int = 4,
 	# blockers[i]: bitmask of placed vehicles in the exit sweep of vehicle i.
 	var blockers: Array = []
 	var attempts := 0
-	while vehicles.size() < vehicle_count and attempts < placement_attempts:
-		attempts += 1
-		var kind: int = KINDS[rng.randi_range(0, KINDS.size() - 1)]
-		var heading: int = rng.randi_range(0, DIRECTIONS - 1)
-		var angle: float = heading * PI / 4.0
-		var size: Vector2 = Vector2(GameModel.WIDTHS[kind], GameModel.LENGTHS[kind])
-		# Sample a centre, then reject any rotated body that crosses the yard.
-		var centre := Vector2(
-			rng.randf_range(GameModel.YARD_RECT.position.x, GameModel.YARD_RECT.end.x),
-			rng.randf_range(GameModel.YARD_RECT.position.y, GameModel.YARD_RECT.end.y))
-		var vehicle := {
-			"id": vehicles.size(),
-			"color": rng.randi_range(0, color_count - 1),
-			"position": centre,
-			"angle": angle,
-			"kind": kind,
-			"capacity": GameModel.CAPACITIES[kind],
-			"load": 0,
-			"status": "yard",
-			"bay": -1
-		}
-		if not _inside_yard(vehicle, size):
-			continue
-		var valid := true
-		for other: Dictionary in vehicles:
-			# Reuse the production SAT collision test, with a small safety margin.
-			if model._rectangles_overlap(vehicle.position, model.forward(vehicle), size + Vector2(4, 4),
-					other.position, model.forward(other), model.vehicle_size(other) + Vector2(4, 4)):
-				valid = false
-				break
-		if valid:
-			valid = _add_without_cycle(vehicle, vehicles, blockers)
-		if valid:
-			vehicles.append(vehicle)
+	# Dense layouts: when random placement stalls, slide the placed trucks
+	# towards a corner (keeping the blocking graph acyclic) and place more
+	# trucks into the freed space, up to compact_rounds times.
+	var budget := placement_attempts
+	var rounds_left := maxi(0, compact_rounds)
+	while true:
+		while vehicles.size() < vehicle_count and attempts < budget:
+			attempts += 1
+			_try_place(vehicles, blockers, color_count)
+		if vehicles.size() >= vehicle_count or rounds_left == 0:
+			break
+		rounds_left -= 1
+		_compact(vehicles, blockers)
+		budget += placement_attempts
 	if vehicles.size() != vehicle_count:
 		return {"ok": false, "seed": level_seed, "reason": "placement_exhausted",
 			"placed": vehicles.size(), "attempts": attempts}
+	return _finish(level_seed, vehicles, vehicle_count, color_count, attempts, queue_window,
+		max_run, same_color_chance)
 
+## One random placement attempt; appends the truck when it fits.
+func _try_place(vehicles: Array, blockers: Array, color_count: int) -> void:
+	var kind: int = KINDS[rng.randi_range(0, KINDS.size() - 1)]
+	var heading: int = rng.randi_range(0, DIRECTIONS - 1)
+	var angle: float = heading * PI / 4.0
+	var size: Vector2 = Vector2(GameModel.WIDTHS[kind], GameModel.LENGTHS[kind])
+	# Sample a centre, then reject any rotated body that crosses the yard.
+	var centre := Vector2(
+		rng.randf_range(GameModel.YARD_RECT.position.x, GameModel.YARD_RECT.end.x),
+		rng.randf_range(GameModel.YARD_RECT.position.y, GameModel.YARD_RECT.end.y))
+	var vehicle := {
+		"id": vehicles.size(),
+		"color": rng.randi_range(0, color_count - 1),
+		"position": centre,
+		"angle": angle,
+		"kind": kind,
+		"capacity": GameModel.CAPACITIES[kind],
+		"load": 0,
+		"status": "yard",
+		"bay": -1
+	}
+	if not _inside_yard(vehicle, size):
+		return
+	var valid := true
+	for other: Dictionary in vehicles:
+		# Reuse the production SAT collision test, with a small safety margin.
+		if model._rectangles_overlap(vehicle.position, model.forward(vehicle), size + Vector2(4, 4),
+				other.position, model.forward(other), model.vehicle_size(other) + Vector2(4, 4)):
+			valid = false
+			break
+	if valid:
+		valid = _add_without_cycle(vehicle, vehicles, blockers)
+	if valid:
+		vehicles.append(vehicle)
+
+func _finish(level_seed: int, vehicles: Array, vehicle_count: int, color_count: int, attempts: int,
+		queue_window: int, max_run: int, same_color_chance: float) -> Dictionary:
 	# Choose an order that respects all forward-sweep blockers.
 	# A cycle means no geometrically valid complete dispatch order exists.
 	var remaining: Array = []
@@ -117,6 +136,74 @@ func generate(level_seed: int, vehicle_count: int = 10, color_count: int = 4,
 			"initially_dispatchable": _count_initially_dispatchable(vehicles)
 		}
 	}
+
+## Slides every truck towards a random yard corner in shrinking steps. A move
+## is kept only if the truck stays inside the yard, overlaps nothing and the
+## blocking graph stays acyclic; blockers is rebuilt for the moved truck.
+func _compact(vehicles: Array, blockers: Array) -> void:
+	var yard: Rect2 = GameModel.YARD_RECT
+	var corner := Vector2(yard.position.x if rng.randf() < 0.5 else yard.end.x,
+		yard.position.y if rng.randf() < 0.5 else yard.end.y)
+	for step: float in [8.0, 4.0, 2.0, 1.0]:
+		for iteration in 25:
+			var changed := false
+			for vehicle: Dictionary in vehicles:
+				var start: Vector2 = vehicle.position
+				var delta: Vector2 = corner - start
+				for move: Vector2 in [delta.normalized() * step, Vector2(signf(delta.x) * step, 0.0),
+						Vector2(0.0, signf(delta.y) * step)]:
+					if move == Vector2.ZERO:
+						continue
+					vehicle.position = start + move
+					if _fits(vehicle, vehicles) and _rebuild_blockers(vehicle, vehicles, blockers):
+						changed = true
+						break
+					vehicle.position = start
+				if vehicle.position == start:
+					_rebuild_blockers(vehicle, vehicles, blockers)
+			if not changed:
+				break
+
+func _fits(vehicle: Dictionary, vehicles: Array) -> bool:
+	var size: Vector2 = model.vehicle_size(vehicle)
+	if not _inside_yard(vehicle, size):
+		return false
+	for other: Dictionary in vehicles:
+		if other.id != vehicle.id and model._rectangles_overlap(vehicle.position, model.forward(vehicle),
+				size + Vector2(4, 4), other.position, model.forward(other),
+				model.vehicle_size(other) + Vector2(4, 4)):
+			return false
+	return true
+
+## Recomputes the blocking bits of `vehicle` at its current position. Returns
+## false (leaving blockers unchanged) if that would create a blocking cycle.
+func _rebuild_blockers(vehicle: Dictionary, vehicles: Array, blockers: Array) -> bool:
+	var index: int = vehicle.id
+	var updated := blockers.duplicate()
+	var own := 0
+	for other: Dictionary in vehicles:
+		var id: int = other.id
+		if id == index:
+			continue
+		if model._sweep_hits(vehicle, other):
+			own |= 1 << id
+		if model._sweep_hits(other, vehicle):
+			updated[id] = int(updated[id]) | (1 << index)
+		else:
+			updated[id] = int(updated[id]) & ~(1 << index)
+	updated[index] = own
+	var remaining := (1 << vehicles.size()) - 1
+	while remaining != 0:
+		var free := 0
+		for id in vehicles.size():
+			if (remaining >> id) & 1 == 1 and (int(updated[id]) & remaining) == 0:
+				free |= 1 << id
+		if free == 0:
+			return false
+		remaining &= ~free
+	for id in vehicles.size():
+		blockers[id] = updated[id]
+	return true
 
 ## Accepts a placement only if the blocking graph stays acyclic, so every
 ## finished layout has a complete dispatch order. Updates blockers on success.

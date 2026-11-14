@@ -122,7 +122,7 @@ func _generate_pool(pool: Dictionary, label: String, generator, evaluator, recor
 		var runs = pool.max_run
 		var max_run: int = params.randi_range(int(runs[0]), int(runs[1])) if runs is Array else int(runs)
 		var candidate: Dictionary = generator.generate(level_seed, vehicle_count, colors,
-			int(pool.placement_attempts), window, max_run, same_color)
+			int(pool.placement_attempts), window, max_run, same_color, int(pool.get("compact_rounds", 0)))
 		if not candidate.ok:
 			_count(stats, label + "generator:" + str(candidate.reason))
 			continue

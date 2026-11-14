@@ -20,6 +20,7 @@ func _initialize() -> void:
 	_test_boosters()
 	_test_trap_depth_and_expert()
 	_test_continuation_schedule()
+	_test_dense_layouts()
 	print("Level pipeline checks: %d; failures: %d" % [checks, failures])
 	quit(0 if failures == 0 else 1)
 
@@ -318,6 +319,25 @@ func _test_continuation_schedule() -> void:
 				"Level %d is won with three slots by its certificate" % int(level.campaign.level))
 	check(is_zero_approx(sequencer._progress(101)) and is_equal_approx(sequencer._progress(150), 1.0),
 		"Difficulty ramp runs from level 101 to 150")
+
+func _test_dense_layouts() -> void:
+	var generator = Generator.new()
+	var model = Model.new()
+	var placed := 0
+	for level_seed in range(1100, 1106):
+		var candidate: Dictionary = generator.generate(level_seed, 20, 5, 10000, 3, 1, 0.4, 8)
+		if not candidate.ok:
+			continue
+		placed += 1
+		var clear := true
+		for a: Dictionary in candidate.vehicles:
+			for b: Dictionary in candidate.vehicles:
+				if a.id < b.id and model._rectangles_overlap(a.position, model.forward(a), model.vehicle_size(a),
+						b.position, model.forward(b), model.vehicle_size(b)):
+					clear = false
+		check(clear, "Dense layout %d has no overlapping trucks" % level_seed)
+		check(candidate.dispatch_order.size() == 20, "Dense layout %d keeps a full dispatch order" % level_seed)
+	check(placed >= 4, "Compaction places twenty trucks on most seeds (got %d of 6)" % placed)
 
 func _tier_of(fail: float) -> String:
 	if fail <= 0.15:

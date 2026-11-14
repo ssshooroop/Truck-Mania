@@ -53,7 +53,7 @@ func _run() -> void:
 		var same_color := params.randf_range(float(twins[0]), float(twins[1]))
 		var max_run := params.randi_range(int(pool.max_run[0]), int(pool.max_run[1]))
 		var candidate: Dictionary = generator.generate(level_seed, vehicle_count, colors,
-			int(pool.placement_attempts), window, max_run, same_color)
+			int(pool.placement_attempts), window, max_run, same_color, int(pool.get("compact_rounds", 0)))
 		if not candidate.ok:
 			_count(stats, "generator:" + str(candidate.reason))
 			continue
