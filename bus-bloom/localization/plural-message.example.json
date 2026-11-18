@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "rule_standard": "CLDR 48 cardinal",
+  "id": "shop.unlock_slot.price",
+  "source_revision": 1,
+  "context": "Кнопка открытия дополнительного места за монеты",
+  "parameters": {
+    "coins": {"type": "integer", "minimum": 0, "required": true, "display": "integer"}
+  },
+  "selector": {"type": "plural", "parameter": "coins", "rule": "cardinal"},
+  "translations": {
+    "ru": {
+      "source_revision": 1,
+      "status": "reviewed",
+      "forms": {
+        "one": "Открыть за {coins} монету",
+        "few": "Открыть за {coins} монеты",
+        "many": "Открыть за {coins} монет",
+        "other": "Открыть за {coins} монеты"
+      }
+    },
+    "en": {
+      "source_revision": 1,
+      "status": "reviewed",
+      "forms": {"one": "Unlock for {coins} coin", "other": "Unlock for {coins} coins"}
+    },
+    "ar": {
+      "source_revision": 1,
+      "status": "new",
+      "forms": {"zero": "", "one": "", "two": "", "few": "", "many": "", "other": ""}
+    }
+  }
+}

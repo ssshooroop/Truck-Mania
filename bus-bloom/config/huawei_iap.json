@@ -1,0 +1,15 @@
+{
+  "package_name": "org.truckmania.game.hw",
+  "app_id": "119855549",
+  "public_key": "MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA0MsnmduRJORHkpW4R/GR3k+AFA+PX7MYlCaONBE98NXtkGHu4YRw/llaL4Nx3Z5ODcl0ts3fZgqZGixTxnMtzIGyvbd+8AzmO+QuATUQs9NrIxgKgyqCG6r2CF9N31MB6hWkiJEwVbdzTTd04B5HRrAdi3LMOc5h1ktXRxbuv9FStKNQY3hIw5HIkBdsU9AKNDan4lFh2lgISUlnjgWDuiA5ZhmtUYg7y3GdJyO1SC0XJwII7tOXYIjDyzbvWQ9xfUf5qpq1tNMvvSXvG6lvgh6cFKQ7x94OVKW4QGwHwLQiDO8HDwOD0YSLFM6o8LEd9MhnRI2EMTcySW6yRCsDGGplFIoumXHL2b0VbPD6iJqA5SmTnoDdqL97u9u4cSQ5MtSk7KD5jvo0u87ERWqP6Fiktm7Uz+LsIQHqhKkZPEP9jpm1x7qMkRfRXaGLKdyvvm0UceQYhLzK1qOYIhghEDubZjTlURgaqLW7LAKNtj4z5qxZGRbYh9ZtLUfZZnS3AgMBAAE=",
+  "product_ids": {
+    "coins_500": "coins_500",
+    "coins_1200": "coins_1200",
+    "coins_2600": "coins_2600",
+    "coins_5500": "coins_5500",
+    "coins_12000": "coins_12000",
+    "starter": "starter",
+    "season_halloween_2026": "season_halloween_2026",
+    "season_newyear_2026": "season_newyear_2026"
+  }
+}

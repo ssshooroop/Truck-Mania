@@ -1,0 +1,50 @@
+Truck Mania / Unity Ads Android integration
+2026-11-11
+
+SDK: com.unity3d.ads:unity-ads:4.21.0 (Maven Central).
+Godot v2 Android plugin: TruckManiaAds, compiled against Godot 4.5.2.
+Java source lives here; built AAR goes to addons/unity_ads/truck-mania-ads.aar.
+EditorExportPlugin adds the AAR and SDK dependency during Gradle Android export.
+
+Configuration: config/ads.json. Android Game ID 800430064.
+shortfall -> 25_coins_level; shop -> 25_coins_store; double -> double_reward;
+slot -> open_slot; undo -> undo; interstitial -> BP_Interstitial_Android.
+Test mode is ON. No production ad traffic is intended in this build.
+Privacy: contextual/non-behavioral, userConsent=false, userOptOut=true.
+Do not infer individual consent or age from the content rating.
+The supplied Notion privacy-policy URL is recorded in config; its contents
+could not be fetched in this session and have not been audited.
+
+Build test APK: python tools/build_ads_apk.py
+Build internal-test AAB: python tools/build_aab.py --allow-test-ads
+Normal AAB build refuses test mode, to prevent accidental production uploads.
+Signing keys remain outside the game source tree. No store upload is automated.
+
+Rewarded: preload each placement, retry load failure after 30 seconds, enable
+only its own button. Native onRewarded authorizes a reward; onCompleted/Failed
+ends presentation. Match request ID and unit; ignore duplicate/stale callbacks.
+Game is paused, audio muted and navigation locked until SDK completion.
+Unavailable, skipped and failed ads never produce a free reward.
+
+Interstitial: after 4 completions in the current session, at the player's
+next/replay/map action in the victory window. Never wait for an unloaded ad.
+At least 120 seconds since any ad start. Any rewarded ad resets the counter.
+Does not run in a level, on launch, on loss, or immediately after rewarded ads.
+
+Automated checks:
+tests/unity_ads_test.gd: placement routing, duplicate/stale/mismatched callbacks,
+concurrent requests, no reward on skip/error, interstitial spacing/cooldown.
+tests/ads_game_flow_test.gd: live button refresh, shop and shortfall coins,
+double reward, fourth/fifth slots, pause/mute/navigation protection.
+
+Still requires Android device validation (no device connected during build):
+- SDK initializes for Game ID 800430064; all six units load test ads.
+- Complete/skip each rewarded format; reward once, then allow a new video.
+- Close via Android Back; background/resume during an ad; check sound recovery.
+- Launch offline, reconnect, wait for retry; game still plays offline.
+- Four completions reach interstitial at a transition; no back-to-back ads.
+- No native SDK ads are available in the web preview or desktop editor.
+
+Official references:
+https://docs.unity.com/en-us/ads-android/4.21.0/sdk-integration/api/android-api
+https://docs.godotengine.org/en/4.5/tutorials/platform/android/android_plugin.html

@@ -1,4 +1,5 @@
 extends Control
+const LocalText = preload("res://scripts/ui/localized_text.gd")
 ## Reward definitions and persisted calendar state are supplied by the game.
 signal closed
 signal reward_requested(index:int)
@@ -52,8 +53,7 @@ func card_rect(index:int)->Rect2:
 	if index==6: return Rect2(46,602,448,164)
 	return Rect2(46+(index%3)*154,220+(index/3)*191,140,177)
 func label(value:String,center:Vector2,font_size:int,tint:Color):
-	var width=FONT.get_string_size(value,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size).x
-	draw_string(FONT,center-Vector2(width/2,0),value,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size,tint)
+	LocalText.draw(self,value,center,FONT,font_size,tint,HORIZONTAL_ALIGNMENT_CENTER)
 func box(rect:Rect2,tint:Color,radius:int=18,bottom_only:bool=false,border:bool=true):
 	var style=StyleBoxFlat.new()
 	style.bg_color=tint
@@ -97,7 +97,7 @@ func _draw():
 	for i in 7:
 		var rect=card_rect(i)
 		box(rect,Color(palette[i]))
-		draw_string(DAY_FONT,rect.position+Vector2(12,23),"День %d"%(i+1),HORIZONTAL_ALIGNMENT_LEFT,-1,15,Color("52617a"))
+		LocalText.draw(self,"День %d"%(i+1),rect.position+Vector2(12,23),DAY_FONT,15,Color("52617a"))
 		var items:Array=rewards[i].rewards
 		for j in items.size():
 			var reward:Dictionary=items[j]

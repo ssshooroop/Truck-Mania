@@ -1,0 +1,32 @@
+#status {
+ visibility:visible;
+ background:#19394f;
+ overflow:hidden;
+}
+#status::before {
+ content:"";position:absolute;inset:-30px;
+ background:linear-gradient(#17334d66,#17334d88),url('loading-background.png') center/cover;
+ filter:blur(18px);
+}
+#status #status-splash {
+ display:block;position:absolute;inset:0;
+ width:min(100%,75vh);height:100%;max-width:none;max-height:none;
+ object-fit:cover;object-position:center;margin:auto;
+}
+#loading-logo {
+ position:absolute;top:max(3.5%,env(safe-area-inset-top));left:50%;
+ transform:translateX(-50%);width:min(86vw,47vh,440px);height:auto;
+ filter:drop-shadow(0 5px 5px #12243c66);
+}
+#status #status-progress {display:none!important}
+#cargo-loading {
+ position:fixed;z-index:10;left:50%;transform:translateX(-50%);
+ bottom:max(5.5%,calc(env(safe-area-inset-bottom) + 20px));
+ width:min(78vw,400px);text-align:center;color:#fff;
+ font:700 16px system-ui,sans-serif;text-shadow:0 2px 4px #101f33;
+}
+.cargo-track {height:18px;padding:3px;border:2px solid #fff2b0;border-radius:30px;background:#142c48;box-shadow:0 3px 0 #10213988}
+.cargo-fill {height:100%;width:0;border-radius:20px;background:linear-gradient(#ffec58,#ffb51b);transition:width .18s linear}
+.cargo-label {margin-top:10px;min-height:24px}
+#cargo-loading button {margin-top:12px;padding:12px 28px;border:2px solid #fff2b0;border-radius:16px;background:#ffc32c;color:#142c48;font:700 16px system-ui;cursor:pointer}
+@media(prefers-reduced-motion:reduce){.cargo-fill{transition:none}}

@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories { google(); mavenCentral(); gradlePluginPortal() }
+}
+dependencyResolutionManagement {
+    repositories {
+        google { content { includeGroupByRegex 'com\\.android.*'; includeGroupByRegex 'androidx\\..*'; includeGroupByRegex 'com\\.google\\.android.*'; includeGroup 'org.chromium.net' } }
+        mavenCentral()
+    }
+}
+rootProject.name = 'truck-mania-unity-ads'

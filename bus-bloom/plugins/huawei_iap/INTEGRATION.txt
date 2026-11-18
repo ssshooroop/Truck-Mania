@@ -1,0 +1,99 @@
+Truck Mania / Huawei AppGallery IAP
+
+SDK: com.huawei.hms:iap:6.16.6.305, official Huawei Maven repository.
+Version verified against Huawei Maven metadata on 2026-11-17.
+Godot: 4.5.2 Android v2 plugin, singleton TruckManiaIap.
+Java 17, min SDK 24. No real app credentials are stored in this plugin.
+
+Build: python tools/build_huawei_iap_plugin.py
+The build runs ReceiptVerifierTest using generated, ephemeral RSA keys, then
+Gradle bundleReleaseAar. Output: addons/huawei_iap/truck-mania-iap.aar.
+Log: artifacts/huawei-iap-plugin-build.log.
+The complete AAR is produced by AGP; HMS SDK manifests and resources remain
+transitive Maven dependencies and are merged by the application's Gradle build.
+
+Enable addons/huawei_iap/plugin.cfg in project.godot editor_plugins.
+Only the Android preset with custom_features containing huawei_appgallery
+receives the plugin AAR, Huawei SDK, repository and AppID manifest metadata.
+Callbacks inspect get_export_preset().get_custom_features(); they do not depend
+on the host OS feature flags or export callback order. Other Android presets
+receive none of these Huawei additions.
+
+The export script reads app_id from config/huawei_iap.json and emits:
+  com.huawei.hms.client.appid = appid=<configured AppID>
+Do not add duplicate metadata elsewhere. The actual HMS base SDK supports this
+manifest fallback without the AGC Gradle plugin. At initialization both the
+manifest AppID and SDK-resolved AppID must match the configured AppID.
+If an agconnect-services.json/config is added later, it must describe the same
+registered AppGallery application and package. Receipt package checks use the
+actual Activity package, including the Huawei package suffix.
+
+Required real account configuration before a working purchase build:
+- AppGallery application registered for the exact Huawei package name.
+- Release signing certificate fingerprint registered for that app.
+- IAP enabled; Huawei IAP RSA PUBLIC key (never the private key).
+- Published/available products in the chosen regions and their real product IDs.
+These account settings, login, regional availability and real checkout cannot
+be validated by compilation or the local cryptographic tests.
+
+API (called from GDScript; all work marshalled to Android UI thread):
+initialize(appId, publicKey, catalogJson)
+  catalogJson = [{"id":"logical_id","product_id":"Huawei product ID","type":0}]
+  type 0 = consumable; type 1 = non-consumable. store_id is accepted as a legacy
+  alias for product_id. No subscriptions, invented IDs or fake transactions.
+query_products()
+purchase(logicalId, requestId)
+restore(requestId)
+confirm_delivery(token)
+
+Signals:
+env_ready(bool ready, String error)
+products_loaded(String json, String error)
+  json = [{id, product_id, type, price, currency, micros_price, title}]
+  price is Huawei's localized display string. Missing products are omitted.
+purchase_verified(String json)
+  json = {id, token, order_id, type, source, request_id}
+  source = purchase | restore | recovery
+operation_finished(int requestId, String status, String error)
+  status = verified | restored | cancelled | pending | failed | unavailable | busy
+consumed(String token, bool ok, String error)
+
+Delivery contract:
+- purchase_verified authorizes the game to persist an idempotent entitlement
+  keyed by token/order. It does not itself grant currency or consume anything.
+- The game calls confirm_delivery only AFTER the reward and transaction ledger
+  have been durably saved. Failed saves must not call confirm_delivery.
+- Only a known, verified consumable token can be sent to consumeOwnedPurchase.
+  Non-consumables are never consumed. A consume failure does not revoke the
+  already-persisted reward. Later ownership scans allow a consumption retry.
+- Every returned receipt must pass an RSA signature check, an allowlisted
+  algorithm (default SHA256WithRSA), app/package/product/type checks, state=0,
+  and non-empty token/order. Pending orders are checked but not delivered.
+- Direct checkout also matches a random developerPayload and the displayed
+  Huawei ProductInfo price/currency. A changed price requires another user tap.
+- Owned recovery verifies historical signed purchases without comparing their
+  price with TODAY'S price, which may legitimately differ after price changes.
+- Initial product refresh and activity resume recover unconsumed purchases.
+  Restore scans both types and all continuation pages; receipts precede the
+  restored completion signal. Invalid responses or failed pages report failed.
+- Missing/cancelled/failed checkout never emits delivery. Already-owned errors
+  run a verified owned scan. A timeout releases the UI but late signed receipts
+  still emit recovery delivery; the game ledger must deduplicate them.
+- Error strings contain safe status codes, not raw receipts, public keys or
+  payment data. This bridge does not log those values.
+
+Validation completed locally:
+- Compiled against the real Huawei IAP 6.16.6.305 and Godot 4.5.2 SDKs.
+- Genuine RSA tests cover correct signatures, changed bytes, wrong keys,
+  forbidden algorithms, PSS, app/package/product/type mismatch, and price.
+- Device/account integration, payment completion/cancellation, process-death
+  recovery and HMS installation/login resolutions still require an appropriately
+  registered app, real product configuration and a Huawei test device/account.
+
+Official references:
+https://developer.huawei.com/repo/com/huawei/hms/iap/maven-metadata.xml
+https://developer.huawei.com/consumer/en/doc/HMSCore-Guides/verifying-signature-returned-result-0000001050033088/
+https://developer.huawei.com/consumer/en/doc/HMSCore-References/productinfo-0000001050135784/
+https://developer.huawei.com/consumer/en/doc/HMS-References/iap-InAppPurchaseData-v4/
+https://github.com/HMS-Core/hms-iap-clientdemo-android-studio
+https://docs.godotengine.org/en/4.5/classes/class_editorexportplugin.html

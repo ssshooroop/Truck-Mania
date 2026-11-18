@@ -1,0 +1,3316 @@
+{
+  "source_locale": "ru",
+  "runtime_connected": false,
+  "description": "Инвентаризация текущих исходников. configuration — данные; legacy_or_mock — отдельная очередь. translation заполняется в копии файла.",
+  "entries": [
+    {
+      "id": "config.achievements.achievements.0.dispatcher_1.83f7eca71358",
+      "source": "Диспетчер стройки I",
+      "context": "config/achievements/achievements/0/dispatcher_1",
+      "scope": "configuration",
+      "references": [
+        "config/achievements.json:4"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.achievements.achievements.1.dispatcher_2.63332aabd948",
+      "source": "Диспетчер стройки II",
+      "context": "config/achievements/achievements/1/dispatcher_2",
+      "scope": "configuration",
+      "references": [
+        "config/achievements.json:6"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.achievements.achievements.2.dispatcher_3.a56fb6a376d3",
+      "source": "Диспетчер стройки III",
+      "context": "config/achievements/achievements/2/dispatcher_3",
+      "scope": "configuration",
+      "references": [
+        "config/achievements.json:8"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.achievements.achievements.3.dispatcher_4.7d95d2998eaf",
+      "source": "Диспетчер стройки IV",
+      "context": "config/achievements/achievements/3/dispatcher_4",
+      "scope": "configuration",
+      "references": [
+        "config/achievements.json:10"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.achievements.achievements.4.cargo_1000.a468efbda495",
+      "source": "Тысяча грузов",
+      "context": "config/achievements/achievements/4/cargo_1000",
+      "scope": "configuration",
+      "references": [
+        "config/achievements.json:12"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.achievements.achievements.5.flawless_loading.c4c7e7a91bb3",
+      "source": "Безупречная погрузка",
+      "context": "config/achievements/achievements/5/flawless_loading",
+      "scope": "configuration",
+      "references": [
+        "config/achievements.json:14"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.achievements.achievements.6.no_mistakes_10.14d4390bae4e",
+      "source": "Без единой ошибки",
+      "context": "config/achievements/achievements/6/no_mistakes_10",
+      "scope": "configuration",
+      "references": [
+        "config/achievements.json:17"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.achievements.achievements.7.on_the_edge.2131158405e9",
+      "source": "На волоске",
+      "context": "config/achievements/achievements/7/on_the_edge",
+      "scope": "configuration",
+      "references": [
+        "config/achievements.json:19"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.achievements.achievements.8.comeback.28b4f0f21de6",
+      "source": "Не сдаваться",
+      "context": "config/achievements/achievements/8/comeback",
+      "scope": "configuration",
+      "references": [
+        "config/achievements.json:21"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.achievements.achievements.9.dream_fleet.ada7efaa9d67",
+      "source": "Автопарк мечты",
+      "context": "config/achievements/achievements/9/dream_fleet",
+      "scope": "configuration",
+      "references": [
+        "config/achievements.json:23"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.daily_rewards.items.coins.label.a54143865c0d",
+      "source": "Монеты",
+      "context": "config/daily_rewards/items/coins/label",
+      "scope": "configuration",
+      "references": [
+        "config/daily_rewards.json:4"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.daily_rewards.items.crane.label.8224141e7344",
+      "source": "Кран",
+      "context": "config/daily_rewards/items/crane/label",
+      "scope": "configuration",
+      "references": [
+        "config/daily_rewards.json:12"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.daily_rewards.items.extra_slot.label.4649b302d2a0",
+      "source": "Место",
+      "context": "config/daily_rewards/items/extra_slot/label",
+      "scope": "configuration",
+      "references": [
+        "config/daily_rewards.json:17"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.daily_rewards.items.shuffle.label.b03d6d33ac21",
+      "source": "Перемешивание",
+      "context": "config/daily_rewards/items/shuffle/label",
+      "scope": "configuration",
+      "references": [
+        "config/daily_rewards.json:22"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.daily_rewards.items.swap.label.9378e03b6132",
+      "source": "Обмен",
+      "context": "config/daily_rewards/items/swap/label",
+      "scope": "configuration",
+      "references": [
+        "config/daily_rewards.json:26"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.daily_rewards.items.undo.label.3ec2342a5527",
+      "source": "Отмена хода",
+      "context": "config/daily_rewards/items/undo/label",
+      "scope": "configuration",
+      "references": [
+        "config/daily_rewards.json:8"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.seasonal_events.events.0.halloween_2026.a9f8a3eb45b4",
+      "source": "Тыквы на складе, летучие мыши\nнад краном — набор только до 2 ноября!",
+      "context": "config/seasonal_events/events/0/halloween_2026",
+      "scope": "configuration",
+      "references": [
+        "config/seasonal_events.json:12"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": [
+        "В исходнике есть перенос строки; проверить ширину после перевода."
+      ]
+    },
+    {
+      "id": "config.seasonal_events.events.0.halloween_2026.3e3da8ee1d96",
+      "source": "Забрать набор",
+      "context": "config/seasonal_events/events/0/halloween_2026",
+      "scope": "configuration",
+      "references": [
+        "config/seasonal_events.json:14"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.seasonal_events.events.0.halloween_2026.58bd03ae04fd",
+      "source": "Ночная смена",
+      "context": "config/seasonal_events/events/0/halloween_2026",
+      "scope": "configuration",
+      "references": [
+        "config/seasonal_events.json:6"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.seasonal_events.events.1.newyear_2026.3e3da8ee1d96",
+      "source": "Забрать набор",
+      "context": "config/seasonal_events/events/1/newyear_2026",
+      "scope": "configuration",
+      "references": [
+        "config/seasonal_events.json:14"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.seasonal_events.events.1.newyear_2026.038586991416",
+      "source": "Новогодний аврал",
+      "context": "config/seasonal_events/events/1/newyear_2026",
+      "scope": "configuration",
+      "references": [
+        "config/seasonal_events.json:18"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.seasonal_events.events.1.newyear_2026.731e4b25b35d",
+      "source": "Праздничные подарки уже на складе —\nуспей до конца каникул!",
+      "context": "config/seasonal_events/events/1/newyear_2026",
+      "scope": "configuration",
+      "references": [
+        "config/seasonal_events.json:24"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": [
+        "В исходнике есть перенос строки; проверить ширину после перевода."
+      ]
+    },
+    {
+      "id": "config.store_catalog.products.2.coins_2600.e56b418b8103",
+      "source": "Хит",
+      "context": "config/store_catalog/products/2/coins_2600",
+      "scope": "configuration",
+      "references": [
+        "config/store_catalog.json:6"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.store_catalog.products.4.coins_12000.18ec97a01aaa",
+      "source": "Выгодно",
+      "context": "config/store_catalog/products/4/coins_12000",
+      "scope": "configuration",
+      "references": [
+        "config/store_catalog.json:8"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.store_catalog.products.5.starter.90436a08231e",
+      "source": "Набор новичка",
+      "context": "config/store_catalog/products/5/starter",
+      "scope": "configuration",
+      "references": [
+        "config/store_catalog.json:9"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.store_catalog.products.5.starter.7170092c5229",
+      "source": "Один раз за всю игру",
+      "context": "config/store_catalog/products/5/starter",
+      "scope": "configuration",
+      "references": [
+        "config/store_catalog.json:9"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.store_catalog.products.6.season_halloween_2026.a03446388631",
+      "source": "Набор ночной смены",
+      "context": "config/store_catalog/products/6/season_halloween_2026",
+      "scope": "configuration",
+      "references": [
+        "config/store_catalog.json:11"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "config.store_catalog.products.7.season_newyear_2026.694f571f43c4",
+      "source": "Новогодний набор",
+      "context": "config/store_catalog/products/7/season_newyear_2026",
+      "scope": "configuration",
+      "references": [
+        "config/store_catalog.json:13"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.cargo_art.9143eb5dcc80",
+      "source": "Доски",
+      "context": "scripts/cargo_art",
+      "scope": "current_source",
+      "references": [
+        "scripts/cargo_art.gd:12"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.cargo_art.bd86ace178a0",
+      "source": "Кабель",
+      "context": "scripts/cargo_art",
+      "scope": "current_source",
+      "references": [
+        "scripts/cargo_art.gd:12"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.cargo_art.34896f67adfa",
+      "source": "Кирпичи",
+      "context": "scripts/cargo_art",
+      "scope": "current_source",
+      "references": [
+        "scripts/cargo_art.gd:12"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.cargo_art.cb488b3124a1",
+      "source": "Профнастил",
+      "context": "scripts/cargo_art",
+      "scope": "current_source",
+      "references": [
+        "scripts/cargo_art.gd:12"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.cargo_art.291fa3db8353",
+      "source": "Трубы",
+      "context": "scripts/cargo_art",
+      "scope": "current_source",
+      "references": [
+        "scripts/cargo_art.gd:12"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.cargo_art.0ef0f22c90df",
+      "source": "Цемент",
+      "context": "scripts/cargo_art",
+      "scope": "current_source",
+      "references": [
+        "scripts/cargo_art.gd:12"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.cargo_art.34a493696529",
+      "source": "Бортовой",
+      "context": "scripts/cargo_art",
+      "scope": "current_source",
+      "references": [
+        "scripts/cargo_art.gd:13"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.cargo_art.144095769e68",
+      "source": "Пикап",
+      "context": "scripts/cargo_art",
+      "scope": "current_source",
+      "references": [
+        "scripts/cargo_art.gd:13"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.cargo_art.315789424c5f",
+      "source": "Самосвал",
+      "context": "scripts/cargo_art",
+      "scope": "current_source",
+      "references": [
+        "scripts/cargo_art.gd:13"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.daily_bonus.eb9739970cd2",
+      "source": "День %d",
+      "context": "scripts/daily_bonus",
+      "scope": "current_source",
+      "references": [
+        "scripts/daily_bonus.gd:100"
+      ],
+      "placeholders": [
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.daily_bonus.6662621fbab6",
+      "source": "Пропущен",
+      "context": "scripts/daily_bonus",
+      "scope": "current_source",
+      "references": [
+        "scripts/daily_bonus.gd:120"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.daily_bonus.e276492e344d",
+      "source": "Забрать",
+      "context": "scripts/daily_bonus",
+      "scope": "current_source",
+      "references": [
+        "scripts/daily_bonus.gd:126"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.daily_bonus.a42aee58d60a",
+      "source": "Продолжить",
+      "context": "scripts/daily_bonus",
+      "scope": "current_source",
+      "references": [
+        "scripts/daily_bonus.gd:128"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.daily_bonus.f4cdc2548c52",
+      "source": "Заходите каждый день",
+      "context": "scripts/daily_bonus",
+      "scope": "current_source",
+      "references": [
+        "scripts/daily_bonus.gd:129"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.daily_bonus.1f46e7410c9f",
+      "source": "и получайте призы!",
+      "context": "scripts/daily_bonus",
+      "scope": "current_source",
+      "references": [
+        "scripts/daily_bonus.gd:130"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.daily_bonus.a1af0e391ab9",
+      "source": "ЕЖЕДНЕВНЫЙ БОНУС",
+      "context": "scripts/daily_bonus",
+      "scope": "current_source",
+      "references": [
+        "scripts/daily_bonus.gd:95"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.game_model.ef9052e0abf8",
+      "source": "Первая поставка",
+      "context": "scripts/game_model",
+      "scope": "current_source",
+      "references": [
+        "scripts/game_model.gd:12"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.game_model.d6bcf97d5770",
+      "source": "Склад %d",
+      "context": "scripts/game_model",
+      "scope": "current_source",
+      "references": [
+        "scripts/game_model.gd:124"
+      ],
+      "placeholders": [
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.game_model.b4f4294c73e0",
+      "source": "Стройка оживает",
+      "context": "scripts/game_model",
+      "scope": "current_source",
+      "references": [
+        "scripts/game_model.gd:13"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.game_model.ee0b343982c8",
+      "source": "Плотная парковка",
+      "context": "scripts/game_model",
+      "scope": "current_source",
+      "references": [
+        "scripts/game_model.gd:14"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.game_model.775d6e7f5168",
+      "source": "Большая разгрузка",
+      "context": "scripts/game_model",
+      "scope": "current_source",
+      "references": [
+        "scripts/game_model.gd:15"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.game_model.e148bd322eb6",
+      "source": "Рабочий квартал",
+      "context": "scripts/game_model",
+      "scope": "current_source",
+      "references": [
+        "scripts/game_model.gd:16"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.game_model.c1ff8ad27d51",
+      "source": "Строительный час пик",
+      "context": "scripts/game_model",
+      "scope": "current_source",
+      "references": [
+        "scripts/game_model.gd:17"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.b695d5d8d1c5",
+      "source": "Сначала открой соседнее место",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1191"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.91a064acd00e",
+      "source": "Нужно %d монет",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1213"
+      ],
+      "placeholders": [
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.main.22c3ddf18611",
+      "source": "Лимит помощи в этой попытке исчерпан",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1216"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.1375e36fe936",
+      "source": "+%d",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1298"
+      ],
+      "placeholders": [
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.main.7312d70f7a8b",
+      "source": "УРОВЕНЬ %d",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1315"
+      ],
+      "placeholders": [
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.main.1d4f240c7386",
+      "source": "НАЖМИ НА КОНУС",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1426"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.1f72393019ca",
+      "source": "ОТКРОЙ МЕСТО!",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1427"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.db50163456aa",
+      "source": "БЕСПЛАТНО!",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1428"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.e993bacd9ca4",
+      "source": "До конца этой попытки",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1429"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.57b425f0b144",
+      "source": "БОЛЬШЕ МЕСТА!",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1431"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.6087ccb7cb2d",
+      "source": "Открой место до конца попытки",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1432"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.359ec6222b67",
+      "source": "Открыть за %d монет",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1434"
+      ],
+      "placeholders": [
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.main.308594c1fc02",
+      "source": "Цена уточняется",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1434"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.29d1e351c540",
+      "source": "Реклама пока недоступна",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1435"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.c4c39ac6251c",
+      "source": "Помощь на стройке",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1448"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.971455b7f908",
+      "source": "Замена машины",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1450"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.8224141e7344",
+      "source": "Кран",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1450"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.baf34c9a08fe",
+      "source": "Перемешать грузы",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1450"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.caf21fe0d262",
+      "source": "%s · %d монет",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1454"
+      ],
+      "placeholders": [
+        "%s",
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.main.ad2d15963945",
+      "source": "Помощь действует в этой попытке",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1455"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.5ddb4a930a33",
+      "source": "Баланс: %d",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1456"
+      ],
+      "placeholders": [
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.main.199de93a9257",
+      "source": "Перерыв на стройке",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1458"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.8314a586f880",
+      "source": "Груз и машины подождут",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1459"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.21dffe50ffc5",
+      "source": "Звуки погрузки",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1461"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.bf0e90816be7",
+      "source": "Меньше анимации",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1462"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.0541c131cbc0",
+      "source": "Продолжить работу",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1463"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.0c7925af0933",
+      "source": "Начать уровень заново",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1464"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.8e8dad84ce78",
+      "source": "Выбрать склад",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1465"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.fb16f2253476",
+      "source": "Твои склады",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1467"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.589bafc9b8fb",
+      "source": "Больше машин — интереснее задача",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1468"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.b2dd460cc970",
+      "source": "%02d",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1473"
+      ],
+      "placeholders": [
+        "%02d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.main.3a5628fdf323",
+      "source": "ЗАКРЫТ",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1474"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.39b131afe827",
+      "source": "НАЧАТЬ",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1474"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.e94c8b10fb66",
+      "source": "Новый склад открывается после полной отгрузки",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1475"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.f9135b8def31",
+      "source": "Нет хода для отмены",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1742"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.01e589e7cd6d",
+      "source": "Ролик пока не готов — попробуй позже",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1829"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.195f8283a5ee",
+      "source": "Ролик не досмотрен — награды нет",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1838"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.85790e1f3a24",
+      "source": "+%d %s",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1905"
+      ],
+      "placeholders": [
+        "%d",
+        "%s"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.main.07989dddb60a",
+      "source": "Покупки восстановлены",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1906"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.0767e8068116",
+      "source": "Покупки появятся в следующей версии",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1906",
+        "scripts/main.gd:1914"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.eb13f87aaacb",
+      "source": "Покупка не завершена — деньги не списаны",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:1923"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.91d91f393841",
+      "source": "Посты заняты — отмени ход или дождись погрузки",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:452"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.af6341234057",
+      "source": "Проезд занят — попробуй после проезда соседней машины",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:645"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.9f7d1e182ba7",
+      "source": "Машины и конвейер вернулись на ход назад",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:967"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.d338a4ad3d38",
+      "source": "Освободи машину у края или отмени последний ход",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:975"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.8e499a7944ea",
+      "source": "Вернись на ход назад — здесь нет решения",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:976"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.main.0e2764290fd4",
+      "source": "Выделенная машина поможет разгрузить двор",
+      "context": "scripts/main",
+      "scope": "current_source",
+      "references": [
+        "scripts/main.gd:977"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.slot_offer.99bf27c02d89",
+      "source": "−100",
+      "context": "scripts/slot_offer",
+      "scope": "current_source",
+      "references": [
+        "scripts/slot_offer.gd:26"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.game_modal.1375e36fe936",
+      "source": "+%d",
+      "context": "scripts/ui/game_modal",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/game_modal.gd:295"
+      ],
+      "placeholders": [
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.ui.game_modal.22a5d9112486",
+      "source": "Загружаем…",
+      "context": "scripts/ui/game_modal",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/game_modal.gd:365"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.game_modal.4367e0063eba",
+      "source": "Взять",
+      "context": "scripts/ui/game_modal",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/game_modal.gd:394"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.game_modal.912fad7363d8",
+      "source": "%s  %s",
+      "context": "scripts/ui/game_modal",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/game_modal.gd:398"
+      ],
+      "placeholders": [
+        "%s",
+        "%s"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.ui.game_modal.0246a2516cda",
+      "source": "Осталось",
+      "context": "scripts/ui/game_modal",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/game_modal.gd:398"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.game_modal.e656bc246d80",
+      "source": "%d д %d ч",
+      "context": "scripts/ui/game_modal",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/game_modal.gd:412"
+      ],
+      "placeholders": [
+        "%d",
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.ui.game_modal.77cbdae53b1d",
+      "source": "%d ч %02d мин",
+      "context": "scripts/ui/game_modal",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/game_modal.gd:413"
+      ],
+      "placeholders": [
+        "%d",
+        "%02d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.ui.game_modal.22aa5926e209",
+      "source": "%d:%02d",
+      "context": "scripts/ui/game_modal",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/game_modal.gd:414"
+      ],
+      "placeholders": [
+        "%d",
+        "%02d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.04a597bd50fb",
+      "source": "Материалы на ленте\nвстанут в новом порядке.",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:100"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": [
+        "В исходнике есть перенос строки; проверить ширину после перевода."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.8afd9b9a4ecf",
+      "source": "Перемешать",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:100"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.9b8183747132",
+      "source": "Перемешать груз?",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:100"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.7c47f7292ba4",
+      "source": "Отменить",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:101"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.c350b098b327",
+      "source": "Отменить ход?",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:101"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.215d188d6b1a",
+      "source": "Последняя машина\nвернётся на парковку.",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:101"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": [
+        "В исходнике есть перенос строки; проверить ширину после перевода."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.36f798a63c92",
+      "source": "Помощь",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:102"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.86991a952a8c",
+      "source": "Бесплатно с рекламой",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:108"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.d4fe5fffa3d6",
+      "source": "Не сейчас",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:109",
+        "scripts/ui/modal_catalog.gd:126",
+        "scripts/ui/modal_catalog.gd:160"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.90cba449230b",
+      "source": "Нужно ещё %d %s.",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:120"
+      ],
+      "placeholders": [
+        "%d",
+        "%s"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.15e07e80df50",
+      "source": "+%d за рекламу",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:121"
+      ],
+      "placeholders": [
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.2cacba01ed01",
+      "source": "%d монет",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:124"
+      ],
+      "placeholders": [
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.0b350c3a966b",
+      "source": "Все наборы в магазине",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:125"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.0e71379e30e5",
+      "source": "Не хватает монет",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:127"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.83c948293f13",
+      "source": "Монеты уже в копилке!",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:138"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.c459a8469cdb",
+      "source": "Отлично!",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:139",
+        "scripts/ui/modal_catalog.gd:278"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.ae5d2abc4e93",
+      "source": "Награда получена!",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:141"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.d674c9a43e5f",
+      "source": "Загружаем ролик…",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:145"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.8fbe9b75cbdf",
+      "source": "Отмена",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:146"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.81be36fb6d76",
+      "source": "Ролик не загрузился.\nПроверь интернет и попробуй ещё раз.",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:151"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": [
+        "В исходнике есть перенос строки; проверить ширину после перевода."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.13222328c826",
+      "source": "Попробовать ещё",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:152"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.a7a4033657e8",
+      "source": "Закрыть",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:153"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.c510079471ac",
+      "source": "Посмотри короткий ролик\nи получи %d %s.",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:158"
+      ],
+      "placeholders": [
+        "%d",
+        "%s"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}.",
+        "В исходнике есть перенос строки; проверить ширину после перевода."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.7ac84107c129",
+      "source": "Смотреть",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:159"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.f3c8f3a92afd",
+      "source": "Бесплатные монеты",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:162"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.4ac69ceabdf6",
+      "source": "Удвоить награду",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:176"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.fd5ddecfacae",
+      "source": "Награда за этот уровень\nуже получена.",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:177"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": [
+        "В исходнике есть перенос строки; проверить ширину после перевода."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.7b3864be0f54",
+      "source": "Карта уровней",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:179"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.6eaef62bc617",
+      "source": "Следующий уровень",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:179"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.800380963da6",
+      "source": "Сыграть ещё раз",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:180"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.6e06b221d0f8",
+      "source": "Груз отправлен!",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:181"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.44ce35728237",
+      "source": "Достижения",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:189"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.a7bdff844b22",
+      "source": "Серия",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:189"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.e1368cabf157",
+      "source": "Сундук",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:189"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.7f67af3d6cd9",
+      "source": "Уровень",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:189"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.d2904dded9ed",
+      "source": "До конца",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:201"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.3e3da8ee1d96",
+      "source": "Забрать набор",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:204"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.7996f711496a",
+      "source": "Позже",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:206"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.04c98320ca2b",
+      "source": "Обычная цена %s",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:208"
+      ],
+      "placeholders": [
+        "%s"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.2f46e9af5b29",
+      "source": "Сезонная акция",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:210"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.14071c7fed0a",
+      "source": "%s · ещё %s",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:250"
+      ],
+      "placeholders": [
+        "%s",
+        "%s"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.a54143865c0d",
+      "source": "Монеты",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:258"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.ecaab828792b",
+      "source": "Бесплатно",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:261"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.72c299e0d65e",
+      "source": "Скоро",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:261"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.16af0289546a",
+      "source": "Восстановить покупки",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:269"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.23e3c7064746",
+      "source": "Магазин",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:270"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.fb544c2664fb",
+      "source": "Готово!",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:274"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.900d17c85c44",
+      "source": "Всё уже на складе. За работу!",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:276"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.91faf0b5f015",
+      "source": "%d д",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:299"
+      ],
+      "placeholders": [
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.fdb60b7161f2",
+      "source": "%d ч",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:300"
+      ],
+      "placeholders": [
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.ec2f763fe6e3",
+      "source": "монета",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:305"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": [
+        "Форма русского множественного числа. При подключении нужен tr_n и правила целевого языка."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.253383400304",
+      "source": "монеты",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:306"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": [
+        "Форма русского множественного числа. При подключении нужен tr_n и правила целевого языка."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.5722f18f0748",
+      "source": "монет",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:307"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": [
+        "Форма русского множественного числа. При подключении нужен tr_n и правила целевого языка."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.ea58bb0bc6d4",
+      "source": "Дальше",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:35",
+        "scripts/ui/modal_catalog.gd:36"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.2179f8734c6f",
+      "source": "Нажми на машину — она выедет по стрелке к складу.",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:35"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.e180633a436f",
+      "source": "Привет, я Билли!",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:35"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.1e15b34f2534",
+      "source": "Машина берёт только свой материал. Следи за лентой сверху!",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:36"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.4d3181b2b05e",
+      "source": "Цвет — это груз",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:36"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.e7735f16fb5f",
+      "source": "Мест всего три",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:37"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.d09cef487b9e",
+      "source": "Начать работу",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:37"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.2052041e04c0",
+      "source": "Не занимай места машинами, которым груз пока не нужен.",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:37"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.9e4d256050a3",
+      "source": "Пропустить обучение",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:51"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.48dccafab27d",
+      "source": "Все места у склада заняты.\nОткрой ещё одно — и продолжай!",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:67"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": [
+        "В исходнике есть перенос строки; проверить ширину после перевода."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.c60d2d77d06d",
+      "source": "Открыть место",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:68"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.aa882b151605",
+      "source": "Место за рекламу",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:70"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.6909d293a79e",
+      "source": "Ролик готовится…",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:70",
+        "scripts/ui/modal_catalog.gd:108",
+        "scripts/ui/modal_catalog.gd:121"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.cf19cb36e0bd",
+      "source": "Кран переставит нужную машину прямо к складу.",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:72"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.25b355813f82",
+      "source": "Вызвать кран",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:73",
+        "scripts/ui/modal_catalog.gd:79"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.2398ba31360b",
+      "source": "Помощь в этой попытке закончилась.\nОтмени ход или начни заново.",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:75"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": [
+        "В исходнике есть перенос строки; проверить ширину после перевода."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.0abf7381f65f",
+      "source": "Место и нужная машина",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:80"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.4367e0063eba",
+      "source": "Взять",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:81",
+        "scripts/ui/modal_catalog.gd:85",
+        "scripts/ui/modal_catalog.gd:102"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.8d589b0c3c10",
+      "source": "Отменить ход",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:83"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.19640d8d48a9",
+      "source": "Бесплатно: ещё %d",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:84"
+      ],
+      "placeholders": [
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.f40432b44242",
+      "source": "Вернуть последнюю машину",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:84"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.086406bd4bfe",
+      "source": "Перемешать груз",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:88"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.ab24f870e1e9",
+      "source": "Новый порядок на ленте",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:89"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.0c7925af0933",
+      "source": "Начать уровень заново",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:90"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.6d45f7c36311",
+      "source": "Парковка заполнена!",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:91"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.07cb65087477",
+      "source": "Убрать",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:98"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.0aece7c229eb",
+      "source": "Убрать конус?",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:98"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.26bf5538561c",
+      "source": "Четвёртое место у склада\nдо конца этой попытки.",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:98"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": [
+        "В исходнике есть перенос строки; проверить ширину после перевода."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_catalog.b4d4430a6344",
+      "source": "Вызвать",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:99"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.2aef95648c48",
+      "source": "Вызвать кран?",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:99"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.ui.modal_catalog.8cf3ff0db4db",
+      "source": "Кран поставит нужную машину\nна свободное место.",
+      "context": "scripts/ui/modal_catalog",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_catalog.gd:99"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": [
+        "В исходнике есть перенос строки; проверить ширину после перевода."
+      ]
+    },
+    {
+      "id": "scripts.ui.modal_style.ecaab828792b",
+      "source": "Бесплатно",
+      "context": "scripts/ui/modal_style",
+      "scope": "current_source",
+      "references": [
+        "scripts/ui/modal_style.gd:167",
+        "scripts/ui/modal_style.gd:184"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "web.wasm-loader.4ed8a7ee34b3",
+      "source": "Подготовка загрузки…",
+      "context": "web/wasm-loader",
+      "scope": "current_source",
+      "references": [
+        "web/wasm-loader.js:11"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "web.wasm-loader.3a8db977333d",
+      "source": "Загрузка игры: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} МБ",
+      "context": "web/wasm-loader",
+      "scope": "current_source",
+      "references": [
+        "web/wasm-loader.js:15"
+      ],
+      "placeholders": [
+        "${(bytes/1048576).toFixed(1)}",
+        "${(total/1048576).toFixed(1)}"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "web.wasm-loader.d2db517556a1",
+      "source": "Файлы загружены. Запускаем игру…",
+      "context": "web/wasm-loader",
+      "scope": "current_source",
+      "references": [
+        "web/wasm-loader.js:15"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "web.wasm-loader.c9a6e2e1026a",
+      "source": "Не удалось загрузить игру. ",
+      "context": "web/wasm-loader",
+      "scope": "current_source",
+      "references": [
+        "web/wasm-loader.js:19"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "web.wasm-loader.5189135a6110",
+      "source": "Повторить",
+      "context": "web/wasm-loader",
+      "scope": "current_source",
+      "references": [
+        "web/wasm-loader.js:19"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "web.wasm-loader.9c14e5456dd5",
+      "source": "Запуск занимает слишком долго. Попробуйте перезагрузить страницу.",
+      "context": "web/wasm-loader",
+      "scope": "current_source",
+      "references": [
+        "web/wasm-loader.js:21"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "web.wasm-loader.edb5706027b7",
+      "source": "Ошибка загрузки (${response.status}).",
+      "context": "web/wasm-loader",
+      "scope": "current_source",
+      "references": [
+        "web/wasm-loader.js:29"
+      ],
+      "placeholders": [
+        "${response.status}"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "web.wasm-loader.ae4e27ff7bd9",
+      "source": "Проверьте вход в свой аккаунт ChatGPT в Safari.",
+      "context": "web/wasm-loader",
+      "scope": "current_source",
+      "references": [
+        "web/wasm-loader.js:30"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "web.wasm-loader.a8161b487809",
+      "source": "Обновите браузер для запуска игры.",
+      "context": "web/wasm-loader",
+      "scope": "current_source",
+      "references": [
+        "web/wasm-loader.js:48"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "web.wasm-loader.1c5e2746e50d",
+      "source": "Файл загружен не полностью. Обновите страницу.",
+      "context": "web/wasm-loader",
+      "scope": "current_source",
+      "references": [
+        "web/wasm-loader.js:57"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.crane_offer.2540c82265cd",
+      "source": "Закончились",
+      "context": "scripts/crane_offer",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/crane_offer.gd:19"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.crane_offer.7e09a101b132",
+      "source": "ходы?",
+      "context": "scripts/crane_offer",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/crane_offer.gd:20"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.crane_offer.f5b4bf07252d",
+      "source": "Вызовите кран!",
+      "context": "scripts/crane_offer",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/crane_offer.gd:21"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.crane_offer.48ebb7d55857",
+      "source": "Вызвать бесплатно",
+      "context": "scripts/crane_offer",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/crane_offer.gd:23"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.crane_offer.ca5b0ecc2dfc",
+      "source": "В первый раз бесплатно,",
+      "context": "scripts/crane_offer",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/crane_offer.gd:24"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.crane_offer.968a9fc9f568",
+      "source": "потом —",
+      "context": "scripts/crane_offer",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/crane_offer.gd:25"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.crane_offer.8fbe9b75cbdf",
+      "source": "Отмена",
+      "context": "scripts/crane_offer",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/crane_offer.gd:31"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.crane_offer.185dbf0bf8d3",
+      "source": "хода 20",
+      "context": "scripts/crane_offer",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/crane_offer.gd:32"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.crane_offer.6f9f87534095",
+      "source": "Попробовать",
+      "context": "scripts/crane_offer",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/crane_offer.gd:35"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.crane_offer.05acc920d2f5",
+      "source": "заново",
+      "context": "scripts/crane_offer",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/crane_offer.gd:36"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.parking_full.d34ff2a3e8fe",
+      "source": "Парковка",
+      "context": "scripts/parking_full",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/parking_full.gd:51"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.parking_full.3b79dc0da388",
+      "source": "заполнена!",
+      "context": "scripts/parking_full",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/parking_full.gd:52"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.parking_full.4b63dee5eaf6",
+      "source": "Открыть дополнительное",
+      "context": "scripts/parking_full",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/parking_full.gd:55"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.parking_full.21c5c4cbb82c",
+      "source": "место за 100",
+      "context": "scripts/parking_full",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/parking_full.gd:56"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.parking_full.2d7a0b39f0f4",
+      "source": "Все места уже открыты",
+      "context": "scripts/parking_full",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/parking_full.gd:58"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.parking_full.bcacbff7a563",
+      "source": "или",
+      "context": "scripts/parking_full",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/parking_full.gd:59"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.parking_full.b9eb6b66d046",
+      "source": "за просмотр",
+      "context": "scripts/parking_full",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/parking_full.gd:61"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.parking_full.3f91926320b5",
+      "source": "рекламы",
+      "context": "scripts/parking_full",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/parking_full.gd:62"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.parking_full.29d1e351c540",
+      "source": "Реклама пока недоступна",
+      "context": "scripts/parking_full",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/parking_full.gd:64"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.parking_full.8fbe9b75cbdf",
+      "source": "Отмена",
+      "context": "scripts/parking_full",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/parking_full.gd:66"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.parking_full.185dbf0bf8d3",
+      "source": "хода 20",
+      "context": "scripts/parking_full",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/parking_full.gd:68"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.parking_full.82e07617aac8",
+      "source": "хода ×%d",
+      "context": "scripts/parking_full",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/parking_full.gd:68"
+      ],
+      "placeholders": [
+        "%d"
+      ],
+      "translation": "",
+      "notes": [
+        "Сохранить переменные и их порядок. Не переводить выражения ${…}."
+      ]
+    },
+    {
+      "id": "scripts.parking_full.6f9f87534095",
+      "source": "Попробовать",
+      "context": "scripts/parking_full",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/parking_full.gd:71"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.parking_full.05acc920d2f5",
+      "source": "заново",
+      "context": "scripts/parking_full",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/parking_full.gd:72"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.slot_unlock_mock.07cb65087477",
+      "source": "Убрать",
+      "context": "scripts/slot_unlock_mock",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/slot_unlock_mock.gd:44"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.slot_unlock_mock.3c0df78bba9d",
+      "source": "конус?",
+      "context": "scripts/slot_unlock_mock",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/slot_unlock_mock.gd:45"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.slot_unlock_mock.bcacbff7a563",
+      "source": "или",
+      "context": "scripts/slot_unlock_mock",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/slot_unlock_mock.gd:52"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.slot_unlock_mock.6b6949cec849",
+      "source": "посмотреть",
+      "context": "scripts/slot_unlock_mock",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/slot_unlock_mock.gd:55"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "scripts.slot_unlock_mock.04df0e54b20e",
+      "source": "рекламу",
+      "context": "scripts/slot_unlock_mock",
+      "scope": "legacy_or_mock",
+      "references": [
+        "scripts/slot_unlock_mock.gd:56"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "menu.language.title",
+      "source": "Язык",
+      "context": "Main menu",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/menu_windows.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "menu.support.title",
+      "source": "Поддержка",
+      "context": "Main menu",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/menu_windows.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "menu.support.intro",
+      "source": "Нашли ошибку или есть идея?\nНапишите — читаем каждое письмо.",
+      "context": "Main menu",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/menu_windows.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "menu.support.metadata",
+      "source": "Версия: %s\nID: %s",
+      "context": "Main menu",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/menu_windows.gd"
+      ],
+      "placeholders": [
+        "%s",
+        "%s"
+      ],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "menu.support.compose",
+      "source": "Открыть письмо",
+      "context": "Main menu",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/menu_windows.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "menu.support.copy",
+      "source": "Скопировать сообщение",
+      "context": "Main menu",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/menu_windows.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "menu.support.placeholder",
+      "source": "Ваше сообщение…",
+      "context": "Main menu",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/menu_windows.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "menu.support.required",
+      "source": "Напишите сообщение",
+      "context": "Main menu",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/menu_windows.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "menu.support.copied",
+      "source": "Сообщение скопировано",
+      "context": "Main menu",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/menu_windows.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "menu.support.finish",
+      "source": "Завершите отправку в почтовом приложении",
+      "context": "Main menu",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/menu_windows.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "daily.title",
+      "source": "Ежедневный бонус",
+      "context": "Daily rewards",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "daily.tomorrow",
+      "source": "Завтра: %s",
+      "context": "Daily rewards",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [
+        "%s",
+        "%s"
+      ],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "daily.next_week",
+      "source": "Новая неделя начнётся завтра!",
+      "context": "Daily rewards",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "daily.invitation",
+      "source": "Заходи каждый день — награды растут!",
+      "context": "Daily rewards",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "daily.claim",
+      "source": "Забрать",
+      "context": "Daily rewards",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "daily.missed",
+      "source": "Пропущен",
+      "context": "Daily rewards",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "daily.today",
+      "source": "Сегодня",
+      "context": "Daily rewards",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "daily.day",
+      "source": "День %d",
+      "context": "Daily rewards",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "daily.item.undo",
+      "source": "отмена хода ×%d",
+      "context": "Daily rewards",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "daily.item.extra_slot",
+      "source": "место ×%d",
+      "context": "Daily rewards",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "daily.item.crane",
+      "source": "кран ×%d",
+      "context": "Daily rewards",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "daily.item.shuffle",
+      "source": "перемешивание ×%d",
+      "context": "Daily rewards",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "daily.item.gift",
+      "source": "подарок ×%d",
+      "context": "Daily rewards",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "crane.intro.title",
+      "source": "Закончились ходы?",
+      "context": "Crane onboarding",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "crane.intro.prompt",
+      "source": "Вызовите кран!",
+      "context": "Crane onboarding",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "crane.intro.free",
+      "source": "Вызвать бесплатно",
+      "context": "Crane onboarding",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "crane.intro.price",
+      "source": "В первый раз бесплатно, потом — {price} {{coin}}.",
+      "context": "Crane onboarding",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [
+        "{price}",
+        "{{coin}}"
+      ],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "crane.intro.retry",
+      "source": "Попробовать заново",
+      "context": "Crane onboarding",
+      "scope": "runtime",
+      "references": [
+        "scripts/ui/modal_catalog.gd"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "loading.start",
+      "source": "Запускаем игру…",
+      "context": "Web loading screen",
+      "scope": "runtime",
+      "references": [
+        "web/wasm-loader.js"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "loading.error",
+      "source": "Не удалось загрузить игру. Проверьте подключение и повторите.",
+      "context": "Web loading screen",
+      "scope": "runtime",
+      "references": [
+        "web/wasm-loader.js"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    },
+    {
+      "id": "loading.retry",
+      "source": "Повторить",
+      "context": "Web loading screen",
+      "scope": "runtime",
+      "references": [
+        "web/wasm-loader.js"
+      ],
+      "placeholders": [],
+      "translation": "",
+      "notes": []
+    }
+  ]
+}

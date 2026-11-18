@@ -1,0 +1,3703 @@
+{
+  "schema_version": 1,
+  "source_locale": "ru",
+  "messages": {
+    "config.achievements.achievements.0.dispatcher_1.83f7eca71358": {
+      "source": "Диспетчер стройки I",
+      "translations": {
+        "en": "Yard Dispatcher I",
+        "de": "Hofdisponent I",
+        "fr": "Répartiteur I",
+        "ja": "配車係 I",
+        "ko": "배차 담당 I",
+        "zh": "调度员 I",
+        "tr": "Dispeçer I",
+        "pl": "Dyspozytor I",
+        "es": "Despachador I",
+        "ar": "منسّق الساحة I"
+      }
+    },
+    "config.achievements.achievements.1.dispatcher_2.63332aabd948": {
+      "source": "Диспетчер стройки II",
+      "translations": {
+        "en": "Yard Dispatcher II",
+        "de": "Hofdisponent II",
+        "fr": "Répartiteur II",
+        "ja": "配車係 II",
+        "ko": "배차 담당 II",
+        "zh": "调度员 II",
+        "tr": "Dispeçer II",
+        "pl": "Dyspozytor II",
+        "es": "Despachador II",
+        "ar": "منسّق الساحة II"
+      }
+    },
+    "config.achievements.achievements.2.dispatcher_3.a56fb6a376d3": {
+      "source": "Диспетчер стройки III",
+      "translations": {
+        "en": "Yard Dispatcher III",
+        "de": "Hofdisponent III",
+        "fr": "Répartiteur III",
+        "ja": "配車係 III",
+        "ko": "배차 담당 III",
+        "zh": "调度员 III",
+        "tr": "Dispeçer III",
+        "pl": "Dyspozytor III",
+        "es": "Despachador III",
+        "ar": "منسّق الساحة III"
+      }
+    },
+    "config.achievements.achievements.3.dispatcher_4.7d95d2998eaf": {
+      "source": "Диспетчер стройки IV",
+      "translations": {
+        "en": "Yard Dispatcher IV",
+        "de": "Hofdisponent IV",
+        "fr": "Répartiteur IV",
+        "ja": "配車係 IV",
+        "ko": "배차 담당 IV",
+        "zh": "调度员 IV",
+        "tr": "Dispeçer IV",
+        "pl": "Dyspozytor IV",
+        "es": "Despachador IV",
+        "ar": "منسّق الساحة IV"
+      }
+    },
+    "config.achievements.achievements.4.cargo_1000.a468efbda495": {
+      "source": "Тысяча грузов",
+      "translations": {
+        "en": "A Thousand Loads",
+        "de": "1000 Ladungen",
+        "fr": "1000 colis",
+        "ja": "荷物1000個",
+        "ko": "화물 1000개",
+        "zh": "千件货物",
+        "tr": "Bin Yük",
+        "pl": "1000 ładunków",
+        "es": "1000 cargas",
+        "ar": "ألف حمولة"
+      }
+    },
+    "config.achievements.achievements.5.flawless_loading.c4c7e7a91bb3": {
+      "source": "Безупречная погрузка",
+      "translations": {
+        "en": "Perfect Loading",
+        "de": "Perfekte Beladung",
+        "fr": "Chargement parfait",
+        "ja": "完璧な積み込み",
+        "ko": "완벽한 적재",
+        "zh": "完美装货",
+        "tr": "Kusursuz Yükleme",
+        "pl": "Idealny załadunek",
+        "es": "Carga perfecta",
+        "ar": "تحميل مثالي"
+      }
+    },
+    "config.achievements.achievements.6.no_mistakes_10.14d4390bae4e": {
+      "source": "Без единой ошибки",
+      "translations": {
+        "en": "Not a Single Mistake",
+        "de": "Null Fehler",
+        "fr": "Zéro erreur",
+        "ja": "ノーミス",
+        "ko": "실수 제로",
+        "zh": "零失误",
+        "tr": "Sıfır Hata",
+        "pl": "Zero błędów",
+        "es": "Cero errores",
+        "ar": "بلا أي خطأ"
+      }
+    },
+    "config.achievements.achievements.7.on_the_edge.2131158405e9": {
+      "source": "На волоске",
+      "translations": {
+        "en": "Close Call",
+        "de": "Haarscharf",
+        "fr": "De justesse",
+        "ja": "ギリギリ",
+        "ko": "아슬아슬",
+        "zh": "千钧一发",
+        "tr": "Kıl Payı",
+        "pl": "O włos",
+        "es": "Por poco",
+        "ar": "على الحافة"
+      }
+    },
+    "config.achievements.achievements.8.comeback.28b4f0f21de6": {
+      "source": "Не сдаваться",
+      "translations": {
+        "en": "Never Give Up",
+        "de": "Nie aufgeben",
+        "fr": "Ne lâche rien",
+        "ja": "あきらめない",
+        "ko": "포기는 없다",
+        "zh": "永不放弃",
+        "tr": "Pes Etme",
+        "pl": "Walcz do końca",
+        "es": "No te rindas",
+        "ar": "لا تستسلم"
+      }
+    },
+    "config.achievements.achievements.9.dream_fleet.ada7efaa9d67": {
+      "source": "Автопарк мечты",
+      "translations": {
+        "en": "Dream Fleet",
+        "de": "Traumflotte",
+        "fr": "Flotte de rêve",
+        "ja": "夢の車両隊",
+        "ko": "꿈의 차고",
+        "zh": "梦想车队",
+        "tr": "Hayal Filosu",
+        "pl": "Flota marzeń",
+        "es": "Flota soñada",
+        "ar": "أسطول الأحلام"
+      }
+    },
+    "config.daily_rewards.items.coins.label.a54143865c0d": {
+      "source": "Монеты",
+      "translations": {
+        "en": "Coins",
+        "de": "Münzen",
+        "fr": "Pièces",
+        "ja": "コイン",
+        "ko": "코인",
+        "zh": "金币",
+        "tr": "Altın",
+        "pl": "Monety",
+        "es": "Monedas",
+        "ar": "عملات"
+      }
+    },
+    "config.daily_rewards.items.crane.label.8224141e7344": {
+      "source": "Кран",
+      "translations": {
+        "en": "Crane",
+        "de": "Kran",
+        "fr": "Grue",
+        "ja": "クレーン",
+        "ko": "크레인",
+        "zh": "吊车",
+        "tr": "Vinç",
+        "pl": "Dźwig",
+        "es": "Grúa",
+        "ar": "رافعة"
+      }
+    },
+    "config.daily_rewards.items.extra_slot.label.4649b302d2a0": {
+      "source": "Место",
+      "translations": {
+        "en": "Parking Spot",
+        "de": "Platz",
+        "fr": "Place",
+        "ja": "駐車枠",
+        "ko": "주차칸",
+        "zh": "车位",
+        "tr": "Yer",
+        "pl": "Miejsce",
+        "es": "Plaza",
+        "ar": "موقف"
+      }
+    },
+    "config.daily_rewards.items.shuffle.label.b03d6d33ac21": {
+      "source": "Перемешивание",
+      "translations": {
+        "en": "Shuffle",
+        "de": "Mischen",
+        "fr": "Mélange",
+        "ja": "シャッフル",
+        "ko": "섞기",
+        "zh": "打乱",
+        "tr": "Karıştırma",
+        "pl": "Tasowanie",
+        "es": "Mezcla",
+        "ar": "خلط"
+      }
+    },
+    "config.daily_rewards.items.swap.label.9378e03b6132": {
+      "source": "Обмен",
+      "translations": {
+        "en": "Swap",
+        "de": "Tausch",
+        "fr": "Échange",
+        "ja": "入れ替え",
+        "ko": "교체",
+        "zh": "交换",
+        "tr": "Takas",
+        "pl": "Zamiana",
+        "es": "Cambio",
+        "ar": "تبديل"
+      }
+    },
+    "config.daily_rewards.items.undo.label.3ec2342a5527": {
+      "source": "Отмена хода",
+      "translations": {
+        "en": "Undo",
+        "de": "Rückgängig",
+        "fr": "Annuler",
+        "ja": "元に戻す",
+        "ko": "되돌리기",
+        "zh": "撤销",
+        "tr": "Geri Al",
+        "pl": "Cofnięcie",
+        "es": "Deshacer",
+        "ar": "تراجع"
+      }
+    },
+    "config.seasonal_events.events.0.halloween_2026.a9f8a3eb45b4": {
+      "source": "Тыквы на складе, летучие мыши\nнад краном — набор только до 2 ноября!",
+      "translations": {
+        "en": "Pumpkins in the yard, bats\nover the crane — pack ends November 2!",
+        "de": "Kürbisse im Lager, Fledermäuse\nüberm Kran – nur bis 2. November!",
+        "fr": "Citrouilles au dépôt, chauves-souris\nsur la grue — jusqu'au 2 novembre !",
+        "ja": "倉庫にカボチャ、クレーンにコウモリ\nパックは11月2日まで！",
+        "ko": "창고엔 호박, 크레인엔 박쥐\n11월 2일까지만 판매!",
+        "zh": "仓库里有南瓜，吊车上有蝙蝠\n礼包仅售至11月2日！",
+        "tr": "Depoda balkabakları, vincin\nüstünde yarasalar — 2 Kasım'a kadar!",
+        "pl": "Dynie w magazynie, nietoperze\nnad dźwigiem — tylko do 2 listopada!",
+        "es": "¡Calabazas en el patio y murciélagos\nsobre la grúa — solo hasta el 2 de noviembre!",
+        "ar": "قرع في المستودع، وخفافيش\nفوق الرافعة — العرض حتى 2 نوفمبر!"
+      }
+    },
+    "config.seasonal_events.events.0.halloween_2026.3e3da8ee1d96": {
+      "source": "Забрать набор",
+      "translations": {
+        "en": "Get Pack",
+        "de": "Paket holen",
+        "fr": "Récupérer",
+        "ja": "受け取る",
+        "ko": "받기",
+        "zh": "领取礼包",
+        "tr": "Paketi Al",
+        "pl": "Odbierz",
+        "es": "Conseguir",
+        "ar": "احصل على الحزمة"
+      }
+    },
+    "config.seasonal_events.events.0.halloween_2026.58bd03ae04fd": {
+      "source": "Ночная смена",
+      "translations": {
+        "en": "Night Shift",
+        "de": "Nachtschicht",
+        "fr": "Poste de nuit",
+        "ja": "夜勤",
+        "ko": "야간 근무",
+        "zh": "夜班",
+        "tr": "Gece Vardiyası",
+        "pl": "Nocna zmiana",
+        "es": "Turno de noche",
+        "ar": "النوبة الليلية"
+      }
+    },
+    "config.seasonal_events.events.1.newyear_2026.3e3da8ee1d96": {
+      "source": "Забрать набор",
+      "translations": {
+        "en": "Get Pack",
+        "de": "Paket holen",
+        "fr": "Récupérer",
+        "ja": "受け取る",
+        "ko": "받기",
+        "zh": "领取礼包",
+        "tr": "Paketi Al",
+        "pl": "Odbierz",
+        "es": "Conseguir",
+        "ar": "احصل على الحزمة"
+      }
+    },
+    "config.seasonal_events.events.1.newyear_2026.038586991416": {
+      "source": "Новогодний аврал",
+      "translations": {
+        "en": "New Year Rush",
+        "de": "Neujahrs-Ansturm",
+        "fr": "Rush du Nouvel An",
+        "ja": "年末年始ラッシュ",
+        "ko": "새해 대작전",
+        "zh": "新年大忙",
+        "tr": "Yılbaşı Telaşı",
+        "pl": "Noworoczny szał",
+        "es": "Lío de Año Nuevo",
+        "ar": "زحمة رأس السنة"
+      }
+    },
+    "config.seasonal_events.events.1.newyear_2026.731e4b25b35d": {
+      "source": "Праздничные подарки уже на складе —\nуспей до конца каникул!",
+      "translations": {
+        "en": "Holiday gifts are in the warehouse —\nget them before the holidays end!",
+        "de": "Festtagsgeschenke sind im Lager –\nhol sie dir vor Ferienende!",
+        "fr": "Les cadeaux de fête sont là —\nvite, avant la fin des fêtes !",
+        "ja": "ギフトが倉庫に到着 —\n休み中に受け取ろう！",
+        "ko": "연말 선물이 창고에 도착! 연휴가 끝나기 전에 받으세요!",
+        "zh": "节日礼物已到仓库——\n假期结束前快来领！",
+        "tr": "Yılbaşı hediyeleri depoda —\ntatil bitmeden kap!",
+        "pl": "Prezenty już czekają w magazynie —\nzdąż przed końcem świąt!",
+        "es": "¡Regalos festivos en el almacén:\nconsíguelos antes de fin de vacaciones!",
+        "ar": "هدايا العيد في المستودع —\nاحصل عليها قبل نهاية العطلة!"
+      }
+    },
+    "config.store_catalog.products.2.coins_2600.e56b418b8103": {
+      "source": "Хит",
+      "translations": {
+        "en": "Hot",
+        "de": "Top",
+        "fr": "Top",
+        "ja": "人気",
+        "ko": "인기",
+        "zh": "热卖",
+        "tr": "Çok Satan",
+        "pl": "Hit",
+        "es": "Top",
+        "ar": "رائج"
+      }
+    },
+    "config.store_catalog.products.4.coins_12000.18ec97a01aaa": {
+      "source": "Выгодно",
+      "translations": {
+        "en": "Best Value",
+        "de": "Top-Deal",
+        "fr": "Promo",
+        "ja": "お得",
+        "ko": "특가",
+        "zh": "超值",
+        "tr": "Süper Fırsat",
+        "pl": "Okazja",
+        "es": "Oferta",
+        "ar": "موفّر"
+      }
+    },
+    "config.store_catalog.products.5.starter.90436a08231e": {
+      "source": "Набор новичка",
+      "translations": {
+        "en": "Starter Pack",
+        "de": "Starterpaket",
+        "fr": "Pack débutant",
+        "ja": "初心者パック",
+        "ko": "초보자 팩",
+        "zh": "新手礼包",
+        "tr": "Acemi Paketi",
+        "pl": "Zestaw startowy",
+        "es": "Pack inicial",
+        "ar": "حزمة المبتدئ"
+      }
+    },
+    "config.store_catalog.products.5.starter.7170092c5229": {
+      "source": "Один раз за всю игру",
+      "translations": {
+        "en": "One time only",
+        "de": "Einmaliges Angebot",
+        "fr": "Une seule fois",
+        "ja": "1回限り",
+        "ko": "계정당 1회",
+        "zh": "限购一次",
+        "tr": "Tek seferlik teklif",
+        "pl": "Tylko raz w grze",
+        "es": "Solo una vez",
+        "ar": "مرة واحدة فقط"
+      }
+    },
+    "config.store_catalog.products.6.season_halloween_2026.a03446388631": {
+      "source": "Набор ночной смены",
+      "translations": {
+        "en": "Night Shift Pack",
+        "de": "Nachtschicht-Paket",
+        "fr": "Pack de nuit",
+        "ja": "夜勤パック",
+        "ko": "야간 근무 팩",
+        "zh": "夜班礼包",
+        "tr": "Gece Paketi",
+        "pl": "Zestaw nocny",
+        "es": "Pack nocturno",
+        "ar": "حزمة الليل"
+      }
+    },
+    "config.store_catalog.products.7.season_newyear_2026.694f571f43c4": {
+      "source": "Новогодний набор",
+      "translations": {
+        "en": "New Year Pack",
+        "de": "Neujahrspaket",
+        "fr": "Pack Nouvel An",
+        "ja": "お正月パック",
+        "ko": "새해 팩",
+        "zh": "新年礼包",
+        "tr": "Yılbaşı Paketi",
+        "pl": "Zestaw noworoczny",
+        "es": "Pack Año Nuevo",
+        "ar": "حزمة رأس السنة"
+      }
+    },
+    "scripts.cargo_art.9143eb5dcc80": {
+      "source": "Доски",
+      "translations": {
+        "en": "Planks",
+        "de": "Bretter",
+        "fr": "Bois",
+        "ja": "板材",
+        "ko": "판자",
+        "zh": "木板",
+        "tr": "Tahta",
+        "pl": "Deski",
+        "es": "Tablas",
+        "ar": "ألواح"
+      }
+    },
+    "scripts.cargo_art.bd86ace178a0": {
+      "source": "Кабель",
+      "translations": {
+        "en": "Cable",
+        "de": "Kabel",
+        "fr": "Câble",
+        "ja": "ケーブル",
+        "ko": "케이블",
+        "zh": "电缆",
+        "tr": "Kablo",
+        "pl": "Kabel",
+        "es": "Cable",
+        "ar": "كابل"
+      }
+    },
+    "scripts.cargo_art.34896f67adfa": {
+      "source": "Кирпичи",
+      "translations": {
+        "en": "Bricks",
+        "de": "Ziegel",
+        "fr": "Briques",
+        "ja": "レンガ",
+        "ko": "벽돌",
+        "zh": "砖块",
+        "tr": "Tuğla",
+        "pl": "Cegły",
+        "es": "Ladrillos",
+        "ar": "طوب"
+      }
+    },
+    "scripts.cargo_art.cb488b3124a1": {
+      "source": "Профнастил",
+      "translations": {
+        "en": "Metal Sheets",
+        "de": "Bleche",
+        "fr": "Tôles",
+        "ja": "鋼板",
+        "ko": "강판",
+        "zh": "彩钢板",
+        "tr": "Sac Levha",
+        "pl": "Blacha",
+        "es": "Chapas",
+        "ar": "صفائح معدنية"
+      }
+    },
+    "scripts.cargo_art.291fa3db8353": {
+      "source": "Трубы",
+      "translations": {
+        "en": "Pipes",
+        "de": "Rohre",
+        "fr": "Tuyaux",
+        "ja": "パイプ",
+        "ko": "파이프",
+        "zh": "管材",
+        "tr": "Boru",
+        "pl": "Rury",
+        "es": "Tubos",
+        "ar": "أنابيب"
+      }
+    },
+    "scripts.cargo_art.0ef0f22c90df": {
+      "source": "Цемент",
+      "translations": {
+        "en": "Cement",
+        "de": "Zement",
+        "fr": "Ciment",
+        "ja": "セメント",
+        "ko": "시멘트",
+        "zh": "水泥",
+        "tr": "Çimento",
+        "pl": "Cement",
+        "es": "Cemento",
+        "ar": "إسمنت"
+      }
+    },
+    "scripts.cargo_art.34a493696529": {
+      "source": "Бортовой",
+      "translations": {
+        "en": "Flatbed",
+        "de": "Pritsche",
+        "fr": "Plateau",
+        "ja": "平ボディ",
+        "ko": "카고",
+        "zh": "栏板车",
+        "tr": "Kasalı",
+        "pl": "Platforma",
+        "es": "Plataforma",
+        "ar": "مسطّحة"
+      }
+    },
+    "scripts.cargo_art.144095769e68": {
+      "source": "Пикап",
+      "translations": {
+        "en": "Pickup",
+        "de": "Pickup",
+        "fr": "Pickup",
+        "ja": "ピックアップ",
+        "ko": "픽업",
+        "zh": "皮卡",
+        "tr": "Pikap",
+        "pl": "Pikap",
+        "es": "Pickup",
+        "ar": "بيك أب"
+      }
+    },
+    "scripts.cargo_art.315789424c5f": {
+      "source": "Самосвал",
+      "translations": {
+        "en": "Dump Truck",
+        "de": "Kipper",
+        "fr": "Benne",
+        "ja": "ダンプ",
+        "ko": "덤프",
+        "zh": "自卸车",
+        "tr": "Damperli",
+        "pl": "Wywrotka",
+        "es": "Volquete",
+        "ar": "قلّابة"
+      }
+    },
+    "scripts.daily_bonus.eb9739970cd2": {
+      "source": "День %d",
+      "translations": {
+        "en": "Day %d",
+        "de": "Tag %d",
+        "fr": "Jour %d",
+        "ja": "%d日目",
+        "ko": "%d일차",
+        "zh": "第%d天",
+        "tr": "Gün %d",
+        "pl": "Dzień %d",
+        "es": "Día %d",
+        "ar": "يوم %d"
+      }
+    },
+    "scripts.daily_bonus.6662621fbab6": {
+      "source": "Пропущен",
+      "translations": {
+        "en": "Missed",
+        "de": "Verpasst",
+        "fr": "Manqué",
+        "ja": "受取期限切れ",
+        "ko": "놓침",
+        "zh": "已错过",
+        "tr": "Kaçırıldı",
+        "pl": "Pominięty",
+        "es": "Perdido",
+        "ar": "فائت"
+      }
+    },
+    "scripts.daily_bonus.e276492e344d": {
+      "source": "Забрать",
+      "translations": {
+        "en": "Claim",
+        "de": "Abholen",
+        "fr": "Récupérer",
+        "ja": "受け取る",
+        "ko": "받기",
+        "zh": "领取",
+        "tr": "Topla",
+        "pl": "Odbierz",
+        "es": "Recoger",
+        "ar": "استلام"
+      }
+    },
+    "scripts.daily_bonus.a42aee58d60a": {
+      "source": "Продолжить",
+      "translations": {
+        "en": "Continue",
+        "de": "Weiter",
+        "fr": "Continuer",
+        "ja": "続ける",
+        "ko": "계속",
+        "zh": "继续",
+        "tr": "Devam",
+        "pl": "Dalej",
+        "es": "Continuar",
+        "ar": "متابعة"
+      }
+    },
+    "scripts.daily_bonus.f4cdc2548c52": {
+      "source": "Заходите каждый день",
+      "translations": {
+        "en": "Log in every day",
+        "de": "Komm jeden Tag",
+        "fr": "Reviens chaque jour",
+        "ja": "毎日ログインして",
+        "ko": "매일 접속하고",
+        "zh": "每天登录",
+        "tr": "Her gün gir",
+        "pl": "Zaglądaj codziennie",
+        "es": "Entra cada día",
+        "ar": "ادخل كل يوم"
+      }
+    },
+    "scripts.daily_bonus.1f46e7410c9f": {
+      "source": "и получайте призы!",
+      "translations": {
+        "en": "and get rewards!",
+        "de": "und hol Preise ab!",
+        "fr": "et gagne des prix !",
+        "ja": "報酬をゲット！",
+        "ko": "보상을 받으세요!",
+        "zh": "领取奖励！",
+        "tr": "ve ödül kazan!",
+        "pl": "i zgarniaj nagrody!",
+        "es": "¡y gana premios!",
+        "ar": "واحصل على الجوائز!"
+      }
+    },
+    "scripts.daily_bonus.a1af0e391ab9": {
+      "source": "ЕЖЕДНЕВНЫЙ БОНУС",
+      "translations": {
+        "en": "DAILY BONUS",
+        "de": "TÄGLICHER BONUS",
+        "fr": "BONUS QUOTIDIEN",
+        "ja": "デイリーボーナス",
+        "ko": "일일 보너스",
+        "zh": "每日奖励",
+        "tr": "GÜNLÜK BONUS",
+        "pl": "CODZIENNY BONUS",
+        "es": "BONO DIARIO",
+        "ar": "المكافأة اليومية"
+      }
+    },
+    "scripts.game_model.ef9052e0abf8": {
+      "source": "Первая поставка",
+      "translations": {
+        "en": "First Delivery",
+        "de": "Erste Lieferung",
+        "fr": "1re livraison",
+        "ja": "初めての配送",
+        "ko": "첫 배송",
+        "zh": "首批送货",
+        "tr": "İlk Teslimat",
+        "pl": "Pierwsza dostawa",
+        "es": "Primer envío",
+        "ar": "أول توصيل"
+      }
+    },
+    "scripts.game_model.d6bcf97d5770": {
+      "source": "Склад %d",
+      "translations": {
+        "en": "Warehouse %d",
+        "de": "Lager %d",
+        "fr": "Dépôt %d",
+        "ja": "倉庫%d",
+        "ko": "창고 %d",
+        "zh": "仓库%d",
+        "tr": "Depo %d",
+        "pl": "Magazyn %d",
+        "es": "Almacén %d",
+        "ar": "المستودع %d"
+      }
+    },
+    "scripts.game_model.b4f4294c73e0": {
+      "source": "Стройка оживает",
+      "translations": {
+        "en": "Site Comes Alive",
+        "de": "Baustelle lebt",
+        "fr": "Chantier animé",
+        "ja": "現場が動き出す",
+        "ko": "현장이 살아난다",
+        "zh": "工地苏醒",
+        "tr": "Şantiye Uyanıyor",
+        "pl": "Budowa ożywa",
+        "es": "Obra en marcha",
+        "ar": "الموقع يستيقظ"
+      }
+    },
+    "scripts.game_model.ee0b343982c8": {
+      "source": "Плотная парковка",
+      "translations": {
+        "en": "Tight Parking",
+        "de": "Enges Parken",
+        "fr": "Parking serré",
+        "ja": "ぎっしり駐車場",
+        "ko": "빽빽한 주차장",
+        "zh": "拥挤停车场",
+        "tr": "Sıkışık Park",
+        "pl": "Ciasny parking",
+        "es": "Parking apretado",
+        "ar": "موقف مزدحم"
+      }
+    },
+    "scripts.game_model.775d6e7f5168": {
+      "source": "Большая разгрузка",
+      "translations": {
+        "en": "Big Unload",
+        "de": "Große Entladung",
+        "fr": "Gros déchargement",
+        "ja": "大量荷下ろし",
+        "ko": "대량 하역",
+        "zh": "大卸货",
+        "tr": "Büyük Boşaltma",
+        "pl": "Duży rozładunek",
+        "es": "Gran descarga",
+        "ar": "تفريغ كبير"
+      }
+    },
+    "scripts.game_model.e148bd322eb6": {
+      "source": "Рабочий квартал",
+      "translations": {
+        "en": "Work District",
+        "de": "Arbeiterviertel",
+        "fr": "Quartier ouvrier",
+        "ja": "作業地区",
+        "ko": "작업 구역",
+        "zh": "工人街区",
+        "tr": "İşçi Mahallesi",
+        "pl": "Dzielnica robocza",
+        "es": "Barrio obrero",
+        "ar": "حي العمال"
+      }
+    },
+    "scripts.game_model.c1ff8ad27d51": {
+      "source": "Строительный час пик",
+      "translations": {
+        "en": "Construction Rush Hour",
+        "de": "Baustellen-Rushhour",
+        "fr": "Heure de pointe",
+        "ja": "工事ラッシュ",
+        "ko": "공사 러시아워",
+        "zh": "施工高峰",
+        "tr": "Yoğun Saat",
+        "pl": "Budowlany szczyt",
+        "es": "Hora punta",
+        "ar": "ساعة الذروة"
+      }
+    },
+    "scripts.main.b695d5d8d1c5": {
+      "source": "Сначала открой соседнее место",
+      "translations": {
+        "en": "Unlock the adjacent spot first",
+        "de": "Erst den Platz daneben öffnen",
+        "fr": "D'abord la place voisine",
+        "ja": "先に隣の枠を開放しよう",
+        "ko": "먼저 옆 칸을 여세요",
+        "zh": "请先解锁相邻车位",
+        "tr": "Önce yandaki yeri aç",
+        "pl": "Najpierw otwórz miejsce obok",
+        "es": "Abre antes la plaza vecina",
+        "ar": "افتح الموقف المجاور أولاً"
+      }
+    },
+    "scripts.main.91a064acd00e": {
+      "source": "Нужно %d монет",
+      "translations": {
+        "en": "You need %d {{coin}}",
+        "de": "%d {{coin}} nötig",
+        "fr": "Il faut %d {{coin}}",
+        "ja": "必要：%d {{coin}}",
+        "ko": "필요: %d {{coin}}",
+        "zh": "需要 %d {{coin}}",
+        "tr": "%d {{coin}} gerekli",
+        "pl": "Potrzeba %d {{coin}}",
+        "es": "Son %d {{coin}}",
+        "ar": "تحتاج إلى %d {{coin}}",
+        "ru": "Нужно %d {{coin}}"
+      }
+    },
+    "scripts.main.22c3ddf18611": {
+      "source": "Лимит помощи в этой попытке исчерпан",
+      "translations": {
+        "en": "You've reached the boost limit for this attempt",
+        "de": "Booster-Limit im Versuch erreicht",
+        "fr": "Limite de bonus atteinte",
+        "ja": "アシストの上限に達しました",
+        "ko": "이번 도전의 부스터 한도 도달",
+        "zh": "本次尝试的道具已用完",
+        "tr": "Bu denemede yardım hakkın bitti",
+        "pl": "Limit pomocy w tej próbie wyczerpany",
+        "es": "Límite de ayuda agotado",
+        "ar": "بلغت حد المساعدة لهذه المحاولة"
+      }
+    },
+    "scripts.main.1375e36fe936": {
+      "source": "+%d",
+      "translations": {
+        "en": "+%d",
+        "de": "+%d",
+        "fr": "+%d",
+        "ja": "+%d",
+        "ko": "+%d",
+        "zh": "+%d",
+        "tr": "+%d",
+        "pl": "+%d",
+        "es": "+%d",
+        "ar": "+%d"
+      }
+    },
+    "scripts.main.7312d70f7a8b": {
+      "source": "УРОВЕНЬ %d",
+      "translations": {
+        "en": "LEVEL %d",
+        "de": "LEVEL %d",
+        "fr": "NIVEAU %d",
+        "ja": "レベル%d",
+        "ko": "레벨 %d",
+        "zh": "第%d关",
+        "tr": "SEVİYE %d",
+        "pl": "POZIOM %d",
+        "es": "NIVEL %d",
+        "ar": "المستوى %d"
+      }
+    },
+    "scripts.main.1d4f240c7386": {
+      "source": "НАЖМИ НА КОНУС",
+      "translations": {
+        "en": "TAP THE CONE",
+        "de": "KEGEL ANTIPPEN",
+        "fr": "TOUCHE LE CÔNE",
+        "ja": "コーンをタップ",
+        "ko": "콘을 탭하세요",
+        "zh": "点击锥桶",
+        "tr": "KONİYE DOKUN",
+        "pl": "DOTKNIJ PACHOŁKA",
+        "es": "TOCA EL CONO",
+        "ar": "المس المخروط"
+      }
+    },
+    "scripts.main.1f72393019ca": {
+      "source": "ОТКРОЙ МЕСТО!",
+      "translations": {
+        "en": "UNLOCK A SPOT!",
+        "de": "PLATZ ÖFFNEN!",
+        "fr": "OUVRE LA PLACE !",
+        "ja": "枠を開放！",
+        "ko": "칸을 여세요!",
+        "zh": "解锁车位！",
+        "tr": "YERİ AÇ!",
+        "pl": "OTWÓRZ MIEJSCE!",
+        "es": "¡ABRE PLAZA!",
+        "ar": "افتح موقفًا!"
+      }
+    },
+    "scripts.main.db50163456aa": {
+      "source": "БЕСПЛАТНО!",
+      "translations": {
+        "en": "FREE!",
+        "de": "GRATIS!",
+        "fr": "GRATUIT !",
+        "ja": "無料！",
+        "ko": "무료!",
+        "zh": "免费！",
+        "tr": "ÜCRETSİZ!",
+        "pl": "ZA DARMO!",
+        "es": "¡GRATIS!",
+        "ar": "مجانًا!"
+      }
+    },
+    "scripts.main.e993bacd9ca4": {
+      "source": "До конца этой попытки",
+      "translations": {
+        "en": "Until the end of this attempt",
+        "de": "Bis Versuchsende",
+        "fr": "Pour cet essai",
+        "ja": "今回の挑戦中のみ",
+        "ko": "이번 도전 동안",
+        "zh": "直到本次尝试结束",
+        "tr": "Bu deneme sonuna kadar",
+        "pl": "Do końca tej próby",
+        "es": "En este intento",
+        "ar": "حتى نهاية هذه المحاولة"
+      }
+    },
+    "scripts.main.57b425f0b144": {
+      "source": "БОЛЬШЕ МЕСТА!",
+      "translations": {
+        "en": "EXTRA PARKING SPOT!",
+        "de": "MEHR PLATZ!",
+        "fr": "PLUS DE PLACE !",
+        "ja": "駐車枠を追加！",
+        "ko": "주차칸 추가!",
+        "zh": "更多车位！",
+        "tr": "EKSTRA YER!",
+        "pl": "WIĘCEJ MIEJSC!",
+        "es": "¡MÁS PLAZAS!",
+        "ar": "موقف إضافي!"
+      }
+    },
+    "scripts.main.6087ccb7cb2d": {
+      "source": "Открой место до конца попытки",
+      "translations": {
+        "en": "Unlock a parking spot for this attempt",
+        "de": "Platz bis Versuchsende öffnen",
+        "fr": "Ouvre une place pour cet essai",
+        "ja": "今回の挑戦中、枠を開放",
+        "ko": "이번 도전 동안 칸 열기",
+        "zh": "本次尝试内解锁车位",
+        "tr": "Deneme sonuna kadar yer aç",
+        "pl": "Otwórz miejsce do końca próby",
+        "es": "Plaza extra en este intento",
+        "ar": "افتح موقفًا لهذه المحاولة"
+      }
+    },
+    "scripts.main.359ec6222b67": {
+      "source": "Открыть за %d монет",
+      "translations": {
+        "en": "Unlock for %d {{coin}}",
+        "de": "Für %d {{coin}} öffnen",
+        "fr": "Ouvrir pour %d {{coin}}",
+        "ja": "%d {{coin}} で開放",
+        "ko": "%d {{coin}} 사용해 열기",
+        "zh": "花费 %d {{coin}} 解锁",
+        "tr": "%d {{coin}} aç",
+        "pl": "Otwórz za %d {{coin}}",
+        "es": "Abrir por %d {{coin}}",
+        "ar": "افتح مقابل %d {{coin}}",
+        "ru": "Открыть за %d {{coin}}"
+      }
+    },
+    "scripts.main.308594c1fc02": {
+      "source": "Цена уточняется",
+      "translations": {
+        "en": "Checking price…",
+        "de": "Preis lädt…",
+        "fr": "Prix en cours…",
+        "ja": "価格を確認中…",
+        "ko": "가격 확인 중…",
+        "zh": "价格确认中…",
+        "tr": "Fiyat alınıyor…",
+        "pl": "Sprawdzamy cenę…",
+        "es": "Cargando precio…",
+        "ar": "جارٍ تحديد السعر…"
+      }
+    },
+    "scripts.main.29d1e351c540": {
+      "source": "Реклама пока недоступна",
+      "translations": {
+        "en": "Ad currently unavailable",
+        "de": "Werbung nicht verfügbar",
+        "fr": "Pub indisponible",
+        "ja": "広告は利用できません",
+        "ko": "지금은 광고를 볼 수 없어요",
+        "zh": "暂无广告",
+        "tr": "Reklam şu an yok",
+        "pl": "Reklama niedostępna",
+        "es": "Anuncio no disponible",
+        "ar": "الإعلان غير متاح حاليًا"
+      }
+    },
+    "scripts.main.c4c39ac6251c": {
+      "source": "Помощь на стройке",
+      "translations": {
+        "en": "Boosters",
+        "de": "Booster",
+        "fr": "Bonus",
+        "ja": "アシスト",
+        "ko": "부스터",
+        "zh": "道具",
+        "tr": "Şantiye Yardımı",
+        "pl": "Pomoc na budowie",
+        "es": "Ayudas",
+        "ar": "المساعدات"
+      }
+    },
+    "scripts.main.971455b7f908": {
+      "source": "Замена машины",
+      "translations": {
+        "en": "Swap Truck",
+        "de": "LKW tauschen",
+        "fr": "Échange camion",
+        "ja": "トラック入替",
+        "ko": "트럭 교체",
+        "zh": "换车",
+        "tr": "Kamyon Takası",
+        "pl": "Zamiana auta",
+        "es": "Cambiar camión",
+        "ar": "تبديل الشاحنة"
+      }
+    },
+    "scripts.main.8224141e7344": {
+      "source": "Кран",
+      "translations": {
+        "en": "Crane",
+        "de": "Kran",
+        "fr": "Grue",
+        "ja": "クレーン",
+        "ko": "크레인",
+        "zh": "吊车",
+        "tr": "Vinç",
+        "pl": "Dźwig",
+        "es": "Grúa",
+        "ar": "رافعة"
+      }
+    },
+    "scripts.main.baf34c9a08fe": {
+      "source": "Перемешать грузы",
+      "translations": {
+        "en": "Shuffle Cargo",
+        "de": "Ladung mischen",
+        "fr": "Mélanger le fret",
+        "ja": "荷物シャッフル",
+        "ko": "화물 섞기",
+        "zh": "打乱货物",
+        "tr": "Yükleri Karıştır",
+        "pl": "Tasuj ładunek",
+        "es": "Mezclar carga",
+        "ar": "خلط الحمولة"
+      }
+    },
+    "scripts.main.caf21fe0d262": {
+      "source": "%s · %d монет",
+      "translations": {
+        "en": "%s · %d {{coin}}",
+        "de": "%s · %d {{coin}}",
+        "fr": "%s · %d {{coin}}",
+        "ja": "%s · %d {{coin}}",
+        "ko": "%s · %d {{coin}}",
+        "zh": "%s · %d {{coin}}",
+        "tr": "%s · %d {{coin}}",
+        "pl": "%s · %d {{coin}}",
+        "es": "%s · %d {{coin}}",
+        "ar": "%s · %d {{coin}}",
+        "ru": "%s · %d {{coin}}"
+      }
+    },
+    "scripts.main.ad2d15963945": {
+      "source": "Помощь действует в этой попытке",
+      "translations": {
+        "en": "This boost lasts for this attempt only",
+        "de": "Booster gilt nur im Versuch",
+        "fr": "Bonus valable pour cet essai",
+        "ja": "今回の挑戦のみ有効",
+        "ko": "이번 도전에만 적용돼요",
+        "zh": "道具仅限本次尝试",
+        "tr": "Yardım bu denemede geçerli",
+        "pl": "Pomoc działa w tej próbie",
+        "es": "La ayuda vale en este intento",
+        "ar": "المساعدة لهذه المحاولة فقط"
+      }
+    },
+    "scripts.main.5ddb4a930a33": {
+      "source": "Баланс: %d",
+      "translations": {
+        "en": "Balance: %d",
+        "de": "Konto: %d",
+        "fr": "Solde : %d",
+        "ja": "所持: %d",
+        "ko": "잔액: %d",
+        "zh": "余额：%d",
+        "tr": "Bakiye: %d",
+        "pl": "Saldo: %d",
+        "es": "Saldo: %d",
+        "ar": "الرصيد: %d"
+      }
+    },
+    "scripts.main.199de93a9257": {
+      "source": "Перерыв на стройке",
+      "translations": {
+        "en": "Break Time",
+        "de": "Pause",
+        "fr": "Pause",
+        "ja": "休憩中",
+        "ko": "휴식 중",
+        "zh": "工地休息",
+        "tr": "Mola",
+        "pl": "Przerwa na budowie",
+        "es": "Descanso",
+        "ar": "استراحة"
+      }
+    },
+    "scripts.main.8314a586f880": {
+      "source": "Груз и машины подождут",
+      "translations": {
+        "en": "The trucks and cargo aren't going anywhere!",
+        "de": "LKWs und Ladung warten",
+        "fr": "Le fret peut attendre",
+        "ja": "荷物は逃げないよ！",
+        "ko": "트럭과 화물은 기다려 줘요!",
+        "zh": "卡车和货物会等你！",
+        "tr": "Yük ve kamyonlar bekler",
+        "pl": "Ładunek poczeka",
+        "es": "La carga puede esperar",
+        "ar": "الحمولة ستنتظرك!"
+      }
+    },
+    "scripts.main.21dffe50ffc5": {
+      "source": "Звуки погрузки",
+      "translations": {
+        "en": "Loading Sounds",
+        "de": "Soundeffekte",
+        "fr": "Bruitages",
+        "ja": "積み込み音",
+        "ko": "적재 효과음",
+        "zh": "装货音效",
+        "tr": "Yükleme Sesleri",
+        "pl": "Odgłosy pracy",
+        "es": "Sonidos de carga",
+        "ar": "أصوات التحميل"
+      }
+    },
+    "scripts.main.bf0e90816be7": {
+      "source": "Меньше анимации",
+      "translations": {
+        "en": "Reduced Motion",
+        "de": "Weniger Animationen",
+        "fr": "Moins d’animations",
+        "ja": "動きを減らす",
+        "ko": "움직임 줄이기",
+        "zh": "减少动画",
+        "tr": "Hareketi Azalt",
+        "pl": "Mniej animacji",
+        "es": "Menos animación",
+        "ar": "تقليل الحركة"
+      }
+    },
+    "scripts.main.0541c131cbc0": {
+      "source": "Продолжить работу",
+      "translations": {
+        "en": "Back to Work",
+        "de": "Weiterarbeiten",
+        "fr": "Reprendre",
+        "ja": "作業に戻る",
+        "ko": "작업 계속",
+        "zh": "继续工作",
+        "tr": "İşe Dön",
+        "pl": "Wróć do pracy",
+        "es": "Volver al trabajo",
+        "ar": "العودة للعمل"
+      }
+    },
+    "scripts.main.0c7925af0933": {
+      "source": "Начать уровень заново",
+      "translations": {
+        "en": "Restart Level",
+        "de": "Level neu starten",
+        "fr": "Recommencer",
+        "ja": "やり直す",
+        "ko": "레벨 다시 시작",
+        "zh": "重新开始",
+        "tr": "Baştan Başla",
+        "pl": "Zacznij od nowa",
+        "es": "Reiniciar nivel",
+        "ar": "إعادة المستوى"
+      }
+    },
+    "scripts.main.8e8dad84ce78": {
+      "source": "Выбрать склад",
+      "translations": {
+        "en": "Choose Warehouse",
+        "de": "Lager wählen",
+        "fr": "Choix du dépôt",
+        "ja": "倉庫を選ぶ",
+        "ko": "창고 선택",
+        "zh": "选择仓库",
+        "tr": "Depo Seç",
+        "pl": "Wybierz magazyn",
+        "es": "Elegir almacén",
+        "ar": "اختر مستودعًا"
+      }
+    },
+    "scripts.main.fb16f2253476": {
+      "source": "Твои склады",
+      "translations": {
+        "en": "Your Warehouses",
+        "de": "Deine Lager",
+        "fr": "Tes dépôts",
+        "ja": "あなたの倉庫",
+        "ko": "내 창고",
+        "zh": "你的仓库",
+        "tr": "Depoların",
+        "pl": "Magazyny",
+        "es": "Tus almacenes",
+        "ar": "مستودعاتك"
+      }
+    },
+    "scripts.main.589bafc9b8fb": {
+      "source": "Больше машин — интереснее задача",
+      "translations": {
+        "en": "More trucks, more challenging puzzles",
+        "de": "Mehr LKWs, kniffligere Rätsel",
+        "fr": "Plus de camions, plus de défi",
+        "ja": "トラックが多いほど難しい",
+        "ko": "트럭이 많을수록 더 어려워요",
+        "zh": "卡车越多，挑战越大",
+        "tr": "Daha çok kamyon, daha zor görev",
+        "pl": "Więcej aut — ciekawsze zadanie",
+        "es": "Más camiones, más reto",
+        "ar": "شاحنات أكثر، تحدٍّ أكبر"
+      }
+    },
+    "scripts.main.b2dd460cc970": {
+      "source": "%02d",
+      "translations": {
+        "en": "%02d",
+        "de": "%02d",
+        "fr": "%02d",
+        "ja": "%02d",
+        "ko": "%02d",
+        "zh": "%02d",
+        "tr": "%02d",
+        "pl": "%02d",
+        "es": "%02d",
+        "ar": "%02d"
+      }
+    },
+    "scripts.main.3a5628fdf323": {
+      "source": "ЗАКРЫТ",
+      "translations": {
+        "en": "LOCKED",
+        "de": "GESPERRT",
+        "fr": "FERMÉ",
+        "ja": "ロック中",
+        "ko": "잠김",
+        "zh": "未解锁",
+        "tr": "KAPALI",
+        "pl": "BLOKADA",
+        "es": "CERRADO",
+        "ar": "مقفل"
+      }
+    },
+    "scripts.main.39b131afe827": {
+      "source": "НАЧАТЬ",
+      "translations": {
+        "en": "START",
+        "de": "START",
+        "fr": "JOUER",
+        "ja": "スタート",
+        "ko": "시작",
+        "zh": "开始",
+        "tr": "BAŞLA",
+        "pl": "START",
+        "es": "EMPEZAR",
+        "ar": "ابدأ"
+      }
+    },
+    "scripts.main.e94c8b10fb66": {
+      "source": "Новый склад открывается после полной отгрузки",
+      "translations": {
+        "en": "A new warehouse unlocks after all cargo is shipped",
+        "de": "Neues Lager nach kompletter Verladung frei",
+        "fr": "Nouveau dépôt après livraison complète",
+        "ja": "全て出荷すると次の倉庫が開放",
+        "ko": "모두 출하하면 새 창고가 열려요",
+        "zh": "全部发货后解锁新仓库",
+        "tr": "Yeni depo tam sevkiyattan sonra açılır",
+        "pl": "Nowy magazyn po pełnej wysyłce",
+        "es": "Nuevo almacén tras el envío completo",
+        "ar": "يُفتح مستودع جديد بعد شحن كل الحمولة"
+      }
+    },
+    "scripts.main.f9135b8def31": {
+      "source": "Нет хода для отмены",
+      "translations": {
+        "en": "No move to undo",
+        "de": "Nichts zurückzunehmen",
+        "fr": "Rien à annuler",
+        "ja": "戻せる手がありません",
+        "ko": "되돌릴 수 없어요",
+        "zh": "没有可撤销的操作",
+        "tr": "Geri alınacak hamle yok",
+        "pl": "Nie ma czego cofnąć",
+        "es": "Nada que deshacer",
+        "ar": "لا توجد حركة للتراجع"
+      }
+    },
+    "scripts.main.01e589e7cd6d": {
+      "source": "Ролик пока не готов — попробуй позже",
+      "translations": {
+        "en": "Video not ready yet — try again later",
+        "de": "Video nicht bereit – später erneut",
+        "fr": "Vidéo pas prête — réessaie plus tard",
+        "ja": "動画の準備中 — 後でもう一度",
+        "ko": "영상 준비 중 — 나중에 다시 시도하세요",
+        "zh": "视频未就绪——请稍后再试",
+        "tr": "Video hazır değil — sonra dene",
+        "pl": "Film niegotowy — spróbuj później",
+        "es": "Vídeo no listo — inténtalo luego",
+        "ar": "الفيديو غير جاهز — حاول لاحقًا"
+      }
+    },
+    "scripts.main.195f8283a5ee": {
+      "source": "Ролик не досмотрен — награды нет",
+      "translations": {
+        "en": "Video not finished — no reward",
+        "de": "Video nicht fertig – kein Bonus",
+        "fr": "Vidéo interrompue — pas de prix",
+        "ja": "最後まで見ないと報酬なし",
+        "ko": "끝까지 보지 않아 보상 없음",
+        "zh": "视频未看完——无奖励",
+        "tr": "Video bitmedi — ödül yok",
+        "pl": "Film nieobejrzany — brak nagrody",
+        "es": "Vídeo incompleto — sin premio",
+        "ar": "لم تُكمل الفيديو — لا مكافأة"
+      }
+    },
+    "scripts.main.85790e1f3a24": {
+      "source": "+%d %s",
+      "translations": {
+        "en": "+%d %s",
+        "de": "+%d %s",
+        "fr": "+%d %s",
+        "ja": "+%d %s",
+        "ko": "+%d %s",
+        "zh": "+%d %s",
+        "tr": "+%d %s",
+        "pl": "+%d %s",
+        "es": "+%d %s",
+        "ar": "+%d %s"
+      }
+    },
+    "scripts.main.07989dddb60a": {
+      "source": "Покупки восстановлены",
+      "translations": {
+        "en": "Purchases restored",
+        "de": "Käufe wiederhergestellt",
+        "fr": "Achats restaurés",
+        "ja": "購入を復元しました",
+        "ko": "구매 복원 완료",
+        "zh": "购买已恢复",
+        "tr": "Alımlar geri yüklendi",
+        "pl": "Zakupy przywrócone",
+        "es": "Compras restauradas",
+        "ar": "تمت استعادة المشتريات"
+      }
+    },
+    "scripts.main.0767e8068116": {
+      "source": "Покупки появятся в следующей версии",
+      "translations": {
+        "en": "Purchases will be available in the next version",
+        "de": "Käufe folgen im nächsten Update",
+        "fr": "Achats dans la prochaine version",
+        "ja": "購入は次のバージョンで",
+        "ko": "구매는 다음 버전에 추가돼요",
+        "zh": "购买功能将在下个版本推出",
+        "tr": "Satın alma sonraki sürümde",
+        "pl": "Zakupy w następnej wersji",
+        "es": "Compras en la próxima versión",
+        "ar": "المشتريات في الإصدار القادم"
+      }
+    },
+    "scripts.main.eb13f87aaacb": {
+      "source": "Покупка не завершена — деньги не списаны",
+      "translations": {
+        "en": "Purchase not completed — you were not charged",
+        "de": "Kauf abgebrochen – nichts abgebucht",
+        "fr": "Achat échoué — aucun débit",
+        "ja": "購入未完了 — 請求なし",
+        "ko": "구매 미완료 — 결제되지 않았어요",
+        "zh": "购买未完成——未扣款",
+        "tr": "Alım tamamlanmadı — ücret alınmadı",
+        "pl": "Zakup nieudany — pieniądze nie pobrane",
+        "es": "Compra fallida — sin cargo",
+        "ar": "لم يكتمل الشراء — لم يُخصم أي مبلغ"
+      }
+    },
+    "scripts.main.91d91f393841": {
+      "source": "Посты заняты — отмени ход или дождись погрузки",
+      "translations": {
+        "en": "All spots are full — undo a move or wait for loading",
+        "de": "Plätze voll – Zug zurück oder Beladen abwarten",
+        "fr": "Plus de place — annule ou attends le chargement",
+        "ja": "枠が満杯 — 手を戻すか積み込みを待とう",
+        "ko": "칸이 가득 — 되돌리거나 적재를 기다리세요",
+        "zh": "车位已满——请撤销或等待装货",
+        "tr": "Yerler dolu — geri al veya yüklemeyi bekle",
+        "pl": "Miejsca zajęte — cofnij lub czekaj na załadunek",
+        "es": "Plazas llenas — deshaz o espera la carga",
+        "ar": "المواقف ممتلئة — تراجع أو انتظر التحميل"
+      }
+    },
+    "scripts.main.af6341234057": {
+      "source": "Проезд занят — попробуй после проезда соседней машины",
+      "translations": {
+        "en": "Path blocked — try again after the nearby truck leaves",
+        "de": "Weg blockiert – warte, bis der LKW daneben wegfährt",
+        "fr": "Passage bloqué — attends que le camion voisin parte",
+        "ja": "通路がふさがっています — 隣のトラックを待とう",
+        "ko": "길이 막혔어요 — 옆 트럭이 지나간 뒤 다시 하세요",
+        "zh": "道路被堵——等旁边的卡车开走再试",
+        "tr": "Yol kapalı — yandaki kamyon geçince tekrar dene",
+        "pl": "Przejazd zajęty — poczekaj, aż sąsiednie auto odjedzie",
+        "es": "Paso bloqueado — espera a que salga el camión vecino",
+        "ar": "الطريق مسدود — حاول بعد مرور الشاحنة المجاورة"
+      }
+    },
+    "scripts.main.9f7d1e182ba7": {
+      "source": "Машины и конвейер вернулись на ход назад",
+      "translations": {
+        "en": "Trucks and the conveyor moved one step back",
+        "de": "LKWs und Band einen Zug zurückgesetzt",
+        "fr": "Camions et tapis reculent d'un coup",
+        "ja": "トラックとベルトが1手前に戻った",
+        "ko": "트럭과 벨트가 한 수 전으로 돌아갔어요",
+        "zh": "卡车和传送带已退回一步",
+        "tr": "Kamyonlar ve bant bir hamle geri döndü",
+        "pl": "Auta i taśma cofnęły się o ruch",
+        "es": "Camiones y cinta retroceden un turno",
+        "ar": "عادت الشاحنات والحزام خطوة للخلف"
+      }
+    },
+    "scripts.main.d338a4ad3d38": {
+      "source": "Освободи машину у края или отмени последний ход",
+      "translations": {
+        "en": "Free a truck at the edge or undo your last move",
+        "de": "LKW am Rand befreien oder Zug zurücknehmen",
+        "fr": "Libère un camion au bord ou annule le coup",
+        "ja": "端のトラックを動かすか1手戻そう",
+        "ko": "가장자리 트럭을 빼거나 마지막 수를 되돌리세요",
+        "zh": "移走边上的卡车或撤销上一步",
+        "tr": "Kenardaki kamyonu çıkar veya son hamleyi geri al",
+        "pl": "Uwolnij auto przy krawędzi lub cofnij ruch",
+        "es": "Libera un camión del borde o deshaz",
+        "ar": "حرّر شاحنة عند الحافة أو تراجع عن آخر حركة"
+      }
+    },
+    "scripts.main.8e499a7944ea": {
+      "source": "Вернись на ход назад — здесь нет решения",
+      "translations": {
+        "en": "Go back one move — there is no solution here",
+        "de": "Zug zurück – hier gibt es keine Lösung",
+        "fr": "Recule d'un coup — pas de solution ici",
+        "ja": "1手戻そう — ここに解決策はない",
+        "ko": "한 수 되돌리세요 — 여기선 답이 없어요",
+        "zh": "退回一步——这里无解",
+        "tr": "Bir hamle geri dön — burada çözüm yok",
+        "pl": "Cofnij ruch — tu nie ma rozwiązania",
+        "es": "Retrocede un paso — aquí no hay solución",
+        "ar": "تراجع خطوة — لا يوجد حل هنا"
+      }
+    },
+    "scripts.main.0e2764290fd4": {
+      "source": "Выделенная машина поможет разгрузить двор",
+      "translations": {
+        "en": "The highlighted truck will help clear the yard",
+        "de": "Der markierte LKW hilft beim Räumen",
+        "fr": "Le camion surligné aide à vider la cour",
+        "ja": "光っているトラックで場所を空けよう",
+        "ko": "강조된 트럭으로 마당을 비우세요",
+        "zh": "高亮的卡车能帮你清空场地",
+        "tr": "Seçili kamyon avluyu boşaltmaya yarar",
+        "pl": "Podświetlone auto pomoże rozładować plac",
+        "es": "El camión marcado ayuda a vaciar el patio",
+        "ar": "الشاحنة المميزة ستساعد في إخلاء الساحة"
+      }
+    },
+    "scripts.slot_offer.99bf27c02d89": {
+      "source": "−100",
+      "translations": {
+        "en": "−100",
+        "de": "−100",
+        "fr": "−100",
+        "ja": "−100",
+        "ko": "−100",
+        "zh": "−100",
+        "tr": "−100",
+        "pl": "−100",
+        "es": "−100",
+        "ar": "−100"
+      }
+    },
+    "scripts.ui.game_modal.1375e36fe936": {
+      "source": "+%d",
+      "translations": {
+        "en": "+%d",
+        "de": "+%d",
+        "fr": "+%d",
+        "ja": "+%d",
+        "ko": "+%d",
+        "zh": "+%d",
+        "tr": "+%d",
+        "pl": "+%d",
+        "es": "+%d",
+        "ar": "+%d"
+      }
+    },
+    "scripts.ui.game_modal.22a5d9112486": {
+      "source": "Загружаем…",
+      "translations": {
+        "en": "Loading…",
+        "de": "Lädt…",
+        "fr": "Chargement…",
+        "ja": "読み込み中…",
+        "ko": "불러오는 중…",
+        "zh": "加载中…",
+        "tr": "Yükleniyor…",
+        "pl": "Ładujemy…",
+        "es": "Cargando…",
+        "ar": "جارٍ التحميل…"
+      }
+    },
+    "scripts.ui.game_modal.4367e0063eba": {
+      "source": "Взять",
+      "translations": {
+        "en": "Take",
+        "de": "Nehmen",
+        "fr": "Prendre",
+        "ja": "受け取る",
+        "ko": "받기",
+        "zh": "领取",
+        "tr": "Al",
+        "pl": "Weź",
+        "es": "Tomar",
+        "ar": "خذ"
+      }
+    },
+    "scripts.ui.game_modal.912fad7363d8": {
+      "source": "%s  %s",
+      "translations": {
+        "en": "%s  %s",
+        "de": "%s  %s",
+        "fr": "%s  %s",
+        "ja": "%s  %s",
+        "ko": "%s  %s",
+        "zh": "%s  %s",
+        "tr": "%s  %s",
+        "pl": "%s  %s",
+        "es": "%s  %s",
+        "ar": "%s  %s"
+      }
+    },
+    "scripts.ui.game_modal.0246a2516cda": {
+      "source": "Осталось",
+      "translations": {
+        "en": "Expires in",
+        "de": "Endet in",
+        "fr": "Fin dans",
+        "ja": "残り",
+        "ko": "남은 시간",
+        "zh": "剩余",
+        "tr": "Kalan",
+        "pl": "Zostało",
+        "es": "Quedan",
+        "ar": "المتبقي"
+      }
+    },
+    "scripts.ui.game_modal.e656bc246d80": {
+      "source": "%d д %d ч",
+      "translations": {
+        "en": "%dd %dh",
+        "de": "%d T %d h",
+        "fr": "%d j %d h",
+        "ja": "%d日%d時間",
+        "ko": "%d일 %d시간",
+        "zh": "%d天%d小时",
+        "tr": "%d g %d s",
+        "pl": "%d d %d h",
+        "es": "%d d %d h",
+        "ar": "%d ي %d س"
+      }
+    },
+    "scripts.ui.game_modal.77cbdae53b1d": {
+      "source": "%d ч %02d мин",
+      "translations": {
+        "en": "%dh %02dm",
+        "de": "%d h %02d min",
+        "fr": "%d h %02d min",
+        "ja": "%d時間%02d分",
+        "ko": "%d시간 %02d분",
+        "zh": "%d小时%02d分",
+        "tr": "%d s %02d dk",
+        "pl": "%d h %02d min",
+        "es": "%d h %02d min",
+        "ar": "%d س %02d د"
+      }
+    },
+    "scripts.ui.game_modal.22aa5926e209": {
+      "source": "%d:%02d",
+      "translations": {
+        "en": "%d:%02d",
+        "de": "%d:%02d",
+        "fr": "%d:%02d",
+        "ja": "%d:%02d",
+        "ko": "%d:%02d",
+        "zh": "%d:%02d",
+        "tr": "%d:%02d",
+        "pl": "%d:%02d",
+        "es": "%d:%02d",
+        "ar": "%d:%02d"
+      }
+    },
+    "scripts.ui.modal_catalog.04a597bd50fb": {
+      "source": "Материалы на ленте\nвстанут в новом порядке.",
+      "translations": {
+        "en": "The materials on the conveyor belt will be shuffled.",
+        "de": "Material auf dem Band\nwird neu sortiert.",
+        "fr": "Les matériaux du tapis\nseront mélangés.",
+        "ja": "ベルト上の資材が\n並び替わります。",
+        "ko": "벨트 위 자재가\n새로 섞여요.",
+        "zh": "传送带上的材料\n将重新排列。",
+        "tr": "Banttaki malzemeler\nyeniden dizilecek.",
+        "pl": "Materiały na taśmie\nustawią się inaczej.",
+        "es": "Los materiales\nse reordenarán.",
+        "ar": "المواد على الحزام\nستُخلط من جديد."
+      }
+    },
+    "scripts.ui.modal_catalog.8afd9b9a4ecf": {
+      "source": "Перемешать",
+      "translations": {
+        "en": "Shuffle",
+        "de": "Mischen",
+        "fr": "Mélanger",
+        "ja": "シャッフル",
+        "ko": "섞기",
+        "zh": "打乱",
+        "tr": "Karıştır",
+        "pl": "Tasuj",
+        "es": "Mezclar",
+        "ar": "خلط"
+      }
+    },
+    "scripts.ui.modal_catalog.9b8183747132": {
+      "source": "Перемешать груз?",
+      "translations": {
+        "en": "Shuffle cargo?",
+        "de": "Ladung mischen?",
+        "fr": "Mélanger ?",
+        "ja": "シャッフルする？",
+        "ko": "화물을 섞을까요?",
+        "zh": "打乱货物？",
+        "tr": "Karıştırılsın mı?",
+        "pl": "Tasować ładunek?",
+        "es": "¿Mezclar carga?",
+        "ar": "خلط الحمولة؟"
+      }
+    },
+    "scripts.ui.modal_catalog.7c47f7292ba4": {
+      "source": "Отменить",
+      "translations": {
+        "en": "Undo",
+        "de": "Rückgängig",
+        "fr": "Annuler",
+        "ja": "戻す",
+        "ko": "되돌리기",
+        "zh": "撤销",
+        "tr": "Geri Al",
+        "pl": "Cofnij",
+        "es": "Deshacer",
+        "ar": "تراجع"
+      }
+    },
+    "scripts.ui.modal_catalog.c350b098b327": {
+      "source": "Отменить ход?",
+      "translations": {
+        "en": "Undo move?",
+        "de": "Zug zurück?",
+        "fr": "Annuler ?",
+        "ja": "1手戻す？",
+        "ko": "되돌릴까요?",
+        "zh": "撤销这一步？",
+        "tr": "Geri alınsın mı?",
+        "pl": "Cofnąć ruch?",
+        "es": "¿Deshacer?",
+        "ar": "تراجع عن الحركة؟"
+      }
+    },
+    "scripts.ui.modal_catalog.215d188d6b1a": {
+      "source": "Последняя машина\nвернётся на парковку.",
+      "translations": {
+        "en": "The last truck will return to its original position.",
+        "de": "Der letzte LKW\nkehrt zurück.",
+        "fr": "Le dernier camion\nretourne au parking.",
+        "ja": "最後のトラックが\n駐車場に戻ります。",
+        "ko": "마지막 트럭이\n주차장으로 돌아가요.",
+        "zh": "最后一辆卡车\n将回到停车场。",
+        "tr": "Son kamyon\nparka geri döner.",
+        "pl": "Ostatnie auto\nwróci na parking.",
+        "es": "El último camión\nvuelve al parking.",
+        "ar": "ستعود آخر شاحنة\nإلى الموقف."
+      }
+    },
+    "scripts.ui.modal_catalog.36f798a63c92": {
+      "source": "Помощь",
+      "translations": {
+        "en": "Help",
+        "de": "Hilfe",
+        "fr": "Aide",
+        "ja": "ヘルプ",
+        "ko": "도움말",
+        "zh": "帮助",
+        "tr": "Yardım",
+        "pl": "Pomoc",
+        "es": "Ayuda",
+        "ar": "مساعدة"
+      }
+    },
+    "scripts.ui.modal_catalog.86991a952a8c": {
+      "source": "Бесплатно с рекламой",
+      "translations": {
+        "en": "Free with ad",
+        "de": "Gratis mit Werbung",
+        "fr": "Gratuit avec pub",
+        "ja": "広告で無料",
+        "ko": "광고 보고 무료",
+        "zh": "看广告免费",
+        "tr": "Reklamla ücretsiz",
+        "pl": "Za darmo z reklamą",
+        "es": "Gratis con anuncio",
+        "ar": "مجانًا مع إعلان"
+      }
+    },
+    "scripts.ui.modal_catalog.d4fe5fffa3d6": {
+      "source": "Не сейчас",
+      "translations": {
+        "en": "Not now",
+        "de": "Nicht jetzt",
+        "fr": "Non merci",
+        "ja": "今はしない",
+        "ko": "나중에",
+        "zh": "暂不",
+        "tr": "Şimdi değil",
+        "pl": "Nie teraz",
+        "es": "Ahora no",
+        "ar": "ليس الآن"
+      }
+    },
+    "scripts.ui.modal_catalog.90cba449230b": {
+      "source": "Нужно ещё %d %s.",
+      "translations": {
+        "en": "You need %d more %s.",
+        "de": "Noch %d %s nötig.",
+        "fr": "Il manque %d %s.",
+        "ja": "あと%d%s必要です。",
+        "ko": "%d %s 더 필요해요.",
+        "zh": "还需%d%s。",
+        "tr": "%d %s daha lazım.",
+        "pl": "Brakuje %d %s.",
+        "es": "Te falta: %d %s.",
+        "ar": "تحتاج أيضًا إلى %d %s."
+      }
+    },
+    "scripts.ui.modal_catalog.15e07e80df50": {
+      "source": "+%d за рекламу",
+      "translations": {
+        "en": "+%d for an ad",
+        "de": "+%d für Werbung",
+        "fr": "+%d avec pub",
+        "ja": "広告で+%d",
+        "ko": "광고 보고 +%d",
+        "zh": "看广告+%d",
+        "tr": "Reklamla +%d",
+        "pl": "+%d za reklamę",
+        "es": "+%d por anuncio",
+        "ar": "+%d مقابل إعلان"
+      }
+    },
+    "scripts.ui.modal_catalog.2cacba01ed01": {
+      "source": "%d монет",
+      "translations": {
+        "en": "%d {{coin}}",
+        "de": "%d {{coin}}",
+        "fr": "%d {{coin}}",
+        "ja": "%d {{coin}}",
+        "ko": "%d {{coin}}",
+        "zh": "%d {{coin}}",
+        "tr": "%d {{coin}}",
+        "pl": "%d {{coin}}",
+        "es": "%d {{coin}}",
+        "ar": "%d {{coin}}",
+        "ru": "%d {{coin}}"
+      }
+    },
+    "scripts.ui.modal_catalog.0b350c3a966b": {
+      "source": "Все наборы в магазине",
+      "translations": {
+        "en": "All packs in the shop",
+        "de": "Alle Pakete im Shop",
+        "fr": "Tous les packs",
+        "ja": "ショップの全パック",
+        "ko": "상점의 모든 팩",
+        "zh": "商店全部礼包",
+        "tr": "Tüm paketler",
+        "pl": "Wszystkie zestawy",
+        "es": "Todos los packs",
+        "ar": "كل الحزم في المتجر"
+      }
+    },
+    "scripts.ui.modal_catalog.0e71379e30e5": {
+      "source": "Не хватает монет",
+      "translations": {
+        "en": "Not enough coins",
+        "de": "Zu wenig Münzen",
+        "fr": "Pièces manquantes",
+        "ja": "コインが足りません",
+        "ko": "코인이 부족해요",
+        "zh": "金币不足",
+        "tr": "Altın yetersiz",
+        "pl": "Za mało monet",
+        "es": "Faltan monedas",
+        "ar": "العملات غير كافية"
+      }
+    },
+    "scripts.ui.modal_catalog.83c948293f13": {
+      "source": "Монеты уже в копилке!",
+      "translations": {
+        "en": "Coins added!",
+        "de": "Münzen erhalten!",
+        "fr": "Pièces ajoutées !",
+        "ja": "コインを追加！",
+        "ko": "코인 추가 완료!",
+        "zh": "金币已到账！",
+        "tr": "Altınlar kumbarada!",
+        "pl": "Monety dodane!",
+        "es": "¡Monedas añadidas!",
+        "ar": "أُضيفت العملات!"
+      }
+    },
+    "scripts.ui.modal_catalog.c459a8469cdb": {
+      "source": "Отлично!",
+      "translations": {
+        "en": "Great!",
+        "de": "Super!",
+        "fr": "Super !",
+        "ja": "すばらしい！",
+        "ko": "좋아요!",
+        "zh": "太棒了！",
+        "tr": "Harika!",
+        "pl": "Świetnie!",
+        "es": "¡Genial!",
+        "ar": "رائع!"
+      }
+    },
+    "scripts.ui.modal_catalog.ae5d2abc4e93": {
+      "source": "Награда получена!",
+      "translations": {
+        "en": "Reward received!",
+        "de": "Belohnung da!",
+        "fr": "Récompense reçue !",
+        "ja": "報酬を獲得！",
+        "ko": "보상 획득!",
+        "zh": "已获得奖励！",
+        "tr": "Ödül alındı!",
+        "pl": "Nagroda odebrana!",
+        "es": "¡Premio recibido!",
+        "ar": "تم استلام المكافأة!"
+      }
+    },
+    "scripts.ui.modal_catalog.d674c9a43e5f": {
+      "source": "Загружаем ролик…",
+      "translations": {
+        "en": "Loading video…",
+        "de": "Video lädt…",
+        "fr": "Vidéo en cours…",
+        "ja": "動画を読み込み中…",
+        "ko": "영상 불러오는 중…",
+        "zh": "视频加载中…",
+        "tr": "Video yükleniyor…",
+        "pl": "Ładujemy film…",
+        "es": "Cargando vídeo…",
+        "ar": "جارٍ تحميل الفيديو…"
+      }
+    },
+    "scripts.ui.modal_catalog.8fbe9b75cbdf": {
+      "source": "Отмена",
+      "translations": {
+        "en": "Cancel",
+        "de": "Abbrechen",
+        "fr": "Annuler",
+        "ja": "キャンセル",
+        "ko": "취소",
+        "zh": "取消",
+        "tr": "İptal",
+        "pl": "Anuluj",
+        "es": "Cancelar",
+        "ar": "إلغاء"
+      }
+    },
+    "scripts.ui.modal_catalog.81be36fb6d76": {
+      "source": "Ролик не загрузился.\nПроверь интернет и попробуй ещё раз.",
+      "translations": {
+        "en": "The video did not load.\nCheck your internet and try again.",
+        "de": "Das Video lädt nicht.\nInternet prüfen, dann neu versuchen.",
+        "fr": "Vidéo non chargée.\nVérifie ta connexion et réessaie.",
+        "ja": "動画を読み込めません。\n接続を確認して再試行しよう。",
+        "ko": "영상을 불러오지 못했어요.\n인터넷 연결 확인 후 다시 시도하세요.",
+        "zh": "视频加载失败。\n请检查网络后重试。",
+        "tr": "Video yüklenemedi.\nİnterneti kontrol et ve tekrar dene.",
+        "pl": "Film nie załadowany.\nSprawdź internet i spróbuj ponownie.",
+        "es": "El vídeo no cargó.\nRevisa tu conexión y reinténtalo.",
+        "ar": "تعذّر تحميل الفيديو.\nتحقق من الإنترنت وحاول مجددًا."
+      }
+    },
+    "scripts.ui.modal_catalog.13222328c826": {
+      "source": "Попробовать ещё",
+      "translations": {
+        "en": "Try again",
+        "de": "Nochmal",
+        "fr": "Réessayer",
+        "ja": "再試行",
+        "ko": "다시 시도",
+        "zh": "重试",
+        "tr": "Tekrar dene",
+        "pl": "Spróbuj jeszcze",
+        "es": "Reintentar",
+        "ar": "حاول مجددًا"
+      }
+    },
+    "scripts.ui.modal_catalog.a7a4033657e8": {
+      "source": "Закрыть",
+      "translations": {
+        "en": "Close",
+        "de": "Schließen",
+        "fr": "Fermer",
+        "ja": "閉じる",
+        "ko": "닫기",
+        "zh": "关闭",
+        "tr": "Kapat",
+        "pl": "Zamknij",
+        "es": "Cerrar",
+        "ar": "إغلاق"
+      }
+    },
+    "scripts.ui.modal_catalog.c510079471ac": {
+      "source": "Посмотри короткий ролик\nи получи %d %s.",
+      "translations": {
+        "en": "Watch a short video\nand get %d %s.",
+        "de": "Sieh ein kurzes Video\nund hol dir %d %s.",
+        "fr": "Regarde une vidéo\net gagne %d %s.",
+        "ja": "短い動画を見て\n%d%sをゲット！",
+        "ko": "짧은 영상을 보고\n%d %s 받으세요.",
+        "zh": "观看短视频\n即可获得%d%s。",
+        "tr": "Kısa bir video izle,\n%d %s kazan.",
+        "pl": "Obejrzyj krótki film\ni zgarnij %d %s.",
+        "es": "Mira un vídeo corto\ny gana %d %s.",
+        "ar": "شاهد فيديو قصيرًا\nواحصل على %d %s."
+      }
+    },
+    "scripts.ui.modal_catalog.7ac84107c129": {
+      "source": "Смотреть",
+      "translations": {
+        "en": "Watch",
+        "de": "Ansehen",
+        "fr": "Regarder",
+        "ja": "見る",
+        "ko": "보기",
+        "zh": "观看",
+        "tr": "İzle",
+        "pl": "Oglądaj",
+        "es": "Ver",
+        "ar": "مشاهدة"
+      }
+    },
+    "scripts.ui.modal_catalog.f3c8f3a92afd": {
+      "source": "Бесплатные монеты",
+      "translations": {
+        "en": "Free Coins",
+        "de": "Gratis-Münzen",
+        "fr": "Pièces gratuites",
+        "ja": "無料コイン",
+        "ko": "무료 코인",
+        "zh": "免费金币",
+        "tr": "Bedava Altın",
+        "pl": "Darmowe monety",
+        "es": "Monedas gratis",
+        "ar": "عملات مجانية"
+      }
+    },
+    "scripts.ui.modal_catalog.4ac69ceabdf6": {
+      "source": "Удвоить награду",
+      "translations": {
+        "en": "Double Reward",
+        "de": "Belohnung x2",
+        "fr": "Doubler le gain",
+        "ja": "報酬2倍",
+        "ko": "보상 2배",
+        "zh": "奖励翻倍",
+        "tr": "2 Kat Ödül",
+        "pl": "Podwój nagrodę",
+        "es": "Doblar premio",
+        "ar": "ضاعف المكافأة"
+      }
+    },
+    "scripts.ui.modal_catalog.fd5ddecfacae": {
+      "source": "Награда за этот уровень\nуже получена.",
+      "translations": {
+        "en": "You already got the reward\nfor this level.",
+        "de": "Level-Belohnung\nschon erhalten.",
+        "fr": "Gain de ce niveau\ndéjà obtenu.",
+        "ja": "このレベルの報酬は\n受取済みです。",
+        "ko": "이 레벨의 보상은\n이미 받았어요.",
+        "zh": "本关奖励\n已领取。",
+        "tr": "Bu seviyenin ödülü\nzaten alındı.",
+        "pl": "Nagroda za ten poziom\njuż odebrana.",
+        "es": "Premio de este nivel\nya recibido.",
+        "ar": "حصلت على مكافأة\nهذا المستوى بالفعل."
+      }
+    },
+    "scripts.ui.modal_catalog.7b3864be0f54": {
+      "source": "Карта уровней",
+      "translations": {
+        "en": "Level Map",
+        "de": "Levelkarte",
+        "fr": "Les niveaux",
+        "ja": "レベルマップ",
+        "ko": "레벨 지도",
+        "zh": "关卡地图",
+        "tr": "Harita",
+        "pl": "Mapa poziomów",
+        "es": "Niveles",
+        "ar": "خريطة المستويات"
+      }
+    },
+    "scripts.ui.modal_catalog.6eaef62bc617": {
+      "source": "Следующий уровень",
+      "translations": {
+        "en": "Next Level",
+        "de": "Nächstes Level",
+        "fr": "Niveau suivant",
+        "ja": "次のレベル",
+        "ko": "다음 레벨",
+        "zh": "下一关",
+        "tr": "Sonraki Seviye",
+        "pl": "Następny poziom",
+        "es": "Siguiente nivel",
+        "ar": "المستوى التالي"
+      }
+    },
+    "scripts.ui.modal_catalog.800380963da6": {
+      "source": "Сыграть ещё раз",
+      "translations": {
+        "en": "Play Again",
+        "de": "Nochmal spielen",
+        "fr": "Rejouer",
+        "ja": "もう一度",
+        "ko": "다시 하기",
+        "zh": "再玩一次",
+        "tr": "Tekrar Oyna",
+        "pl": "Zagraj ponownie",
+        "es": "Jugar otra vez",
+        "ar": "العب مجددًا"
+      }
+    },
+    "scripts.ui.modal_catalog.6e06b221d0f8": {
+      "source": "Груз отправлен!",
+      "translations": {
+        "en": "Cargo shipped!",
+        "de": "Verschickt!",
+        "fr": "Fret envoyé !",
+        "ja": "出荷完了！",
+        "ko": "화물 출발!",
+        "zh": "货物已发出！",
+        "tr": "Yük gönderildi!",
+        "pl": "Ładunek wysłany!",
+        "es": "¡Carga enviada!",
+        "ar": "تم شحن الحمولة!"
+      }
+    },
+    "scripts.ui.modal_catalog.44ce35728237": {
+      "source": "Достижения",
+      "translations": {
+        "en": "Achievements",
+        "de": "Erfolge",
+        "fr": "Succès",
+        "ja": "実績",
+        "ko": "업적",
+        "zh": "成就",
+        "tr": "Başarımlar",
+        "pl": "Osiągnięcia",
+        "es": "Logros",
+        "ar": "الإنجازات"
+      }
+    },
+    "scripts.ui.modal_catalog.a7bdff844b22": {
+      "source": "Серия",
+      "translations": {
+        "en": "Streak",
+        "de": "Serie",
+        "fr": "Série",
+        "ja": "連続",
+        "ko": "연속",
+        "zh": "连胜",
+        "tr": "Seri",
+        "pl": "Seria",
+        "es": "Racha",
+        "ar": "سلسلة"
+      }
+    },
+    "scripts.ui.modal_catalog.e1368cabf157": {
+      "source": "Сундук",
+      "translations": {
+        "en": "Chest",
+        "de": "Truhe",
+        "fr": "Coffre",
+        "ja": "宝箱",
+        "ko": "상자",
+        "zh": "宝箱",
+        "tr": "Sandık",
+        "pl": "Kufer",
+        "es": "Cofre",
+        "ar": "صندوق"
+      }
+    },
+    "scripts.ui.modal_catalog.7f67af3d6cd9": {
+      "source": "Уровень",
+      "translations": {
+        "en": "Level",
+        "de": "Level",
+        "fr": "Niveau",
+        "ja": "レベル",
+        "ko": "레벨",
+        "zh": "关卡",
+        "tr": "Seviye",
+        "pl": "Poziom",
+        "es": "Nivel",
+        "ar": "المستوى"
+      }
+    },
+    "scripts.ui.modal_catalog.d2904dded9ed": {
+      "source": "До конца",
+      "translations": {
+        "en": "Ends in",
+        "de": "Endet in",
+        "fr": "Fin dans",
+        "ja": "終了まで",
+        "ko": "종료까지",
+        "zh": "剩余",
+        "tr": "Kalan",
+        "pl": "Do końca",
+        "es": "Termina en",
+        "ar": "ينتهي خلال"
+      }
+    },
+    "scripts.ui.modal_catalog.3e3da8ee1d96": {
+      "source": "Забрать набор",
+      "translations": {
+        "en": "Get Pack",
+        "de": "Paket holen",
+        "fr": "Récupérer",
+        "ja": "受け取る",
+        "ko": "받기",
+        "zh": "领取礼包",
+        "tr": "Paketi Al",
+        "pl": "Odbierz",
+        "es": "Conseguir",
+        "ar": "احصل على الحزمة"
+      }
+    },
+    "scripts.ui.modal_catalog.7996f711496a": {
+      "source": "Позже",
+      "translations": {
+        "en": "Later",
+        "de": "Später",
+        "fr": "Après",
+        "ja": "後で",
+        "ko": "나중에",
+        "zh": "稍后",
+        "tr": "Sonra",
+        "pl": "Później",
+        "es": "Luego",
+        "ar": "لاحقًا"
+      }
+    },
+    "scripts.ui.modal_catalog.04c98320ca2b": {
+      "source": "Обычная цена %s",
+      "translations": {
+        "en": "Regular price %s",
+        "de": "Normalpreis %s",
+        "fr": "Prix normal %s",
+        "ja": "通常価格 %s",
+        "ko": "정가 %s",
+        "zh": "原价%s",
+        "tr": "Normal fiyat %s",
+        "pl": "Zwykła cena %s",
+        "es": "Precio normal %s",
+        "ar": "السعر العادي %s"
+      }
+    },
+    "scripts.ui.modal_catalog.2f46e9af5b29": {
+      "source": "Сезонная акция",
+      "translations": {
+        "en": "Seasonal Offer",
+        "de": "Saisonangebot",
+        "fr": "Offre de saison",
+        "ja": "期間限定セール",
+        "ko": "시즌 특가",
+        "zh": "季节活动",
+        "tr": "Sezon Fırsatı",
+        "pl": "Akcja sezonowa",
+        "es": "Oferta temporal",
+        "ar": "عرض موسمي"
+      }
+    },
+    "scripts.ui.modal_catalog.14071c7fed0a": {
+      "source": "%s · ещё %s",
+      "translations": {
+        "en": "%s · %s left",
+        "de": "%s · noch %s",
+        "fr": "%s · reste %s",
+        "ja": "%s · 残り%s",
+        "ko": "%s · %s 남음",
+        "zh": "%s · 还剩%s",
+        "tr": "%s · %s kaldı",
+        "pl": "%s · jeszcze %s",
+        "es": "%s · quedan %s",
+        "ar": "%s · متبقٍ %s"
+      }
+    },
+    "scripts.ui.modal_catalog.a54143865c0d": {
+      "source": "Монеты",
+      "translations": {
+        "en": "Coins",
+        "de": "Münzen",
+        "fr": "Pièces",
+        "ja": "コイン",
+        "ko": "코인",
+        "zh": "金币",
+        "tr": "Altın",
+        "pl": "Monety",
+        "es": "Monedas",
+        "ar": "عملات"
+      }
+    },
+    "scripts.ui.modal_catalog.ecaab828792b": {
+      "source": "Бесплатно",
+      "translations": {
+        "en": "Free",
+        "de": "Gratis",
+        "fr": "Gratuit",
+        "ja": "無料",
+        "ko": "무료",
+        "zh": "免费",
+        "tr": "Ücretsiz",
+        "pl": "Za darmo",
+        "es": "Gratis",
+        "ar": "مجانًا"
+      }
+    },
+    "scripts.ui.modal_catalog.72c299e0d65e": {
+      "source": "Скоро",
+      "translations": {
+        "en": "Coming soon",
+        "de": "Bald",
+        "fr": "Bientôt",
+        "ja": "近日公開",
+        "ko": "곧 출시",
+        "zh": "敬请期待",
+        "tr": "Yakında",
+        "pl": "Wkrótce",
+        "es": "Pronto",
+        "ar": "قريبًا"
+      }
+    },
+    "scripts.ui.modal_catalog.16af0289546a": {
+      "source": "Восстановить покупки",
+      "translations": {
+        "en": "Restore Purchases",
+        "de": "Käufe wiederherstellen",
+        "fr": "Restaurer les achats",
+        "ja": "購入を復元",
+        "ko": "구매 복원",
+        "zh": "恢复购买",
+        "tr": "Alımları Geri Yükle",
+        "pl": "Przywróć zakupy",
+        "es": "Restaurar compras",
+        "ar": "استعادة المشتريات"
+      }
+    },
+    "scripts.ui.modal_catalog.23e3c7064746": {
+      "source": "Магазин",
+      "translations": {
+        "en": "Shop",
+        "de": "Shop",
+        "fr": "Boutique",
+        "ja": "ショップ",
+        "ko": "상점",
+        "zh": "商店",
+        "tr": "Mağaza",
+        "pl": "Sklep",
+        "es": "Tienda",
+        "ar": "المتجر"
+      }
+    },
+    "scripts.ui.modal_catalog.fb544c2664fb": {
+      "source": "Готово!",
+      "translations": {
+        "en": "Done!",
+        "de": "Fertig!",
+        "fr": "Prêt !",
+        "ja": "完了！",
+        "ko": "완료!",
+        "zh": "完成！",
+        "tr": "Hazır!",
+        "pl": "Gotowe!",
+        "es": "¡Listo!",
+        "ar": "تم!"
+      }
+    },
+    "scripts.ui.modal_catalog.900d17c85c44": {
+      "source": "Всё уже на складе. За работу!",
+      "translations": {
+        "en": "Everything is in the warehouse. Let's get to work!",
+        "de": "Alles im Lager. An die Arbeit!",
+        "fr": "Tout est livré. Au boulot !",
+        "ja": "準備完了。さあ仕事だ！",
+        "ko": "모두 준비됐어요. 일하러 가요!",
+        "zh": "一切就绪，开工吧！",
+        "tr": "Her şey depoda. İşe koyul!",
+        "pl": "Wszystko gotowe. Do roboty!",
+        "es": "Todo listo. ¡A trabajar!",
+        "ar": "كل شيء في المستودع. إلى العمل!"
+      }
+    },
+    "scripts.ui.modal_catalog.91faf0b5f015": {
+      "source": "%d д",
+      "translations": {
+        "en": "%dd",
+        "de": "%d T",
+        "fr": "%d j",
+        "ja": "%d日",
+        "ko": "%d일",
+        "zh": "%d天",
+        "tr": "%d g",
+        "pl": "%d d",
+        "es": "%d d",
+        "ar": "%d ي"
+      }
+    },
+    "scripts.ui.modal_catalog.fdb60b7161f2": {
+      "source": "%d ч",
+      "translations": {
+        "en": "%dh",
+        "de": "%d h",
+        "fr": "%d h",
+        "ja": "%d時間",
+        "ko": "%d시간",
+        "zh": "%d小时",
+        "tr": "%d s",
+        "pl": "%d h",
+        "es": "%d h",
+        "ar": "%d س"
+      }
+    },
+    "scripts.ui.modal_catalog.ec2f763fe6e3": {
+      "source": "монета",
+      "translations": {
+        "en": "{{coin}}",
+        "de": "{{coin}}",
+        "fr": "{{coin}}",
+        "ja": "{{coin}}",
+        "ko": "{{coin}}",
+        "zh": "{{coin}}",
+        "tr": "{{coin}}",
+        "pl": "{{coin}}",
+        "es": "{{coin}}",
+        "ar": "{{coin}}",
+        "ru": "{{coin}}"
+      }
+    },
+    "scripts.ui.modal_catalog.253383400304": {
+      "source": "монеты",
+      "translations": {
+        "en": "{{coin}}",
+        "de": "{{coin}}",
+        "fr": "{{coin}}",
+        "ja": "{{coin}}",
+        "ko": "{{coin}}",
+        "zh": "{{coin}}",
+        "tr": "{{coin}}",
+        "pl": "{{coin}}",
+        "es": "{{coin}}",
+        "ar": "{{coin}}",
+        "ru": "{{coin}}"
+      }
+    },
+    "scripts.ui.modal_catalog.5722f18f0748": {
+      "source": "монет",
+      "translations": {
+        "en": "{{coin}}",
+        "de": "{{coin}}",
+        "fr": "{{coin}}",
+        "ja": "{{coin}}",
+        "ko": "{{coin}}",
+        "zh": "{{coin}}",
+        "tr": "{{coin}}",
+        "pl": "{{coin}}",
+        "es": "{{coin}}",
+        "ar": "{{coin}}",
+        "ru": "{{coin}}"
+      }
+    },
+    "scripts.ui.modal_catalog.ea58bb0bc6d4": {
+      "source": "Дальше",
+      "translations": {
+        "en": "Next",
+        "de": "Weiter",
+        "fr": "Suivant",
+        "ja": "次へ",
+        "ko": "다음",
+        "zh": "下一步",
+        "tr": "İleri",
+        "pl": "Dalej",
+        "es": "Seguir",
+        "ar": "التالي"
+      }
+    },
+    "scripts.ui.modal_catalog.2179f8734c6f": {
+      "source": "Нажми на машину — она выедет по стрелке к складу.",
+      "translations": {
+        "en": "Tap a truck to send it toward the warehouse in the direction of the arrow.",
+        "de": "Tipp einen LKW an – er folgt dem Pfeil zum Lager.",
+        "fr": "Touche un camion : il suit la flèche au dépôt.",
+        "ja": "トラックをタップ — 矢印の方へ倉庫に向かうよ。",
+        "ko": "트럭을 탭하면 화살표 방향으로 창고에 가요.",
+        "zh": "点击卡车，它会按箭头方向开往仓库。",
+        "tr": "Kamyona dokun — ok yönünde depoya gider.",
+        "pl": "Dotknij auta — pojedzie za strzałką do magazynu.",
+        "es": "Toca un camión: irá al almacén según la flecha.",
+        "ar": "المس شاحنة لتتجه إلى المستودع باتجاه السهم."
+      }
+    },
+    "scripts.ui.modal_catalog.e180633a436f": {
+      "source": "Привет, я Билли!",
+      "translations": {
+        "en": "Hi, I'm Billy!",
+        "de": "Hi, ich bin Billy!",
+        "fr": "Moi, c'est Billy !",
+        "ja": "やあ、ぼくはビリー！",
+        "ko": "안녕, 난 빌리야!",
+        "zh": "你好，我是比利！",
+        "tr": "Selam, ben Billy!",
+        "pl": "Hej, tu Billy!",
+        "es": "¡Hola, soy Billy!",
+        "ar": "مرحبًا، أنا بيلي!"
+      }
+    },
+    "scripts.ui.modal_catalog.1e15b34f2534": {
+      "source": "Машина берёт только свой материал. Следи за лентой сверху!",
+      "translations": {
+        "en": "Each truck takes only its own material. Watch the belt at the top!",
+        "de": "Jeder LKW lädt nur sein Material. Achte aufs Band oben!",
+        "fr": "Un camion ne prend que son matériau. Regarde le tapis !",
+        "ja": "トラックは自分の資材だけを運ぶ。上のベルトを見よう！",
+        "ko": "트럭은 자기 자재만 실어요. 위쪽 벨트를 보세요!",
+        "zh": "每辆卡车只装自己的材料。留意上方的传送带！",
+        "tr": "Kamyon sadece kendi malzemesini alır. Üstteki banda bak!",
+        "pl": "Auto bierze tylko swój materiał. Obserwuj taśmę u góry!",
+        "es": "Cada camión lleva solo su material. ¡Vigila la cinta!",
+        "ar": "تأخذ الشاحنة مادتها فقط. راقب الحزام في الأعلى!"
+      }
+    },
+    "scripts.ui.modal_catalog.4d3181b2b05e": {
+      "source": "Цвет — это груз",
+      "translations": {
+        "en": "Match trucks to cargo by color",
+        "de": "Farbe = Ladung",
+        "fr": "Couleur = fret",
+        "ja": "色＝荷物",
+        "ko": "색깔 = 화물",
+        "zh": "颜色就是货物",
+        "tr": "Renk = yük",
+        "pl": "Kolor to ładunek",
+        "es": "Color = carga",
+        "ar": "اللون هو الحمولة"
+      }
+    },
+    "scripts.ui.modal_catalog.e7735f16fb5f": {
+      "source": "Мест всего три",
+      "translations": {
+        "en": "Only Three Spots!",
+        "de": "Nur 3 Plätze!",
+        "fr": "Que 3 places !",
+        "ja": "枠は3つだけ！",
+        "ko": "칸은 단 3개!",
+        "zh": "只有三个车位",
+        "tr": "Yalnızca 3 yer!",
+        "pl": "Tylko 3 miejsca",
+        "es": "¡Solo 3 plazas!",
+        "ar": "ثلاثة مواقف فقط!"
+      }
+    },
+    "scripts.ui.modal_catalog.d09cef487b9e": {
+      "source": "Начать работу",
+      "translations": {
+        "en": "Get to Work",
+        "de": "An die Arbeit",
+        "fr": "Au travail !",
+        "ja": "作業開始",
+        "ko": "작업 시작",
+        "zh": "开始工作",
+        "tr": "İşe Başla",
+        "pl": "Do roboty",
+        "es": "A trabajar",
+        "ar": "ابدأ العمل"
+      }
+    },
+    "scripts.ui.modal_catalog.2052041e04c0": {
+      "source": "Не занимай места машинами, которым груз пока не нужен.",
+      "translations": {
+        "en": "Keep spots free for trucks that match the upcoming cargo.",
+        "de": "Parke keine LKWs, deren Ladung noch nicht dran ist.",
+        "fr": "Garde les places pour les camions dont le fret arrive.",
+        "ja": "まだ荷物が来ないトラックで枠をふさがないで。",
+        "ko": "아직 필요 없는 트럭으로 칸을 채우지 마세요.",
+        "zh": "别让暂时用不上的卡车占用车位。",
+        "tr": "Yükü henüz gelmeyen kamyonlarla yerleri doldurma.",
+        "pl": "Nie zajmuj miejsc autami, które nie są jeszcze potrzebne.",
+        "es": "No ocupes plazas con camiones que aún no hacen falta.",
+        "ar": "لا تشغل المواقف بشاحنات لا تحتاج حمولتها بعد."
+      }
+    },
+    "scripts.ui.modal_catalog.9e4d256050a3": {
+      "source": "Пропустить обучение",
+      "translations": {
+        "en": "Skip Tutorial",
+        "de": "Tutorial überspringen",
+        "fr": "Passer le tutoriel",
+        "ja": "チュートリアルをスキップ",
+        "ko": "튜토리얼 건너뛰기",
+        "zh": "跳过教程",
+        "tr": "Eğitimi Atla",
+        "pl": "Pomiń samouczek",
+        "es": "Saltar tutorial",
+        "ar": "تخطي الشرح"
+      }
+    },
+    "scripts.ui.modal_catalog.48dccafab27d": {
+      "source": "Все места у склада заняты.\nОткрой ещё одно — и продолжай!",
+      "translations": {
+        "en": "All parking spots at the warehouse are full.\nUnlock one more and keep going!",
+        "de": "Alle Plätze am Lager belegt.\nÖffne noch einen – und weiter!",
+        "fr": "Toutes les places prises.\nOuvre-en une et continue !",
+        "ja": "倉庫の枠がすべて埋まった。\nもう1つ開放して続けよう！",
+        "ko": "창고 앞 칸이 모두 찼어요.\n하나 더 열고 계속하세요!",
+        "zh": "仓库前的车位都满了。\n再解锁一个继续吧！",
+        "tr": "Depodaki tüm yerler dolu.\nBir tane daha aç ve devam et!",
+        "pl": "Wszystkie miejsca zajęte.\nOtwórz kolejne i graj dalej!",
+        "es": "Las plazas están llenas.\n¡Abre otra y sigue jugando!",
+        "ar": "كل المواقف ممتلئة.\nافتح موقفًا آخر وتابع!"
+      }
+    },
+    "scripts.ui.modal_catalog.c60d2d77d06d": {
+      "source": "Открыть место",
+      "translations": {
+        "en": "Unlock Parking Spot",
+        "de": "Platz öffnen",
+        "fr": "Ouvrir une place",
+        "ja": "枠を開放",
+        "ko": "칸 열기",
+        "zh": "解锁车位",
+        "tr": "Yer Aç",
+        "pl": "Otwórz miejsce",
+        "es": "Abrir plaza",
+        "ar": "فتح موقف"
+      }
+    },
+    "scripts.ui.modal_catalog.aa882b151605": {
+      "source": "Место за рекламу",
+      "translations": {
+        "en": "Unlock with Ad",
+        "de": "Platz für Video",
+        "fr": "Place contre pub",
+        "ja": "広告で枠を開放",
+        "ko": "광고 보고 칸 열기",
+        "zh": "看广告得车位",
+        "tr": "Reklamla Yer",
+        "pl": "Miejsce za reklamę",
+        "es": "Plaza por anuncio",
+        "ar": "موقف مقابل إعلان"
+      }
+    },
+    "scripts.ui.modal_catalog.6909d293a79e": {
+      "source": "Ролик готовится…",
+      "translations": {
+        "en": "Preparing video…",
+        "de": "Video kommt…",
+        "fr": "La vidéo arrive…",
+        "ja": "動画を準備中…",
+        "ko": "영상 준비 중…",
+        "zh": "视频准备中…",
+        "tr": "Video geliyor…",
+        "pl": "Film się ładuje…",
+        "es": "Preparando vídeo…",
+        "ar": "جارٍ تجهيز الفيديو…"
+      }
+    },
+    "scripts.ui.modal_catalog.cf19cb36e0bd": {
+      "source": "Кран переставит нужную машину прямо к складу.",
+      "translations": {
+        "en": "The crane will move the right truck straight to the warehouse.",
+        "de": "Der Kran stellt den richtigen LKW ans Lager.",
+        "fr": "La grue place le bon camion devant le dépôt.",
+        "ja": "クレーンが必要なトラックを倉庫の前へ運ぶ。",
+        "ko": "크레인이 필요한 트럭을 창고 앞으로 옮겨요.",
+        "zh": "吊车会把需要的卡车直接移到仓库前。",
+        "tr": "Vinç doğru kamyonu doğrudan depoya taşır.",
+        "pl": "Dźwig postawi właściwe auto przy magazynie.",
+        "es": "La grúa lleva el camión justo al almacén.",
+        "ar": "ستنقل الرافعة الشاحنة المطلوبة إلى المستودع."
+      }
+    },
+    "scripts.ui.modal_catalog.25b355813f82": {
+      "source": "Вызвать кран",
+      "translations": {
+        "en": "Call Crane",
+        "de": "Kran rufen",
+        "fr": "Appeler la grue",
+        "ja": "クレーンを呼ぶ",
+        "ko": "크레인 부르기",
+        "zh": "呼叫吊车",
+        "tr": "Vinç Çağır",
+        "pl": "Wezwij dźwig",
+        "es": "Llamar grúa",
+        "ar": "استدعاء الرافعة"
+      }
+    },
+    "scripts.ui.modal_catalog.2398ba31360b": {
+      "source": "Помощь в этой попытке закончилась.\nОтмени ход или начни заново.",
+      "translations": {
+        "en": "No more boosts in this attempt.\nUndo a move or start over.",
+        "de": "Keine Booster mehr übrig.\nZug zurück oder neu starten.",
+        "fr": "Plus de bonus pour cet essai.\nAnnule un coup ou recommence.",
+        "ja": "今回のアシストは使い切った。\n手を戻すか、やり直そう。",
+        "ko": "이번 도전의 부스터를 다 썼어요.\n되돌리거나 다시 시작하세요.",
+        "zh": "本次尝试的道具已用完。\n撤销一步或重新开始。",
+        "tr": "Bu denemede yardım hakkın bitti.\nGeri al veya baştan başla.",
+        "pl": "Pomoc w tej próbie się skończyła.\nCofnij ruch lub graj od nowa.",
+        "es": "No quedan ayudas en este intento.\nDeshaz o empieza de nuevo.",
+        "ar": "انتهت المساعدة في هذه المحاولة.\nتراجع أو ابدأ من جديد."
+      }
+    },
+    "scripts.ui.modal_catalog.0abf7381f65f": {
+      "source": "Место и нужная машина",
+      "translations": {
+        "en": "Parking spot and the right truck",
+        "de": "Platz + passender LKW",
+        "fr": "Place et bon camion",
+        "ja": "枠と必要なトラック",
+        "ko": "칸과 필요한 트럭",
+        "zh": "车位和所需卡车",
+        "tr": "Yer ve doğru kamyon",
+        "pl": "Miejsce i właściwe auto",
+        "es": "Plaza y camión justo",
+        "ar": "موقف وشاحنة مناسبة"
+      }
+    },
+    "scripts.ui.modal_catalog.4367e0063eba": {
+      "source": "Взять",
+      "translations": {
+        "en": "Take",
+        "de": "Nehmen",
+        "fr": "Prendre",
+        "ja": "受け取る",
+        "ko": "받기",
+        "zh": "领取",
+        "tr": "Al",
+        "pl": "Weź",
+        "es": "Tomar",
+        "ar": "خذ"
+      }
+    },
+    "scripts.ui.modal_catalog.8d589b0c3c10": {
+      "source": "Отменить ход",
+      "translations": {
+        "en": "Undo Move",
+        "de": "Zug zurück",
+        "fr": "Annuler le coup",
+        "ja": "1手戻す",
+        "ko": "되돌리기",
+        "zh": "撤销",
+        "tr": "Geri Al",
+        "pl": "Cofnij ruch",
+        "es": "Deshacer",
+        "ar": "تراجع عن حركة"
+      }
+    },
+    "scripts.ui.modal_catalog.19640d8d48a9": {
+      "source": "Бесплатно: ещё %d",
+      "translations": {
+        "en": "Free: %d left",
+        "de": "Gratis: noch %d",
+        "fr": "Gratuit : reste %d",
+        "ja": "無料：残り%d",
+        "ko": "무료: %d회 남음",
+        "zh": "免费：剩余%d次",
+        "tr": "Ücretsiz: %d kaldı",
+        "pl": "Gratis: jeszcze %d",
+        "es": "Usos gratuitos: %d",
+        "ar": "مجانًا: متبقٍ %d"
+      }
+    },
+    "scripts.ui.modal_catalog.f40432b44242": {
+      "source": "Вернуть последнюю машину",
+      "translations": {
+        "en": "Return Last Truck",
+        "de": "Letzten LKW zurückholen",
+        "fr": "Retour du dernier camion",
+        "ja": "最後のトラックを戻す",
+        "ko": "마지막 트럭 되돌리기",
+        "zh": "退回最后一辆车",
+        "tr": "Son Kamyonu Geri Al",
+        "pl": "Cofnij ostatnie auto",
+        "es": "Devolver último camión",
+        "ar": "إرجاع آخر شاحنة"
+      }
+    },
+    "scripts.ui.modal_catalog.086406bd4bfe": {
+      "source": "Перемешать груз",
+      "translations": {
+        "en": "Shuffle Cargo",
+        "de": "Ladung mischen",
+        "fr": "Mélanger le fret",
+        "ja": "荷物シャッフル",
+        "ko": "화물 섞기",
+        "zh": "打乱货物",
+        "tr": "Yükü Karıştır",
+        "pl": "Tasuj ładunek",
+        "es": "Mezclar carga",
+        "ar": "خلط الحمولة"
+      }
+    },
+    "scripts.ui.modal_catalog.ab24f870e1e9": {
+      "source": "Новый порядок на ленте",
+      "translations": {
+        "en": "New order on the belt",
+        "de": "Band neu sortiert",
+        "fr": "Tapis réorganisé",
+        "ja": "ベルトの順番を変更",
+        "ko": "벨트 순서 변경",
+        "zh": "传送带重新排序",
+        "tr": "Bantta yeni sıra",
+        "pl": "Nowy porządek taśmy",
+        "es": "Cinta reordenada",
+        "ar": "ترتيب جديد على الحزام"
+      }
+    },
+    "scripts.ui.modal_catalog.0c7925af0933": {
+      "source": "Начать уровень заново",
+      "translations": {
+        "en": "Restart Level",
+        "de": "Level neu starten",
+        "fr": "Recommencer",
+        "ja": "やり直す",
+        "ko": "레벨 다시 시작",
+        "zh": "重新开始",
+        "tr": "Baştan Başla",
+        "pl": "Zacznij od nowa",
+        "es": "Reiniciar nivel",
+        "ar": "إعادة المستوى"
+      }
+    },
+    "scripts.ui.modal_catalog.6d45f7c36311": {
+      "source": "Парковка заполнена!",
+      "translations": {
+        "en": "Parking is full!",
+        "de": "Parkplätze voll!",
+        "fr": "Parking plein !",
+        "ja": "駐車場が満杯！",
+        "ko": "주차장이 가득 찼어요!",
+        "zh": "停车场已满！",
+        "tr": "Park dolu!",
+        "pl": "Parking pełny!",
+        "es": "¡Parking lleno!",
+        "ar": "الموقف ممتلئ!"
+      }
+    },
+    "scripts.ui.modal_catalog.07cb65087477": {
+      "source": "Убрать",
+      "translations": {
+        "en": "Remove",
+        "de": "Entfernen",
+        "fr": "Retirer",
+        "ja": "撤去",
+        "ko": "치우기",
+        "zh": "移除",
+        "tr": "Kaldır",
+        "pl": "Usuń",
+        "es": "Quitar",
+        "ar": "إزالة"
+      }
+    },
+    "scripts.ui.modal_catalog.0aece7c229eb": {
+      "source": "Убрать конус?",
+      "translations": {
+        "en": "Remove the cone?",
+        "de": "Kegel weg?",
+        "fr": "Ôter le cône ?",
+        "ja": "コーンを撤去？",
+        "ko": "콘을 치울까요?",
+        "zh": "移除锥桶？",
+        "tr": "Koni gitsin mi?",
+        "pl": "Usunąć pachołek?",
+        "es": "¿Quitar cono?",
+        "ar": "إزالة المخروط؟"
+      }
+    },
+    "scripts.ui.modal_catalog.26bf5538561c": {
+      "source": "Четвёртое место у склада\nдо конца этой попытки.",
+      "translations": {
+        "en": "Unlock a 4th spot for this attempt.",
+        "de": "Ein 4. Platz am Lager\nbis zum Versuchsende.",
+        "fr": "Une 4e place au dépôt\npour tout cet essai.",
+        "ja": "今回の挑戦中、\n4つ目の枠を追加。",
+        "ko": "이번 도전 동안\n4번째 칸을 열어요.",
+        "zh": "本次尝试期间\n增加第4个车位。",
+        "tr": "Depoda dördüncü yer\nbu deneme boyunca.",
+        "pl": "Czwarte miejsce\ndo końca tej próby.",
+        "es": "Una 4.ª plaza extra\ndurante este intento.",
+        "ar": "موقف رابع عند المستودع\nحتى نهاية المحاولة."
+      }
+    },
+    "scripts.ui.modal_catalog.b4d4430a6344": {
+      "source": "Вызвать",
+      "translations": {
+        "en": "Call",
+        "de": "Rufen",
+        "fr": "Appeler",
+        "ja": "呼ぶ",
+        "ko": "부르기",
+        "zh": "呼叫",
+        "tr": "Çağır",
+        "pl": "Wezwij",
+        "es": "Llamar",
+        "ar": "استدعاء"
+      }
+    },
+    "scripts.ui.modal_catalog.2aef95648c48": {
+      "source": "Вызвать кран?",
+      "translations": {
+        "en": "Call the crane?",
+        "de": "Kran rufen?",
+        "fr": "Appeler la grue ?",
+        "ja": "クレーンを呼ぶ？",
+        "ko": "크레인을 부를까요?",
+        "zh": "呼叫吊车？",
+        "tr": "Vinç gelsin mi?",
+        "pl": "Wezwać dźwig?",
+        "es": "¿Usar la grúa?",
+        "ar": "استدعاء الرافعة؟"
+      }
+    },
+    "scripts.ui.modal_catalog.8cf3ff0db4db": {
+      "source": "Кран поставит нужную машину\nна свободное место.",
+      "translations": {
+        "en": "The crane will put the right truck\nin a free parking spot.",
+        "de": "Der Kran setzt den LKW\nauf einen freien Platz.",
+        "fr": "La grue pose le bon camion\nsur une place libre.",
+        "ja": "クレーンがトラックを\n空いた枠に置きます。",
+        "ko": "크레인이 필요한 트럭을\n빈 칸에 놓아요.",
+        "zh": "吊车会把所需卡车\n放到空车位上。",
+        "tr": "Vinç doğru kamyonu\nboş bir yere koyar.",
+        "pl": "Dźwig postawi właściwe auto\nna wolnym miejscu.",
+        "es": "La grúa pondrá el camión\nen una plaza libre.",
+        "ar": "ستضع الرافعة الشاحنة\nفي موقف فارغ."
+      }
+    },
+    "scripts.ui.modal_style.ecaab828792b": {
+      "source": "Бесплатно",
+      "translations": {
+        "en": "Free",
+        "de": "Gratis",
+        "fr": "Gratuit",
+        "ja": "無料",
+        "ko": "무료",
+        "zh": "免费",
+        "tr": "Ücretsiz",
+        "pl": "Za darmo",
+        "es": "Gratis",
+        "ar": "مجانًا"
+      }
+    },
+    "web.wasm-loader.4ed8a7ee34b3": {
+      "source": "Подготовка загрузки…",
+      "translations": {
+        "en": "Preparing download…",
+        "de": "Download startet…",
+        "fr": "Préparation…",
+        "ja": "ダウンロード準備中…",
+        "ko": "다운로드 준비 중…",
+        "zh": "准备下载…",
+        "tr": "Yükleme hazırlanıyor…",
+        "pl": "Przygotowanie…",
+        "es": "Preparando descarga…",
+        "ar": "جارٍ تجهيز التحميل…"
+      }
+    },
+    "web.wasm-loader.3a8db977333d": {
+      "source": "Загрузка игры: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} МБ",
+      "translations": {
+        "en": "Loading game: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} MB",
+        "de": "Spiel lädt: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} MB",
+        "fr": "Chargement : ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} Mo",
+        "ja": "読み込み中: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} MB",
+        "ko": "게임 불러오는 중: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} MB",
+        "zh": "游戏加载中：${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} MB",
+        "tr": "Oyun yükleniyor: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} MB",
+        "pl": "Ładowanie gry: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} MB",
+        "es": "Cargando juego: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} MB",
+        "ar": "تحميل اللعبة: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} MB"
+      }
+    },
+    "web.wasm-loader.d2db517556a1": {
+      "source": "Файлы загружены. Запускаем игру…",
+      "translations": {
+        "en": "Files loaded. Starting the game…",
+        "de": "Dateien geladen. Spiel startet…",
+        "fr": "Fichiers prêts. Lancement du jeu…",
+        "ja": "読み込み完了。ゲームを起動中…",
+        "ko": "파일 로드 완료. 게임을 시작합니다…",
+        "zh": "文件已加载，正在启动游戏…",
+        "tr": "Dosyalar yüklendi. Oyun başlıyor…",
+        "pl": "Pliki pobrane. Uruchamiamy grę…",
+        "es": "Archivos listos. Iniciando juego…",
+        "ar": "تم التحميل. جارٍ تشغيل اللعبة…"
+      }
+    },
+    "web.wasm-loader.c9a6e2e1026a": {
+      "source": "Не удалось загрузить игру. ",
+      "translations": {
+        "en": "Unable to load the game.",
+        "de": "Laden fehlgeschlagen.",
+        "fr": "Échec du chargement.",
+        "ja": "ゲームを読み込めませんでした。",
+        "ko": "게임을 불러오지 못했습니다.",
+        "zh": "游戏加载失败。",
+        "tr": "Oyun yüklenemedi.",
+        "pl": "Nie udało się wczytać gry.",
+        "es": "No se pudo cargar el juego.",
+        "ar": "تعذّر تحميل اللعبة."
+      }
+    },
+    "web.wasm-loader.5189135a6110": {
+      "source": "Повторить",
+      "translations": {
+        "en": "Retry",
+        "de": "Wiederholen",
+        "fr": "Réessayer",
+        "ja": "再試行",
+        "ko": "다시 시도",
+        "zh": "重试",
+        "tr": "Yeniden dene",
+        "pl": "Ponów",
+        "es": "Reintentar",
+        "ar": "إعادة المحاولة"
+      }
+    },
+    "web.wasm-loader.9c14e5456dd5": {
+      "source": "Запуск занимает слишком долго. Попробуйте перезагрузить страницу.",
+      "translations": {
+        "en": "Starting is taking too long. Try reloading the page.",
+        "de": "Der Start dauert zu lange. Bitte laden Sie die Seite neu.",
+        "fr": "Le lancement est trop long. Rechargez la page.",
+        "ja": "起動に時間がかかっています。ページを再読み込みしてください。",
+        "ko": "시작이 너무 오래 걸립니다. 페이지를 새로고침해 주세요.",
+        "zh": "启动时间过长，请刷新页面。",
+        "tr": "Başlatma çok uzun sürüyor. Sayfayı yenilemeyi deneyin.",
+        "pl": "Uruchamianie trwa zbyt długo. Odśwież stronę.",
+        "es": "El inicio tarda demasiado. Recargue la página.",
+        "ar": "يستغرق التشغيل وقتًا طويلاً. يُرجى إعادة تحميل الصفحة."
+      }
+    },
+    "web.wasm-loader.edb5706027b7": {
+      "source": "Ошибка загрузки (${response.status}).",
+      "translations": {
+        "en": "Loading error (${response.status}).",
+        "de": "Ladefehler (${response.status}).",
+        "fr": "Erreur (${response.status}).",
+        "ja": "読み込みエラー（${response.status}）。",
+        "ko": "로드 오류(${response.status}).",
+        "zh": "加载错误（${response.status}）。",
+        "tr": "Yükleme hatası (${response.status}).",
+        "pl": "Błąd ładowania (${response.status}).",
+        "es": "Error de carga (${response.status}).",
+        "ar": "خطأ في التحميل (${response.status})."
+      }
+    },
+    "web.wasm-loader.ae4e27ff7bd9": {
+      "source": "Проверьте вход в свой аккаунт ChatGPT в Safari.",
+      "translations": {
+        "en": "Check that you are signed in to your ChatGPT account in Safari.",
+        "de": "Prüfen Sie Ihr ChatGPT-Login in Safari.",
+        "fr": "Vérifiez votre connexion ChatGPT dans Safari.",
+        "ja": "SafariでChatGPTにログインしているか確認してください。",
+        "ko": "Safari에서 ChatGPT 로그인 상태를 확인해 주세요.",
+        "zh": "请检查是否已在Safari中登录ChatGPT账户。",
+        "tr": "Safari'de ChatGPT oturumunuzu kontrol edin.",
+        "pl": "Sprawdź logowanie do konta ChatGPT w Safari.",
+        "es": "Compruebe su sesión de ChatGPT en Safari.",
+        "ar": "تحقّق من تسجيل الدخول إلى ChatGPT في Safari."
+      }
+    },
+    "web.wasm-loader.a8161b487809": {
+      "source": "Обновите браузер для запуска игры.",
+      "translations": {
+        "en": "Update your browser to run the game.",
+        "de": "Bitte Browser aktualisieren.",
+        "fr": "Mettez à jour le navigateur.",
+        "ja": "ブラウザを更新してください。",
+        "ko": "브라우저를 업데이트해 주세요.",
+        "zh": "请更新浏览器以运行游戏。",
+        "tr": "Lütfen tarayıcınızı güncelleyin.",
+        "pl": "Zaktualizuj przeglądarkę.",
+        "es": "Actualice su navegador para jugar.",
+        "ar": "حدّث المتصفح لتشغيل اللعبة."
+      }
+    },
+    "web.wasm-loader.1c5e2746e50d": {
+      "source": "Файл загружен не полностью. Обновите страницу.",
+      "translations": {
+        "en": "The file did not fully load. Refresh the page.",
+        "de": "Datei unvollständig. Bitte Seite neu laden.",
+        "fr": "Fichier incomplet. Rechargez la page.",
+        "ja": "ファイルが不完全です。ページを更新してください。",
+        "ko": "파일이 완전히 로드되지 않았습니다. 새로고침해 주세요.",
+        "zh": "文件未完整加载，请刷新页面。",
+        "tr": "Dosya tam yüklenmedi. Sayfayı yenileyin.",
+        "pl": "Plik niekompletny. Odśwież stronę.",
+        "es": "Archivo incompleto. Recargue la página.",
+        "ar": "لم يُحمَّل الملف بالكامل. حدّث الصفحة."
+      }
+    },
+    "menu.language.title": {
+      "source": "Язык",
+      "translations": {
+        "en": "Language",
+        "de": "Sprache",
+        "fr": "Langue",
+        "ja": "言語",
+        "ko": "언어",
+        "zh": "语言",
+        "tr": "Dil",
+        "pl": "Język",
+        "es": "Idioma",
+        "ar": "اللغة"
+      }
+    },
+    "menu.support.title": {
+      "source": "Поддержка",
+      "translations": {
+        "en": "Support",
+        "de": "Support",
+        "fr": "Assistance",
+        "ja": "サポート",
+        "ko": "고객 지원",
+        "zh": "客服",
+        "tr": "Destek",
+        "pl": "Pomoc",
+        "es": "Soporte",
+        "ar": "الدعم"
+      }
+    },
+    "menu.support.intro": {
+      "source": "Нашли ошибку или есть идея?\nНапишите — читаем каждое письмо.",
+      "translations": {
+        "en": "Found a bug or have an idea?\nSend us a message — we read every one.",
+        "de": "Fehler gefunden oder eine Idee?\nSchreib uns – wir lesen jede Nachricht.",
+        "fr": "Un bug ou une idée ?\nÉcris-nous — nous lisons chaque message.",
+        "ja": "バグを見つけた？アイデアがある？\nメッセージをお送りください。すべて読んでいます。",
+        "ko": "버그를 발견했거나 아이디어가 있나요?\n메시지를 보내 주세요. 모든 메시지를 읽고 있어요.",
+        "zh": "发现问题或有好点子？\n给我们留言吧——每条消息我们都会认真阅读。",
+        "tr": "Bir hata mı buldun ya da bir fikrin mi var?\nBize yaz — her mesajı okuyoruz.",
+        "pl": "Błąd? A może pomysł?\nNapisz do nas — czytamy każdą wiadomość.",
+        "es": "¿Encontraste un error o tienes una idea?\nEscríbenos: leemos todos los mensajes.",
+        "ar": "وجدت خطأً أو لديك فكرة؟\nراسلنا — نقرأ كل رسالة."
+      }
+    },
+    "menu.support.metadata": {
+      "source": "Версия: %s\nID: %s",
+      "translations": {
+        "en": "Build: %s\nID: %s",
+        "de": "Build: %s\nID: %s",
+        "fr": "Version : %s\nID : %s",
+        "ja": "ビルド: %s\nID: %s",
+        "ko": "빌드: %s\nID: %s",
+        "zh": "版本：%s\nID：%s",
+        "tr": "Sürüm: %s\nID: %s",
+        "pl": "Wersja: %s\nID: %s",
+        "es": "Versión: %s\nID: %s",
+        "ar": "الإصدار: %s\nID: %s"
+      }
+    },
+    "menu.support.compose": {
+      "source": "Открыть письмо",
+      "translations": {
+        "en": "Open email",
+        "de": "E-Mail öffnen",
+        "fr": "Ouvrir l’e-mail",
+        "ja": "メールを開く",
+        "ko": "이메일 열기",
+        "zh": "打开邮件",
+        "tr": "E-postayı aç",
+        "pl": "Otwórz e-mail",
+        "es": "Abrir correo",
+        "ar": "فتح البريد"
+      }
+    },
+    "menu.support.copy": {
+      "source": "Скопировать сообщение",
+      "translations": {
+        "en": "Copy message",
+        "de": "Nachricht kopieren",
+        "fr": "Copier le message",
+        "ja": "メッセージをコピー",
+        "ko": "메시지 복사",
+        "zh": "复制消息",
+        "tr": "Mesajı kopyala",
+        "pl": "Kopiuj wiadomość",
+        "es": "Copiar mensaje",
+        "ar": "نسخ الرسالة"
+      }
+    },
+    "menu.support.placeholder": {
+      "source": "Ваше сообщение…",
+      "translations": {
+        "en": "Your message…",
+        "de": "Deine Nachricht…",
+        "fr": "Ton message…",
+        "ja": "メッセージを入力…",
+        "ko": "메시지 입력…",
+        "zh": "你的消息…",
+        "tr": "Mesajın…",
+        "pl": "Twoja wiadomość…",
+        "es": "Tu mensaje…",
+        "ar": "رسالتك…"
+      }
+    },
+    "menu.support.required": {
+      "source": "Напишите сообщение",
+      "translations": {
+        "en": "Please enter a message",
+        "de": "Bitte gib eine Nachricht ein",
+        "fr": "Saisis un message",
+        "ja": "メッセージを入力してください",
+        "ko": "메시지를 입력해 주세요",
+        "zh": "请输入消息",
+        "tr": "Lütfen bir mesaj yaz",
+        "pl": "Wpisz wiadomość",
+        "es": "Escribe un mensaje",
+        "ar": "يرجى كتابة رسالة"
+      }
+    },
+    "menu.support.copied": {
+      "source": "Сообщение скопировано",
+      "translations": {
+        "en": "Message copied",
+        "de": "Nachricht kopiert",
+        "fr": "Message copié",
+        "ja": "メッセージをコピーしました",
+        "ko": "메시지가 복사되었어요",
+        "zh": "消息已复制",
+        "tr": "Mesaj kopyalandı",
+        "pl": "Skopiowano wiadomość",
+        "es": "Mensaje copiado",
+        "ar": "تم نسخ الرسالة"
+      }
+    },
+    "menu.support.finish": {
+      "source": "Завершите отправку в почтовом приложении",
+      "translations": {
+        "en": "Finish sending in your email app",
+        "de": "Schließe das Senden in deiner E-Mail-App ab",
+        "fr": "Termine l’envoi dans ton application e-mail",
+        "ja": "メールアプリで送信を完了してください",
+        "ko": "이메일 앱에서 전송을 완료해 주세요",
+        "zh": "请在邮件应用中完成发送",
+        "tr": "Gönderimi e-posta uygulamanda tamamla",
+        "pl": "Dokończ wysyłanie w aplikacji pocztowej",
+        "es": "Termina el envío en tu app de correo",
+        "ar": "أكمل الإرسال في تطبيق البريد"
+      }
+    },
+    "daily.title": {
+      "source": "Ежедневный бонус",
+      "translations": {
+        "en": "Daily rewards",
+        "de": "Tägliche Belohnungen",
+        "fr": "Récompenses quotidiennes",
+        "ja": "デイリー報酬",
+        "ko": "일일 보상",
+        "zh": "每日奖励",
+        "tr": "Günlük ödüller",
+        "pl": "Codzienne nagrody",
+        "es": "Recompensas diarias",
+        "ar": "المكافآت اليومية"
+      }
+    },
+    "daily.tomorrow": {
+      "source": "Завтра: %s",
+      "translations": {
+        "en": "Tomorrow: %s",
+        "de": "Morgen: %s",
+        "fr": "Demain : %s",
+        "ja": "明日: %s",
+        "ko": "내일: %s",
+        "zh": "明天：%s",
+        "tr": "Yarın: %s",
+        "pl": "Jutro: %s",
+        "es": "Mañana: %s",
+        "ar": "غدًا: %s"
+      }
+    },
+    "daily.next_week": {
+      "source": "Новая неделя начнётся завтра!",
+      "translations": {
+        "en": "A new week starts tomorrow!",
+        "de": "Morgen beginnt eine neue Woche!",
+        "fr": "Une nouvelle semaine commence demain !",
+        "ja": "明日から新しい週が始まります！",
+        "ko": "내일 새로운 주가 시작돼요!",
+        "zh": "新的一周明天开始！",
+        "tr": "Yeni hafta yarın başlıyor!",
+        "pl": "Jutro zaczyna się nowy tydzień!",
+        "es": "¡Mañana empieza una nueva semana!",
+        "ar": "يبدأ أسبوع جديد غدًا!"
+      }
+    },
+    "daily.invitation": {
+      "source": "Заходи каждый день — награды растут!",
+      "translations": {
+        "en": "Come back daily for bigger rewards!",
+        "de": "Komm täglich wieder für größere Belohnungen!",
+        "fr": "Reviens chaque jour pour de plus grosses récompenses !",
+        "ja": "毎日ログインして報酬をアップ！",
+        "ko": "매일 접속하고 더 큰 보상을 받으세요!",
+        "zh": "每天回来，奖励越来越多！",
+        "tr": "Daha büyük ödüller için her gün gel!",
+        "pl": "Wracaj codziennie po większe nagrody!",
+        "es": "¡Vuelve cada día para ganar más!",
+        "ar": "عُد كل يوم لتحصل على مكافآت أكبر!"
+      }
+    },
+    "daily.claim": {
+      "source": "Забрать",
+      "translations": {
+        "en": "Claim",
+        "de": "Abholen",
+        "fr": "Récupérer",
+        "ja": "受け取る",
+        "ko": "받기",
+        "zh": "领取",
+        "tr": "Topla",
+        "pl": "Odbierz",
+        "es": "Recoger",
+        "ar": "استلام"
+      }
+    },
+    "daily.missed": {
+      "source": "Пропущен",
+      "translations": {
+        "en": "Missed",
+        "de": "Verpasst",
+        "fr": "Manqué",
+        "ja": "受取期限切れ",
+        "ko": "놓침",
+        "zh": "已错过",
+        "tr": "Kaçırıldı",
+        "pl": "Pominięty",
+        "es": "Perdido",
+        "ar": "فائت"
+      }
+    },
+    "daily.today": {
+      "source": "Сегодня",
+      "translations": {
+        "en": "Today",
+        "de": "Heute",
+        "fr": "Aujourd’hui",
+        "ja": "今日",
+        "ko": "오늘",
+        "zh": "今天",
+        "tr": "Bugün",
+        "pl": "Dzisiaj",
+        "es": "Hoy",
+        "ar": "اليوم"
+      }
+    },
+    "daily.day": {
+      "source": "День %d",
+      "translations": {
+        "en": "Day %d",
+        "de": "Tag %d",
+        "fr": "Jour %d",
+        "ja": "%d日目",
+        "ko": "%d일차",
+        "zh": "第%d天",
+        "tr": "Gün %d",
+        "pl": "Dzień %d",
+        "es": "Día %d",
+        "ar": "يوم %d"
+      }
+    },
+    "daily.item.undo": {
+      "source": "отмена хода ×%d",
+      "translations": {
+        "en": "Undo ×%d",
+        "de": "Rückgängig ×%d",
+        "fr": "Annuler ×%d",
+        "ja": "元に戻す ×%d",
+        "ko": "되돌리기 ×%d",
+        "zh": "撤销 ×%d",
+        "tr": "Geri al ×%d",
+        "pl": "Cofnij ×%d",
+        "es": "Deshacer ×%d",
+        "ar": "تراجع ×%d"
+      }
+    },
+    "daily.item.extra_slot": {
+      "source": "место ×%d",
+      "translations": {
+        "en": "Extra slot ×%d",
+        "de": "Extra-Platz ×%d",
+        "fr": "Emplacement ×%d",
+        "ja": "追加スロット ×%d",
+        "ko": "추가 칸 ×%d",
+        "zh": "额外空位 ×%d",
+        "tr": "Ekstra yer ×%d",
+        "pl": "Dodatkowe miejsce ×%d",
+        "es": "Espacio extra ×%d",
+        "ar": "خانة إضافية ×%d"
+      }
+    },
+    "daily.item.crane": {
+      "source": "кран ×%d",
+      "translations": {
+        "en": "Crane ×%d",
+        "de": "Kran ×%d",
+        "fr": "Grue ×%d",
+        "ja": "クレーン ×%d",
+        "ko": "크레인 ×%d",
+        "zh": "起重机 ×%d",
+        "tr": "Vinç ×%d",
+        "pl": "Dźwig ×%d",
+        "es": "Grúa ×%d",
+        "ar": "رافعة ×%d"
+      }
+    },
+    "daily.item.shuffle": {
+      "source": "перемешивание ×%d",
+      "translations": {
+        "en": "Shuffle ×%d",
+        "de": "Mischen ×%d",
+        "fr": "Mélange ×%d",
+        "ja": "シャッフル ×%d",
+        "ko": "섞기 ×%d",
+        "zh": "重排 ×%d",
+        "tr": "Karıştır ×%d",
+        "pl": "Tasowanie ×%d",
+        "es": "Mezclar ×%d",
+        "ar": "خلط ×%d"
+      }
+    },
+    "daily.item.gift": {
+      "source": "подарок ×%d",
+      "translations": {
+        "en": "Gift ×%d",
+        "de": "Geschenk ×%d",
+        "fr": "Cadeau ×%d",
+        "ja": "プレゼント ×%d",
+        "ko": "선물 ×%d",
+        "zh": "礼物 ×%d",
+        "tr": "Hediye ×%d",
+        "pl": "Prezent ×%d",
+        "es": "Regalo ×%d",
+        "ar": "هدية ×%d"
+      }
+    },
+    "crane.intro.title": {
+      "source": "Закончились ходы?",
+      "translations": {
+        "en": "Out of moves?",
+        "de": "Keine Züge mehr?",
+        "fr": "Plus de coups ?",
+        "ja": "もう動かせない？",
+        "ko": "더 이상 움직일 수 없나요?",
+        "zh": "无步可走？",
+        "tr": "Hamlen kalmadı mı?",
+        "pl": "Brak ruchów?",
+        "es": "¿Sin movimientos?",
+        "ar": "نفدت الحركات؟"
+      }
+    },
+    "crane.intro.prompt": {
+      "source": "Вызовите кран!",
+      "translations": {
+        "en": "Call the crane!",
+        "de": "Ruf den Kran!",
+        "fr": "Appelle la grue !",
+        "ja": "クレーンを呼ぼう！",
+        "ko": "크레인을 부르세요!",
+        "zh": "呼叫起重机！",
+        "tr": "Vinci çağır!",
+        "pl": "Wezwij dźwig!",
+        "es": "¡Llama a la grúa!",
+        "ar": "استدعِ الرافعة!"
+      }
+    },
+    "crane.intro.free": {
+      "source": "Вызвать бесплатно",
+      "translations": {
+        "en": "Call for free",
+        "de": "Gratis rufen",
+        "fr": "Appeler gratuitement",
+        "ja": "無料で呼ぶ",
+        "ko": "무료로 부르기",
+        "zh": "免费呼叫",
+        "tr": "Ücretsiz çağır",
+        "pl": "Wezwij za darmo",
+        "es": "Llamar gratis",
+        "ar": "استدعاء مجاني"
+      }
+    },
+    "crane.intro.price": {
+      "source": "В первый раз бесплатно, потом — {price} {{coin}}.",
+      "translations": {
+        "en": "First time free, then {price} {{coin}}.",
+        "de": "Beim ersten Mal gratis, danach {price} {{coin}}.",
+        "fr": "Gratuit la première fois, puis {price} {{coin}}.",
+        "ja": "初回は無料、2回目以降は{price} {{coin}}。",
+        "ko": "첫 호출은 무료, 이후 {price} {{coin}}.",
+        "zh": "首次免费，之后需 {price} {{coin}}。",
+        "tr": "İlk sefer ücretsiz, sonra {price} {{coin}}.",
+        "pl": "Za pierwszym razem za darmo, potem {price} {{coin}}.",
+        "es": "Gratis la primera vez, luego {price} {{coin}}.",
+        "ar": "مجانًا في المرة الأولى، ثم {price} {{coin}}."
+      }
+    },
+    "crane.intro.retry": {
+      "source": "Попробовать заново",
+      "translations": {
+        "en": "Try again",
+        "de": "Erneut versuchen",
+        "fr": "Réessayer",
+        "ja": "もう一度挑戦",
+        "ko": "다시 도전",
+        "zh": "再试一次",
+        "tr": "Tekrar dene",
+        "pl": "Spróbuj ponownie",
+        "es": "Intentar de nuevo",
+        "ar": "حاول مجددًا"
+      }
+    },
+    "loading.start": {
+      "source": "Запускаем игру…",
+      "translations": {
+        "en": "Starting…",
+        "de": "Wird gestartet…",
+        "fr": "Démarrage…",
+        "ja": "起動中…",
+        "ko": "시작하는 중…",
+        "zh": "正在启动…",
+        "tr": "Başlatılıyor…",
+        "pl": "Uruchamianie…",
+        "es": "Iniciando…",
+        "ar": "جارٍ التشغيل…"
+      }
+    },
+    "loading.error": {
+      "source": "Не удалось загрузить игру. Проверьте подключение и повторите.",
+      "translations": {
+        "en": "Unable to load. Check your connection and try again.",
+        "de": "Laden fehlgeschlagen. Prüfe deine Verbindung und versuche es erneut.",
+        "fr": "Échec du chargement. Vérifie ta connexion et réessaie.",
+        "ja": "読み込めませんでした。接続を確認して、もう一度お試しください。",
+        "ko": "불러오지 못했어요. 연결을 확인하고 다시 시도해 주세요.",
+        "zh": "加载失败。请检查网络连接后重试。",
+        "tr": "Yüklenemedi. Bağlantını kontrol edip tekrar dene.",
+        "pl": "Nie udało się wczytać. Sprawdź połączenie i spróbuj ponownie.",
+        "es": "No se pudo cargar. Revisa tu conexión e inténtalo de nuevo.",
+        "ar": "تعذّر التحميل. تحقق من اتصالك وحاول مرة أخرى."
+      }
+    },
+    "loading.retry": {
+      "source": "Повторить",
+      "translations": {
+        "en": "Retry",
+        "de": "Wiederholen",
+        "fr": "Réessayer",
+        "ja": "再試行",
+        "ko": "다시 시도",
+        "zh": "重试",
+        "tr": "Yeniden dene",
+        "pl": "Ponów",
+        "es": "Reintentar",
+        "ar": "إعادة المحاولة"
+      }
+    },
+    "store.status.unavailable": {
+      "source": "Магазин недоступен",
+      "translations": {
+        "en": "Shop unavailable",
+        "de": "Shop nicht verfügbar",
+        "fr": "Boutique indisponible",
+        "ja": "ストアを利用できません",
+        "ko": "상점을 이용할 수 없습니다",
+        "zh": "商店暂不可用",
+        "tr": "Mağaza kullanılamıyor",
+        "pl": "Sklep niedostępny",
+        "es": "Tienda no disponible",
+        "ar": "المتجر غير متاح"
+      }
+    },
+    "store.status.loading": {
+      "source": "Загрузка товаров…",
+      "translations": {
+        "en": "Loading products…",
+        "de": "Produkte werden geladen…",
+        "fr": "Chargement des articles…",
+        "ja": "商品を読み込み中…",
+        "ko": "상품 불러오는 중…",
+        "zh": "正在加载商品…",
+        "tr": "Ürünler yükleniyor…",
+        "pl": "Wczytywanie produktów…",
+        "es": "Cargando productos…",
+        "ar": "جارٍ تحميل المنتجات…"
+      }
+    },
+    "store.status.load_failed": {
+      "source": "Не удалось загрузить товары",
+      "translations": {
+        "en": "Could not load products",
+        "de": "Produkte konnten nicht geladen werden",
+        "fr": "Impossible de charger les articles",
+        "ja": "商品を読み込めませんでした",
+        "ko": "상품을 불러오지 못했습니다",
+        "zh": "无法加载商品",
+        "tr": "Ürünler yüklenemedi",
+        "pl": "Nie udało się wczytać produktów",
+        "es": "No se pudieron cargar los productos",
+        "ar": "تعذر تحميل المنتجات"
+      }
+    },
+    "store.status.cancelled": {
+      "source": "Покупка отменена",
+      "translations": {
+        "en": "Purchase canceled",
+        "de": "Kauf abgebrochen",
+        "fr": "Achat annulé",
+        "ja": "購入をキャンセルしました",
+        "ko": "구매가 취소되었습니다",
+        "zh": "购买已取消",
+        "tr": "Satın alma iptal edildi",
+        "pl": "Zakup anulowany",
+        "es": "Compra cancelada",
+        "ar": "تم إلغاء الشراء"
+      }
+    },
+    "store.status.purchase_failed": {
+      "source": "Не удалось завершить покупку. Проверьте покупки в магазине и попробуйте снова.",
+      "translations": {
+        "en": "Could not complete the purchase. Check your store purchases and try again.",
+        "de": "Der Kauf konnte nicht abgeschlossen werden. Prüfe deine Käufe im Store und versuche es erneut.",
+        "fr": "Impossible de finaliser l’achat. Vérifie tes achats dans la boutique et réessaie.",
+        "ja": "購入を完了できませんでした。ストアの購入履歴を確認して、もう一度お試しください。",
+        "ko": "구매를 완료하지 못했습니다. 스토어의 구매 내역을 확인하고 다시 시도해 주세요.",
+        "zh": "无法完成购买。请查看商店购买记录后重试。",
+        "tr": "Satın alma tamamlanamadı. Mağazadaki satın alma geçmişini kontrol edip tekrar dene.",
+        "pl": "Nie udało się dokończyć zakupu. Sprawdź zakupy w sklepie i spróbuj ponownie.",
+        "es": "No se pudo completar la compra. Revisa tus compras en la tienda e inténtalo de nuevo.",
+        "ar": "تعذر إكمال الشراء. تحقّق من مشترياتك في المتجر وحاول مجددًا."
+      }
+    },
+    "store.status.processing": {
+      "source": "Покупка обрабатывается",
+      "translations": {
+        "en": "Processing purchase",
+        "de": "Kauf wird verarbeitet",
+        "fr": "Achat en cours",
+        "ja": "購入を処理中",
+        "ko": "구매 처리 중",
+        "zh": "正在处理购买",
+        "tr": "Satın alma işleniyor",
+        "pl": "Przetwarzanie zakupu",
+        "es": "Procesando compra",
+        "ar": "جارٍ معالجة الشراء"
+      }
+    },
+    "store.status.restore_empty": {
+      "source": "Нет покупок для восстановления",
+      "translations": {
+        "en": "No purchases to restore",
+        "de": "Keine Käufe zum Wiederherstellen",
+        "fr": "Aucun achat à restaurer",
+        "ja": "復元できる購入はありません",
+        "ko": "복원할 구매 내역이 없습니다",
+        "zh": "没有可恢复的购买",
+        "tr": "Geri yüklenecek satın alma yok",
+        "pl": "Brak zakupów do przywrócenia",
+        "es": "No hay compras que restaurar",
+        "ar": "لا توجد مشتريات لاستعادتها"
+      }
+    },
+    "store.status.restore_failed": {
+      "source": "Не удалось восстановить покупки",
+      "translations": {
+        "en": "Could not restore purchases",
+        "de": "Käufe konnten nicht wiederhergestellt werden",
+        "fr": "Impossible de restaurer les achats",
+        "ja": "購入を復元できませんでした",
+        "ko": "구매 내역을 복원하지 못했습니다",
+        "zh": "无法恢复购买",
+        "tr": "Satın almalar geri yüklenemedi",
+        "pl": "Nie udało się przywrócić zakupów",
+        "es": "No se pudieron restaurar las compras",
+        "ar": "تعذر استعادة المشتريات"
+      }
+    },
+    "store.status.save_failed": {
+      "source": "Не удалось сохранить покупку. Восстановление будет повторено при следующем запуске.",
+      "translations": {
+        "en": "Could not save the purchase. Recovery will be retried the next time you open the game.",
+        "de": "Der Kauf konnte nicht gespeichert werden. Die Wiederherstellung wird beim nächsten Spielstart erneut versucht.",
+        "fr": "Impossible d’enregistrer l’achat. La restauration sera retentée au prochain lancement du jeu.",
+        "ja": "購入を保存できませんでした。次回のゲーム起動時に復元を再試行します。",
+        "ko": "구매를 저장하지 못했습니다. 다음에 게임을 실행하면 복원을 다시 시도합니다.",
+        "zh": "无法保存购买。下次启动游戏时将再次尝试恢复。",
+        "tr": "Satın alma kaydedilemedi. Oyun yeniden açıldığında geri yükleme tekrar denenecek.",
+        "pl": "Nie udało się zapisać zakupu. Przy następnym uruchomieniu gry ponowimy próbę przywrócenia.",
+        "es": "No se pudo guardar la compra. Se volverá a intentar la recuperación al abrir el juego de nuevo.",
+        "ar": "تعذر حفظ الشراء. ستُعاد محاولة الاستعادة عند فتح اللعبة مرة أخرى."
+      }
+    },
+    "store.status.pending": {
+      "source": "Покупка ожидает подтверждения",
+      "translations": {
+        "en": "Purchase awaiting confirmation",
+        "de": "Kauf wartet auf Bestätigung",
+        "fr": "Achat en attente de confirmation",
+        "ja": "購入の確認待ちです",
+        "ko": "구매 확인 대기 중",
+        "zh": "购买等待确认",
+        "tr": "Satın alma onay bekliyor",
+        "pl": "Zakup oczekuje na potwierdzenie",
+        "es": "Compra pendiente de confirmación",
+        "ar": "الشراء بانتظار التأكيد"
+      }
+    },
+    "menu.support.copy_diagnostics": {
+      "source": "Скопировать диагностику",
+      "translations": {
+        "en": "Copy diagnostics",
+        "de": "Diagnose kopieren",
+        "fr": "Copier le diagnostic",
+        "ja": "診断情報をコピー",
+        "ko": "진단 정보 복사",
+        "zh": "复制诊断信息",
+        "tr": "Tanılamayı kopyala",
+        "pl": "Skopiuj diagnostykę",
+        "es": "Copiar diagnóstico",
+        "ar": "نسخ بيانات التشخيص"
+      }
+    },
+    "menu.support.diagnostics_copied": {
+      "source": "Диагностика скопирована",
+      "translations": {
+        "en": "Diagnostics copied",
+        "de": "Diagnose kopiert",
+        "fr": "Diagnostic copié",
+        "ja": "診断情報をコピーしました",
+        "ko": "진단 정보를 복사했습니다",
+        "zh": "诊断信息已复制",
+        "tr": "Tanılama kopyalandı",
+        "pl": "Diagnostyka skopiowana",
+        "es": "Diagnóstico copiado",
+        "ar": "تم نسخ بيانات التشخيص"
+      }
+    },
+    "store.status.product_unavailable": {
+      "source": "Недоступно",
+      "translations": {
+        "en": "Unavailable",
+        "de": "Nicht verfügbar",
+        "fr": "Indisponible",
+        "ja": "利用不可",
+        "ko": "이용 불가",
+        "zh": "暂不可用",
+        "tr": "Kullanılamıyor",
+        "pl": "Niedostępne",
+        "es": "No disponible",
+        "ar": "غير متاح"
+      }
+    }
+  }
+}

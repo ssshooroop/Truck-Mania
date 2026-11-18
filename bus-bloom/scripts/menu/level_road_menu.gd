@@ -1,7 +1,9 @@
 extends Control
 
 signal level_selected(index:int)
-signal settings_requested
+signal language_requested
+signal support_requested
+signal daily_requested
 signal shop_requested
 signal resume_requested
 signal preference_changed(key:String,enabled:bool)
@@ -33,8 +35,11 @@ var last_time = 0
 var distance_dragged = 0.0
 var preference_icons: Dictionary = {}
 var resume_level = -1
-var settings_button: TextureButton
-var shop_button: TextureButton
+var language_button:BaseButton
+var motion_button:BaseButton
+var support_button:BaseButton
+var gift_button:BaseButton
+var shop_button:BaseButton
 var coin_badge
 
 func _ready() -> void:
@@ -68,18 +73,16 @@ func _ready() -> void:
 		button.toggled.connect(func(enabled:bool): preference_changed.emit(key,enabled))
 		add_child(button)
 		preference_icons[key] = button
-	settings_button = TextureButton.new()
-	settings_button.texture_normal = preload("res://assets/artwork/menu/gear.png")
-	settings_button.ignore_texture_size = true
-	settings_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
-	settings_button.pressed.connect(func(): settings_requested.emit())
-	add_child(settings_button)
-	shop_button = TextureButton.new()
-	shop_button.texture_normal = preload("res://assets/artwork/menu/shop.png")
-	shop_button.ignore_texture_size = true
-	shop_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
-	shop_button.pressed.connect(func(): shop_requested.emit())
-	add_child(shop_button)
+	language_button = _action("language.png",func(): language_requested.emit())
+	motion_button = PreferenceIcon.new()
+	motion_button.icon = preload("res://assets/artwork/menu/reduced-motion.png")
+	motion_button.button_pressed = not reduced_motion
+	motion_button.toggled.connect(func(on:bool): preference_changed.emit("reduced_motion",not on))
+	add_child(motion_button)
+	support_button = _action("support.png",func(): support_requested.emit())
+	shop_button = _action("shop.png",func(): shop_requested.emit())
+	shop_button.shine = true
+	gift_button = _action("gift.png",func(): daily_requested.emit())
 	coin_badge = preload("res://scripts/coin_badge.gd").new()
 	add_child(coin_badge)
 	resized.connect(_layout)
@@ -92,22 +95,36 @@ func _layout() -> void:
 	background.queue_redraw()
 	road.position = Vector2(0,size.y*road_top)
 	road.size = Vector2(size.x,size.y*(road_bottom-road_top))
+	var safe_top := _safe_top()
+	var badge_y := maxf(18.0,safe_top+8.0)
+	var controls_y := badge_y+58.0
 	var index = 0
 	for key in ["music","sound","vibration"]:
 		var button = preference_icons[key]
-		button.position = Vector2(14,14+index*70)
+		button.position = Vector2(14,controls_y+index*70)
 		button.size = Vector2(60,60)
 		index += 1
-	settings_button.position = Vector2(size.x-66,16)
-	settings_button.size = Vector2(48,48)
-	shop_button.position = Vector2(size.x-74,76)
-	shop_button.size = Vector2(64,64)
-	coin_badge.position = Vector2(size.x/2-67,18)
+	for i in 3:
+		var button = [language_button,motion_button,support_button][i]
+		button.position = Vector2(size.x-74,controls_y+i*70)
+		button.size = Vector2(60,60)
+	shop_button.position = Vector2(14,size.y-100)
+	shop_button.size = Vector2(84,84)
+	gift_button.position = Vector2(size.x-98,size.y-100)
+	gift_button.size = Vector2(84,84)
+	coin_badge.position = Vector2(size.x-148,badge_y)
 	coin_badge.size = Vector2(134,44)
+
+func _safe_top() -> float:
+	if not OS.has_feature("android") and not OS.has_feature("ios"): return 0.0
+	var safe := DisplayServer.get_display_safe_area()
+	if safe.size.x<=0 or safe.size.y<=0: return 0.0
+	var local_top := get_screen_transform().affine_inverse()*Vector2(safe.position)
+	return maxf(0.0,local_top.y)
 
 func configure(count:int,progress:int,motion_reduced:bool,resumable:bool) -> void:
 	unlocked = clampi(progress,0,count-1)
-	reduced_motion = motion_reduced
+	set_reduced_motion(motion_reduced)
 	can_resume = resumable
 	for marker in markers: marker.free()
 	markers.clear()
@@ -187,6 +204,8 @@ func _place(item:Node2D,world:float,lateral:float,area:Rect2) -> void:
 
 func set_input_blocked(value:bool) -> void:
 	input_blocked = value
+	for button in [language_button,motion_button,support_button,shop_button,gift_button]+preference_icons.values():
+		button.disabled = value
 	if value:
 		pressed = false
 		touch_id = -1
@@ -212,6 +231,8 @@ func _input(event:InputEvent) -> void:
 		_drag(event.position)
 
 func _begin(p:Vector2) -> void:
+	for button in [language_button,motion_button,support_button,shop_button,gift_button]:
+		if button.get_global_rect().has_point(p): return
 	if not Rect2(road.position,road.size).has_point(p): return
 	pressed = true
 	start_point = p
@@ -251,3 +272,19 @@ func _notification(what:int) -> void:
 		touch_id = -1
 		road.dragging = false
 		road.velocity = 0
+
+func _action(filename:String,callback:Callable) -> BaseButton:
+	var button = preload("res://scripts/menu/action_icon.gd").new()
+	button.icon = load("res://assets/artwork/menu/"+filename)
+	button.pressed.connect(callback)
+	button.z_index = 10
+	add_child(button)
+	return button
+
+func set_reduced_motion(value:bool) -> void:
+	reduced_motion = value
+	if motion_button:
+		motion_button.set_pressed_no_signal(not value)
+		motion_button.queue_redraw()
+	if shop_button: shop_button.reduced_motion = value
+	for marker in markers: marker.reduced_motion = value

@@ -3,12 +3,12 @@ extends RefCounted
 ## copy keeps each physical cargo silhouette clear on the belt and in the bed.
 
 const SOURCES = [
-	preload("res://assets/artwork/cargo/Wood-yellow.png"),
-	preload("res://assets/artwork/cargo/Brick-bright-orange.png"),
-	preload("res://assets/artwork/cargo/Cement-gray.png"),
-	preload("res://assets/artwork/cargo/Cable-green.png"),
-	preload("res://assets/artwork/cargo/Blue-pipe.png"),
-	preload("res://assets/artwork/cargo/Sheet-bright-red.png")
+	preload("res://assets/artwork/cargo/cargo 256x256/wood-yellow.png"),
+	preload("res://assets/artwork/cargo/cargo 256x256/bricks-orange.png"),
+	preload("res://assets/artwork/cargo/cargo 256x256/cement-purple.png"),
+	preload("res://assets/artwork/cargo/cargo 256x256/cable-green.png"),
+	preload("res://assets/artwork/cargo/cargo 256x256/pipes-blue.png"),
+	preload("res://assets/artwork/cargo/cargo 256x256/metal-sheet-red.png")
 ]
 const FOOTPRINT = Vector2(26.0,28.4)
 static var _textures: Dictionary = {}
@@ -31,16 +31,7 @@ static func get_texture(index: int) -> Texture2D:
 	_rects[index] = Rect2(-native_size*fit*0.5,native_size*fit)
 	var reduction: float = 192.0/maxf(native_size.x,native_size.y)
 	cropped.resize(maxi(1,roundi(native_size.x*reduction)),maxi(1,roundi(native_size.y*reduction)),Image.INTERPOLATE_LANCZOS)
-	if index==2:
-		# Tint packaging at runtime, preserving dark ink, folds and alpha.
-		var pink := Color("ff52b5")
-		for y in cropped.get_height():
-			for x in cropped.get_width():
-				var pixel := cropped.get_pixel(x,y)
-				if pixel.a<0.01: continue
-				var weight: float = smoothstep(0.24,0.55,pixel.v)
-				var tinted := Color.from_hsv(pink.h,pink.s,lerpf(pixel.v,1.0,0.3),pixel.a)
-				cropped.set_pixel(x,y,pixel.lerp(tinted,weight))
+	# The optimized artwork already contains its intended colors.
 	cropped.generate_mipmaps()
 	var texture := ImageTexture.create_from_image(cropped)
 	_textures[index] = texture

@@ -2,7 +2,7 @@ extends RefCounted
 ## Persistent economy; behavioural probabilities remain offline simulation inputs.
 var config: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://config/economy_config.json"))
 var achievements: Array = JSON.parse_string(FileAccess.get_file_as_string("res://config/achievements.json")).achievements
-var state: Dictionary = {"clean_streak":0,"tutorial_done":false,"claimed":[],"counters":{},"inventory":{},"last_login_day":-1,"login_index":0,"failures":{},"daily_calendar":{},"intro_seen":false,"season_seen":{},"purchases":[]}
+var state: Dictionary = {"clean_streak":0,"tutorial_done":false,"claimed":[],"counters":{},"inventory":{},"last_login_day":-1,"login_index":0,"failures":{},"daily_calendar":{},"intro_seen":false,"season_seen":{},"purchases":[],"iap_transactions":{},"iap_orders":{}}
 
 func base_reward(number:int) -> int:
 	var r: Dictionary = config.reward.base

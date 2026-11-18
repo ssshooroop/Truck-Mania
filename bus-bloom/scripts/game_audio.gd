@@ -13,6 +13,8 @@ const PICKUP = [
 	preload("res://assets/sound/fx/pipe-download-single.wav") # Sheet metal fallback.
 ]
 const FX = {
+	"ufo":preload("res://assets/sound/fx/ufo.wav"),
+	"thief":preload("res://assets/sound/fx/thief-gigling.wav"),
 	"horn":preload("res://assets/sound/fx/truck_air_horn_01.wav"),
 	"skid":preload("res://assets/sound/fx/skid_short_01.wav"),
 	"start":preload("res://assets/sound/fx/truck_start.wav"),
@@ -28,6 +30,7 @@ var music_enabled = true
 var effects_enabled = true
 var context = "menu"
 var music:AudioStreamPlayer
+var crane:AudioStreamPlayer
 var voices:Array[AudioStreamPlayer] = []
 var repeat_left:Dictionary = {}
 var next_voice = 0
@@ -36,6 +39,10 @@ func _ready() -> void:
 	music = AudioStreamPlayer.new()
 	music.volume_db = -16
 	add_child(music)
+	crane = AudioStreamPlayer.new()
+	crane.stream = preload("res://assets/sound/fx/crane-movement.wav")
+	crane.volume_db = -9
+	add_child(crane)
 	for i in 10:
 		var player = AudioStreamPlayer.new()
 		player.volume_db = -9
@@ -91,15 +98,24 @@ func deposit(count:int) -> void:
 func effect(key:String) -> void:
 	play_stream(FX[key],1,0.0 if key=="bump" else -9.0)
 
+func start_crane() -> void:
+	if effects_enabled: crane.play()
+
+func stop_crane() -> void:
+	if crane: crane.stop()
+
 func stop_effects() -> void:
+	stop_crane()
 	repeat_left.clear()
 	for player in voices: player.stop()
 
 func pause_effects(value:bool) -> void:
+	if crane: crane.stream_paused = value
 	for player in voices: player.stream_paused = value
 
 func _exit_tree() -> void:
 	stop_effects()
+	if crane: crane.stream = null
 	for player in voices: player.stream = null
 	if music:
 		music.stop()

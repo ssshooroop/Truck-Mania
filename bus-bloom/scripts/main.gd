@@ -1,13 +1,25 @@
 extends Node2D
 
+const LocalText = preload("res://scripts/ui/localized_text.gd")
+
 const Model = preload("res://scripts/game_model.gd")
 const Contact = preload("res://scripts/collision_feedback.gd")
-var daily_screen
+var player_id := ""
+var build_info:Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://config/build_info.json"))
+const MenuWindows = preload("res://scripts/ui/menu_windows.gd")
 var daily_rewards=preload("res://scripts/daily_rewards.gd").new()
+var undo_badge_pop := 0.0
 var crane_preview
 const CraneAnimation = preload("res://scripts/crane_animation.gd")
 var crane_state:Dictionary = {}
 var crane_truck := -1
+const ThiefRules = preload("res://scripts/thief_rules.gd")
+const ThiefArt = preload("res://scripts/thief_art.gd")
+var thief_state:Dictionary = {}
+var thief_clock := 0.0
+var thief_events := 0
+var thief_next := 9.0
+var thief_tween:Tween
 const SlotOffer = preload("res://scripts/slot_offer.gd")
 const AD_ICON = preload("res://assets/artwork/menu/ad-player.png")
 const EdgeRoute = preload("res://scripts/edge_route.gd")
@@ -15,6 +27,7 @@ const TruckRoute = preload("res://scripts/truck_route.gd")
 const Art = preload("res://scripts/cargo_art.gd")
 const CoinBadge = preload("res://scripts/coin_badge.gd")
 const PRIZE = preload("res://assets/sound/fx/prize.wav")
+const WIN_SOUND = preload("res://assets/sound/fx/win.wav")
 const Economy = preload("res://scripts/runtime_economy.gd")
 const Boosters = preload("res://scripts/level_boosters.gd")
 const GameModal = preload("res://scripts/ui/game_modal.gd")
@@ -26,7 +39,12 @@ var modal_layer: CanvasLayer
 var modal: Control
 var modal_scope: Array = []
 var ads = AdService.new()
+var ad_previous_pause := false
+var ad_previous_mute := false
+var ad_previous_overlay := ""
+var win_transition := false
 var store = StoreService.new()
+var store_presenting := false
 var tutorial_step = 0
 var reward_doubled = false
 const INK = Color("152b46")
@@ -55,7 +73,8 @@ func _footer_y() -> float:
 const GAME_ICONS = [
 	preload("res://assets/artwork/menu/undo.png"),
 	preload("res://assets/artwork/menu/bulb.png"),
-	preload("res://assets/artwork/menu/door-back.png")
+	preload("res://assets/artwork/menu/door-back.png"),
+	preload("res://assets/artwork/menu/crane-icon.png")
 ]
 var game_icon_regions: Array[Rect2] = []
 const ACCENT = Color("ffc400")
@@ -72,6 +91,12 @@ const SAVE_PATH = "user://cargo_yard_playtest10_c3a0f1c.cfg"
 var model = Model.new()
 var art
 var font: Font
+const UfoRules=preload("res://scripts/ufo_rules.gd")
+const UfoArt=preload("res://scripts/ufo_art.gd")
+var ufo_state:Dictionary={}
+var ufo_clock:=0.0
+var ufo_next:=18.0
+var ufo_events:=0
 var bus_visuals: Dictionary = {}
 var intro_age := 0.0
 var intro_delays: Dictionary = {}
@@ -121,6 +146,8 @@ var vibration_enabled = true
 var audio
 var reduced_motion = false
 var hint_bus = -1
+var hint_state := ""
+var hint_started := 0.0
 var rejected_bus = -1
 var blockers: Array = []
 var reject_time = 0.0
@@ -154,6 +181,7 @@ var automation = false
 var style_cache: Dictionary = {}
 
 func _ready() -> void:
+	preload("res://scripts/localization.gd").initialize()
 	for icon in GAME_ICONS:
 		game_icon_regions.append(Rect2(icon.get_image().get_used_rect()))
 	font = preload("res://assets/fonts/MPLUSRounded1c-Medium.ttf")
@@ -190,9 +218,17 @@ func _ready() -> void:
 	modal_layer.layer = 20
 	add_child(modal_layer)
 	ads.simulate = "--fake-ads" in args
+	ads.presentation_changed.connect(_ad_presentation)
+	ads.availability_changed.connect(_refresh_ad_buttons)
+	ads.initialize()
 	store.simulate = "--fake-store" in args
+	store.availability_changed.connect(_refresh_store_buttons)
+	store.delivery_requested.connect(_deliver_store_purchase)
+	store.initialize()
 	_sync_coins()
-	road_menu.settings_requested.connect(_open_settings)
+	road_menu.language_requested.connect(_open_languages)
+	road_menu.support_requested.connect(_open_support)
+	road_menu.daily_requested.connect(func(): _open_daily_bonus(true))
 	road_menu.shop_requested.connect(func(): _open_shop(["road_menu"]))
 	road_menu.resume_requested.connect(_resume_from_menu)
 	road_menu.preference_changed.connect(_set_preference)
@@ -204,6 +240,8 @@ func _ready() -> void:
 	if "--demo" in args: _demo.call_deferred()
 
 func _process(delta:float) -> void:
+	_validate_hint()
+	undo_badge_pop = maxf(0.0,undo_badge_pop-delta)
 	_sync_modals()
 	if overlay=="crane_preview" and crane_preview==null:
 		crane_preview=preload("res://scripts/crane_offer.gd").new()
@@ -234,6 +272,8 @@ func _process(delta:float) -> void:
 			particle.position += particle.velocity*delta
 			particle.rotation += delta*particle.spin
 	_process_pending_dispatch()
+	_update_ufo(delta)
+	_update_thief(delta)
 	_update_worker_idle(delta)
 	_update_truck_idle(delta)
 	queue_redraw()
@@ -298,11 +338,13 @@ func _update_worker_idle(delta:float) -> void:
 		_reset_worker_idle()
 
 func _notification(what:int) -> void:
+	if ads.watching or store_presenting: return
 	if what in [NOTIFICATION_APPLICATION_PAUSED,NOTIFICATION_APPLICATION_FOCUS_OUT]:
 		if is_node_ready() and overlay == "" and not automation: _open_settings()
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST and is_node_ready(): _back()
 
 func _back() -> void:
+	if ads.watching or store_presenting or win_transition: return
 	if modal != null:
 		modal.back()
 		return
@@ -316,6 +358,10 @@ func _back() -> void:
 	elif overlay == "": _open_settings()
 
 func _cancel_animation() -> void:
+	ufo_state.clear()
+	if thief_tween and thief_tween.is_valid(): thief_tween.kill()
+	thief_tween=null
+	thief_state.clear()
 	crane_state.clear()
 	crane_truck = -1
 	_reset_truck_idle()
@@ -341,7 +387,13 @@ func _cancel_animation() -> void:
 	busy = false
 
 func _load_level(index:int) -> void:
+	ufo_clock=0.0
+	ufo_next=18.0
+	ufo_events=0
 	if index<0 or index>=model.level_count(): return
+	thief_clock = 0.0
+	thief_events = 0
+	thief_next = float(ThiefRules.settings().first_delay)
 	if model.level_index==index and moves>0 and not completion_handled and not attempt_failed:
 		economy.failure(index)
 		_save()
@@ -402,25 +454,30 @@ func _load_level(index:int) -> void:
 func _sync_visuals() -> void:
 	bus_visuals.clear()
 	for bus in model.buses:
-		bus_visuals[bus.id] = {"position":bus.position if bus.status=="yard" else _bay_position(bus.bay,bus.kind),"angle":bus.angle if bus.status=="yard" else BAY_ANGLE,"scale":1.0}
+		bus_visuals[bus.id] = {"position":bus.position if bus.status=="yard" else _bay_position(bus.bay,bus.kind),"angle":bus.angle if bus.status=="yard" else _bay_angle(bus.bay),"scale":1.0}
 
 func _yard_position(bus:Dictionary) -> Vector2:
 	return bus.position
 
 func _bay_position(bay:int,kind:int=0) -> Vector2:
-	return _bay_front(bay)+_bay_back()*Model.LENGTHS[kind]*model.layout_scale*0.5
+	return _bay_front(bay)+_bay_back(bay)*Model.LENGTHS[kind]*model.layout_scale*0.5
 
 func _bay_front(bay:int) -> Vector2:
+	if bay==Model.CRANE_BAY: return Vector2(469,227)
 	return Vector2(BAY_X[clampi(bay,0,BAY_X.size()-1)],227)
 
-func _bay_back() -> Vector2:
-	return Vector2(-sin(BAY_ANGLE),cos(BAY_ANGLE))
+func _bay_angle(bay:int) -> float:
+	return BAY_ANGLE
+
+func _bay_back(bay:int=0) -> Vector2:
+	return Vector2(-sin(_bay_angle(bay)),cos(_bay_angle(bay)))
 
 func _bay_road(bay:int,y:float=ROAD_Y) -> Vector2:
-	return _bay_front(bay)+_bay_back()*((y-_bay_front(bay).y)/cos(BAY_ANGLE))
+	return _bay_front(bay)+_bay_back(bay)*((y-_bay_front(bay).y)/cos(_bay_angle(bay)))
 
 func _belt_position(index:int) -> Vector2:
-	return Vector2(468-index*BELT_STEP+queue_slide,133)
+	var gap:float=ThiefArt.belt_gap(thief_state) if index>=int(thief_state.get("target",99999)) else 0.0
+	return Vector2(468-(index+gap)*BELT_STEP+queue_slide,133)
 
 func _belt_cargo_scale(material_id:int) -> float:
 	var size: Vector2 = Art.Cargo.draw_rect(material_id).size
@@ -435,6 +492,8 @@ func _duration(seconds:float) -> float:
 	return seconds*(0.38 if reduced_motion else 1.0)*speed_factor
 
 func _dispatch(id:int) -> void:
+	if not ufo_state.is_empty(): return
+	if not thief_state.is_empty(): return
 	if crane_truck>=0: return
 	_reset_truck_idle()
 	# Input can interrupt the presentation without delaying a player's move.
@@ -447,7 +506,9 @@ func _dispatch(id:int) -> void:
 	if not blockers.is_empty() and model.free_bay()>=0:
 		maneuver = _maneuver_arrival(id)
 	if not blockers.is_empty() and maneuver.is_empty():
-		if road_busy or loading or not arrival_ids.is_empty():
+		# Yard collision feedback does not use the worker or the arrival routes.
+		# Only another exclusive road animation shares our motion tween.
+		if road_busy:
 			pending_dispatch = id
 			return
 		rejected_bus = id
@@ -607,7 +668,7 @@ func _departure_route(id:int) -> Array:
 	var best:Array = []
 	var best_length := INF
 	for distance in [0.0,40.0,80.0,120.0,160.0,200.0,240.0,280.0]:
-		var anchor:Vector2 = visual.position+_bay_back()*distance
+		var anchor:Vector2 = visual.position+_bay_back(model.buses[id].bay)*distance
 		var prefix:Array=[]
 		if distance>0:
 			prefix=planner.direct_plan(visual.position,visual.angle,anchor,visual.angle)
@@ -710,7 +771,7 @@ func _blocked_bump(id:int) -> void:
 	_refresh_busy()
 
 func _refresh_busy() -> void:
-	busy = road_busy or loading or not arrival_ids.is_empty()
+	busy = road_busy or loading or not arrival_ids.is_empty() or not thief_state.is_empty() or not ufo_state.is_empty()
 	if not busy and overlay == "": _check_end()
 
 static func _drive_pose(start:Vector2,end:Vector2,initial:float,target:float,t:float,road_y:float=516.0) -> Dictionary:
@@ -797,6 +858,9 @@ func _settle(ticket:int) -> void:
 	loading = true
 	busy = true
 	while ticket == generation:
+		if _thief_due() and not road_busy and arrival_ids.is_empty():
+			await _run_thief(ticket)
+			if ticket!=generation: return
 		var id = model.next_boarding()
 		if id < 0: break
 		var bus = model.get_bus(id)
@@ -830,7 +894,7 @@ func _settle(ticket:int) -> void:
 		active_tween = null
 		if ticket != generation: return
 		# Use the clear pedestrian edge and load from the rear of the vehicle.
-		var rear = _bay_front(bus.bay)+_bay_back()*(Model.LENGTHS[bus.kind]*model.layout_scale+23)
+		var rear = _bay_front(bus.bay)+_bay_back(bus.bay)*(Model.LENGTHS[bus.kind]*model.layout_scale+23)
 		await _walk(Vector2(24,185),0.43)
 		if ticket != generation: return
 		await _walk(Vector2(24,WALKWAY_Y),0.40)
@@ -881,7 +945,7 @@ func _settle(ticket:int) -> void:
 			else:
 				push_warning("No smooth departure route for level %d truck %d" % [model.level_index+1,id])
 				bus_visuals[id].route = false
-				await _drive(id,_bay_road(bus.bay),0.55,BAY_ANGLE)
+				await _drive(id,_bay_road(bus.bay),0.55,_bay_angle(bus.bay))
 				if ticket != generation: return
 				await _drive(id,Vector2(680,ROAD_Y),0.65,PI/2)
 			if ticket != generation: return
@@ -892,16 +956,118 @@ func _settle(ticket:int) -> void:
 	peak_bays = maxi(peak_bays,model.open_bay_count-model.bays.slice(0,model.open_bay_count).count(-1))
 	_refresh_busy()
 
+func _update_ufo(delta:float) -> void:
+	if overlay!="" or modal!=null: return
+	if not ufo_state.is_empty():
+		ufo_state.time+=delta
+		var id:int=ufo_state.id
+		var t:float=ufo_state.time
+		bus_visuals[id].angle=float(ufo_state.angle)+PI*UfoArt.turn(t)
+		bus_visuals[id].lift=sin(PI*UfoArt.turn(t))*0.65
+		if t>=UfoArt.TURN_END and not ufo_state.committed:
+			if not UfoRules.commit(model,id):
+				bus_visuals[id].angle=ufo_state.angle
+				bus_visuals[id].lift=0.0
+				ufo_state.clear()
+				_refresh_busy()
+				return
+			ufo_state.committed=true
+			ufo_events+=1
+			# Automatic events are not extra paid undo steps; snapshots retain
+			# their own orientations and are restored with the player's last move.
+		if t>=UfoArt.DURATION:
+			bus_visuals[id].angle=model.buses[id].angle
+			bus_visuals[id].lift=0.0
+			ufo_state.clear()
+			ufo_next=ufo_clock+randf_range(30.0,45.0)
+			_refresh_busy()
+			_check_end()
+		return
+	if automation or model.level_index+1<UfoRules.FIRST_LEVEL or ufo_events>=2: return
+	ufo_clock+=delta
+	if ufo_clock<ufo_next or busy or loading or road_busy or pending_dispatch>=0 or not intro_delays.is_empty() or not model.is_settled(): return
+	ufo_next=ufo_clock+5.0
+	var targets:Array[int]=UfoRules.safe_targets(model)
+	if targets.is_empty(): return
+	_start_ufo(targets.pick_random())
+
+func _start_ufo(id:int) -> void:
+	if id not in UfoRules.safe_targets(model): return
+	var bus:Dictionary=model.buses[id]
+	ufo_state={"id":id,"angle":bus.angle,"time":0.0,"committed":false,
+		"center":_world_transform()*EdgeRoute.position_for(bus.position,bus.angle,model.vehicle_size(bus))}
+	hint_bus=-1
+	_reset_worker_idle()
+	_reset_truck_idle()
+	_refresh_busy()
+	_sound_effect("ufo")
+
+func _thief_due() -> bool:
+	var cap:int = 1 if model.level_index==16 else int(ThiefRules.settings().max_events)
+	return ThiefRules.mode(model.level_index+1)!="none" and thief_clock>=thief_next and thief_events<cap and thief_state.is_empty() and overlay=="" and modal==null
+
+func _update_thief(delta:float) -> void:
+	if not ufo_state.is_empty(): return
+	if automation or overlay!="" or modal!=null or not thief_state.is_empty(): return
+	thief_clock+=delta
+	if _thief_due() and not busy and not loading and model.is_settled():
+		_run_idle_thief(generation)
+
+func _run_idle_thief(ticket:int) -> void:
+	await _run_thief(ticket)
+	if ticket!=generation: return
+	await _settle(ticket)
+	if ticket==generation: _refresh_busy()
+
+func _run_thief(ticket:int) -> void:
+	thief_next=thief_clock+3.0 # No safe target: retry later, never repeatedly every frame.
+	var event:Dictionary=ThiefRules.choose(model,thief_events)
+	if event.is_empty(): return
+	var pos:Vector2=_belt_cargo_center(event.target) if event.kind=="belt" else _world_transform()*Vector2(bus_visuals[event.target].position)
+	thief_state={"time":0.0,"position":pos,"kind":event.kind,"target":event.target,"color":event.color,"taken":false,"worker_previous":worker_position}
+	busy=true
+	_reset_worker_idle()
+	ThiefArt.prepare()
+	thief_tween=create_tween()
+	thief_tween.tween_method(func(t:float):
+		if generation!=ticket or thief_state.is_empty(): return
+		var previous:Vector2=ThiefArt.pose(thief_state,true).feet
+		var dt:float=t-float(thief_state.time)
+		thief_state.time=t
+		var feet:Vector2=ThiefArt.pose(thief_state,true).feet
+		var velocity:Vector2=(worker_position-Vector2(thief_state.worker_previous))/maxf(dt,0.001)
+		if not thief_state.has("hop_start") and ThiefArt.should_jump(previous,feet,worker_position,velocity,dt):
+			thief_state.hop_start=t
+		thief_state.worker_previous=worker_position
+		if t>=ThiefArt.CONTACT and not thief_state.taken:
+			if ThiefRules.commit(model,event):
+				thief_state.taken=true
+				if event.kind=="truck": boarded-=1
+				thief_events+=1
+				_sound_effect("thief")
+		queue_redraw(),0.0,ThiefArt.DURATION,ThiefArt.DURATION)
+	thief_tween.tween_callback(func():
+		if generation!=ticket: return
+		thief_tween=null
+		thief_state.clear()
+		thief_next=thief_clock+float(ThiefRules.settings().interval)
+		_refresh_busy())
+	# Billy reserves a new batch only after the visible gap has closed.
+	var release:float=ThiefArt.BELT_SLIDE_END if event.kind=="belt" else 2.65
+	while ticket==generation and not thief_state.is_empty() and float(thief_state.time)<release:
+		await get_tree().process_frame
+
 func _check_end() -> void:
 	if model.is_won():
 		if completion_handled: return
 		completion_handled = true
+		ads.note_level_completed()
 		win_balance_before = coins
 		level_reward = _claim_level_reward(model.level_index)
 		overlay = "win"
 		unlocked = maxi(unlocked,mini(model.level_index+1,model.level_count()-1))
 		_save()
-		if sound_enabled and audio: audio.play_stream(PRIZE,1,-6.0)
+		if sound_enabled and audio: audio.play_stream(WIN_SOUND,1,-6.0)
 
 	elif model.is_stuck():
 		overlay = "stuck"
@@ -978,11 +1144,24 @@ func _undo() -> void:
 func _hint() -> void:
 	if busy: return
 	hint_bus = model.find_hint()
+	hint_state = _hint_signature()
+	hint_started = elapsed
 	if hint_bus == -3: _message("Освободи машину у края или отмени последний ход")
 	elif hint_bus < 0: _message("Вернись на ход назад — здесь нет решения")
 	else: _message("Выделенная машина поможет разгрузить двор")
 
+func _hint_signature() -> String:
+	var states:Array=[]
+	for bus in model.buses: states.append([bus.status,bus.load,bus.bay])
+	return JSON.stringify([model.level_index,model.queue,states])
+
+func _validate_hint() -> void:
+	if hint_bus<0: return
+	var bus:Dictionary=model.get_bus(hint_bus)
+	if bus.is_empty() or bus.status!="yard" or _hint_signature()!=hint_state: hint_bus=-1
+
 func _open_settings() -> void:
+	if thief_tween and thief_tween.is_valid(): thief_tween.pause()
 	if audio: audio.pause_effects(true)
 	if road_menu and road_menu.visible:
 		menu_settings = true
@@ -996,6 +1175,7 @@ func _open_settings() -> void:
 		paused_motion_tween.pause()
 
 func _resume() -> void:
+	if _modal_is("pause"): _close_modal(true)
 	if menu_settings:
 		menu_settings = false
 		_show_road_menu(road_menu.can_resume)
@@ -1006,6 +1186,7 @@ func _resume() -> void:
 		audio.set_context("game")
 	if paused_tween and paused_tween.is_valid(): paused_tween.play()
 	if paused_motion_tween and paused_motion_tween.is_valid(): paused_motion_tween.play()
+	if thief_tween and thief_tween.is_valid(): thief_tween.play()
 	paused_tween = null
 	paused_motion_tween = null
 
@@ -1017,9 +1198,7 @@ func _message(value:String) -> void:
 	toast_time = 3.0
 
 func _input(event:InputEvent) -> void:
-	if daily_screen!=null:
-		if event is InputEventKey and event.pressed and event.keycode==KEY_ESCAPE: daily_screen.closed.emit()
-		return
+	if ads.watching or store_presenting or win_transition: return
 	if modal!=null:
 		if event is InputEventKey and event.pressed and event.keycode==KEY_ESCAPE: modal.back()
 		return
@@ -1041,14 +1220,19 @@ func _input(event:InputEvent) -> void:
 	if overlay != "":
 		_overlay_input(_panel_transform().affine_inverse()*p)
 		return
-	if Rect2(143,_footer_y()-27,54,54).has_point(p): _undo()
-	elif Rect2(243,_footer_y()-27,54,54).has_point(p): _hint()
-	elif Rect2(343,_footer_y()-27,54,54).has_point(p): _show_road_menu(true)
-	else:
-		var candidate := _truck_at(world_p)
-		if candidate >= 0:
-			if audio: audio.effect("touch")
-			_dispatch(candidate)
+	var buttons := _footer_buttons()
+	for i in buttons.size():
+		if Rect2(_footer_center(i,buttons.size())-Vector2(27,27),Vector2(54,54)).has_point(p):
+			match buttons[i]:
+				0: _open_undo_offer()
+				1: _hint()
+				2: _show_road_menu(true)
+				3: _open_crane_offer()
+			return
+	var candidate := _truck_at(world_p)
+	if candidate >= 0:
+		if audio: audio.effect("touch")
+		_dispatch(candidate)
 
 func _truck_at(point:Vector2) -> int:
 	var candidate := -1
@@ -1067,7 +1251,7 @@ func _truck_at(point:Vector2) -> int:
 	return candidate
 
 func _process_pending_dispatch() -> void:
-	if pending_dispatch<0 or road_busy or loading or not arrival_ids.is_empty() or overlay!="": return
+	if pending_dispatch<0 or road_busy or overlay!="": return
 	var id := pending_dispatch
 	pending_dispatch = -1
 	_dispatch(id)
@@ -1086,22 +1270,10 @@ func _overlay_input(p:Vector2) -> void:
 		elif not _free_tutorial_slot() and Rect2(76,550,388,58).has_point(p):
 			offered_bay = model.open_bay_count
 			_purchase_slot()
-	elif overlay == "settings":
-		if Rect2(415,234,50,50).has_point(p): _resume()
-		elif Rect2(76,352,388,54).has_point(p):
-			_set_preference("sound",not sound_enabled)
-		elif Rect2(76,426,388,54).has_point(p):
-			reduced_motion = not reduced_motion
-			_save()
-		elif Rect2(76,516,388,58).has_point(p): _resume()
-		elif Rect2(76,590,388,58).has_point(p): _load_level(model.level_index)
-		elif Rect2(76,663,388,50).has_point(p):
-			levels_origin = "settings"
-			_show_road_menu(true)
 	elif overlay == "levels":
 		if Rect2(415,234,50,50).has_point(p): overlay = levels_origin
 		for i in model.level_count():
-			if Rect2(83+(i%3)*129,350+floori(i/3.0)*117,116,98).has_point(p) and i <= unlocked: _load_level(i)
+			if Rect2(83+(i%3)*129,350+floori(i/3.0)*117,116,98).has_point(p) and i <= _accessible_level(): _load_level(i)
 
 func _cone_position(bay:int) -> Vector2:
 	return _bay_front(bay)+_bay_back()*43.0
@@ -1124,15 +1296,17 @@ func _rescue_target() -> int:
 	return target
 
 func _can_rescue(tool:String) -> bool:
-	if busy or not model.is_stuck() or rescue_count>=int(economy.config.rescue.max_tools): return false
+	if busy or rescue_count>=int(economy.config.rescue.max_tools): return false
+	if not model.is_stuck() and (tool!="crane" or not economy.state.get("crane_intro_used",false)): return false
 	if tool=="shuffle": return not Boosters.docked_trucks(model).is_empty() and model.queue.size()>1
 	if not bool(economy.config.rescue.get(tool+"_enabled",false)): return false
 	if _rescue_target()<0: return false
-	if tool=="crane": return model.level_index+1>=15 and (model.free_bay()>=0 or model.open_bay_count<Model.BAY_COUNT)
-	return model.bays.count(-1)<Model.BAY_COUNT
+	if tool=="crane": return model.level_index+1>=15 and model.crane_bay()>=0
+	return model.bays.count(-1)<model.bays.size()
 
 func _purchase_rescue(tool:String) -> void:
-	if overlay not in ["rescue_menu","stuck"] or not _can_rescue(tool): return
+	if overlay not in ["rescue_menu","stuck"] and not (tool=="crane" and overlay==""): return
+	if not _can_rescue(tool): return
 	var price := _rescue_price(tool)
 	if coins<price: return
 	var ticket: int = generation
@@ -1145,8 +1319,8 @@ func _purchase_rescue(tool:String) -> void:
 		if returning<0: return
 		bay = model.buses[returning].bay
 	elif tool=="crane":
-		bay = model.free_bay()
-		if bay<0: bay = model.open_bay_count
+		bay = model.crane_bay()
+		if bay<0: return
 	coins -= price
 	if tool=="crane" and not economy.state.get("crane_intro_used",false): economy.state.crane_intro_used = true
 	elif price==0: economy.state.inventory[tool] = maxi(0,int(economy.state.inventory.get(tool,0))-1)
@@ -1163,7 +1337,6 @@ func _purchase_rescue(tool:String) -> void:
 		rng.randomize()
 		model.queue = Boosters.smart_shuffle(model.queue,rng,0,Boosters.docked_trucks(model),int(economy.config.rescue.shuffle_strength))
 	else:
-		if tool=="crane" and bay>=model.open_bay_count: model.unlock_next_bay()
 		if returning>=0:
 			var old: Dictionary = model.buses[returning]
 			for unit in int(old.load): model.queue.append(old.color)
@@ -1177,7 +1350,7 @@ func _purchase_rescue(tool:String) -> void:
 		model.bays[bay] = target
 		bus.bay = bay
 		bus.status = "arriving"
-		if tool=="crane": await _crane_airlift(target,_bay_position(bay,bus.kind),BAY_ANGLE)
+		if tool=="crane": await _crane_airlift(target,_bay_position(bay,bus.kind),_bay_angle(bay))
 		else: await _airlift(target,_bay_position(bay,bus.kind),BAY_ANGLE)
 		if ticket!=generation: return
 		model.arrive(target)
@@ -1186,6 +1359,7 @@ func _purchase_rescue(tool:String) -> void:
 	if ticket==generation: _refresh_busy()
 
 func _crane_airlift(id:int,end:Vector2,angle:float) -> void:
+	if audio: audio.start_crane()
 	var ticket:int = generation
 	var start:Vector2 = bus_visuals[id].position
 	var initial:float = bus_visuals[id].angle
@@ -1206,6 +1380,7 @@ func _crane_airlift(id:int,end:Vector2,angle:float) -> void:
 		queue_redraw(),0.0,CraneAnimation.DURATION,_duration(CraneAnimation.DURATION))
 	await motion_tween.finished
 	if generation!=ticket: return
+	if audio: audio.stop_crane()
 	bus_visuals[id].position = end
 	bus_visuals[id].angle = angle
 	bus_visuals[id].crane_scale = 1.0
@@ -1252,9 +1427,7 @@ func _purchase_slot(by_ad:bool=false) -> void:
 	if not tutorial and coins<price:
 		_message("Нужно %d монет" % price)
 		return
-	if not tutorial and rescue_count>=int(economy.config.rescue.max_tools):
-		_message("Лимит помощи в этой попытке исчерпан")
-		return
+	# Slots are bounded by the five painted bays, not the rescue-tool quota.
 	var pop_position: Vector2 = _cone_position(offered_bay)
 	if not model.unlock_next_bay(): return
 	if tutorial: economy.state.tutorial_done = true
@@ -1275,13 +1448,17 @@ func _purchase_slot(by_ad:bool=false) -> void:
 		if overlay in ["stuck","rescue_menu"]: _resume()
 	if not tutorial: slot_pops.append({"position":pop_position,"age":0.0})
 
+func _accessible_level() -> int:
+	# QA access does not mark levels completed or grant their rewards.
+	return model.level_count()-1 if bool(build_info.get("unlock_all_levels",false)) else unlocked
+
 func _show_road_menu(resumable:bool=true) -> void:
 	_sync_coins()
 	if not road_menu: return
 	if overlay == "": _open_settings()
 	menu_settings = false
 	overlay = "road_menu"
-	road_menu.configure(model.level_count(),unlocked,reduced_motion,resumable)
+	road_menu.configure(model.level_count(),_accessible_level(),reduced_motion,resumable)
 	road_menu.resume_level = model.level_index if resumable else -1
 	road_menu.sync_preferences(music_enabled,sound_enabled,vibration_enabled)
 	if audio: audio.set_context("menu")
@@ -1317,10 +1494,11 @@ func _draw() -> void:
 	_draw_loading()
 	_draw_yard()
 	for bus in model.buses:
-		if bus.id!=crane_truck and bus.status in ["yard","docked"]: _draw_truck(bus)
+		if bus.id!=crane_truck and bus.id!=ufo_state.get("id",-1) and bus.status in ["yard","docked"]: _draw_truck(bus)
 	for bus in model.buses:
 		if bus.id!=crane_truck and bus.status in ["arriving","leaving"]: _draw_truck(bus)
 	_draw_impact()
+	_draw_hint_pointer()
 	var world:Transform2D = _world_transform()
 	var blend:float = smoothstep(Layout.SPLIT,Layout.SPLIT+65.0,worker_position.y)
 	_draw_space(Transform2D.IDENTITY.interpolate_with(world,blend))
@@ -1341,13 +1519,18 @@ func _draw() -> void:
 	if not crane_state.is_empty():
 		var crane_screen:Dictionary = crane_state.duplicate()
 		crane_screen.tip = world*Vector2(crane_state.tip)
-		_draw_space(Transform2D.IDENTITY)
-		CraneAnimation.draw_arm(self,crane_screen)
 		_draw_space(world)
 		if crane_truck>=0: _draw_truck(model.buses[crane_truck])
 		_draw_space(Transform2D.IDENTITY)
+		CraneAnimation.draw_arm(self,crane_screen)
 		CraneAnimation.draw_magnet(self,crane_screen)
 	_draw_space(Transform2D.IDENTITY)
+	ThiefArt.draw(self,thief_state,reduced_motion)
+	if not ufo_state.is_empty():
+		_draw_space(_world_transform())
+		_draw_truck(model.buses[ufo_state.id])
+		_draw_space(Transform2D.IDENTITY)
+	UfoArt.draw(self,ufo_state,reduced_motion)
 	_draw_header()
 	_draw_footer()
 	if toast_time>0 and overlay=="":
@@ -1367,6 +1550,7 @@ func _draw_header() -> void:
 
 func _draw_conveyor() -> void:
 	for i in range(worker_batch_count,mini(model.queue.size(),worker_batch_count+14)):
+		if i==model.queue.size()-1 and ThiefArt.belt_gap(thief_state)>0.0: continue
 		if collecting and i==worker_batch_count: continue
 		var p = _belt_position(i)
 		if p.x>=123 and p.x<=489:
@@ -1386,11 +1570,34 @@ func _draw_loading() -> void:
 		_text("%d/%d" % [parked.load,parked.capacity],p+Vector2(0,4),11,Color.WHITE,true)
 
 func _draw_yard() -> void:
-	if hint_bus>=0:
-		var bus = model.get_bus(hint_bus)
-		var size: Vector2 = model.vehicle_size(bus)
-		var p: Vector2 = bus.position+model.forward(bus)*(size.y/2+11)
-		draw_circle(p,4,Color("fffaf0"))
+	if hint_bus<0: return
+	var bus:Dictionary=model.get_bus(hint_bus)
+	if bus.is_empty() or bus.status!="yard": return
+	var visual:Dictionary=bus_visuals[hint_bus]
+	var center:Vector2=EdgeRoute.position_for(visual.position,visual.angle,model.vehicle_size(bus))
+	var size:Vector2=model.vehicle_size(bus)
+	var pulse:float=0.65 if reduced_motion else 0.5+0.5*sin((elapsed-hint_started)*TAU/1.4)
+	art_transform(center,visual.angle)
+	for ring in range(5,0,-1):
+		var margin:float=(3.0+ring*2.0)/_world_transform().get_scale().x
+		var rect:=Rect2(-size*0.5,size).grow(margin)
+		Modals.Style.round_rect(self,rect,Color(1.0,0.85,0.14,0.025+pulse*0.015),12,Color(1.0,0.86,0.12,0.06+pulse*0.035),2)
+	Modals.Style.round_rect(self,Rect2(-size*0.5,size).grow(3),Color.TRANSPARENT,7,Color("fff49b"),3)
+	art_transform(Vector2.ZERO)
+
+func _draw_hint_pointer() -> void:
+	if hint_bus<0: return
+	var bus:Dictionary=model.get_bus(hint_bus)
+	if bus.is_empty() or bus.status!="yard": return
+	var visual:Dictionary=bus_visuals[hint_bus]
+	var world:=_world_transform()
+	var center:Vector2=world*EdgeRoute.position_for(visual.position,visual.angle,model.vehicle_size(bus))
+	var size:Vector2=model.vehicle_size(bus)*world.get_scale()
+	var side:float=1.0 if center.x<get_viewport_rect().size.x*0.5 else -1.0
+	var half_width:float=(absf(cos(visual.angle))*size.x+absf(sin(visual.angle))*size.y)*0.5
+	var tip:=center+Vector2(side*(half_width+16),0)
+	preload("res://scripts/ui/tutorial_pointer.gd").draw(self,tip,Vector2(-side,0),elapsed-hint_started,reduced_motion,Transform2D.IDENTITY,68)
+	art_transform(Vector2.ZERO)
 
 func _draw_impact() -> void:
 	if impact.is_empty() or impact_age>0.48: return
@@ -1413,7 +1620,7 @@ func _draw_truck(bus:Dictionary) -> void:
 	var selected = hint_bus==bus.id or pending_dispatch==bus.id
 	var visible_position: Vector2 = visual.position if visual.get("route",false) else EdgeRoute.position_for(visual.position,visual.angle,model.vehicle_size(bus))
 	var lift: float = visual.get("lift",0.0)
-	if lift>0.01:
+	if lift>0.01 and ufo_state.get("id",-1)!=bus.id:
 		draw_line(visible_position+Vector2(0,-150),visible_position+Vector2(0,-25),Color("ffce35"),3.0,true)
 	var intro_scale := 1.0
 	var intro_height := 0.0
@@ -1434,18 +1641,51 @@ func _draw_truck(bus:Dictionary) -> void:
 		sway = sin(p*TAU*2.0)*deg_to_rad(2.0)*sin(p*PI)
 	art.vehicle(bus,visible_position-Vector2(0,lift*30+intro_height),visual.angle+sway,(1.0+lift*0.12)*intro_scale*model.layout_scale*float(visual.get("crane_scale",1.0)),selected,rejected)
 
+func _footer_buttons() -> Array:
+	return [0,1,3,2] if economy.state.get("crane_intro_used",false) else [0,1,2]
+
+func _footer_center(index:int,count:int) -> Vector2:
+	return Vector2(270.0+(index-(count-1)*0.5)*100.0,_footer_y())
+
+func _open_crane_offer() -> void:
+	if not economy.state.get("crane_intro_used",false) or not _can_rescue("crane"): return
+	var ticket:int = generation
+	var spec := Modals.offer("crane",_rescue_price("crane"),coins,false)
+	spec.blocks = spec.blocks.filter(func(block:Dictionary): return block.get("id","")!="watch_ad")
+	_open_modal(spec,func(action:String):
+		if ticket!=generation: return
+		if action=="buy":
+			if not _can_rescue("crane"): return
+			if coins<_rescue_price("crane"):
+				_open_shortfall(_rescue_price("crane"),[""])
+				return
+			_close_modal(true)
+			_purchase_rescue("crane")
+		elif action=="close": _close_modal(),[""])
+
 func _draw_footer() -> void:
-	# Leave the lower service lane visible behind the three controls.
-	for i in GAME_ICONS.size():
-		var center := Vector2(170+i*100,_footer_y())
-		var enabled: bool = i==2 or (not busy and (i!=0 or not history.is_empty()))
+	var buttons := _footer_buttons()
+	for index in buttons.size():
+		var i:int = buttons[index]
+		var center := _footer_center(index,buttons.size())
+		var enabled: bool = _can_rescue("crane") if i==3 else (i==2 or (not busy and (i!=0 or not history.is_empty())))
 		var region: Rect2 = game_icon_regions[i]
 		var fit: float = minf(54.0/region.size.x,54.0/region.size.y)
 		var drawn: Vector2 = region.size*fit
 		var tint := Color(1,1,1,1.0 if enabled else 0.4)
 		draw_texture_rect_region(GAME_ICONS[i],Rect2(center-drawn*0.5,drawn),region,tint)
+		if i==0:
+			var count := int(economy.state.inventory.get("undo",0))
+			if count>0:
+				var pulse := 1.0 if reduced_motion else 1.0+0.18*sin(PI*undo_badge_pop/0.35)
+				var badge := center+Vector2(22,-23)
+				draw_circle(badge,14*pulse,Color("153844"))
+				draw_circle(badge,12*pulse,Color("45da73"))
+				_text(str(count) if count<100 else "99+",badge+Vector2(0,5),14,Color.WHITE,true)
+
 
 func _juicy_text(value:String,y:float,text_size:int,tint:Color) -> void:
+	value = preload("res://scripts/localization.gd").text(value)
 	var actual_size: int = text_size
 	while juicy_font.get_string_size(value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual_size).x>470:
 		actual_size -= 1
@@ -1486,6 +1726,7 @@ func _draw_slot_spotlight() -> void:
 		draw_line(Vector2(491,30+sign_value*9),Vector2(509,30-sign_value*9),Color.WHITE,4,true)
 
 func _draw_overlay() -> void:
+	if overlay=="settings": return # Drawn by the shared modal component.
 	if overlay=="crane_preview":
 		preload("res://scripts/crane_offer.gd").draw_crane(self)
 		return
@@ -1503,24 +1744,15 @@ func _draw_overlay() -> void:
 			_button(Rect2(76,350+i*90,388,60),"%s · %d монет" % [labels[i],price],true,_can_rescue(keys[i]) and coins>=price)
 		_text("Помощь действует в этой попытке",Vector2(270,654),17,MUTED,true)
 		_text("Баланс: %d" % coins,Vector2(270,689),18,INK,true)
-	elif overlay=="settings":
-		_text("Перерыв на стройке",Vector2(270,291),27,INK,true)
-		_text("Груз и машины подождут",Vector2(270,320),15,MUTED,true)
-		_close_icon()
-		_setting_row(352,"Звуки погрузки",sound_enabled)
-		_setting_row(426,"Меньше анимации",reduced_motion)
-		_button(Rect2(76,516,388,58),"Продолжить работу",true)
-		_button(Rect2(76,590,388,58),"Начать уровень заново",false)
-		_text("Выбрать склад",Vector2(270,695),16,INK,true)
 	elif overlay=="levels":
 		_text("Твои склады",Vector2(270,291),29,INK,true)
 		_text("Больше машин — интереснее задача",Vector2(270,320),14,MUTED,true)
 		_close_icon()
 		for i in model.level_count():
 			var rect = Rect2(83+(i%3)*129,350+floori(i/3.0)*117,116,98)
-			_round(rect,ACCENT if i<=unlocked else Color("e5eae6"),18)
-			_text("%02d" % (i+1),rect.position+Vector2(58,49),29,INK if i<=unlocked else MUTED,true)
-			_text("НАЧАТЬ" if i<=unlocked else "ЗАКРЫТ",rect.position+Vector2(58,77),10,INK if i<=unlocked else MUTED,true)
+			_round(rect,ACCENT if i<=_accessible_level() else Color("e5eae6"),18)
+			_text("%02d" % (i+1),rect.position+Vector2(58,49),29,INK if i<=_accessible_level() else MUTED,true)
+			_text("НАЧАТЬ" if i<=_accessible_level() else "ЗАКРЫТ",rect.position+Vector2(58,77),10,INK if i<=_accessible_level() else MUTED,true)
 		_text("Новый склад открывается после полной отгрузки",Vector2(270,642),12,MUTED,true)
 
 func _close_icon() -> void:
@@ -1564,13 +1796,15 @@ func _round(rect:Rect2,color:Color,radius:int=12,_fill:bool=true,border:Color=Co
 	draw_style_box(style_cache[key],rect)
 
 func _text(value:String,pos:Vector2,size:int,color:Color,center:bool=false,right:bool=false) -> void:
-	var width = font.get_string_size(value,HORIZONTAL_ALIGNMENT_LEFT,-1,size).x
-	var offset = width*0.5 if center else (width if right else 0.0)
-	draw_string(font,pos-Vector2(offset,0),value,HORIZONTAL_ALIGNMENT_LEFT,-1,size,color)
+	LocalText.draw(self,value,pos,font,size,color,HORIZONTAL_ALIGNMENT_CENTER if center else (HORIZONTAL_ALIGNMENT_RIGHT if right else HORIZONTAL_ALIGNMENT_LEFT))
 
 func _load_save() -> void:
 	var cfg = ConfigFile.new()
+	player_id = Crypto.new().generate_random_bytes(8).hex_encode()
 	if cfg.load(save_path)!=OK: return
+	player_id = str(cfg.get_value("settings","player_id",player_id))
+	var saved_language:String = str(cfg.get_value("settings","language",""))
+	if not saved_language.is_empty(): preload("res://scripts/localization.gd").set_locale(saved_language)
 	unlocked = clampi(int(cfg.get_value("game","unlocked",0)),0,model.level_count()-1)
 	coins = maxi(0,int(cfg.get_value("economy","coins",economy.config.start_balance)))
 	economy.restore(cfg.get_value("economy","state",{}))
@@ -1583,24 +1817,38 @@ func _load_save() -> void:
 	vibration_enabled = bool(cfg.get_value("settings","vibration",true))
 	reduced_motion = bool(cfg.get_value("settings","reduced_motion",false))
 
-func _save() -> void:
-	if not save_enabled: return
+func _save() -> bool:
+	if not save_enabled: return false
 	var cfg = ConfigFile.new()
 	cfg.set_value("game","unlocked",unlocked)
 	cfg.set_value("economy","coins",coins)
 	cfg.set_value("economy","state",economy.state)
 	cfg.set_value("economy","rewarded_levels",rewarded_levels)
+	cfg.set_value("settings","language",preload("res://scripts/localization.gd").locale)
+	cfg.set_value("settings","player_id",player_id)
 	cfg.set_value("settings","sound",sound_enabled)
 	cfg.set_value("settings","music",music_enabled)
 	cfg.set_value("settings","vibration",vibration_enabled)
 	cfg.set_value("settings","reduced_motion",reduced_motion)
-	if cfg.save(save_path)!=OK: push_warning("Progress could not be saved")
+	# Commit balance, inventory and purchase receipts together. A crash before
+	# replacement leaves the previous complete save and an unconsumed order.
+	var temporary:String = save_path+".tmp"
+	if cfg.save(temporary)!=OK:
+		push_warning("Progress could not be saved")
+		return false
+	if DirAccess.rename_absolute(temporary,save_path)!=OK:
+		push_warning("Progress could not be committed")
+		return false
+	return true
 
 func _set_preference(key:String,enabled:bool) -> void:
 	match key:
 		"music": music_enabled = enabled
 		"sound": sound_enabled = enabled
 		"vibration": vibration_enabled = enabled
+		"reduced_motion":
+			reduced_motion = enabled
+			road_menu.set_reduced_motion(enabled)
 	_sync_audio_preferences()
 	if road_menu: road_menu.sync_preferences(music_enabled,sound_enabled,vibration_enabled)
 	_save()
@@ -1674,40 +1922,39 @@ func _demo() -> void:
 	get_tree().quit()
 
 
-func _open_daily_bonus() -> void:
-	if not save_enabled or daily_screen!=null:return
-	var date=Time.get_date_dict_from_system()
-	var day:int=int(Time.get_unix_time_from_datetime_dict(date)/86400)
-	var info:Dictionary=daily_rewards.calendar.visit(day)
-	economy.state.daily_calendar=daily_rewards.calendar.state.duplicate(true)
+func _open_daily_bonus(force:bool=false) -> void:
+	if not save_enabled or modal!=null: return
+	var info:Dictionary = daily_rewards.calendar.visit(_today())
+	economy.state.daily_calendar = daily_rewards.calendar.state.duplicate(true)
 	_save()
-	if not info.can_claim:
+	if not info.can_claim and not force:
 		_maybe_show_season()
 		return
-	road_menu.hide()
-	daily_screen=preload("res://scripts/daily_bonus.gd").new()
-	daily_screen.sound_enabled=sound_enabled
-	add_child(daily_screen)
-	daily_screen.z_index=100
-	daily_screen.size=get_viewport_rect().size
-	get_viewport().size_changed.connect(_resize_daily_bonus)
-	daily_screen.configure(daily_rewards.definitions(),info.cards)
-	daily_screen.closed.connect(func():
-		get_viewport().size_changed.disconnect(_resize_daily_bonus)
-		daily_screen.queue_free()
-		daily_screen=null
-		road_menu.show()
-		_maybe_show_season())
-	var result:Dictionary=daily_rewards.claim(day,economy.state.inventory)
-	if result.index>=0:
-		coins+=int(result.coins)
-		economy.state.daily_calendar=daily_rewards.calendar.state.duplicate(true)
-		_save()
-		_sync_coins()
-		daily_screen.reveal(result.index)
+	_open_modal(_daily_spec(info,not info.can_claim,coins),_on_daily_action,["road_menu"])
 
-func _resize_daily_bonus():
-	if daily_screen!=null:daily_screen.size=get_viewport_rect().size
+func _today() -> int:
+	return int(Time.get_unix_time_from_datetime_dict(Time.get_date_dict_from_system())/86400)
+
+func _daily_spec(info:Dictionary,claimed:bool,before:int,animate:bool=false) -> Dictionary:
+	return Modals.daily({"definitions":daily_rewards.definitions(),"cards":info.cards,"today":info.index,
+		"claimed":claimed,"animate":animate,"coins":coins,"before":before})
+
+func _on_daily_action(id:String) -> void:
+	match id:
+		"claim":
+			var before: int = coins
+			var result: Dictionary = daily_rewards.claim(_today(),economy.state.inventory)
+			if result.index<0: return
+			coins += int(result.coins)
+			economy.state.daily_calendar = daily_rewards.calendar.state.duplicate(true)
+			_save()
+			_sync_coins()
+			if sound_enabled and audio: audio.play_stream(PRIZE,1,-6.0)
+			_vibrate(30)
+			modal.update_spec(_daily_spec(daily_rewards.calendar.view(_today()),true,before,true))
+		"close":
+			_close_modal()
+			get_tree().create_timer(0.25).timeout.connect(_maybe_show_season)
 
 # ------------------------------------------------------------------ modal windows
 # Specs come from scripts/ui/modal_catalog.gd; this section only routes actions.
@@ -1730,6 +1977,8 @@ func _open_modal(spec:Dictionary,handler:Callable,scope:Array) -> void:
 	road_menu.set_input_blocked(true)
 	modal_scope = scope
 	modal_layer.add_child(opened)
+	_refresh_ad_buttons()
+	_refresh_store_buttons()
 
 func _close_modal(instant:bool=false) -> void:
 	if modal==null: return
@@ -1742,12 +1991,28 @@ func _close_modal(instant:bool=false) -> void:
 func _sync_modals() -> void:
 	if modal_layer==null: return
 	if modal!=null and not modal.is_closing() and overlay not in modal_scope: modal.close()
-	if modal!=null or daily_screen!=null: return
+	if modal!=null: return
 	if overlay=="stuck":
 		if _can_rescue("crane") and not economy.state.get("crane_intro_used",false):
 			_open_modal(Modals.crane_intro(coins),_on_stuck_action,["stuck"])
 		else: _open_modal(Modals.stuck(_stuck_context()),_on_stuck_action,["stuck"])
 	elif overlay=="win": _open_modal(_win_spec(),_on_win_action,["win"])
+	elif overlay=="settings": _open_modal(_pause_spec(),_on_pause_action,["settings"])
+
+func _pause_spec() -> Dictionary:
+	return Modals.pause_menu({"music":music_enabled,"sound":sound_enabled,"vibration":vibration_enabled,"reduced_motion":reduced_motion})
+
+func _on_pause_action(id:String) -> void:
+	match id:
+		"close", "resume": _resume()
+		"retry": _load_level(model.level_index)
+		"menu":
+			_close_modal(true)
+			_show_road_menu(true)
+		"music", "sound", "vibration", "reduced_motion":
+			var values := {"music":music_enabled,"sound":sound_enabled,"vibration":vibration_enabled,"reduced_motion":reduced_motion}
+			_set_preference(id,not values[id])
+			if modal: modal.update_spec(_pause_spec())
 
 func _modal_is(id:String) -> bool:
 	return modal!=null and not modal.is_closing() and modal.spec.get("id","")==id
@@ -1757,7 +2022,7 @@ func _stuck_context() -> Dictionary:
 		"coins":coins,
 		"slot_available":model.open_bay_count<Model.BAY_COUNT,
 		"slot_price":_slot_price(),
-		"ad_ready":ads.is_ready() and bool(economy.config.rewarded_video.get("rescue",false)),
+		"ad_ready":ads.is_ready("slot") and bool(economy.config.rewarded_video.get("rescue",false)),
 		"undo_price":UNDO_PRICE,
 		"undo_gifts":int(economy.state.inventory.get("undo",0)),
 		"can_undo":not history.is_empty(),
@@ -1776,10 +2041,10 @@ func _on_stuck_action(id:String) -> void:
 				return
 			_open_slot_offer(model.open_bay_count)
 		"slot_ad":
-			_watch_ad(id,func():
+			_watch_ad("slot",id,func():
 				offered_bay = model.open_bay_count
 				_purchase_slot(true))
-		"undo": _paid_undo()
+		"undo": _open_undo_offer()
 		"shuffle","crane":
 			if coins<_rescue_price(id):
 				_open_shortfall(_rescue_price(id),["stuck"])
@@ -1789,18 +2054,45 @@ func _on_stuck_action(id:String) -> void:
 		"menu": _show_road_menu(true)
 	if _modal_is("stuck") and overlay=="stuck": modal.update_spec(Modals.stuck(_stuck_context()))
 
-func _paid_undo() -> void:
+func _open_undo_offer() -> void:
+	if busy or history.is_empty():
+		_message("Нет хода для отмены")
+		return
+	if int(economy.state.inventory.get("undo",0))>0:
+		_paid_undo(true)
+		return
+	var ticket: int = generation
+	var spec := Modals.offer("undo",UNDO_PRICE,coins,ads.is_ready("undo"))
+	_open_modal(spec,func(id:String):
+		if ticket!=generation: return
+		match id:
+			"buy": _paid_undo()
+			"gift": _paid_undo(true)
+			"watch_ad":
+				_watch_ad("undo",id,func():
+					if ticket!=generation or busy or history.is_empty(): return
+					_close_modal(true)
+					_undo())
+			"close": _close_modal()
+	,[overlay])
+
+func _paid_undo(use_gift:bool=false) -> void:
 	if history.is_empty():
 		_message("Нет хода для отмены")
 		return
-	var gifts := int(economy.state.inventory.get("undo",0))
+	var gifts := int(economy.state.inventory.get("undo",0)) if use_gift else 0
+	if use_gift and gifts==0: return
 	if gifts==0 and coins<UNDO_PRICE:
 		_open_shortfall(UNDO_PRICE,[overlay])
 		return
+	if busy: return
+	_close_modal(true)
 	var before := history.size()
 	_undo()
 	if history.size()<before:
-		if gifts>0: economy.state.inventory.undo = gifts-1
+		if gifts>0:
+			economy.state.inventory.undo = gifts-1
+			undo_badge_pop = 0.35
 		else: coins -= UNDO_PRICE
 		_sync_coins()
 		_save()
@@ -1812,7 +2104,7 @@ func _tap_cone(bay:int) -> void:
 		_open_slot_offer(bay)
 		return
 	var scope := [overlay]
-	_open_modal(Modals.offer("extra_slot",price,coins,ads.is_ready()),func(id:String):
+	_open_modal(Modals.offer("extra_slot",price,coins,ads.is_ready("slot")),func(id:String):
 		match id:
 			"buy":
 				if coins<price:
@@ -1821,7 +2113,7 @@ func _tap_cone(bay:int) -> void:
 				_close_modal()
 				_open_slot_offer(bay)
 			"watch_ad":
-				_watch_ad(id,func():
+				_watch_ad("slot",id,func():
 					_close_modal()
 					offered_bay = model.open_bay_count
 					_purchase_slot(true))
@@ -1832,13 +2124,13 @@ func _open_shortfall(need:int,scope:Array) -> void:
 	var ad_coins := int(economy.config.rewarded_video.get("coins",25))
 	var pack_id: String = store.pack_for(need-coins)
 	var pack := {}
-	if pack_id!="": pack = {"coins":int(store.product(pack_id).contents.coins),"price":store.price(pack_id)}
-	_open_modal(Modals.shortfall(need,coins,ad_coins,ads.is_ready(),pack),func(id:String):
+	if pack_id!="": pack = {"coins":int(store.product(pack_id).contents.coins),"price":store.price(pack_id),"product_id":pack_id,"enabled":store.is_available(pack_id)}
+	_open_modal(Modals.shortfall(need,coins,ad_coins,ads.is_ready("shortfall"),pack),func(id:String):
 		match id:
 			"buy_pack": _buy(pack_id,id)
 			"shop": _open_shop(scope)
 			"watch_ad":
-				_watch_ad(id,func():
+				_watch_ad("shortfall",id,func():
 					coins += ad_coins
 					_sync_coins()
 					_save()
@@ -1854,6 +2146,11 @@ func _win_spec(replay:bool=false) -> Dictionary:
 	return spec
 
 func _on_win_action(id:String) -> void:
+	if ads.watching or store_presenting or win_transition: return
+	if id in ["next","map","replay"]:
+		win_transition = true
+		await ads.show_interstitial()
+		win_transition = false
 	match id:
 		"next":
 			if model.level_index+1<model.level_count(): _load_level(model.level_index+1)
@@ -1864,7 +2161,7 @@ func _on_win_action(id:String) -> void:
 			_show_road_menu(false)
 		"double":
 			if reward_doubled or level_reward<=0 or overlay!="win": return
-			_watch_ad(id,func():
+			_watch_ad("double",id,func():
 				if reward_doubled or overlay!="win": return
 				reward_doubled = true
 				win_balance_before = coins
@@ -1876,18 +2173,63 @@ func _on_win_action(id:String) -> void:
 
 ## Plays a rewarded video for the pressed button; the reward runs only after a
 ## finished video.
-func _watch_ad(id:String,reward:Callable) -> void:
-	if not ads.is_ready():
+func _ad_presentation(active:bool) -> void:
+	if active:
+		ad_previous_pause = get_tree().paused
+		ad_previous_mute = AudioServer.is_bus_mute(0)
+		ad_previous_overlay = overlay
+		overlay = "settings"
+		AudioServer.set_bus_mute(0,true)
+		get_tree().paused = true
+	else:
+		overlay = ad_previous_overlay
+		get_tree().paused = ad_previous_pause
+		AudioServer.set_bus_mute(0,ad_previous_mute)
+		if audio:
+			audio.pause_effects(ad_previous_overlay=="settings")
+			if audio.music: audio.music.stream_paused = false
+	if is_instance_valid(modal): modal.input_locked = active
+
+## Refresh loaded-state labels without recreating the window or its reward flight.
+func _refresh_ad_buttons() -> void:
+	if not is_instance_valid(modal) or modal.is_closing(): return
+	var screen:String = modal.spec.get("id","")
+	for block:Dictionary in modal.spec.get("blocks",[]):
+		if block.get("type","")=="packs":
+			for tile:Dictionary in block.tiles:
+				if tile.id=="free_coins":
+					tile.enabled = ads.is_ready("shop")
+					tile.price = "Бесплатно" if tile.enabled else "Скоро"
+		if block.get("kind","")!="ad" or block.get("type","")!="button": continue
+		var placement := ""
+		var label := "Бесплатно с рекламой"
+		match str(block.get("id","")):
+			"double":
+				placement = "double"
+				label = "Удвоить награду"
+			"slot_ad":
+				placement = "slot"
+				label = "Место за рекламу"
+			"watch_ad":
+				placement = {"offer_undo":"undo","offer_extra_slot":"slot","shortfall":"shortfall"}.get(screen,"")
+				if screen=="shortfall": label = "+%d за рекламу" % int(economy.config.rewarded_video.get("coins",25))
+		if placement.is_empty(): continue
+		block.enabled = ads.is_ready(placement)
+		if block.get("id","")!="double": block.label = label if block.enabled else "Ролик готовится…"
+	modal.refresh_controls()
+
+func _watch_ad(placement:String,id:String,reward:Callable) -> void:
+	if store_presenting or store.buying: return
+	if not ads.is_ready(placement):
 		_message("Ролик пока не готов — попробуй позже")
 		return
 	var shown := modal
 	if shown: shown.set_busy(id,true)
-	if audio: audio.pause_effects(true)
-	var finished: bool = await ads.show_rewarded()
-	if audio: audio.pause_effects(false)
+	var ticket:int = generation
+	var finished: bool = await ads.show_rewarded(placement)
 	if is_instance_valid(shown): shown.set_busy(id,false)
-	if finished: reward.call()
-	else: _message("Ролик не досмотрен — награды нет")
+	if finished and ticket==generation: reward.call()
+	elif not finished: _message("Ролик не досмотрен — награды нет" if ads.last_error=="skipped" else "Ролик пока не готов — попробуй позже")
 
 ## `ticket` is the level generation that asked for it; a reload cancels it.
 func _start_tutorial(ticket:int) -> void:
@@ -1921,7 +2263,7 @@ func _on_tutorial_action(id:String) -> void:
 	overlay = ""
 
 func _maybe_show_season() -> void:
-	if automation or modal!=null or daily_screen!=null: return
+	if automation or modal!=null: return
 	var now := int(Time.get_unix_time_from_system())
 	var event := Modals.active_event(Modals.load_events(),now)
 	if event.is_empty() or event.get("product","") in economy.state.purchases: return
@@ -1937,47 +2279,171 @@ func _maybe_show_season() -> void:
 	,["road_menu"])
 
 func _open_shop(scope:Array) -> void:
+	if not store.simulate and not store.buying and not store.loading:
+		if not store.initialized: store.initialize()
+		elif not store.is_available(): store.refresh_products()
 	var ad_coins := int(economy.config.rewarded_video.get("coins",25))
 	var spec_now := func() -> Dictionary:
 		return Modals.shop({"coins":coins,"store":store,"owned":economy.state.purchases,
 			"event":Modals.active_event(Modals.load_events(),int(Time.get_unix_time_from_system())),
-			"ad_ready":ads.is_ready(),"ad_coins":ad_coins})
+			"ad_ready":ads.is_ready("shop"),"ad_coins":ad_coins})
 	_open_modal(spec_now.call(),func(id:String):
 		if id.begins_with("buy:"):
 			_buy(id.substr(4),id)
 			return
 		match id:
 			"free_coins":
-				_watch_ad(id,func():
+				_watch_ad("shop",id,func():
 					coins += ad_coins
 					_sync_coins()
 					_save()
 					if _modal_is("shop"):
 						modal.update_spec(spec_now.call())
 						modal.flash("+%d %s" % [ad_coins,Modals.coin_word(ad_coins)]))
-			"restore": _message("Покупки появятся в следующей версии" if not store.is_available() else "Покупки восстановлены")
+			"restore": _restore_purchases()
 			"close": _close_modal()
 	,scope)
 
 ## Buys a store product for real money; contents arrive only after the store
 ## confirms. `button` shows the loading state on the pressed control.
 func _buy(product_id:String,button:String) -> void:
-	if not store.is_available():
-		_message("Покупки появятся в следующей версии")
+	if ads.watching or store_presenting or store.buying: return
+	if not store.is_available(product_id):
+		_message("Магазин недоступен")
 		return
 	var product: Dictionary = store.product(product_id)
 	if product.is_empty() or product_id in economy.state.purchases: return
 	var shown := modal
 	if shown: shown.set_busy(button,true)
-	var paid: bool = await store.purchase(product_id)
+	_store_presentation(true)
+	var result:Dictionary = await store.purchase(product_id)
+	_store_presentation(false)
 	if is_instance_valid(shown): shown.set_busy(button,false)
-	if not paid:
-		_message("Покупка не завершена — деньги не списаны")
+	match str(result.get("status","failed")):
+		"delivered":
+			if is_instance_valid(shown) and modal==shown: shown.update_spec(Modals.received(product.contents,coins))
+		"cancelled": _message("Покупка отменена")
+		"pending": _message("Покупка ожидает подтверждения")
+		"busy": _message("Покупка обрабатывается")
+		"unavailable": _message("Магазин недоступен")
+		_:
+			if result.get("error","")=="delivery_failed":
+				_message("Не удалось сохранить покупку. Восстановление будет повторено при следующем запуске.")
+			else: _message("Не удалось завершить покупку. Проверьте покупки в магазине и попробуйте снова.")
+
+func _store_presentation(active:bool) -> void:
+	if store_presenting==active: return
+	store_presenting = active
+	_ad_presentation(active)
+
+## The receipt has passed native signature verification. No receipt is consumed
+## until the corresponding grant and deduplication record are committed together.
+func _deliver_store_purchase(receipt:Dictionary) -> void:
+	var product_id:String = str(receipt.get("id",""))
+	var token:String = str(receipt.get("token",""))
+	var order_id:String = str(receipt.get("order_id",""))
+	var product:Dictionary = store.product(product_id)
+	if product.is_empty() or token.is_empty() or order_id.is_empty():
+		store.confirm_delivery(receipt,false)
 		return
-	for key: String in product.contents:
-		if key=="coins": coins += int(product.contents.coins)
-		else: economy.state.inventory[key] = int(economy.state.inventory.get(key,0))+int(product.contents[key])
-	if product.get("once",false): economy.state.purchases.append(product_id)
+	var expected_type := 1 if product.get("once",false) else 0
+	if int(receipt.get("type",-1))!=expected_type:
+		store.confirm_delivery(receipt,false)
+		return
+	var receipt_key:String = ("huawei:"+token).sha256_text()
+	var order_key:String = ("huawei:order:"+order_id).sha256_text()
+	var ledger:Dictionary = economy.state.iap_transactions
+	var orders:Dictionary = economy.state.iap_orders
+	if ledger.has(receipt_key) or orders.has(order_key):
+		var known_id:String = str(ledger.get(receipt_key,orders.get(order_key,"")))
+		store.confirm_delivery(receipt,known_id==product_id)
+		return
+	var before_coins:int = coins
+	var before_state:Dictionary = economy.state.duplicate(true)
+	if not (product.get("once",false) and product_id in economy.state.purchases):
+		for key:String in product.contents:
+			if key=="coins": coins += int(product.contents.coins)
+			else: economy.state.inventory[key] = int(economy.state.inventory.get(key,0))+int(product.contents[key])
+		if product.get("once",false): economy.state.purchases.append(product_id)
+	ledger[receipt_key] = product_id
+	orders[order_key] = product_id
+	var committed:bool = _save() if save_enabled else bool(store.simulate)
+	if not committed:
+		coins = before_coins
+		economy.state = before_state
+		store.confirm_delivery(receipt,false)
+		return
 	_sync_coins()
-	_save()
-	if modal: modal.update_spec(Modals.received(product.contents,coins))
+	store.confirm_delivery(receipt,true)
+	_refresh_store_buttons()
+
+func _restore_purchases() -> void:
+	if ads.watching or store_presenting or store.buying: return
+	if not store.can_restore():
+		_message("Магазин недоступен")
+		return
+	var shown := modal
+	if shown: shown.set_busy("restore",true)
+	_store_presentation(true)
+	var result:Dictionary = await store.restore()
+	_store_presentation(false)
+	if is_instance_valid(shown): shown.set_busy("restore",false)
+	if _modal_is("shop"): _open_shop(modal_scope.duplicate())
+	match str(result.get("status","failed")):
+		"restored": _message("Покупки восстановлены")
+		"empty": _message("Нет покупок для восстановления")
+		"cancelled": _message("Покупка отменена")
+		_: _message("Не удалось восстановить покупки")
+
+func _refresh_store_buttons() -> void:
+	if not is_instance_valid(modal) or modal.is_closing(): return
+	for block:Dictionary in modal.spec.get("blocks",[]):
+		if block.get("type","")=="packs":
+			for tile:Dictionary in block.tiles:
+				if str(tile.get("id","")).begins_with("buy:"):
+					var id:String = str(tile.id).trim_prefix("buy:")
+					tile.enabled = store.is_available(id) and id not in economy.state.purchases
+					tile.price = store.price(id)
+		var product_id:String = str(block.get("product_id",""))
+		if str(block.get("id","")).begins_with("buy:"): product_id = str(block.id).trim_prefix("buy:")
+		if not product_id.is_empty():
+			block.enabled = store.is_available(product_id) and product_id not in economy.state.purchases
+			if block.get("price") is Dictionary: block.price.money = store.price(product_id)
+			else: block.price = store.price(product_id)
+			if block.has("old_price"):
+				var old:String = store.old_price(product_id)
+				if old.is_empty(): block.erase("old_price")
+				else: block.old_price = old
+		if block.get("id","")=="restore": block.enabled = store.can_restore()
+	modal.refresh_controls()
+
+func _open_languages() -> void:
+	_open_modal(MenuWindows.languages(),func(id:String):
+		if id.begins_with("language:"):
+			preload("res://scripts/localization.gd").set_locale(id.trim_prefix("language:"))
+			_save()
+			modal.update_spec(MenuWindows.languages())
+		elif id=="close": _close_modal(),["road_menu"])
+
+func _open_support() -> void:
+	_open_modal(MenuWindows.support(build_info.version,player_id),func(id:String):
+		if id=="close":
+			_close_modal()
+			return
+		if id=="copy_diagnostics":
+			DisplayServer.clipboard_set(preload("res://scripts/ui/service_diagnostics.gd").report(build_info,ads,store))
+			modal.flash("Диагностика скопирована")
+			return
+		var message:String = modal.message_input.text.strip_edges()
+		if message.is_empty():
+			modal.flash("Напишите сообщение")
+			return
+		var body:String = message+"\n\nCargo Yard\nBuild: "+str(build_info.version)+"\nPlayer ID: "+player_id
+		if id=="copy":
+			DisplayServer.clipboard_set(body)
+			modal.flash("Сообщение скопировано")
+		elif id=="send":
+			var uri:String = "mailto:"+str(build_info.support_email)+"?subject="+"Cargo Yard — Support".uri_encode()+"&body="+body.uri_encode()
+			OS.shell_open(uri)
+			modal.flash("Завершите отправку в почтовом приложении"),["road_menu"])
+

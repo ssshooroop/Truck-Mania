@@ -17,8 +17,23 @@ dist/
 *.ipa
 *.pck
 export_credentials.cfg
+agconnect-services.json
+upload-credentials.json
+.env
+.env.*
 *.keystore
 *.jks
 *.p12
 *.mobileprovision
 .DS_Store
+
+# Generated Gradle Android project
+/android/
+
+/plugins/*/.gradle/
+/plugins/*/build/
+
+# Local Python caches and generated diagnostics/captures
+__pycache__/
+*.py[cod]
+/artifacts/

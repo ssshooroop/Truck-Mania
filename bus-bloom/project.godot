@@ -5,9 +5,13 @@ config_version=5
 [application]
 config/name="Cargo Yard"
 config/description="Грузовой двор: cartoon construction trucks, a material conveyor, and directional parking puzzles for iOS and Android."
-run/main_scene="res://main.tscn"
+run/main_scene="res://scenes/loading_screen.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://assets/artwork/store icon/icon512.png"
+boot_splash/image="res://assets/artwork/load screen/Load_screen.png"
+boot_splash/bg_color=Color(0.098, 0.224, 0.310, 1)
+boot_splash/fullsize=true
+boot_splash/use_filter=true
 
 [display]
 window/size/viewport_width=540
@@ -37,3 +41,7 @@ environment/defaults/default_clear_color=Color(0.698039, 0.690196, 0.713725, 1)
 [gui]
 
 theme/custom="res://assets/fonts/game_theme.tres"
+
+
+[editor_plugins]
+enabled=PackedStringArray("res://addons/unity_ads/plugin.cfg", "res://addons/huawei_iap/plugin.cfg")

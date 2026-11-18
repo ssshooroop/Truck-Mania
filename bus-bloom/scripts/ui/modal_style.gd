@@ -1,4 +1,6 @@
 extends RefCounted
+const LocalText = preload("res://scripts/ui/localized_text.gd")
+const Loc = preload("res://scripts/localization.gd")
 ## Shared look of every modal window: "a construction-site sign board".
 ## Rules (keep them when adding new windows):
 ## - Card: warm paper body, navy frame with a pressed "lip", navy header plate,
@@ -78,34 +80,31 @@ static func round_rect(c:CanvasItem,rect:Rect2,fill:Color,radius:int,border:Colo
 	c.draw_style_box(_styles[key],rect)
 
 static func text(c:CanvasItem,value:String,center:Vector2,size:int,color:Color,font:Font=BOLD,max_width:float=0.0) -> void:
-	var actual := size
-	if max_width>0.0:
-		while actual>12 and font.get_string_size(value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual).x>max_width: actual -= 1
-	var w := font.get_string_size(value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual).x
-	c.draw_string(font,center-Vector2(w*0.5,0),value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual,color)
+	LocalText.draw(c,value,center,font,size,color,HORIZONTAL_ALIGNMENT_CENTER,max_width)
 
 static func text_left(c:CanvasItem,value:String,pos:Vector2,size:int,color:Color,font:Font=BOLD,max_width:float=0.0) -> void:
-	var actual := size
-	if max_width>0.0:
-		while actual>12 and font.get_string_size(value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual).x>max_width: actual -= 1
-	c.draw_string(font,pos,value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual,color)
+	LocalText.draw(c,value,pos,font,size,color,HORIZONTAL_ALIGNMENT_LEFT,max_width)
 
 ## Outlined "juicy" text, same recipe as the in-game titles.
 static func juicy(c:CanvasItem,value:String,center:Vector2,size:int,tint:Color,max_width:float=440.0,outline:Color=INK) -> void:
+	value = Loc.text(value)
+	var face:Font = LocalText.localized_font(BLACK)
 	var actual := size
-	while actual>14 and BLACK.get_string_size(value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual).x>max_width: actual -= 1
-	var w := BLACK.get_string_size(value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual).x
+	while actual>14 and face.get_string_size(value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual).x>max_width: actual -= 1
+	var w := face.get_string_size(value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual).x
 	var pos := center-Vector2(w*0.5,0)
 	var thick := maxi(4,roundi(actual*0.2))
-	c.draw_string_outline(BLACK,pos+Vector2(0,4),value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual,thick+2,INK_DEEP)
-	c.draw_string_outline(BLACK,pos,value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual,thick,outline)
-	c.draw_string(BLACK,pos,value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual,tint)
+	c.draw_string_outline(face,pos+Vector2(0,4),value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual,thick+2,INK_DEEP)
+	c.draw_string_outline(face,pos,value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual,thick,outline)
+	c.draw_string(face,pos,value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual,tint)
 
 static func paragraph_height(value:String,width:float,size:int) -> float:
-	return BOLD.get_multiline_string_size(value,HORIZONTAL_ALIGNMENT_CENTER,width,size).y
+	value = Loc.text(value)
+	return LocalText.paragraph(value,BOLD,size,width).get_size().y
 
 static func paragraph(c:CanvasItem,value:String,top_left:Vector2,width:float,size:int,color:Color,align:=HORIZONTAL_ALIGNMENT_CENTER) -> void:
-	c.draw_multiline_string(BOLD,top_left+Vector2(0,BOLD.get_ascent(size)),value,align,width,size,-1,color)
+	value = Loc.text(value)
+	LocalText.draw_paragraph(c,value,top_left,BOLD,size,color,width,align)
 
 ## Continuous opaque hazard band; geometry fits the exact window width.
 static func tape(c:CanvasItem,rect:Rect2) -> void:
@@ -152,19 +151,14 @@ static func button(c:CanvasItem,rect:Rect2,kind:String,pressed:float=0.0) -> Rec
 
 static func button_label(c:CanvasItem,value:String,center:Vector2,size:int,kind:String,max_width:float) -> void:
 	var p: Dictionary = BUTTONS.get(kind,BUTTONS.secondary)
-	var actual := size
-	while actual>14 and HEAVY.get_string_size(value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual).x>max_width: actual -= 1
-	var w := HEAVY.get_string_size(value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual).x
-	var pos := center+Vector2(-w*0.5,actual*0.36)
-	if p.outline.a>0: c.draw_string_outline(HEAVY,pos,value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual,6,p.outline)
-	c.draw_string(HEAVY,pos,value,HORIZONTAL_ALIGNMENT_LEFT,-1,actual,p.text)
+	LocalText.draw(c,value,center+Vector2(0,size*0.36),HEAVY,size,p.text,HORIZONTAL_ALIGNMENT_CENTER,max_width,6 if p.outline.a>0 else 0,p.outline)
 
 ## Price tag inside a button: {"coins":100} | {"free":true} | {"money":"199 ₽","old":"499 ₽"}.
 static func price_width(price:Dictionary) -> float:
 	if price.is_empty(): return 0.0
 	if price.has("coins"): return 52.0+HEAVY.get_string_size(str(price.coins),HORIZONTAL_ALIGNMENT_LEFT,-1,26).x+14.0
 	if price.has("money"): return 28.0+HEAVY.get_string_size(price.money,HORIZONTAL_ALIGNMENT_LEFT,-1,26).x
-	return 28.0+HEAVY.get_string_size("Бесплатно",HORIZONTAL_ALIGNMENT_LEFT,-1,20).x
+	return 28.0+LocalText.width("Бесплатно",HEAVY,20)
 
 static func price_tag(c:CanvasItem,face:Rect2,price:Dictionary,kind:String) -> Rect2:
 	var p: Dictionary = BUTTONS.get(kind,BUTTONS.secondary)

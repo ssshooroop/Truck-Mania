@@ -6,17 +6,30 @@
  const loaded = new Map();
  const total = Object.values(files).reduce((n,f)=>n+f.size,0);
  let timer;
- const label = document.createElement('div');
- label.style.cssText='position:fixed;left:5%;right:5%;bottom:12%;text-align:center;color:white;background:#172d45;padding:16px;border-radius:12px;font:16px system-ui;z-index:10';
- label.textContent='Подготовка загрузки…';
- document.body.appendChild(label);
+ const panel = document.createElement('div');
+ panel.id='cargo-loading';
+ panel.innerHTML='<div class="cargo-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Loading"><div class="cargo-fill"></div></div><div class="cargo-label" role="status"></div>';
+ const label=panel.querySelector('.cargo-label'), fill=panel.querySelector('.cargo-fill'), track=panel.querySelector('.cargo-track');
+ const translations = {}; // Injected from reviewed localization during packaging.
+ let savedLanguage='';
+ try { savedLanguage=localStorage.getItem('cargo-language')||''; } catch (_) {}
+ const language=(new URLSearchParams(location.search).get('lang')||savedLanguage||navigator.language||'en').toLowerCase().replace('_','-').split('-')[0];
+ const strings=translations[language]||translations.en||{'loading.start':'Starting…','loading.error':'Unable to load. Check your connection and try again.','loading.retry':'Retry'};
+ panel.lang=translations[language]?language:'en';
+ panel.dir=language==='ar'?'rtl':'ltr';
+ let failed=false;
+ label.textContent='0%';
+ document.body.appendChild(panel);
  const progress = () => {
   const bytes = [...loaded.values()].reduce((a,b)=>a+b,0);
-  label.textContent=bytes>=total ? 'Файлы загружены. Запускаем игру…' : `Загрузка игры: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} МБ`;
+  if(failed)return;
+  const percent=total>0?Math.min(100,Math.floor(bytes/total*100)):0;
+  fill.style.width=percent+'%';track.setAttribute('aria-valuenow',String(percent));
+  label.textContent=bytes>=total ? strings['loading.start'] : percent+'%';
  };
  window.CargoBoot = {
-  done(){clearTimeout(timer);label.remove();},
-  fail(error){clearTimeout(timer);label.textContent='Не удалось загрузить игру. '+String(error.message||error);const b=document.createElement('button');b.textContent='Повторить';b.onclick=()=>location.reload();label.appendChild(document.createElement('br'));label.appendChild(b);}
+  done(){clearTimeout(timer);panel.remove();},
+  fail(error){if(failed)return;failed=true;clearTimeout(timer);label.textContent=strings['loading.error'];console.error(error);const b=document.createElement('button');b.textContent=strings['loading.retry'];b.onclick=()=>location.reload();panel.appendChild(b);}
  };
  timer=setTimeout(()=>window.CargoBoot.fail('Запуск занимает слишком долго. Попробуйте перезагрузить страницу.'),180000);
  async function part(url,key,packed,init) {

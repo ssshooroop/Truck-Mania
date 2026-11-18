@@ -1,0 +1,936 @@
+msgid ""
+msgstr ""
+"Language: ja\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgctxt "config.achievements.achievements.0.dispatcher_1.83f7eca71358"
+msgid "Диспетчер стройки I"
+msgstr "配車係 I"
+
+msgctxt "config.achievements.achievements.1.dispatcher_2.63332aabd948"
+msgid "Диспетчер стройки II"
+msgstr "配車係 II"
+
+msgctxt "config.achievements.achievements.2.dispatcher_3.a56fb6a376d3"
+msgid "Диспетчер стройки III"
+msgstr "配車係 III"
+
+msgctxt "config.achievements.achievements.3.dispatcher_4.7d95d2998eaf"
+msgid "Диспетчер стройки IV"
+msgstr "配車係 IV"
+
+msgctxt "config.achievements.achievements.4.cargo_1000.a468efbda495"
+msgid "Тысяча грузов"
+msgstr "荷物1000個"
+
+msgctxt "config.achievements.achievements.5.flawless_loading.c4c7e7a91bb3"
+msgid "Безупречная погрузка"
+msgstr "完璧な積み込み"
+
+msgctxt "config.achievements.achievements.6.no_mistakes_10.14d4390bae4e"
+msgid "Без единой ошибки"
+msgstr "ノーミス"
+
+msgctxt "config.achievements.achievements.7.on_the_edge.2131158405e9"
+msgid "На волоске"
+msgstr "ギリギリ"
+
+msgctxt "config.achievements.achievements.8.comeback.28b4f0f21de6"
+msgid "Не сдаваться"
+msgstr "あきらめない"
+
+msgctxt "config.achievements.achievements.9.dream_fleet.ada7efaa9d67"
+msgid "Автопарк мечты"
+msgstr "夢の車両隊"
+
+msgctxt "config.daily_rewards.items.coins.label.a54143865c0d"
+msgid "Монеты"
+msgstr "コイン"
+
+msgctxt "config.daily_rewards.items.crane.label.8224141e7344"
+msgid "Кран"
+msgstr "クレーン"
+
+msgctxt "config.daily_rewards.items.extra_slot.label.4649b302d2a0"
+msgid "Место"
+msgstr "駐車枠"
+
+msgctxt "config.daily_rewards.items.shuffle.label.b03d6d33ac21"
+msgid "Перемешивание"
+msgstr "シャッフル"
+
+msgctxt "config.daily_rewards.items.swap.label.9378e03b6132"
+msgid "Обмен"
+msgstr "入れ替え"
+
+msgctxt "config.daily_rewards.items.undo.label.3ec2342a5527"
+msgid "Отмена хода"
+msgstr "元に戻す"
+
+msgctxt "config.seasonal_events.events.0.halloween_2026.a9f8a3eb45b4"
+msgid "Тыквы на складе, летучие мыши\nнад краном — набор только до 2 ноября!"
+msgstr "倉庫にカボチャ、クレーンにコウモリ\nパックは11月2日まで！"
+
+msgctxt "config.seasonal_events.events.0.halloween_2026.3e3da8ee1d96"
+msgid "Забрать набор"
+msgstr "受け取る"
+
+msgctxt "config.seasonal_events.events.0.halloween_2026.58bd03ae04fd"
+msgid "Ночная смена"
+msgstr "夜勤"
+
+msgctxt "config.seasonal_events.events.1.newyear_2026.3e3da8ee1d96"
+msgid "Забрать набор"
+msgstr "受け取る"
+
+msgctxt "config.seasonal_events.events.1.newyear_2026.038586991416"
+msgid "Новогодний аврал"
+msgstr "年末年始ラッシュ"
+
+msgctxt "config.seasonal_events.events.1.newyear_2026.731e4b25b35d"
+msgid "Праздничные подарки уже на складе —\nуспей до конца каникул!"
+msgstr "ギフトが倉庫に到着 —\n休み中に受け取ろう！"
+
+msgctxt "config.store_catalog.products.2.coins_2600.e56b418b8103"
+msgid "Хит"
+msgstr "人気"
+
+msgctxt "config.store_catalog.products.4.coins_12000.18ec97a01aaa"
+msgid "Выгодно"
+msgstr "お得"
+
+msgctxt "config.store_catalog.products.5.starter.90436a08231e"
+msgid "Набор новичка"
+msgstr "初心者パック"
+
+msgctxt "config.store_catalog.products.5.starter.7170092c5229"
+msgid "Один раз за всю игру"
+msgstr "1回限り"
+
+msgctxt "config.store_catalog.products.6.season_halloween_2026.a03446388631"
+msgid "Набор ночной смены"
+msgstr "夜勤パック"
+
+msgctxt "config.store_catalog.products.7.season_newyear_2026.694f571f43c4"
+msgid "Новогодний набор"
+msgstr "お正月パック"
+
+msgctxt "scripts.cargo_art.9143eb5dcc80"
+msgid "Доски"
+msgstr "板材"
+
+msgctxt "scripts.cargo_art.bd86ace178a0"
+msgid "Кабель"
+msgstr "ケーブル"
+
+msgctxt "scripts.cargo_art.34896f67adfa"
+msgid "Кирпичи"
+msgstr "レンガ"
+
+msgctxt "scripts.cargo_art.cb488b3124a1"
+msgid "Профнастил"
+msgstr "鋼板"
+
+msgctxt "scripts.cargo_art.291fa3db8353"
+msgid "Трубы"
+msgstr "パイプ"
+
+msgctxt "scripts.cargo_art.0ef0f22c90df"
+msgid "Цемент"
+msgstr "セメント"
+
+msgctxt "scripts.cargo_art.34a493696529"
+msgid "Бортовой"
+msgstr "平ボディ"
+
+msgctxt "scripts.cargo_art.144095769e68"
+msgid "Пикап"
+msgstr "ピックアップ"
+
+msgctxt "scripts.cargo_art.315789424c5f"
+msgid "Самосвал"
+msgstr "ダンプ"
+
+msgctxt "scripts.daily_bonus.eb9739970cd2"
+msgid "День %d"
+msgstr "%d日目"
+
+msgctxt "scripts.daily_bonus.6662621fbab6"
+msgid "Пропущен"
+msgstr "受取期限切れ"
+
+msgctxt "scripts.daily_bonus.e276492e344d"
+msgid "Забрать"
+msgstr "受け取る"
+
+msgctxt "scripts.daily_bonus.a42aee58d60a"
+msgid "Продолжить"
+msgstr "続ける"
+
+msgctxt "scripts.daily_bonus.f4cdc2548c52"
+msgid "Заходите каждый день"
+msgstr "毎日ログインして"
+
+msgctxt "scripts.daily_bonus.1f46e7410c9f"
+msgid "и получайте призы!"
+msgstr "報酬をゲット！"
+
+msgctxt "scripts.daily_bonus.a1af0e391ab9"
+msgid "ЕЖЕДНЕВНЫЙ БОНУС"
+msgstr "デイリーボーナス"
+
+msgctxt "scripts.game_model.ef9052e0abf8"
+msgid "Первая поставка"
+msgstr "初めての配送"
+
+msgctxt "scripts.game_model.d6bcf97d5770"
+msgid "Склад %d"
+msgstr "倉庫%d"
+
+msgctxt "scripts.game_model.b4f4294c73e0"
+msgid "Стройка оживает"
+msgstr "現場が動き出す"
+
+msgctxt "scripts.game_model.ee0b343982c8"
+msgid "Плотная парковка"
+msgstr "ぎっしり駐車場"
+
+msgctxt "scripts.game_model.775d6e7f5168"
+msgid "Большая разгрузка"
+msgstr "大量荷下ろし"
+
+msgctxt "scripts.game_model.e148bd322eb6"
+msgid "Рабочий квартал"
+msgstr "作業地区"
+
+msgctxt "scripts.game_model.c1ff8ad27d51"
+msgid "Строительный час пик"
+msgstr "工事ラッシュ"
+
+msgctxt "scripts.main.b695d5d8d1c5"
+msgid "Сначала открой соседнее место"
+msgstr "先に隣の枠を開放しよう"
+
+msgctxt "scripts.main.91a064acd00e"
+msgid "Нужно %d монет"
+msgstr "必要：%d {{coin}}"
+
+msgctxt "scripts.main.22c3ddf18611"
+msgid "Лимит помощи в этой попытке исчерпан"
+msgstr "アシストの上限に達しました"
+
+msgctxt "scripts.main.1375e36fe936"
+msgid "+%d"
+msgstr "+%d"
+
+msgctxt "scripts.main.7312d70f7a8b"
+msgid "УРОВЕНЬ %d"
+msgstr "レベル%d"
+
+msgctxt "scripts.main.1d4f240c7386"
+msgid "НАЖМИ НА КОНУС"
+msgstr "コーンをタップ"
+
+msgctxt "scripts.main.1f72393019ca"
+msgid "ОТКРОЙ МЕСТО!"
+msgstr "枠を開放！"
+
+msgctxt "scripts.main.db50163456aa"
+msgid "БЕСПЛАТНО!"
+msgstr "無料！"
+
+msgctxt "scripts.main.e993bacd9ca4"
+msgid "До конца этой попытки"
+msgstr "今回の挑戦中のみ"
+
+msgctxt "scripts.main.57b425f0b144"
+msgid "БОЛЬШЕ МЕСТА!"
+msgstr "駐車枠を追加！"
+
+msgctxt "scripts.main.6087ccb7cb2d"
+msgid "Открой место до конца попытки"
+msgstr "今回の挑戦中、枠を開放"
+
+msgctxt "scripts.main.359ec6222b67"
+msgid "Открыть за %d монет"
+msgstr "%d {{coin}} で開放"
+
+msgctxt "scripts.main.308594c1fc02"
+msgid "Цена уточняется"
+msgstr "価格を確認中…"
+
+msgctxt "scripts.main.29d1e351c540"
+msgid "Реклама пока недоступна"
+msgstr "広告は利用できません"
+
+msgctxt "scripts.main.c4c39ac6251c"
+msgid "Помощь на стройке"
+msgstr "アシスト"
+
+msgctxt "scripts.main.971455b7f908"
+msgid "Замена машины"
+msgstr "トラック入替"
+
+msgctxt "scripts.main.8224141e7344"
+msgid "Кран"
+msgstr "クレーン"
+
+msgctxt "scripts.main.baf34c9a08fe"
+msgid "Перемешать грузы"
+msgstr "荷物シャッフル"
+
+msgctxt "scripts.main.caf21fe0d262"
+msgid "%s · %d монет"
+msgstr "%s · %d {{coin}}"
+
+msgctxt "scripts.main.ad2d15963945"
+msgid "Помощь действует в этой попытке"
+msgstr "今回の挑戦のみ有効"
+
+msgctxt "scripts.main.5ddb4a930a33"
+msgid "Баланс: %d"
+msgstr "所持: %d"
+
+msgctxt "scripts.main.199de93a9257"
+msgid "Перерыв на стройке"
+msgstr "休憩中"
+
+msgctxt "scripts.main.8314a586f880"
+msgid "Груз и машины подождут"
+msgstr "荷物は逃げないよ！"
+
+msgctxt "scripts.main.21dffe50ffc5"
+msgid "Звуки погрузки"
+msgstr "積み込み音"
+
+msgctxt "scripts.main.bf0e90816be7"
+msgid "Меньше анимации"
+msgstr "動きを減らす"
+
+msgctxt "scripts.main.0541c131cbc0"
+msgid "Продолжить работу"
+msgstr "作業に戻る"
+
+msgctxt "scripts.main.0c7925af0933"
+msgid "Начать уровень заново"
+msgstr "やり直す"
+
+msgctxt "scripts.main.8e8dad84ce78"
+msgid "Выбрать склад"
+msgstr "倉庫を選ぶ"
+
+msgctxt "scripts.main.fb16f2253476"
+msgid "Твои склады"
+msgstr "あなたの倉庫"
+
+msgctxt "scripts.main.589bafc9b8fb"
+msgid "Больше машин — интереснее задача"
+msgstr "トラックが多いほど難しい"
+
+msgctxt "scripts.main.b2dd460cc970"
+msgid "%02d"
+msgstr "%02d"
+
+msgctxt "scripts.main.3a5628fdf323"
+msgid "ЗАКРЫТ"
+msgstr "ロック中"
+
+msgctxt "scripts.main.39b131afe827"
+msgid "НАЧАТЬ"
+msgstr "スタート"
+
+msgctxt "scripts.main.e94c8b10fb66"
+msgid "Новый склад открывается после полной отгрузки"
+msgstr "全て出荷すると次の倉庫が開放"
+
+msgctxt "scripts.main.f9135b8def31"
+msgid "Нет хода для отмены"
+msgstr "戻せる手がありません"
+
+msgctxt "scripts.main.01e589e7cd6d"
+msgid "Ролик пока не готов — попробуй позже"
+msgstr "動画の準備中 — 後でもう一度"
+
+msgctxt "scripts.main.195f8283a5ee"
+msgid "Ролик не досмотрен — награды нет"
+msgstr "最後まで見ないと報酬なし"
+
+msgctxt "scripts.main.85790e1f3a24"
+msgid "+%d %s"
+msgstr "+%d %s"
+
+msgctxt "scripts.main.07989dddb60a"
+msgid "Покупки восстановлены"
+msgstr "購入を復元しました"
+
+msgctxt "scripts.main.0767e8068116"
+msgid "Покупки появятся в следующей версии"
+msgstr "購入は次のバージョンで"
+
+msgctxt "scripts.main.eb13f87aaacb"
+msgid "Покупка не завершена — деньги не списаны"
+msgstr "購入未完了 — 請求なし"
+
+msgctxt "scripts.main.91d91f393841"
+msgid "Посты заняты — отмени ход или дождись погрузки"
+msgstr "枠が満杯 — 手を戻すか積み込みを待とう"
+
+msgctxt "scripts.main.af6341234057"
+msgid "Проезд занят — попробуй после проезда соседней машины"
+msgstr "通路がふさがっています — 隣のトラックを待とう"
+
+msgctxt "scripts.main.9f7d1e182ba7"
+msgid "Машины и конвейер вернулись на ход назад"
+msgstr "トラックとベルトが1手前に戻った"
+
+msgctxt "scripts.main.d338a4ad3d38"
+msgid "Освободи машину у края или отмени последний ход"
+msgstr "端のトラックを動かすか1手戻そう"
+
+msgctxt "scripts.main.8e499a7944ea"
+msgid "Вернись на ход назад — здесь нет решения"
+msgstr "1手戻そう — ここに解決策はない"
+
+msgctxt "scripts.main.0e2764290fd4"
+msgid "Выделенная машина поможет разгрузить двор"
+msgstr "光っているトラックで場所を空けよう"
+
+msgctxt "scripts.slot_offer.99bf27c02d89"
+msgid "−100"
+msgstr "−100"
+
+msgctxt "scripts.ui.game_modal.1375e36fe936"
+msgid "+%d"
+msgstr "+%d"
+
+msgctxt "scripts.ui.game_modal.22a5d9112486"
+msgid "Загружаем…"
+msgstr "読み込み中…"
+
+msgctxt "scripts.ui.game_modal.4367e0063eba"
+msgid "Взять"
+msgstr "受け取る"
+
+msgctxt "scripts.ui.game_modal.912fad7363d8"
+msgid "%s  %s"
+msgstr "%s  %s"
+
+msgctxt "scripts.ui.game_modal.0246a2516cda"
+msgid "Осталось"
+msgstr "残り"
+
+msgctxt "scripts.ui.game_modal.e656bc246d80"
+msgid "%d д %d ч"
+msgstr "%d日%d時間"
+
+msgctxt "scripts.ui.game_modal.77cbdae53b1d"
+msgid "%d ч %02d мин"
+msgstr "%d時間%02d分"
+
+msgctxt "scripts.ui.game_modal.22aa5926e209"
+msgid "%d:%02d"
+msgstr "%d:%02d"
+
+msgctxt "scripts.ui.modal_catalog.04a597bd50fb"
+msgid "Материалы на ленте\nвстанут в новом порядке."
+msgstr "ベルト上の資材が\n並び替わります。"
+
+msgctxt "scripts.ui.modal_catalog.8afd9b9a4ecf"
+msgid "Перемешать"
+msgstr "シャッフル"
+
+msgctxt "scripts.ui.modal_catalog.9b8183747132"
+msgid "Перемешать груз?"
+msgstr "シャッフルする？"
+
+msgctxt "scripts.ui.modal_catalog.7c47f7292ba4"
+msgid "Отменить"
+msgstr "戻す"
+
+msgctxt "scripts.ui.modal_catalog.c350b098b327"
+msgid "Отменить ход?"
+msgstr "1手戻す？"
+
+msgctxt "scripts.ui.modal_catalog.215d188d6b1a"
+msgid "Последняя машина\nвернётся на парковку."
+msgstr "最後のトラックが\n駐車場に戻ります。"
+
+msgctxt "scripts.ui.modal_catalog.36f798a63c92"
+msgid "Помощь"
+msgstr "ヘルプ"
+
+msgctxt "scripts.ui.modal_catalog.86991a952a8c"
+msgid "Бесплатно с рекламой"
+msgstr "広告で無料"
+
+msgctxt "scripts.ui.modal_catalog.d4fe5fffa3d6"
+msgid "Не сейчас"
+msgstr "今はしない"
+
+msgctxt "scripts.ui.modal_catalog.90cba449230b"
+msgid "Нужно ещё %d %s."
+msgstr "あと%d%s必要です。"
+
+msgctxt "scripts.ui.modal_catalog.15e07e80df50"
+msgid "+%d за рекламу"
+msgstr "広告で+%d"
+
+msgctxt "scripts.ui.modal_catalog.2cacba01ed01"
+msgid "%d монет"
+msgstr "%d {{coin}}"
+
+msgctxt "scripts.ui.modal_catalog.0b350c3a966b"
+msgid "Все наборы в магазине"
+msgstr "ショップの全パック"
+
+msgctxt "scripts.ui.modal_catalog.0e71379e30e5"
+msgid "Не хватает монет"
+msgstr "コインが足りません"
+
+msgctxt "scripts.ui.modal_catalog.83c948293f13"
+msgid "Монеты уже в копилке!"
+msgstr "コインを追加！"
+
+msgctxt "scripts.ui.modal_catalog.c459a8469cdb"
+msgid "Отлично!"
+msgstr "すばらしい！"
+
+msgctxt "scripts.ui.modal_catalog.ae5d2abc4e93"
+msgid "Награда получена!"
+msgstr "報酬を獲得！"
+
+msgctxt "scripts.ui.modal_catalog.d674c9a43e5f"
+msgid "Загружаем ролик…"
+msgstr "動画を読み込み中…"
+
+msgctxt "scripts.ui.modal_catalog.8fbe9b75cbdf"
+msgid "Отмена"
+msgstr "キャンセル"
+
+msgctxt "scripts.ui.modal_catalog.81be36fb6d76"
+msgid "Ролик не загрузился.\nПроверь интернет и попробуй ещё раз."
+msgstr "動画を読み込めません。\n接続を確認して再試行しよう。"
+
+msgctxt "scripts.ui.modal_catalog.13222328c826"
+msgid "Попробовать ещё"
+msgstr "再試行"
+
+msgctxt "scripts.ui.modal_catalog.a7a4033657e8"
+msgid "Закрыть"
+msgstr "閉じる"
+
+msgctxt "scripts.ui.modal_catalog.c510079471ac"
+msgid "Посмотри короткий ролик\nи получи %d %s."
+msgstr "短い動画を見て\n%d%sをゲット！"
+
+msgctxt "scripts.ui.modal_catalog.7ac84107c129"
+msgid "Смотреть"
+msgstr "見る"
+
+msgctxt "scripts.ui.modal_catalog.f3c8f3a92afd"
+msgid "Бесплатные монеты"
+msgstr "無料コイン"
+
+msgctxt "scripts.ui.modal_catalog.4ac69ceabdf6"
+msgid "Удвоить награду"
+msgstr "報酬2倍"
+
+msgctxt "scripts.ui.modal_catalog.fd5ddecfacae"
+msgid "Награда за этот уровень\nуже получена."
+msgstr "このレベルの報酬は\n受取済みです。"
+
+msgctxt "scripts.ui.modal_catalog.7b3864be0f54"
+msgid "Карта уровней"
+msgstr "レベルマップ"
+
+msgctxt "scripts.ui.modal_catalog.6eaef62bc617"
+msgid "Следующий уровень"
+msgstr "次のレベル"
+
+msgctxt "scripts.ui.modal_catalog.800380963da6"
+msgid "Сыграть ещё раз"
+msgstr "もう一度"
+
+msgctxt "scripts.ui.modal_catalog.6e06b221d0f8"
+msgid "Груз отправлен!"
+msgstr "出荷完了！"
+
+msgctxt "scripts.ui.modal_catalog.44ce35728237"
+msgid "Достижения"
+msgstr "実績"
+
+msgctxt "scripts.ui.modal_catalog.a7bdff844b22"
+msgid "Серия"
+msgstr "連続"
+
+msgctxt "scripts.ui.modal_catalog.e1368cabf157"
+msgid "Сундук"
+msgstr "宝箱"
+
+msgctxt "scripts.ui.modal_catalog.7f67af3d6cd9"
+msgid "Уровень"
+msgstr "レベル"
+
+msgctxt "scripts.ui.modal_catalog.d2904dded9ed"
+msgid "До конца"
+msgstr "終了まで"
+
+msgctxt "scripts.ui.modal_catalog.3e3da8ee1d96"
+msgid "Забрать набор"
+msgstr "受け取る"
+
+msgctxt "scripts.ui.modal_catalog.7996f711496a"
+msgid "Позже"
+msgstr "後で"
+
+msgctxt "scripts.ui.modal_catalog.04c98320ca2b"
+msgid "Обычная цена %s"
+msgstr "通常価格 %s"
+
+msgctxt "scripts.ui.modal_catalog.2f46e9af5b29"
+msgid "Сезонная акция"
+msgstr "期間限定セール"
+
+msgctxt "scripts.ui.modal_catalog.14071c7fed0a"
+msgid "%s · ещё %s"
+msgstr "%s · 残り%s"
+
+msgctxt "scripts.ui.modal_catalog.a54143865c0d"
+msgid "Монеты"
+msgstr "コイン"
+
+msgctxt "scripts.ui.modal_catalog.ecaab828792b"
+msgid "Бесплатно"
+msgstr "無料"
+
+msgctxt "scripts.ui.modal_catalog.72c299e0d65e"
+msgid "Скоро"
+msgstr "近日公開"
+
+msgctxt "scripts.ui.modal_catalog.16af0289546a"
+msgid "Восстановить покупки"
+msgstr "購入を復元"
+
+msgctxt "scripts.ui.modal_catalog.23e3c7064746"
+msgid "Магазин"
+msgstr "ショップ"
+
+msgctxt "scripts.ui.modal_catalog.fb544c2664fb"
+msgid "Готово!"
+msgstr "完了！"
+
+msgctxt "scripts.ui.modal_catalog.900d17c85c44"
+msgid "Всё уже на складе. За работу!"
+msgstr "準備完了。さあ仕事だ！"
+
+msgctxt "scripts.ui.modal_catalog.91faf0b5f015"
+msgid "%d д"
+msgstr "%d日"
+
+msgctxt "scripts.ui.modal_catalog.fdb60b7161f2"
+msgid "%d ч"
+msgstr "%d時間"
+
+msgctxt "scripts.ui.modal_catalog.ec2f763fe6e3"
+msgid "монета"
+msgstr "{{coin}}"
+
+msgctxt "scripts.ui.modal_catalog.253383400304"
+msgid "монеты"
+msgstr "{{coin}}"
+
+msgctxt "scripts.ui.modal_catalog.5722f18f0748"
+msgid "монет"
+msgstr "{{coin}}"
+
+msgctxt "scripts.ui.modal_catalog.ea58bb0bc6d4"
+msgid "Дальше"
+msgstr "次へ"
+
+msgctxt "scripts.ui.modal_catalog.2179f8734c6f"
+msgid "Нажми на машину — она выедет по стрелке к складу."
+msgstr "トラックをタップ — 矢印の方へ倉庫に向かうよ。"
+
+msgctxt "scripts.ui.modal_catalog.e180633a436f"
+msgid "Привет, я Билли!"
+msgstr "やあ、ぼくはビリー！"
+
+msgctxt "scripts.ui.modal_catalog.1e15b34f2534"
+msgid "Машина берёт только свой материал. Следи за лентой сверху!"
+msgstr "トラックは自分の資材だけを運ぶ。上のベルトを見よう！"
+
+msgctxt "scripts.ui.modal_catalog.4d3181b2b05e"
+msgid "Цвет — это груз"
+msgstr "色＝荷物"
+
+msgctxt "scripts.ui.modal_catalog.e7735f16fb5f"
+msgid "Мест всего три"
+msgstr "枠は3つだけ！"
+
+msgctxt "scripts.ui.modal_catalog.d09cef487b9e"
+msgid "Начать работу"
+msgstr "作業開始"
+
+msgctxt "scripts.ui.modal_catalog.2052041e04c0"
+msgid "Не занимай места машинами, которым груз пока не нужен."
+msgstr "まだ荷物が来ないトラックで枠をふさがないで。"
+
+msgctxt "scripts.ui.modal_catalog.9e4d256050a3"
+msgid "Пропустить обучение"
+msgstr "チュートリアルをスキップ"
+
+msgctxt "scripts.ui.modal_catalog.48dccafab27d"
+msgid "Все места у склада заняты.\nОткрой ещё одно — и продолжай!"
+msgstr "倉庫の枠がすべて埋まった。\nもう1つ開放して続けよう！"
+
+msgctxt "scripts.ui.modal_catalog.c60d2d77d06d"
+msgid "Открыть место"
+msgstr "枠を開放"
+
+msgctxt "scripts.ui.modal_catalog.aa882b151605"
+msgid "Место за рекламу"
+msgstr "広告で枠を開放"
+
+msgctxt "scripts.ui.modal_catalog.6909d293a79e"
+msgid "Ролик готовится…"
+msgstr "動画を準備中…"
+
+msgctxt "scripts.ui.modal_catalog.cf19cb36e0bd"
+msgid "Кран переставит нужную машину прямо к складу."
+msgstr "クレーンが必要なトラックを倉庫の前へ運ぶ。"
+
+msgctxt "scripts.ui.modal_catalog.25b355813f82"
+msgid "Вызвать кран"
+msgstr "クレーンを呼ぶ"
+
+msgctxt "scripts.ui.modal_catalog.2398ba31360b"
+msgid "Помощь в этой попытке закончилась.\nОтмени ход или начни заново."
+msgstr "今回のアシストは使い切った。\n手を戻すか、やり直そう。"
+
+msgctxt "scripts.ui.modal_catalog.0abf7381f65f"
+msgid "Место и нужная машина"
+msgstr "枠と必要なトラック"
+
+msgctxt "scripts.ui.modal_catalog.4367e0063eba"
+msgid "Взять"
+msgstr "受け取る"
+
+msgctxt "scripts.ui.modal_catalog.8d589b0c3c10"
+msgid "Отменить ход"
+msgstr "1手戻す"
+
+msgctxt "scripts.ui.modal_catalog.19640d8d48a9"
+msgid "Бесплатно: ещё %d"
+msgstr "無料：残り%d"
+
+msgctxt "scripts.ui.modal_catalog.f40432b44242"
+msgid "Вернуть последнюю машину"
+msgstr "最後のトラックを戻す"
+
+msgctxt "scripts.ui.modal_catalog.086406bd4bfe"
+msgid "Перемешать груз"
+msgstr "荷物シャッフル"
+
+msgctxt "scripts.ui.modal_catalog.ab24f870e1e9"
+msgid "Новый порядок на ленте"
+msgstr "ベルトの順番を変更"
+
+msgctxt "scripts.ui.modal_catalog.0c7925af0933"
+msgid "Начать уровень заново"
+msgstr "やり直す"
+
+msgctxt "scripts.ui.modal_catalog.6d45f7c36311"
+msgid "Парковка заполнена!"
+msgstr "駐車場が満杯！"
+
+msgctxt "scripts.ui.modal_catalog.07cb65087477"
+msgid "Убрать"
+msgstr "撤去"
+
+msgctxt "scripts.ui.modal_catalog.0aece7c229eb"
+msgid "Убрать конус?"
+msgstr "コーンを撤去？"
+
+msgctxt "scripts.ui.modal_catalog.26bf5538561c"
+msgid "Четвёртое место у склада\nдо конца этой попытки."
+msgstr "今回の挑戦中、\n4つ目の枠を追加。"
+
+msgctxt "scripts.ui.modal_catalog.b4d4430a6344"
+msgid "Вызвать"
+msgstr "呼ぶ"
+
+msgctxt "scripts.ui.modal_catalog.2aef95648c48"
+msgid "Вызвать кран?"
+msgstr "クレーンを呼ぶ？"
+
+msgctxt "scripts.ui.modal_catalog.8cf3ff0db4db"
+msgid "Кран поставит нужную машину\nна свободное место."
+msgstr "クレーンがトラックを\n空いた枠に置きます。"
+
+msgctxt "scripts.ui.modal_style.ecaab828792b"
+msgid "Бесплатно"
+msgstr "無料"
+
+msgctxt "web.wasm-loader.4ed8a7ee34b3"
+msgid "Подготовка загрузки…"
+msgstr "ダウンロード準備中…"
+
+msgctxt "web.wasm-loader.3a8db977333d"
+msgid "Загрузка игры: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} МБ"
+msgstr "読み込み中: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} MB"
+
+msgctxt "web.wasm-loader.d2db517556a1"
+msgid "Файлы загружены. Запускаем игру…"
+msgstr "読み込み完了。ゲームを起動中…"
+
+msgctxt "web.wasm-loader.c9a6e2e1026a"
+msgid "Не удалось загрузить игру. "
+msgstr "ゲームを読み込めませんでした。"
+
+msgctxt "web.wasm-loader.5189135a6110"
+msgid "Повторить"
+msgstr "再試行"
+
+msgctxt "web.wasm-loader.9c14e5456dd5"
+msgid "Запуск занимает слишком долго. Попробуйте перезагрузить страницу."
+msgstr "起動に時間がかかっています。ページを再読み込みしてください。"
+
+msgctxt "web.wasm-loader.edb5706027b7"
+msgid "Ошибка загрузки (${response.status})."
+msgstr "読み込みエラー（${response.status}）。"
+
+msgctxt "web.wasm-loader.ae4e27ff7bd9"
+msgid "Проверьте вход в свой аккаунт ChatGPT в Safari."
+msgstr "SafariでChatGPTにログインしているか確認してください。"
+
+msgctxt "web.wasm-loader.a8161b487809"
+msgid "Обновите браузер для запуска игры."
+msgstr "ブラウザを更新してください。"
+
+msgctxt "web.wasm-loader.1c5e2746e50d"
+msgid "Файл загружен не полностью. Обновите страницу."
+msgstr "ファイルが不完全です。ページを更新してください。"
+
+msgctxt "menu.language.title"
+msgid "Язык"
+msgstr "言語"
+
+msgctxt "menu.support.title"
+msgid "Поддержка"
+msgstr "サポート"
+
+msgctxt "menu.support.intro"
+msgid "Нашли ошибку или есть идея?\nНапишите — читаем каждое письмо."
+msgstr "バグを見つけた？アイデアがある？\nメッセージをお送りください。すべて読んでいます。"
+
+msgctxt "menu.support.metadata"
+msgid "Версия: %s\nID: %s"
+msgstr "ビルド: %s\nID: %s"
+
+msgctxt "menu.support.compose"
+msgid "Открыть письмо"
+msgstr "メールを開く"
+
+msgctxt "menu.support.copy"
+msgid "Скопировать сообщение"
+msgstr "メッセージをコピー"
+
+msgctxt "menu.support.placeholder"
+msgid "Ваше сообщение…"
+msgstr "メッセージを入力…"
+
+msgctxt "menu.support.required"
+msgid "Напишите сообщение"
+msgstr "メッセージを入力してください"
+
+msgctxt "menu.support.copied"
+msgid "Сообщение скопировано"
+msgstr "メッセージをコピーしました"
+
+msgctxt "menu.support.finish"
+msgid "Завершите отправку в почтовом приложении"
+msgstr "メールアプリで送信を完了してください"
+
+msgctxt "daily.title"
+msgid "Ежедневный бонус"
+msgstr "デイリー報酬"
+
+msgctxt "daily.tomorrow"
+msgid "Завтра: %s"
+msgstr "明日: %s"
+
+msgctxt "daily.next_week"
+msgid "Новая неделя начнётся завтра!"
+msgstr "明日から新しい週が始まります！"
+
+msgctxt "daily.invitation"
+msgid "Заходи каждый день — награды растут!"
+msgstr "毎日ログインして報酬をアップ！"
+
+msgctxt "daily.claim"
+msgid "Забрать"
+msgstr "受け取る"
+
+msgctxt "daily.missed"
+msgid "Пропущен"
+msgstr "受取期限切れ"
+
+msgctxt "daily.today"
+msgid "Сегодня"
+msgstr "今日"
+
+msgctxt "daily.day"
+msgid "День %d"
+msgstr "%d日目"
+
+msgctxt "daily.item.undo"
+msgid "отмена хода ×%d"
+msgstr "元に戻す ×%d"
+
+msgctxt "daily.item.extra_slot"
+msgid "место ×%d"
+msgstr "追加スロット ×%d"
+
+msgctxt "daily.item.crane"
+msgid "кран ×%d"
+msgstr "クレーン ×%d"
+
+msgctxt "daily.item.shuffle"
+msgid "перемешивание ×%d"
+msgstr "シャッフル ×%d"
+
+msgctxt "daily.item.gift"
+msgid "подарок ×%d"
+msgstr "プレゼント ×%d"
+
+msgctxt "crane.intro.title"
+msgid "Закончились ходы?"
+msgstr "もう動かせない？"
+
+msgctxt "crane.intro.prompt"
+msgid "Вызовите кран!"
+msgstr "クレーンを呼ぼう！"
+
+msgctxt "crane.intro.free"
+msgid "Вызвать бесплатно"
+msgstr "無料で呼ぶ"
+
+msgctxt "crane.intro.price"
+msgid "В первый раз бесплатно, потом — {price} {{coin}}."
+msgstr "初回は無料、2回目以降は{price} {{coin}}。"
+
+msgctxt "crane.intro.retry"
+msgid "Попробовать заново"
+msgstr "もう一度挑戦"
+
+msgctxt "loading.start"
+msgid "Запускаем игру…"
+msgstr "起動中…"
+
+msgctxt "loading.error"
+msgid "Не удалось загрузить игру. Проверьте подключение и повторите."
+msgstr "読み込めませんでした。接続を確認して、もう一度お試しください。"
+
+msgctxt "loading.retry"
+msgid "Повторить"
+msgstr "再試行"

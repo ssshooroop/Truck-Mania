@@ -1,0 +1,4 @@
+-keep class org.truckmania.iap.TruckManiaIap { *; }
+-keep class com.huawei.hms.** { *; }
+-keep class com.huawei.agconnect.** { *; }
+-keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod

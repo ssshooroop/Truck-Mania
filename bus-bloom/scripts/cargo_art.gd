@@ -128,8 +128,8 @@ func _draw_material(index: int) -> void:
 
 const WORKER_IDLE = preload("res://assets/artwork/builder/run/run2/idle.png")
 const WORKER_RUN = [preload("res://assets/artwork/builder/run/run2/run1.png"),preload("res://assets/artwork/builder/run/run2/run2.png"),preload("res://assets/artwork/builder/run/run2/run3.png"),preload("res://assets/artwork/builder/run/run2/run4.png")]
-const WORKER_PICKUP = preload("res://assets/artwork/builder/carry/turn-to-line.png")
-const WORKER_CARRY = [preload("res://assets/artwork/builder/carry/carry1.png"),preload("res://assets/artwork/builder/carry/carry2.png"),preload("res://assets/artwork/builder/carry/carry3.png"),preload("res://assets/artwork/builder/carry/carry4.png")]
+const WORKER_PICKUP = preload("res://assets/artwork/builder/carry/2/turn-to-line.png")
+const WORKER_CARRY = [preload("res://assets/artwork/builder/carry/2/carry1.png"),preload("res://assets/artwork/builder/carry/2/carry2.png"),preload("res://assets/artwork/builder/carry/2/carry3.png"),preload("res://assets/artwork/builder/carry/2/carry4.png")]
 
 func worker(position: Vector2, carrying: int = -1, walking: bool = false, phase: float = 0.0, count: int = 1, panicking: bool = false, facing:float=1.0, picking:bool=false) -> void:
 	var frames = WORKER_CARRY if carrying>=0 else WORKER_RUN

@@ -77,7 +77,7 @@ func run():
 	var wallet:int=g.coins
 	g._purchase_rescue("crane")
 	await create_timer(0.1).timeout
-	check(g.model.bays[3]>=0 and g.model.buses[g.model.bays[3]].status=="arriving","Slot reserved before crane transfer")
+	check(g.model.bays[5]>=0 and g.model.bays[3]==-1 and g.model.open_bay_count==3 and g.model.buses[g.model.bays[5]].status=="arriving","Slot reserved before crane transfer")
 	check(g.coins==wallet and g.economy.state.crane_intro_used,"Free tutorial consumed once without charging")
 	g._load_level(0)
 	g._cancel_animation()

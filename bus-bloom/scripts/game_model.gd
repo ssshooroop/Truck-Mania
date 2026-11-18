@@ -3,6 +3,8 @@ extends RefCounted
 ## Pure construction-yard rules. The view owns the timing of all animations.
 
 const BAY_COUNT := 5
+const CRANE_BAY := 5
+const TOTAL_BAYS := 6
 const COLORS := 6
 const CAPACITIES := [2, 4, 6]
 const WIDTHS := [56.0, 56.0, 56.0]
@@ -131,7 +133,7 @@ var layout_scale := 1.0
 var yard_rect := YARD_RECT
 var queue: Array = []
 var open_bay_count := 3
-var bays: Array = [-1, -1, -1, -1, -1]
+var bays: Array = [-1, -1, -1, -1, -1, -1]
 var level_index := -1
 var level_name := ""
 var _search_deadline := 0
@@ -154,7 +156,7 @@ func load_level(index: int) -> bool:
 	level_name = level_title(index)
 	buses = template["buses"].duplicate(true)
 	queue = template["queue"].duplicate()
-	bays = [-1, -1, -1, -1, -1]
+	bays = [-1, -1, -1, -1, -1, -1]
 	open_bay_count = 3
 	return true
 
@@ -246,8 +248,8 @@ func blocking_ids(id: int) -> Array:
 	return result
 
 func maneuver_paths(id:int, mask:int=-1) -> Array:
-	# Limit this gameplay experiment to level 4 until the playtest is approved.
-	if level_index!=3: return []
+	# Enable manoeuvres only for layouts audited with the turn-clearance rules.
+	if level_index!=3 and (level_index<10 or level_index>19): return []
 	if mask<0:
 		mask=0
 		for bus:Dictionary in buses:
@@ -279,6 +281,10 @@ func free_bay(slots:Array=[]) -> int:
 	for index in range(open_bay_count):
 		if slots[index]==-1: return index
 	return -1
+
+func crane_bay() -> int:
+	var available := free_bay()
+	return available if available>=0 else (CRANE_BAY if bays[CRANE_BAY]==-1 else -1)
 
 func unlock_next_bay() -> bool:
 	if open_bay_count>=BAY_COUNT: return false
@@ -424,7 +430,7 @@ func _valid_snapshot(state: Dictionary) -> bool:
 	var template := _level_template(index)
 	var original_buses: Array = template["buses"]
 	var original_queue: Array = template["queue"]
-	if saved_buses.size() != original_buses.size() or saved_bays.size() != BAY_COUNT or saved_queue.size() > original_queue.size():
+	if saved_buses.size() != original_buses.size() or saved_bays.size() != TOTAL_BAYS or saved_queue.size() > original_queue.size():
 		return false
 	var remaining: Array = [0, 0, 0, 0, 0, 0]
 	var total_loaded := 0
@@ -437,7 +443,10 @@ func _valid_snapshot(state: Dictionary) -> bool:
 		for field in ["id", "color", "kind", "capacity"]:
 			if typeof(bus[field]) != TYPE_INT or bus[field] != original_buses[id][field]:
 				return false
-		if bus["position"] != original_buses[id]["position"] or bus["angle"] != original_buses[id]["angle"]:
+		if typeof(bus["angle"]) not in [TYPE_INT,TYPE_FLOAT] or not is_finite(float(bus["angle"])): return false
+		var angle_delta:float=absf(wrapf(float(bus["angle"])-float(original_buses[id]["angle"]),-PI,PI))
+		var valid_angle:bool=is_zero_approx(angle_delta) or (index>=29 and is_equal_approx(angle_delta,PI))
+		if bus["position"] != original_buses[id]["position"] or not valid_angle:
 			return false
 		if typeof(bus["load"]) != TYPE_INT or typeof(bus["bay"]) != TYPE_INT:
 			return false
@@ -450,17 +459,17 @@ func _valid_snapshot(state: Dictionary) -> bool:
 			if bus["load"] != bus["capacity"] or bus["bay"] != -1:
 				return false
 		elif bus["status"] == "docked":
-			if bus["load"] >= bus["capacity"] or bus["bay"] < 0 or bus["bay"] >= BAY_COUNT or saved_bays[bus["bay"]] != id:
+			if bus["load"] >= bus["capacity"] or bus["bay"] < 0 or bus["bay"] >= TOTAL_BAYS or saved_bays[bus["bay"]] != id:
 				return false
 		else:
 			return false
 		remaining[bus["color"]] += bus["capacity"] - bus["load"]
 		total_loaded += bus["load"]
-	for bay in range(BAY_COUNT):
+	for bay in range(TOTAL_BAYS):
 		var id = saved_bays[bay]
 		if typeof(id) != TYPE_INT or id < -1 or id >= saved_buses.size():
 			return false
-		if id != -1 and bay>=open_bay_count: return false
+		if id != -1 and bay>=open_bay_count and bay!=CRANE_BAY: return false
 		if id != -1 and (saved_buses[id]["status"] != "docked" or saved_buses[id]["bay"] != bay):
 			return false
 	if total_loaded + saved_queue.size() != original_queue.size():
@@ -517,7 +526,7 @@ func _solve_compact(state: Dictionary, masks: Array, seen: Dictionary) -> Array:
 		_search_aborted = true
 		return []
 	_settle_compact(state)
-	if state["yard"] == 0 and state["bays"] == [-1, -1, -1, -1, -1] and state["offset"] == queue.size():
+	if state["yard"] == 0 and state["bays"] == [-1, -1, -1, -1, -1, -1] and state["offset"] == queue.size():
 		return [-2]
 	var free: int = free_bay(state["bays"])
 	if free == -1:
@@ -543,3 +552,4 @@ func _solve_compact(state: Dictionary, masks: Array, seen: Dictionary) -> Array:
 		if _search_aborted:
 			return []
 	return []
+

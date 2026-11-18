@@ -1,0 +1,936 @@
+msgid ""
+msgstr ""
+"Language: tr\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgctxt "config.achievements.achievements.0.dispatcher_1.83f7eca71358"
+msgid "Диспетчер стройки I"
+msgstr "Dispeçer I"
+
+msgctxt "config.achievements.achievements.1.dispatcher_2.63332aabd948"
+msgid "Диспетчер стройки II"
+msgstr "Dispeçer II"
+
+msgctxt "config.achievements.achievements.2.dispatcher_3.a56fb6a376d3"
+msgid "Диспетчер стройки III"
+msgstr "Dispeçer III"
+
+msgctxt "config.achievements.achievements.3.dispatcher_4.7d95d2998eaf"
+msgid "Диспетчер стройки IV"
+msgstr "Dispeçer IV"
+
+msgctxt "config.achievements.achievements.4.cargo_1000.a468efbda495"
+msgid "Тысяча грузов"
+msgstr "Bin Yük"
+
+msgctxt "config.achievements.achievements.5.flawless_loading.c4c7e7a91bb3"
+msgid "Безупречная погрузка"
+msgstr "Kusursuz Yükleme"
+
+msgctxt "config.achievements.achievements.6.no_mistakes_10.14d4390bae4e"
+msgid "Без единой ошибки"
+msgstr "Sıfır Hata"
+
+msgctxt "config.achievements.achievements.7.on_the_edge.2131158405e9"
+msgid "На волоске"
+msgstr "Kıl Payı"
+
+msgctxt "config.achievements.achievements.8.comeback.28b4f0f21de6"
+msgid "Не сдаваться"
+msgstr "Pes Etme"
+
+msgctxt "config.achievements.achievements.9.dream_fleet.ada7efaa9d67"
+msgid "Автопарк мечты"
+msgstr "Hayal Filosu"
+
+msgctxt "config.daily_rewards.items.coins.label.a54143865c0d"
+msgid "Монеты"
+msgstr "Altın"
+
+msgctxt "config.daily_rewards.items.crane.label.8224141e7344"
+msgid "Кран"
+msgstr "Vinç"
+
+msgctxt "config.daily_rewards.items.extra_slot.label.4649b302d2a0"
+msgid "Место"
+msgstr "Yer"
+
+msgctxt "config.daily_rewards.items.shuffle.label.b03d6d33ac21"
+msgid "Перемешивание"
+msgstr "Karıştırma"
+
+msgctxt "config.daily_rewards.items.swap.label.9378e03b6132"
+msgid "Обмен"
+msgstr "Takas"
+
+msgctxt "config.daily_rewards.items.undo.label.3ec2342a5527"
+msgid "Отмена хода"
+msgstr "Geri Al"
+
+msgctxt "config.seasonal_events.events.0.halloween_2026.a9f8a3eb45b4"
+msgid "Тыквы на складе, летучие мыши\nнад краном — набор только до 2 ноября!"
+msgstr "Depoda balkabakları, vincin\nüstünde yarasalar — 2 Kasım'a kadar!"
+
+msgctxt "config.seasonal_events.events.0.halloween_2026.3e3da8ee1d96"
+msgid "Забрать набор"
+msgstr "Paketi Al"
+
+msgctxt "config.seasonal_events.events.0.halloween_2026.58bd03ae04fd"
+msgid "Ночная смена"
+msgstr "Gece Vardiyası"
+
+msgctxt "config.seasonal_events.events.1.newyear_2026.3e3da8ee1d96"
+msgid "Забрать набор"
+msgstr "Paketi Al"
+
+msgctxt "config.seasonal_events.events.1.newyear_2026.038586991416"
+msgid "Новогодний аврал"
+msgstr "Yılbaşı Telaşı"
+
+msgctxt "config.seasonal_events.events.1.newyear_2026.731e4b25b35d"
+msgid "Праздничные подарки уже на складе —\nуспей до конца каникул!"
+msgstr "Yılbaşı hediyeleri depoda —\ntatil bitmeden kap!"
+
+msgctxt "config.store_catalog.products.2.coins_2600.e56b418b8103"
+msgid "Хит"
+msgstr "Çok Satan"
+
+msgctxt "config.store_catalog.products.4.coins_12000.18ec97a01aaa"
+msgid "Выгодно"
+msgstr "Süper Fırsat"
+
+msgctxt "config.store_catalog.products.5.starter.90436a08231e"
+msgid "Набор новичка"
+msgstr "Acemi Paketi"
+
+msgctxt "config.store_catalog.products.5.starter.7170092c5229"
+msgid "Один раз за всю игру"
+msgstr "Tek seferlik teklif"
+
+msgctxt "config.store_catalog.products.6.season_halloween_2026.a03446388631"
+msgid "Набор ночной смены"
+msgstr "Gece Paketi"
+
+msgctxt "config.store_catalog.products.7.season_newyear_2026.694f571f43c4"
+msgid "Новогодний набор"
+msgstr "Yılbaşı Paketi"
+
+msgctxt "scripts.cargo_art.9143eb5dcc80"
+msgid "Доски"
+msgstr "Tahta"
+
+msgctxt "scripts.cargo_art.bd86ace178a0"
+msgid "Кабель"
+msgstr "Kablo"
+
+msgctxt "scripts.cargo_art.34896f67adfa"
+msgid "Кирпичи"
+msgstr "Tuğla"
+
+msgctxt "scripts.cargo_art.cb488b3124a1"
+msgid "Профнастил"
+msgstr "Sac Levha"
+
+msgctxt "scripts.cargo_art.291fa3db8353"
+msgid "Трубы"
+msgstr "Boru"
+
+msgctxt "scripts.cargo_art.0ef0f22c90df"
+msgid "Цемент"
+msgstr "Çimento"
+
+msgctxt "scripts.cargo_art.34a493696529"
+msgid "Бортовой"
+msgstr "Kasalı"
+
+msgctxt "scripts.cargo_art.144095769e68"
+msgid "Пикап"
+msgstr "Pikap"
+
+msgctxt "scripts.cargo_art.315789424c5f"
+msgid "Самосвал"
+msgstr "Damperli"
+
+msgctxt "scripts.daily_bonus.eb9739970cd2"
+msgid "День %d"
+msgstr "Gün %d"
+
+msgctxt "scripts.daily_bonus.6662621fbab6"
+msgid "Пропущен"
+msgstr "Kaçırıldı"
+
+msgctxt "scripts.daily_bonus.e276492e344d"
+msgid "Забрать"
+msgstr "Topla"
+
+msgctxt "scripts.daily_bonus.a42aee58d60a"
+msgid "Продолжить"
+msgstr "Devam"
+
+msgctxt "scripts.daily_bonus.f4cdc2548c52"
+msgid "Заходите каждый день"
+msgstr "Her gün gir"
+
+msgctxt "scripts.daily_bonus.1f46e7410c9f"
+msgid "и получайте призы!"
+msgstr "ve ödül kazan!"
+
+msgctxt "scripts.daily_bonus.a1af0e391ab9"
+msgid "ЕЖЕДНЕВНЫЙ БОНУС"
+msgstr "GÜNLÜK BONUS"
+
+msgctxt "scripts.game_model.ef9052e0abf8"
+msgid "Первая поставка"
+msgstr "İlk Teslimat"
+
+msgctxt "scripts.game_model.d6bcf97d5770"
+msgid "Склад %d"
+msgstr "Depo %d"
+
+msgctxt "scripts.game_model.b4f4294c73e0"
+msgid "Стройка оживает"
+msgstr "Şantiye Uyanıyor"
+
+msgctxt "scripts.game_model.ee0b343982c8"
+msgid "Плотная парковка"
+msgstr "Sıkışık Park"
+
+msgctxt "scripts.game_model.775d6e7f5168"
+msgid "Большая разгрузка"
+msgstr "Büyük Boşaltma"
+
+msgctxt "scripts.game_model.e148bd322eb6"
+msgid "Рабочий квартал"
+msgstr "İşçi Mahallesi"
+
+msgctxt "scripts.game_model.c1ff8ad27d51"
+msgid "Строительный час пик"
+msgstr "Yoğun Saat"
+
+msgctxt "scripts.main.b695d5d8d1c5"
+msgid "Сначала открой соседнее место"
+msgstr "Önce yandaki yeri aç"
+
+msgctxt "scripts.main.91a064acd00e"
+msgid "Нужно %d монет"
+msgstr "%d {{coin}} gerekli"
+
+msgctxt "scripts.main.22c3ddf18611"
+msgid "Лимит помощи в этой попытке исчерпан"
+msgstr "Bu denemede yardım hakkın bitti"
+
+msgctxt "scripts.main.1375e36fe936"
+msgid "+%d"
+msgstr "+%d"
+
+msgctxt "scripts.main.7312d70f7a8b"
+msgid "УРОВЕНЬ %d"
+msgstr "SEVİYE %d"
+
+msgctxt "scripts.main.1d4f240c7386"
+msgid "НАЖМИ НА КОНУС"
+msgstr "KONİYE DOKUN"
+
+msgctxt "scripts.main.1f72393019ca"
+msgid "ОТКРОЙ МЕСТО!"
+msgstr "YERİ AÇ!"
+
+msgctxt "scripts.main.db50163456aa"
+msgid "БЕСПЛАТНО!"
+msgstr "ÜCRETSİZ!"
+
+msgctxt "scripts.main.e993bacd9ca4"
+msgid "До конца этой попытки"
+msgstr "Bu deneme sonuna kadar"
+
+msgctxt "scripts.main.57b425f0b144"
+msgid "БОЛЬШЕ МЕСТА!"
+msgstr "EKSTRA YER!"
+
+msgctxt "scripts.main.6087ccb7cb2d"
+msgid "Открой место до конца попытки"
+msgstr "Deneme sonuna kadar yer aç"
+
+msgctxt "scripts.main.359ec6222b67"
+msgid "Открыть за %d монет"
+msgstr "%d {{coin}} aç"
+
+msgctxt "scripts.main.308594c1fc02"
+msgid "Цена уточняется"
+msgstr "Fiyat alınıyor…"
+
+msgctxt "scripts.main.29d1e351c540"
+msgid "Реклама пока недоступна"
+msgstr "Reklam şu an yok"
+
+msgctxt "scripts.main.c4c39ac6251c"
+msgid "Помощь на стройке"
+msgstr "Şantiye Yardımı"
+
+msgctxt "scripts.main.971455b7f908"
+msgid "Замена машины"
+msgstr "Kamyon Takası"
+
+msgctxt "scripts.main.8224141e7344"
+msgid "Кран"
+msgstr "Vinç"
+
+msgctxt "scripts.main.baf34c9a08fe"
+msgid "Перемешать грузы"
+msgstr "Yükleri Karıştır"
+
+msgctxt "scripts.main.caf21fe0d262"
+msgid "%s · %d монет"
+msgstr "%s · %d {{coin}}"
+
+msgctxt "scripts.main.ad2d15963945"
+msgid "Помощь действует в этой попытке"
+msgstr "Yardım bu denemede geçerli"
+
+msgctxt "scripts.main.5ddb4a930a33"
+msgid "Баланс: %d"
+msgstr "Bakiye: %d"
+
+msgctxt "scripts.main.199de93a9257"
+msgid "Перерыв на стройке"
+msgstr "Mola"
+
+msgctxt "scripts.main.8314a586f880"
+msgid "Груз и машины подождут"
+msgstr "Yük ve kamyonlar bekler"
+
+msgctxt "scripts.main.21dffe50ffc5"
+msgid "Звуки погрузки"
+msgstr "Yükleme Sesleri"
+
+msgctxt "scripts.main.bf0e90816be7"
+msgid "Меньше анимации"
+msgstr "Hareketi Azalt"
+
+msgctxt "scripts.main.0541c131cbc0"
+msgid "Продолжить работу"
+msgstr "İşe Dön"
+
+msgctxt "scripts.main.0c7925af0933"
+msgid "Начать уровень заново"
+msgstr "Baştan Başla"
+
+msgctxt "scripts.main.8e8dad84ce78"
+msgid "Выбрать склад"
+msgstr "Depo Seç"
+
+msgctxt "scripts.main.fb16f2253476"
+msgid "Твои склады"
+msgstr "Depoların"
+
+msgctxt "scripts.main.589bafc9b8fb"
+msgid "Больше машин — интереснее задача"
+msgstr "Daha çok kamyon, daha zor görev"
+
+msgctxt "scripts.main.b2dd460cc970"
+msgid "%02d"
+msgstr "%02d"
+
+msgctxt "scripts.main.3a5628fdf323"
+msgid "ЗАКРЫТ"
+msgstr "KAPALI"
+
+msgctxt "scripts.main.39b131afe827"
+msgid "НАЧАТЬ"
+msgstr "BAŞLA"
+
+msgctxt "scripts.main.e94c8b10fb66"
+msgid "Новый склад открывается после полной отгрузки"
+msgstr "Yeni depo tam sevkiyattan sonra açılır"
+
+msgctxt "scripts.main.f9135b8def31"
+msgid "Нет хода для отмены"
+msgstr "Geri alınacak hamle yok"
+
+msgctxt "scripts.main.01e589e7cd6d"
+msgid "Ролик пока не готов — попробуй позже"
+msgstr "Video hazır değil — sonra dene"
+
+msgctxt "scripts.main.195f8283a5ee"
+msgid "Ролик не досмотрен — награды нет"
+msgstr "Video bitmedi — ödül yok"
+
+msgctxt "scripts.main.85790e1f3a24"
+msgid "+%d %s"
+msgstr "+%d %s"
+
+msgctxt "scripts.main.07989dddb60a"
+msgid "Покупки восстановлены"
+msgstr "Alımlar geri yüklendi"
+
+msgctxt "scripts.main.0767e8068116"
+msgid "Покупки появятся в следующей версии"
+msgstr "Satın alma sonraki sürümde"
+
+msgctxt "scripts.main.eb13f87aaacb"
+msgid "Покупка не завершена — деньги не списаны"
+msgstr "Alım tamamlanmadı — ücret alınmadı"
+
+msgctxt "scripts.main.91d91f393841"
+msgid "Посты заняты — отмени ход или дождись погрузки"
+msgstr "Yerler dolu — geri al veya yüklemeyi bekle"
+
+msgctxt "scripts.main.af6341234057"
+msgid "Проезд занят — попробуй после проезда соседней машины"
+msgstr "Yol kapalı — yandaki kamyon geçince tekrar dene"
+
+msgctxt "scripts.main.9f7d1e182ba7"
+msgid "Машины и конвейер вернулись на ход назад"
+msgstr "Kamyonlar ve bant bir hamle geri döndü"
+
+msgctxt "scripts.main.d338a4ad3d38"
+msgid "Освободи машину у края или отмени последний ход"
+msgstr "Kenardaki kamyonu çıkar veya son hamleyi geri al"
+
+msgctxt "scripts.main.8e499a7944ea"
+msgid "Вернись на ход назад — здесь нет решения"
+msgstr "Bir hamle geri dön — burada çözüm yok"
+
+msgctxt "scripts.main.0e2764290fd4"
+msgid "Выделенная машина поможет разгрузить двор"
+msgstr "Seçili kamyon avluyu boşaltmaya yarar"
+
+msgctxt "scripts.slot_offer.99bf27c02d89"
+msgid "−100"
+msgstr "−100"
+
+msgctxt "scripts.ui.game_modal.1375e36fe936"
+msgid "+%d"
+msgstr "+%d"
+
+msgctxt "scripts.ui.game_modal.22a5d9112486"
+msgid "Загружаем…"
+msgstr "Yükleniyor…"
+
+msgctxt "scripts.ui.game_modal.4367e0063eba"
+msgid "Взять"
+msgstr "Al"
+
+msgctxt "scripts.ui.game_modal.912fad7363d8"
+msgid "%s  %s"
+msgstr "%s  %s"
+
+msgctxt "scripts.ui.game_modal.0246a2516cda"
+msgid "Осталось"
+msgstr "Kalan"
+
+msgctxt "scripts.ui.game_modal.e656bc246d80"
+msgid "%d д %d ч"
+msgstr "%d g %d s"
+
+msgctxt "scripts.ui.game_modal.77cbdae53b1d"
+msgid "%d ч %02d мин"
+msgstr "%d s %02d dk"
+
+msgctxt "scripts.ui.game_modal.22aa5926e209"
+msgid "%d:%02d"
+msgstr "%d:%02d"
+
+msgctxt "scripts.ui.modal_catalog.04a597bd50fb"
+msgid "Материалы на ленте\nвстанут в новом порядке."
+msgstr "Banttaki malzemeler\nyeniden dizilecek."
+
+msgctxt "scripts.ui.modal_catalog.8afd9b9a4ecf"
+msgid "Перемешать"
+msgstr "Karıştır"
+
+msgctxt "scripts.ui.modal_catalog.9b8183747132"
+msgid "Перемешать груз?"
+msgstr "Karıştırılsın mı?"
+
+msgctxt "scripts.ui.modal_catalog.7c47f7292ba4"
+msgid "Отменить"
+msgstr "Geri Al"
+
+msgctxt "scripts.ui.modal_catalog.c350b098b327"
+msgid "Отменить ход?"
+msgstr "Geri alınsın mı?"
+
+msgctxt "scripts.ui.modal_catalog.215d188d6b1a"
+msgid "Последняя машина\nвернётся на парковку."
+msgstr "Son kamyon\nparka geri döner."
+
+msgctxt "scripts.ui.modal_catalog.36f798a63c92"
+msgid "Помощь"
+msgstr "Yardım"
+
+msgctxt "scripts.ui.modal_catalog.86991a952a8c"
+msgid "Бесплатно с рекламой"
+msgstr "Reklamla ücretsiz"
+
+msgctxt "scripts.ui.modal_catalog.d4fe5fffa3d6"
+msgid "Не сейчас"
+msgstr "Şimdi değil"
+
+msgctxt "scripts.ui.modal_catalog.90cba449230b"
+msgid "Нужно ещё %d %s."
+msgstr "%d %s daha lazım."
+
+msgctxt "scripts.ui.modal_catalog.15e07e80df50"
+msgid "+%d за рекламу"
+msgstr "Reklamla +%d"
+
+msgctxt "scripts.ui.modal_catalog.2cacba01ed01"
+msgid "%d монет"
+msgstr "%d {{coin}}"
+
+msgctxt "scripts.ui.modal_catalog.0b350c3a966b"
+msgid "Все наборы в магазине"
+msgstr "Tüm paketler"
+
+msgctxt "scripts.ui.modal_catalog.0e71379e30e5"
+msgid "Не хватает монет"
+msgstr "Altın yetersiz"
+
+msgctxt "scripts.ui.modal_catalog.83c948293f13"
+msgid "Монеты уже в копилке!"
+msgstr "Altınlar kumbarada!"
+
+msgctxt "scripts.ui.modal_catalog.c459a8469cdb"
+msgid "Отлично!"
+msgstr "Harika!"
+
+msgctxt "scripts.ui.modal_catalog.ae5d2abc4e93"
+msgid "Награда получена!"
+msgstr "Ödül alındı!"
+
+msgctxt "scripts.ui.modal_catalog.d674c9a43e5f"
+msgid "Загружаем ролик…"
+msgstr "Video yükleniyor…"
+
+msgctxt "scripts.ui.modal_catalog.8fbe9b75cbdf"
+msgid "Отмена"
+msgstr "İptal"
+
+msgctxt "scripts.ui.modal_catalog.81be36fb6d76"
+msgid "Ролик не загрузился.\nПроверь интернет и попробуй ещё раз."
+msgstr "Video yüklenemedi.\nİnterneti kontrol et ve tekrar dene."
+
+msgctxt "scripts.ui.modal_catalog.13222328c826"
+msgid "Попробовать ещё"
+msgstr "Tekrar dene"
+
+msgctxt "scripts.ui.modal_catalog.a7a4033657e8"
+msgid "Закрыть"
+msgstr "Kapat"
+
+msgctxt "scripts.ui.modal_catalog.c510079471ac"
+msgid "Посмотри короткий ролик\nи получи %d %s."
+msgstr "Kısa bir video izle,\n%d %s kazan."
+
+msgctxt "scripts.ui.modal_catalog.7ac84107c129"
+msgid "Смотреть"
+msgstr "İzle"
+
+msgctxt "scripts.ui.modal_catalog.f3c8f3a92afd"
+msgid "Бесплатные монеты"
+msgstr "Bedava Altın"
+
+msgctxt "scripts.ui.modal_catalog.4ac69ceabdf6"
+msgid "Удвоить награду"
+msgstr "2 Kat Ödül"
+
+msgctxt "scripts.ui.modal_catalog.fd5ddecfacae"
+msgid "Награда за этот уровень\nуже получена."
+msgstr "Bu seviyenin ödülü\nzaten alındı."
+
+msgctxt "scripts.ui.modal_catalog.7b3864be0f54"
+msgid "Карта уровней"
+msgstr "Harita"
+
+msgctxt "scripts.ui.modal_catalog.6eaef62bc617"
+msgid "Следующий уровень"
+msgstr "Sonraki Seviye"
+
+msgctxt "scripts.ui.modal_catalog.800380963da6"
+msgid "Сыграть ещё раз"
+msgstr "Tekrar Oyna"
+
+msgctxt "scripts.ui.modal_catalog.6e06b221d0f8"
+msgid "Груз отправлен!"
+msgstr "Yük gönderildi!"
+
+msgctxt "scripts.ui.modal_catalog.44ce35728237"
+msgid "Достижения"
+msgstr "Başarımlar"
+
+msgctxt "scripts.ui.modal_catalog.a7bdff844b22"
+msgid "Серия"
+msgstr "Seri"
+
+msgctxt "scripts.ui.modal_catalog.e1368cabf157"
+msgid "Сундук"
+msgstr "Sandık"
+
+msgctxt "scripts.ui.modal_catalog.7f67af3d6cd9"
+msgid "Уровень"
+msgstr "Seviye"
+
+msgctxt "scripts.ui.modal_catalog.d2904dded9ed"
+msgid "До конца"
+msgstr "Kalan"
+
+msgctxt "scripts.ui.modal_catalog.3e3da8ee1d96"
+msgid "Забрать набор"
+msgstr "Paketi Al"
+
+msgctxt "scripts.ui.modal_catalog.7996f711496a"
+msgid "Позже"
+msgstr "Sonra"
+
+msgctxt "scripts.ui.modal_catalog.04c98320ca2b"
+msgid "Обычная цена %s"
+msgstr "Normal fiyat %s"
+
+msgctxt "scripts.ui.modal_catalog.2f46e9af5b29"
+msgid "Сезонная акция"
+msgstr "Sezon Fırsatı"
+
+msgctxt "scripts.ui.modal_catalog.14071c7fed0a"
+msgid "%s · ещё %s"
+msgstr "%s · %s kaldı"
+
+msgctxt "scripts.ui.modal_catalog.a54143865c0d"
+msgid "Монеты"
+msgstr "Altın"
+
+msgctxt "scripts.ui.modal_catalog.ecaab828792b"
+msgid "Бесплатно"
+msgstr "Ücretsiz"
+
+msgctxt "scripts.ui.modal_catalog.72c299e0d65e"
+msgid "Скоро"
+msgstr "Yakında"
+
+msgctxt "scripts.ui.modal_catalog.16af0289546a"
+msgid "Восстановить покупки"
+msgstr "Alımları Geri Yükle"
+
+msgctxt "scripts.ui.modal_catalog.23e3c7064746"
+msgid "Магазин"
+msgstr "Mağaza"
+
+msgctxt "scripts.ui.modal_catalog.fb544c2664fb"
+msgid "Готово!"
+msgstr "Hazır!"
+
+msgctxt "scripts.ui.modal_catalog.900d17c85c44"
+msgid "Всё уже на складе. За работу!"
+msgstr "Her şey depoda. İşe koyul!"
+
+msgctxt "scripts.ui.modal_catalog.91faf0b5f015"
+msgid "%d д"
+msgstr "%d g"
+
+msgctxt "scripts.ui.modal_catalog.fdb60b7161f2"
+msgid "%d ч"
+msgstr "%d s"
+
+msgctxt "scripts.ui.modal_catalog.ec2f763fe6e3"
+msgid "монета"
+msgstr "{{coin}}"
+
+msgctxt "scripts.ui.modal_catalog.253383400304"
+msgid "монеты"
+msgstr "{{coin}}"
+
+msgctxt "scripts.ui.modal_catalog.5722f18f0748"
+msgid "монет"
+msgstr "{{coin}}"
+
+msgctxt "scripts.ui.modal_catalog.ea58bb0bc6d4"
+msgid "Дальше"
+msgstr "İleri"
+
+msgctxt "scripts.ui.modal_catalog.2179f8734c6f"
+msgid "Нажми на машину — она выедет по стрелке к складу."
+msgstr "Kamyona dokun — ok yönünde depoya gider."
+
+msgctxt "scripts.ui.modal_catalog.e180633a436f"
+msgid "Привет, я Билли!"
+msgstr "Selam, ben Billy!"
+
+msgctxt "scripts.ui.modal_catalog.1e15b34f2534"
+msgid "Машина берёт только свой материал. Следи за лентой сверху!"
+msgstr "Kamyon sadece kendi malzemesini alır. Üstteki banda bak!"
+
+msgctxt "scripts.ui.modal_catalog.4d3181b2b05e"
+msgid "Цвет — это груз"
+msgstr "Renk = yük"
+
+msgctxt "scripts.ui.modal_catalog.e7735f16fb5f"
+msgid "Мест всего три"
+msgstr "Yalnızca 3 yer!"
+
+msgctxt "scripts.ui.modal_catalog.d09cef487b9e"
+msgid "Начать работу"
+msgstr "İşe Başla"
+
+msgctxt "scripts.ui.modal_catalog.2052041e04c0"
+msgid "Не занимай места машинами, которым груз пока не нужен."
+msgstr "Yükü henüz gelmeyen kamyonlarla yerleri doldurma."
+
+msgctxt "scripts.ui.modal_catalog.9e4d256050a3"
+msgid "Пропустить обучение"
+msgstr "Eğitimi Atla"
+
+msgctxt "scripts.ui.modal_catalog.48dccafab27d"
+msgid "Все места у склада заняты.\nОткрой ещё одно — и продолжай!"
+msgstr "Depodaki tüm yerler dolu.\nBir tane daha aç ve devam et!"
+
+msgctxt "scripts.ui.modal_catalog.c60d2d77d06d"
+msgid "Открыть место"
+msgstr "Yer Aç"
+
+msgctxt "scripts.ui.modal_catalog.aa882b151605"
+msgid "Место за рекламу"
+msgstr "Reklamla Yer"
+
+msgctxt "scripts.ui.modal_catalog.6909d293a79e"
+msgid "Ролик готовится…"
+msgstr "Video geliyor…"
+
+msgctxt "scripts.ui.modal_catalog.cf19cb36e0bd"
+msgid "Кран переставит нужную машину прямо к складу."
+msgstr "Vinç doğru kamyonu doğrudan depoya taşır."
+
+msgctxt "scripts.ui.modal_catalog.25b355813f82"
+msgid "Вызвать кран"
+msgstr "Vinç Çağır"
+
+msgctxt "scripts.ui.modal_catalog.2398ba31360b"
+msgid "Помощь в этой попытке закончилась.\nОтмени ход или начни заново."
+msgstr "Bu denemede yardım hakkın bitti.\nGeri al veya baştan başla."
+
+msgctxt "scripts.ui.modal_catalog.0abf7381f65f"
+msgid "Место и нужная машина"
+msgstr "Yer ve doğru kamyon"
+
+msgctxt "scripts.ui.modal_catalog.4367e0063eba"
+msgid "Взять"
+msgstr "Al"
+
+msgctxt "scripts.ui.modal_catalog.8d589b0c3c10"
+msgid "Отменить ход"
+msgstr "Geri Al"
+
+msgctxt "scripts.ui.modal_catalog.19640d8d48a9"
+msgid "Бесплатно: ещё %d"
+msgstr "Ücretsiz: %d kaldı"
+
+msgctxt "scripts.ui.modal_catalog.f40432b44242"
+msgid "Вернуть последнюю машину"
+msgstr "Son Kamyonu Geri Al"
+
+msgctxt "scripts.ui.modal_catalog.086406bd4bfe"
+msgid "Перемешать груз"
+msgstr "Yükü Karıştır"
+
+msgctxt "scripts.ui.modal_catalog.ab24f870e1e9"
+msgid "Новый порядок на ленте"
+msgstr "Bantta yeni sıra"
+
+msgctxt "scripts.ui.modal_catalog.0c7925af0933"
+msgid "Начать уровень заново"
+msgstr "Baştan Başla"
+
+msgctxt "scripts.ui.modal_catalog.6d45f7c36311"
+msgid "Парковка заполнена!"
+msgstr "Park dolu!"
+
+msgctxt "scripts.ui.modal_catalog.07cb65087477"
+msgid "Убрать"
+msgstr "Kaldır"
+
+msgctxt "scripts.ui.modal_catalog.0aece7c229eb"
+msgid "Убрать конус?"
+msgstr "Koni gitsin mi?"
+
+msgctxt "scripts.ui.modal_catalog.26bf5538561c"
+msgid "Четвёртое место у склада\nдо конца этой попытки."
+msgstr "Depoda dördüncü yer\nbu deneme boyunca."
+
+msgctxt "scripts.ui.modal_catalog.b4d4430a6344"
+msgid "Вызвать"
+msgstr "Çağır"
+
+msgctxt "scripts.ui.modal_catalog.2aef95648c48"
+msgid "Вызвать кран?"
+msgstr "Vinç gelsin mi?"
+
+msgctxt "scripts.ui.modal_catalog.8cf3ff0db4db"
+msgid "Кран поставит нужную машину\nна свободное место."
+msgstr "Vinç doğru kamyonu\nboş bir yere koyar."
+
+msgctxt "scripts.ui.modal_style.ecaab828792b"
+msgid "Бесплатно"
+msgstr "Ücretsiz"
+
+msgctxt "web.wasm-loader.4ed8a7ee34b3"
+msgid "Подготовка загрузки…"
+msgstr "Yükleme hazırlanıyor…"
+
+msgctxt "web.wasm-loader.3a8db977333d"
+msgid "Загрузка игры: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} МБ"
+msgstr "Oyun yükleniyor: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} MB"
+
+msgctxt "web.wasm-loader.d2db517556a1"
+msgid "Файлы загружены. Запускаем игру…"
+msgstr "Dosyalar yüklendi. Oyun başlıyor…"
+
+msgctxt "web.wasm-loader.c9a6e2e1026a"
+msgid "Не удалось загрузить игру. "
+msgstr "Oyun yüklenemedi."
+
+msgctxt "web.wasm-loader.5189135a6110"
+msgid "Повторить"
+msgstr "Yeniden dene"
+
+msgctxt "web.wasm-loader.9c14e5456dd5"
+msgid "Запуск занимает слишком долго. Попробуйте перезагрузить страницу."
+msgstr "Başlatma çok uzun sürüyor. Sayfayı yenilemeyi deneyin."
+
+msgctxt "web.wasm-loader.edb5706027b7"
+msgid "Ошибка загрузки (${response.status})."
+msgstr "Yükleme hatası (${response.status})."
+
+msgctxt "web.wasm-loader.ae4e27ff7bd9"
+msgid "Проверьте вход в свой аккаунт ChatGPT в Safari."
+msgstr "Safari'de ChatGPT oturumunuzu kontrol edin."
+
+msgctxt "web.wasm-loader.a8161b487809"
+msgid "Обновите браузер для запуска игры."
+msgstr "Lütfen tarayıcınızı güncelleyin."
+
+msgctxt "web.wasm-loader.1c5e2746e50d"
+msgid "Файл загружен не полностью. Обновите страницу."
+msgstr "Dosya tam yüklenmedi. Sayfayı yenileyin."
+
+msgctxt "menu.language.title"
+msgid "Язык"
+msgstr "Dil"
+
+msgctxt "menu.support.title"
+msgid "Поддержка"
+msgstr "Destek"
+
+msgctxt "menu.support.intro"
+msgid "Нашли ошибку или есть идея?\nНапишите — читаем каждое письмо."
+msgstr "Bir hata mı buldun ya da bir fikrin mi var?\nBize yaz — her mesajı okuyoruz."
+
+msgctxt "menu.support.metadata"
+msgid "Версия: %s\nID: %s"
+msgstr "Sürüm: %s\nID: %s"
+
+msgctxt "menu.support.compose"
+msgid "Открыть письмо"
+msgstr "E-postayı aç"
+
+msgctxt "menu.support.copy"
+msgid "Скопировать сообщение"
+msgstr "Mesajı kopyala"
+
+msgctxt "menu.support.placeholder"
+msgid "Ваше сообщение…"
+msgstr "Mesajın…"
+
+msgctxt "menu.support.required"
+msgid "Напишите сообщение"
+msgstr "Lütfen bir mesaj yaz"
+
+msgctxt "menu.support.copied"
+msgid "Сообщение скопировано"
+msgstr "Mesaj kopyalandı"
+
+msgctxt "menu.support.finish"
+msgid "Завершите отправку в почтовом приложении"
+msgstr "Gönderimi e-posta uygulamanda tamamla"
+
+msgctxt "daily.title"
+msgid "Ежедневный бонус"
+msgstr "Günlük ödüller"
+
+msgctxt "daily.tomorrow"
+msgid "Завтра: %s"
+msgstr "Yarın: %s"
+
+msgctxt "daily.next_week"
+msgid "Новая неделя начнётся завтра!"
+msgstr "Yeni hafta yarın başlıyor!"
+
+msgctxt "daily.invitation"
+msgid "Заходи каждый день — награды растут!"
+msgstr "Daha büyük ödüller için her gün gel!"
+
+msgctxt "daily.claim"
+msgid "Забрать"
+msgstr "Topla"
+
+msgctxt "daily.missed"
+msgid "Пропущен"
+msgstr "Kaçırıldı"
+
+msgctxt "daily.today"
+msgid "Сегодня"
+msgstr "Bugün"
+
+msgctxt "daily.day"
+msgid "День %d"
+msgstr "Gün %d"
+
+msgctxt "daily.item.undo"
+msgid "отмена хода ×%d"
+msgstr "Geri al ×%d"
+
+msgctxt "daily.item.extra_slot"
+msgid "место ×%d"
+msgstr "Ekstra yer ×%d"
+
+msgctxt "daily.item.crane"
+msgid "кран ×%d"
+msgstr "Vinç ×%d"
+
+msgctxt "daily.item.shuffle"
+msgid "перемешивание ×%d"
+msgstr "Karıştır ×%d"
+
+msgctxt "daily.item.gift"
+msgid "подарок ×%d"
+msgstr "Hediye ×%d"
+
+msgctxt "crane.intro.title"
+msgid "Закончились ходы?"
+msgstr "Hamlen kalmadı mı?"
+
+msgctxt "crane.intro.prompt"
+msgid "Вызовите кран!"
+msgstr "Vinci çağır!"
+
+msgctxt "crane.intro.free"
+msgid "Вызвать бесплатно"
+msgstr "Ücretsiz çağır"
+
+msgctxt "crane.intro.price"
+msgid "В первый раз бесплатно, потом — {price} {{coin}}."
+msgstr "İlk sefer ücretsiz, sonra {price} {{coin}}."
+
+msgctxt "crane.intro.retry"
+msgid "Попробовать заново"
+msgstr "Tekrar dene"
+
+msgctxt "loading.start"
+msgid "Запускаем игру…"
+msgstr "Başlatılıyor…"
+
+msgctxt "loading.error"
+msgid "Не удалось загрузить игру. Проверьте подключение и повторите."
+msgstr "Yüklenemedi. Bağlantını kontrol edip tekrar dene."
+
+msgctxt "loading.retry"
+msgid "Повторить"
+msgstr "Yeniden dene"

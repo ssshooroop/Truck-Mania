@@ -13,6 +13,8 @@ var vehicles: Array = []
 var queue: Array = []
 ## blockers[id]: bitmask of the vehicles standing in the exit sweep of id.
 var blockers: Array = []
+## Optional canonical model for audits that include the live manoeuvre rule.
+var maneuver_model = null
 
 var _nodes := 0
 var _node_limit := 0
@@ -523,7 +525,7 @@ func _available(state: Dictionary) -> Array:
 	var yard: int = state["yard"]
 	var result: Array = []
 	for id in vehicles.size():
-		if ((yard >> id) & 1) == 1 and (int(blockers[id]) & yard) == 0:
+		if ((yard >> id) & 1) == 1 and ((int(blockers[id]) & yard) == 0 or (maneuver_model!=null and not maneuver_model.maneuver_paths(id,yard).is_empty())):
 			result.append(id)
 	return result
 

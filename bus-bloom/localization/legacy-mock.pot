@@ -1,0 +1,181 @@
+# Cargo Yard translation template. Copy to <locale>.po before translating.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. scripts/crane_offer [legacy_or_mock]
+#: scripts/crane_offer.gd:19
+msgctxt "scripts.crane_offer.2540c82265cd"
+msgid "Закончились"
+msgstr ""
+
+#. scripts/crane_offer [legacy_or_mock]
+#: scripts/crane_offer.gd:20
+msgctxt "scripts.crane_offer.7e09a101b132"
+msgid "ходы?"
+msgstr ""
+
+#. scripts/crane_offer [legacy_or_mock]
+#: scripts/crane_offer.gd:21
+msgctxt "scripts.crane_offer.f5b4bf07252d"
+msgid "Вызовите кран!"
+msgstr ""
+
+#. scripts/crane_offer [legacy_or_mock]
+#: scripts/crane_offer.gd:23
+msgctxt "scripts.crane_offer.48ebb7d55857"
+msgid "Вызвать бесплатно"
+msgstr ""
+
+#. scripts/crane_offer [legacy_or_mock]
+#: scripts/crane_offer.gd:24
+msgctxt "scripts.crane_offer.ca5b0ecc2dfc"
+msgid "В первый раз бесплатно,"
+msgstr ""
+
+#. scripts/crane_offer [legacy_or_mock]
+#: scripts/crane_offer.gd:25
+msgctxt "scripts.crane_offer.968a9fc9f568"
+msgid "потом —"
+msgstr ""
+
+#. scripts/crane_offer [legacy_or_mock]
+#: scripts/crane_offer.gd:31
+msgctxt "scripts.crane_offer.8fbe9b75cbdf"
+msgid "Отмена"
+msgstr ""
+
+#. scripts/crane_offer [legacy_or_mock]
+#: scripts/crane_offer.gd:32
+msgctxt "scripts.crane_offer.185dbf0bf8d3"
+msgid "хода 20"
+msgstr ""
+
+#. scripts/crane_offer [legacy_or_mock]
+#: scripts/crane_offer.gd:35
+msgctxt "scripts.crane_offer.6f9f87534095"
+msgid "Попробовать"
+msgstr ""
+
+#. scripts/crane_offer [legacy_or_mock]
+#: scripts/crane_offer.gd:36
+msgctxt "scripts.crane_offer.05acc920d2f5"
+msgid "заново"
+msgstr ""
+
+#. scripts/parking_full [legacy_or_mock]
+#: scripts/parking_full.gd:51
+msgctxt "scripts.parking_full.d34ff2a3e8fe"
+msgid "Парковка"
+msgstr ""
+
+#. scripts/parking_full [legacy_or_mock]
+#: scripts/parking_full.gd:52
+msgctxt "scripts.parking_full.3b79dc0da388"
+msgid "заполнена!"
+msgstr ""
+
+#. scripts/parking_full [legacy_or_mock]
+#: scripts/parking_full.gd:55
+msgctxt "scripts.parking_full.4b63dee5eaf6"
+msgid "Открыть дополнительное"
+msgstr ""
+
+#. scripts/parking_full [legacy_or_mock]
+#: scripts/parking_full.gd:56
+msgctxt "scripts.parking_full.21c5c4cbb82c"
+msgid "место за 100"
+msgstr ""
+
+#. scripts/parking_full [legacy_or_mock]
+#: scripts/parking_full.gd:58
+msgctxt "scripts.parking_full.2d7a0b39f0f4"
+msgid "Все места уже открыты"
+msgstr ""
+
+#. scripts/parking_full [legacy_or_mock]
+#: scripts/parking_full.gd:59
+msgctxt "scripts.parking_full.bcacbff7a563"
+msgid "или"
+msgstr ""
+
+#. scripts/parking_full [legacy_or_mock]
+#: scripts/parking_full.gd:61
+msgctxt "scripts.parking_full.b9eb6b66d046"
+msgid "за просмотр"
+msgstr ""
+
+#. scripts/parking_full [legacy_or_mock]
+#: scripts/parking_full.gd:62
+msgctxt "scripts.parking_full.3f91926320b5"
+msgid "рекламы"
+msgstr ""
+
+#. scripts/parking_full [legacy_or_mock]
+#: scripts/parking_full.gd:64
+msgctxt "scripts.parking_full.29d1e351c540"
+msgid "Реклама пока недоступна"
+msgstr ""
+
+#. scripts/parking_full [legacy_or_mock]
+#: scripts/parking_full.gd:66
+msgctxt "scripts.parking_full.8fbe9b75cbdf"
+msgid "Отмена"
+msgstr ""
+
+#. scripts/parking_full [legacy_or_mock]
+#: scripts/parking_full.gd:68
+msgctxt "scripts.parking_full.185dbf0bf8d3"
+msgid "хода 20"
+msgstr ""
+
+#. scripts/parking_full [legacy_or_mock]
+#. Сохранить переменные и их порядок. Не переводить выражения ${…}.
+#: scripts/parking_full.gd:68
+msgctxt "scripts.parking_full.82e07617aac8"
+msgid "хода ×%d"
+msgstr ""
+
+#. scripts/parking_full [legacy_or_mock]
+#: scripts/parking_full.gd:71
+msgctxt "scripts.parking_full.6f9f87534095"
+msgid "Попробовать"
+msgstr ""
+
+#. scripts/parking_full [legacy_or_mock]
+#: scripts/parking_full.gd:72
+msgctxt "scripts.parking_full.05acc920d2f5"
+msgid "заново"
+msgstr ""
+
+#. scripts/slot_unlock_mock [legacy_or_mock]
+#: scripts/slot_unlock_mock.gd:44
+msgctxt "scripts.slot_unlock_mock.07cb65087477"
+msgid "Убрать"
+msgstr ""
+
+#. scripts/slot_unlock_mock [legacy_or_mock]
+#: scripts/slot_unlock_mock.gd:45
+msgctxt "scripts.slot_unlock_mock.3c0df78bba9d"
+msgid "конус?"
+msgstr ""
+
+#. scripts/slot_unlock_mock [legacy_or_mock]
+#: scripts/slot_unlock_mock.gd:52
+msgctxt "scripts.slot_unlock_mock.bcacbff7a563"
+msgid "или"
+msgstr ""
+
+#. scripts/slot_unlock_mock [legacy_or_mock]
+#: scripts/slot_unlock_mock.gd:55
+msgctxt "scripts.slot_unlock_mock.6b6949cec849"
+msgid "посмотреть"
+msgstr ""
+
+#. scripts/slot_unlock_mock [legacy_or_mock]
+#: scripts/slot_unlock_mock.gd:56
+msgctxt "scripts.slot_unlock_mock.04df0e54b20e"
+msgid "рекламу"
+msgstr ""

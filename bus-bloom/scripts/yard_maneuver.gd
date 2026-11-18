@@ -10,7 +10,10 @@ static func paths(model, id:int, mask:int) -> Array:
 	for other:Dictionary in model.buses:
 		if other.id!=id and (mask & (1<<int(other.id)))!=0: obstacles.append(other)
 	var result:Array = []
-	for distance:float in [size.y*0.35,size.y*0.65,size.y]:
+	# A blocked nose must bump, not immediately pivot away from the arrow.
+	# Allow a turn only after a meaningful, collision-free forward approach.
+	var distances:Array=[size.y*0.35,size.y*0.65,size.y]
+	for distance:float in distances:
 		var end:Vector2 = start+model.forward(bus)*distance
 		var prefix:Array = [{"position":start,"angle":heading,"distance":0.0}]
 		var steps:int = ceili(distance/3.0)
@@ -59,3 +62,4 @@ static func clear_segment(model,size:Vector2,a:Dictionary,b:Dictionary,obstacles
 	for other:Dictionary in obstacles:
 		if model._rectangles_overlap(p,f,extent,other.position,model.forward(other),model.vehicle_size(other)): return false
 	return true
+

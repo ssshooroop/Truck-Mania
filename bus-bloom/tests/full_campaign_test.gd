@@ -2,8 +2,8 @@ extends SceneTree
 const Model=preload("res://scripts/game_model.gd")
 func _initialize():
 	var m=Model.new()
-	assert(m.level_count()==100)
-	for i in range(10,100):
+	assert(m.level_count()==150)
+	for i in range(10,m.level_count()):
 		assert(m.load_level(i))
 		for b in m.buses:
 			for other in m.buses:
@@ -16,5 +16,5 @@ func _initialize():
 				m.board_batch(next,m.batch_size(next))
 				if m.get_bus(next).status=="leaving":m.depart(next)
 		assert(m.is_won(),"Solution level %d"%(i+1))
-	print("Levels 11–100: all solutions and initial geometry verified")
+	print("Levels 11–150: all solutions and initial geometry verified")
 	quit()

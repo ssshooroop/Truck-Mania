@@ -1,0 +1,11 @@
+pluginManagement {
+    repositories { google(); mavenCentral(); gradlePluginPortal() }
+}
+dependencyResolutionManagement {
+    repositories {
+        google { content { includeGroupByRegex 'com\\.android.*'; includeGroupByRegex 'androidx\\..*'; includeGroupByRegex 'com\\.google\\.android.*' } }
+        mavenCentral()
+        maven { url 'https://developer.huawei.com/repo/'; content { includeGroupByRegex 'com\\.huawei.*' } }
+    }
+}
+rootProject.name = 'truck-mania-huawei-iap'

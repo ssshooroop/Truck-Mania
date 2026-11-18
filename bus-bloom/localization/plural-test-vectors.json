@@ -1,0 +1,2031 @@
+{
+  "cldr_version": "48",
+  "type": "cardinal",
+  "cases": [
+    {
+      "locale": "ru",
+      "input": "0",
+      "category": "many"
+    },
+    {
+      "locale": "ru",
+      "input": "1",
+      "category": "one"
+    },
+    {
+      "locale": "ru",
+      "input": "2",
+      "category": "few"
+    },
+    {
+      "locale": "ru",
+      "input": "3",
+      "category": "few"
+    },
+    {
+      "locale": "ru",
+      "input": "4",
+      "category": "few"
+    },
+    {
+      "locale": "ru",
+      "input": "5",
+      "category": "many"
+    },
+    {
+      "locale": "ru",
+      "input": "10",
+      "category": "many"
+    },
+    {
+      "locale": "ru",
+      "input": "11",
+      "category": "many"
+    },
+    {
+      "locale": "ru",
+      "input": "12",
+      "category": "many"
+    },
+    {
+      "locale": "ru",
+      "input": "14",
+      "category": "many"
+    },
+    {
+      "locale": "ru",
+      "input": "20",
+      "category": "many"
+    },
+    {
+      "locale": "ru",
+      "input": "21",
+      "category": "one"
+    },
+    {
+      "locale": "ru",
+      "input": "22",
+      "category": "few"
+    },
+    {
+      "locale": "ru",
+      "input": "25",
+      "category": "many"
+    },
+    {
+      "locale": "ru",
+      "input": "99",
+      "category": "many"
+    },
+    {
+      "locale": "ru",
+      "input": "100",
+      "category": "many"
+    },
+    {
+      "locale": "ru",
+      "input": "101",
+      "category": "one"
+    },
+    {
+      "locale": "ru",
+      "input": "102",
+      "category": "few"
+    },
+    {
+      "locale": "ru",
+      "input": "103",
+      "category": "few"
+    },
+    {
+      "locale": "ru",
+      "input": "111",
+      "category": "many"
+    },
+    {
+      "locale": "ru",
+      "input": "112",
+      "category": "many"
+    },
+    {
+      "locale": "ru",
+      "input": "1000000",
+      "category": "many"
+    },
+    {
+      "locale": "ru",
+      "input": "2000000",
+      "category": "many"
+    },
+    {
+      "locale": "ru",
+      "input": "1.0",
+      "category": "other"
+    },
+    {
+      "locale": "ru",
+      "input": "1.00",
+      "category": "other"
+    },
+    {
+      "locale": "ru",
+      "input": "1.5",
+      "category": "other"
+    },
+    {
+      "locale": "ru",
+      "input": "0.5",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "0",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "1",
+      "category": "one"
+    },
+    {
+      "locale": "en",
+      "input": "2",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "3",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "4",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "5",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "10",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "11",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "12",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "14",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "20",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "21",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "22",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "25",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "99",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "100",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "101",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "102",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "103",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "111",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "112",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "1000000",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "2000000",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "1.0",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "1.00",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "1.5",
+      "category": "other"
+    },
+    {
+      "locale": "en",
+      "input": "0.5",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "0",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "1",
+      "category": "one"
+    },
+    {
+      "locale": "de",
+      "input": "2",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "3",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "4",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "5",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "10",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "11",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "12",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "14",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "20",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "21",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "22",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "25",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "99",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "100",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "101",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "102",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "103",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "111",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "112",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "1000000",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "2000000",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "1.0",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "1.00",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "1.5",
+      "category": "other"
+    },
+    {
+      "locale": "de",
+      "input": "0.5",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "0",
+      "category": "one"
+    },
+    {
+      "locale": "fr",
+      "input": "1",
+      "category": "one"
+    },
+    {
+      "locale": "fr",
+      "input": "2",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "3",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "4",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "5",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "10",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "11",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "12",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "14",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "20",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "21",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "22",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "25",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "99",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "100",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "101",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "102",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "103",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "111",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "112",
+      "category": "other"
+    },
+    {
+      "locale": "fr",
+      "input": "1000000",
+      "category": "many"
+    },
+    {
+      "locale": "fr",
+      "input": "2000000",
+      "category": "many"
+    },
+    {
+      "locale": "fr",
+      "input": "1.0",
+      "category": "one"
+    },
+    {
+      "locale": "fr",
+      "input": "1.00",
+      "category": "one"
+    },
+    {
+      "locale": "fr",
+      "input": "1.5",
+      "category": "one"
+    },
+    {
+      "locale": "fr",
+      "input": "0.5",
+      "category": "one"
+    },
+    {
+      "locale": "es",
+      "input": "0",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "1",
+      "category": "one"
+    },
+    {
+      "locale": "es",
+      "input": "2",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "3",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "4",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "5",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "10",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "11",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "12",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "14",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "20",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "21",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "22",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "25",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "99",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "100",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "101",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "102",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "103",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "111",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "112",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "1000000",
+      "category": "many"
+    },
+    {
+      "locale": "es",
+      "input": "2000000",
+      "category": "many"
+    },
+    {
+      "locale": "es",
+      "input": "1.0",
+      "category": "one"
+    },
+    {
+      "locale": "es",
+      "input": "1.00",
+      "category": "one"
+    },
+    {
+      "locale": "es",
+      "input": "1.5",
+      "category": "other"
+    },
+    {
+      "locale": "es",
+      "input": "0.5",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "0",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "1",
+      "category": "one"
+    },
+    {
+      "locale": "it",
+      "input": "2",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "3",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "4",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "5",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "10",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "11",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "12",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "14",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "20",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "21",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "22",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "25",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "99",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "100",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "101",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "102",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "103",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "111",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "112",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "1000000",
+      "category": "many"
+    },
+    {
+      "locale": "it",
+      "input": "2000000",
+      "category": "many"
+    },
+    {
+      "locale": "it",
+      "input": "1.0",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "1.00",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "1.5",
+      "category": "other"
+    },
+    {
+      "locale": "it",
+      "input": "0.5",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "0",
+      "category": "one"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "1",
+      "category": "one"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "2",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "3",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "4",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "5",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "10",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "11",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "12",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "14",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "20",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "21",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "22",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "25",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "99",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "100",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "101",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "102",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "103",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "111",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "112",
+      "category": "other"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "1000000",
+      "category": "many"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "2000000",
+      "category": "many"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "1.0",
+      "category": "one"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "1.00",
+      "category": "one"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "1.5",
+      "category": "one"
+    },
+    {
+      "locale": "pt-BR",
+      "input": "0.5",
+      "category": "one"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "0",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "1",
+      "category": "one"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "2",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "3",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "4",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "5",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "10",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "11",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "12",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "14",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "20",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "21",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "22",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "25",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "99",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "100",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "101",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "102",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "103",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "111",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "112",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "1000000",
+      "category": "many"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "2000000",
+      "category": "many"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "1.0",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "1.00",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "1.5",
+      "category": "other"
+    },
+    {
+      "locale": "pt-PT",
+      "input": "0.5",
+      "category": "other"
+    },
+    {
+      "locale": "ro",
+      "input": "0",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "1",
+      "category": "one"
+    },
+    {
+      "locale": "ro",
+      "input": "2",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "3",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "4",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "5",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "10",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "11",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "12",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "14",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "20",
+      "category": "other"
+    },
+    {
+      "locale": "ro",
+      "input": "21",
+      "category": "other"
+    },
+    {
+      "locale": "ro",
+      "input": "22",
+      "category": "other"
+    },
+    {
+      "locale": "ro",
+      "input": "25",
+      "category": "other"
+    },
+    {
+      "locale": "ro",
+      "input": "99",
+      "category": "other"
+    },
+    {
+      "locale": "ro",
+      "input": "100",
+      "category": "other"
+    },
+    {
+      "locale": "ro",
+      "input": "101",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "102",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "103",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "111",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "112",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "1000000",
+      "category": "other"
+    },
+    {
+      "locale": "ro",
+      "input": "2000000",
+      "category": "other"
+    },
+    {
+      "locale": "ro",
+      "input": "1.0",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "1.00",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "1.5",
+      "category": "few"
+    },
+    {
+      "locale": "ro",
+      "input": "0.5",
+      "category": "few"
+    },
+    {
+      "locale": "pl",
+      "input": "0",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "1",
+      "category": "one"
+    },
+    {
+      "locale": "pl",
+      "input": "2",
+      "category": "few"
+    },
+    {
+      "locale": "pl",
+      "input": "3",
+      "category": "few"
+    },
+    {
+      "locale": "pl",
+      "input": "4",
+      "category": "few"
+    },
+    {
+      "locale": "pl",
+      "input": "5",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "10",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "11",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "12",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "14",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "20",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "21",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "22",
+      "category": "few"
+    },
+    {
+      "locale": "pl",
+      "input": "25",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "99",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "100",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "101",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "102",
+      "category": "few"
+    },
+    {
+      "locale": "pl",
+      "input": "103",
+      "category": "few"
+    },
+    {
+      "locale": "pl",
+      "input": "111",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "112",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "1000000",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "2000000",
+      "category": "many"
+    },
+    {
+      "locale": "pl",
+      "input": "1.0",
+      "category": "other"
+    },
+    {
+      "locale": "pl",
+      "input": "1.00",
+      "category": "other"
+    },
+    {
+      "locale": "pl",
+      "input": "1.5",
+      "category": "other"
+    },
+    {
+      "locale": "pl",
+      "input": "0.5",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "0",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "1",
+      "category": "one"
+    },
+    {
+      "locale": "tr",
+      "input": "2",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "3",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "4",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "5",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "10",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "11",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "12",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "14",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "20",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "21",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "22",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "25",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "99",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "100",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "101",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "102",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "103",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "111",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "112",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "1000000",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "2000000",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "1.0",
+      "category": "one"
+    },
+    {
+      "locale": "tr",
+      "input": "1.00",
+      "category": "one"
+    },
+    {
+      "locale": "tr",
+      "input": "1.5",
+      "category": "other"
+    },
+    {
+      "locale": "tr",
+      "input": "0.5",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "0",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "1",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "2",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "3",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "4",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "5",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "10",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "11",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "12",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "14",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "20",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "21",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "22",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "25",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "99",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "100",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "101",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "102",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "103",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "111",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "112",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "1000000",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "2000000",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "1.0",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "1.00",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "1.5",
+      "category": "other"
+    },
+    {
+      "locale": "ja",
+      "input": "0.5",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "0",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "1",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "2",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "3",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "4",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "5",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "10",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "11",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "12",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "14",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "20",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "21",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "22",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "25",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "99",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "100",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "101",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "102",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "103",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "111",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "112",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "1000000",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "2000000",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "1.0",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "1.00",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "1.5",
+      "category": "other"
+    },
+    {
+      "locale": "ko",
+      "input": "0.5",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "0",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "1",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "2",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "3",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "4",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "5",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "10",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "11",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "12",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "14",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "20",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "21",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "22",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "25",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "99",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "100",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "101",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "102",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "103",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "111",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "112",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "1000000",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "2000000",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "1.0",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "1.00",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "1.5",
+      "category": "other"
+    },
+    {
+      "locale": "zh",
+      "input": "0.5",
+      "category": "other"
+    },
+    {
+      "locale": "ar",
+      "input": "0",
+      "category": "zero"
+    },
+    {
+      "locale": "ar",
+      "input": "1",
+      "category": "one"
+    },
+    {
+      "locale": "ar",
+      "input": "2",
+      "category": "two"
+    },
+    {
+      "locale": "ar",
+      "input": "3",
+      "category": "few"
+    },
+    {
+      "locale": "ar",
+      "input": "4",
+      "category": "few"
+    },
+    {
+      "locale": "ar",
+      "input": "5",
+      "category": "few"
+    },
+    {
+      "locale": "ar",
+      "input": "10",
+      "category": "few"
+    },
+    {
+      "locale": "ar",
+      "input": "11",
+      "category": "many"
+    },
+    {
+      "locale": "ar",
+      "input": "12",
+      "category": "many"
+    },
+    {
+      "locale": "ar",
+      "input": "14",
+      "category": "many"
+    },
+    {
+      "locale": "ar",
+      "input": "20",
+      "category": "many"
+    },
+    {
+      "locale": "ar",
+      "input": "21",
+      "category": "many"
+    },
+    {
+      "locale": "ar",
+      "input": "22",
+      "category": "many"
+    },
+    {
+      "locale": "ar",
+      "input": "25",
+      "category": "many"
+    },
+    {
+      "locale": "ar",
+      "input": "99",
+      "category": "many"
+    },
+    {
+      "locale": "ar",
+      "input": "100",
+      "category": "other"
+    },
+    {
+      "locale": "ar",
+      "input": "101",
+      "category": "other"
+    },
+    {
+      "locale": "ar",
+      "input": "102",
+      "category": "other"
+    },
+    {
+      "locale": "ar",
+      "input": "103",
+      "category": "few"
+    },
+    {
+      "locale": "ar",
+      "input": "111",
+      "category": "many"
+    },
+    {
+      "locale": "ar",
+      "input": "112",
+      "category": "many"
+    },
+    {
+      "locale": "ar",
+      "input": "1000000",
+      "category": "other"
+    },
+    {
+      "locale": "ar",
+      "input": "2000000",
+      "category": "other"
+    },
+    {
+      "locale": "ar",
+      "input": "1.0",
+      "category": "one"
+    },
+    {
+      "locale": "ar",
+      "input": "1.00",
+      "category": "one"
+    },
+    {
+      "locale": "ar",
+      "input": "1.5",
+      "category": "other"
+    },
+    {
+      "locale": "ar",
+      "input": "0.5",
+      "category": "other"
+    }
+  ]
+}

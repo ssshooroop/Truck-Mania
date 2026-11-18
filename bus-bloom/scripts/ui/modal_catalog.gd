@@ -24,7 +24,7 @@ const ITEM_ICONS := {
 	"coins": COINS_BIG,
 	"undo": UNDO,
 	"extra_slot": CONE,
-	"crane": GIFT,
+	"crane": preload("res://assets/artwork/menu/crane-icon.png"),
 	"shuffle": SHUFFLE,
 	"swap": GIFT,
 }
@@ -62,7 +62,8 @@ static func stuck(ctx:Dictionary) -> Dictionary:
 		{"type":"art","texture":STUCK_ART,"height":210,"focus":Vector2(0.42,0.27)},
 	]
 	var help: bool = ctx.get("rescue_left",true)
-	if ctx.get("slot_available",false) and help:
+	# Locked parking spaces remain purchasable even after the rescue-tool limit.
+	if ctx.get("slot_available",false):
 		var price := int(ctx.get("slot_price",100))
 		blocks.append({"type":"text","text":"Все места у склада заняты.\nОткрой ещё одно — и продолжай!","size":21})
 		blocks.append({"type":"button","id":"slot_coins","kind":"primary","label":"Открыть место","pulse":true,
@@ -111,7 +112,7 @@ static func offer(item:String,price:int,coins:int,ad_ready:bool) -> Dictionary:
 
 # ------------------------------------------------------------- not enough coins
 
-## pack: {"coins":500,"price":"$1.99"} — the smallest store pack that covers
+## pack: {"coins":500,"price":"$1.99","enabled":true} — the smallest store pack that covers
 ## the gap — or {} when no store is configured.
 static func shortfall(need:int,coins:int,ad_coins:int,ad_ready:bool,pack:Dictionary={}) -> Dictionary:
 	var missing := maxi(0,need-coins)
@@ -121,7 +122,7 @@ static func shortfall(need:int,coins:int,ad_coins:int,ad_ready:bool,pack:Diction
 		{"type":"button","id":"watch_ad","kind":"ad","label":("+%d за рекламу" % ad_coins) if ad_ready else "Ролик готовится…","pulse":true,"enabled":ad_ready},
 	]
 	if not pack.is_empty():
-		blocks.append({"type":"button","id":"buy_pack","kind":"primary","label":"%d монет" % int(pack.coins),"icon":COINS_MEDIUM,"price":{"money":pack.price}})
+		blocks.append({"type":"button","id":"buy_pack","product_id":str(pack.get("product_id","")),"kind":"primary","label":"%d монет" % int(pack.coins),"icon":COINS_MEDIUM,"price":{"money":pack.price},"enabled":bool(pack.get("enabled",false))})
 		blocks.append({"type":"link","id":"shop","label":"Все наборы в магазине"})
 	else: blocks.append({"type":"link","id":"close","label":"Не сейчас"})
 	return {"id":"shortfall","title":"Не хватает монет","close":true,"back":"close","balance":coins,"blocks":blocks}
@@ -170,7 +171,7 @@ static func crane_intro(coins:int) -> Dictionary:
 		{"type":"art","texture":preload("res://assets/artwork/menu/Cheerful Crane-Suspended Construction Worker.png"),"height":300,"fit":"contain"},
 		{"type":"text","text":"Вызовите кран!","size":30},
 		{"type":"button","id":"crane","kind":"primary","label":"Вызвать бесплатно","pulse":true},
-		{"type":"text","text":"В первый раз бесплатно, потом — 150 монет.","size":20},
+		{"type":"text","text":preload("res://scripts/localization.gd").message("crane.intro.price",{"price":150}),"size":20},
 		{"type":"link","id":"undo","label":"Отмена хода"},
 		{"type":"link","id":"retry","label":"Попробовать заново"}]}
 
@@ -195,7 +196,9 @@ static func reward_parts(details:Dictionary) -> String:
 	var parts: Array = []
 	for key in ["base","streak","chest","achievements"]:
 		var n := int(details.get(key,0))
-		if n>0: parts.append("%s +%d" % [{"base":"Уровень","streak":"Серия","chest":"Сундук","achievements":"Достижения"}[key],n])
+		if n>0:
+			var label:String = {"base":"Уровень","streak":"Серия","chest":"Сундук","achievements":"Достижения"}[key]
+			parts.append("%s +%d" % [preload("res://scripts/localization.gd").text(label),n])
 	return " · ".join(parts) if parts.size()>1 else ""
 
 # ------------------------------------------------------------- seasonal
@@ -210,14 +213,15 @@ static func seasonal(event:Dictionary,store,frozen_now:int=0) -> Dictionary:
 		{"type":"timer","ends_at":int(event.ends_at),"label":"До конца"},
 		{"type":"text","text":event.get("text",""),"size":21},
 		{"type":"bundle","items":items_for(product.get("contents",{}))},
-		{"type":"button","id":"buy_bundle","kind":"primary","label":event.get("cta","Забрать набор"),"pulse":true,
+		{"type":"button","id":"buy_bundle","product_id":str(product.id),"kind":"primary","label":event.get("cta","Забрать набор"),"pulse":true,"enabled":store.is_available(str(product.id)),
 			"price":{"money":store.price(product.id)}},
 		{"type":"link","id":"close","label":"Позже"},
 	]
-	if product.has("old_usd"): blocks[4].note = "Обычная цена %s" % store.old_price(product.id)
+	var old_price: String = store.old_price(product.id)
+	if store.simulate and not old_price.is_empty(): blocks[4].note = "Обычная цена %s" % old_price
 	if frozen_now>0: blocks[1].now = frozen_now
 	var spec := {"id":"seasonal_"+str(event.get("id","")),"title":event.get("title","Сезонная акция"),"close":true,"back":"close","blocks":blocks}
-	var off := discount(product)
+	var off := discount(product) if store.simulate else ""
 	if off!="": spec.ribbon = off
 	return spec
 
@@ -252,7 +256,7 @@ static func shop(ctx:Dictionary) -> Dictionary:
 	if "starter" not in owned and store.products.has("starter"): featured.append("starter")
 	for id: String in featured:
 		var p: Dictionary = store.product(id)
-		var deal := {"type":"deal","id":"buy:"+id,"title":p.get("title",""),"items":items_for(p.contents),"price":store.price(id)}
+		var deal := {"type":"deal","id":"buy:"+id,"title":p.get("title",""),"items":items_for(p.contents),"price":store.price(id),"enabled":store.is_available(id)}
 		if id==event.get("product",""):
 			deal.art = load(event.art)
 			deal.focus = Vector2(event.get("focus_x",0.5),event.get("focus_y",0.4))
@@ -260,8 +264,9 @@ static func shop(ctx:Dictionary) -> Dictionary:
 		else:
 			deal.icon = GIFT
 			deal.subtitle = p.get("subtitle","")
-		if p.has("old_usd"): deal.old_price = store.old_price(id)
-		var off := discount(p)
+		var old_price: String = store.old_price(id)
+		if store.simulate and not old_price.is_empty(): deal.old_price = old_price
+		var off := discount(p) if store.simulate else ""
 		if off!="": deal.tag = off
 		blocks.append(deal)
 	blocks.append({"type":"label","text":"Монеты"})
@@ -270,12 +275,12 @@ static func shop(ctx:Dictionary) -> Dictionary:
 		"price":"Бесплатно" if ad_ready else "Скоро","enabled":ad_ready}]
 	for id: String in store.coin_packs():
 		var p: Dictionary = store.product(id)
-		var tile := {"id":"buy:"+id,"icon":load("res://assets/artwork/menu/"+p.icon),"amount":_thousands(int(p.contents.coins)),"price":store.price(id)}
+		var tile := {"id":"buy:"+id,"icon":load("res://assets/artwork/menu/"+p.icon),"amount":_thousands(int(p.contents.coins)),"price":store.price(id),"enabled":store.is_available(id)}
 		if store.bonus(id)!="": tile.bonus = store.bonus(id)
-		if p.has("tag"): tile.tag = p.tag
+		if store.simulate and p.has("tag"): tile.tag = p.tag
 		tiles.append(tile)
 	blocks.append({"type":"packs","columns":3,"tiles":tiles})
-	blocks.append({"type":"link","id":"restore","label":"Восстановить покупки"})
+	blocks.append({"type":"link","id":"restore","label":"Восстановить покупки","enabled":store.can_restore()})
 	return {"id":"shop","title":"Магазин","close":true,"back":"close","balance":int(ctx.get("coins",0)),"blocks":blocks}
 
 ## After a successful purchase: what arrived.
@@ -308,9 +313,73 @@ static func _days(seconds:int) -> String:
 	if seconds>=86400: return "%d д" % (seconds/86400)
 	return "%d ч" % maxi(1,seconds/3600)
 
+# ------------------------------------------------------------- daily bonus
+
+## ctx: definitions (daily_rewards.gd days), cards (calendar states), today
+## (index), claimed (bool: today's reward was just taken), coins, before.
+static func daily(ctx:Dictionary) -> Dictionary:
+	var days: Array = []
+	var cards: Array = ctx.cards
+	for i in cards.size():
+		var rewards: Array = []
+		for r: Dictionary in ctx.definitions[i].rewards:
+			rewards.append({"item":r.item,"quantity":int(r.quantity),"texture":ITEM_ICONS.get(r.item,GIFT)})
+		days.append({"state":cards[i],"rewards":rewards})
+	var claimed: bool = ctx.get("claimed",false)
+	var animate: bool = ctx.get("animate",false)
+	var today := int(ctx.get("today",0))
+	var blocks: Array = [
+		{"type":"hero","texture":BILLY_HAPPY,"size":110,"rays":false},
+		{"type":"days","days":days,"pop":today if animate else -1},
+	]
+	if claimed:
+		var next := "Новая неделя начнётся завтра!" if today>=cards.size()-1 else preload("res://scripts/localization.gd").text("Завтра: %s") % reward_text(ctx.definitions[today+1].rewards)
+		blocks.append({"type":"text","text":next,"size":21})
+		blocks.append({"type":"button","id":"close","kind":"primary","label":"Отлично!","pulse":true})
+	else:
+		blocks.append({"type":"text","text":"Заходи каждый день — награды растут!","size":21})
+		blocks.append({"type":"button","id":"claim","kind":"primary","label":"Забрать","pulse":true})
+	var spec := {"id":"daily","title":"Ежедневный бонус","balance":int(ctx.get("coins",0)),"back":"close","blocks":blocks}
+	if animate:
+		spec.balance_from = int(ctx.get("before",ctx.get("coins",0)))
+		spec.fly = int(ctx.get("coins",0))>int(spec.balance_from)
+		spec.replay_flight = true
+	return spec
+
+## "50 монет и отмена хода ×1"
+static func reward_text(rewards:Array) -> String:
+	var parts: Array = []
+	for r: Dictionary in rewards:
+		var n := int(r.quantity)
+		match r.item:
+			"coins": parts.append("%d {{coin}}" % n)
+			"undo": parts.append(preload("res://scripts/localization.gd").text("отмена хода ×%d") % n)
+			"extra_slot": parts.append(preload("res://scripts/localization.gd").text("место ×%d") % n)
+			"crane": parts.append(preload("res://scripts/localization.gd").text("кран ×%d") % n)
+			"shuffle": parts.append(preload("res://scripts/localization.gd").text("перемешивание ×%d") % n)
+			_: parts.append(preload("res://scripts/localization.gd").text("подарок ×%d") % n)
+	return " + ".join(parts)
+
 static func coin_word(n:int) -> String:
 	var m10 := n%10
 	var m100 := n%100
 	if m10==1 and m100!=11: return "монета"
 	if m10>=2 and m10<=4 and (m100<12 or m100>14): return "монеты"
 	return "монет"
+
+static func pause_menu(preferences:Dictionary) -> Dictionary:
+	var items:Array = []
+	var icons = {
+		"music":preload("res://assets/artwork/menu/music.png"),
+		"sound":preload("res://assets/artwork/menu/sound.png"),
+		"vibration":preload("res://assets/artwork/menu/vibration.png"),
+		"reduced_motion":preload("res://assets/artwork/menu/reduced-motion.png")}
+	for key in ["music","sound","vibration","reduced_motion"]:
+		items.append({"id":key,"icon":icons[key],"on":preferences[key] if key!="reduced_motion" else not preferences[key]})
+	return {"id":"pause","title":"Перерыв на стройке","close":true,"back":"close","blocks":[
+		{"type":"hero","texture":BILLY_HAPPY,"size":120,"rays":false},
+		{"type":"text","text":"Груз и машины подождут","size":22},
+		{"type":"preferences","items":items},
+		{"type":"button","id":"resume","kind":"primary","label":"Продолжить работу"},
+		{"type":"button","id":"retry","kind":"secondary","label":"Начать уровень заново","size":24},
+		{"type":"link","id":"menu","label":"Выбрать склад"}]}

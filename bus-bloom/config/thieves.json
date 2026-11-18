@@ -1,0 +1,14 @@
+{
+  "first_level": 17,
+  "first_truck_level": 20,
+  "first_delay": 9.0,
+  "interval": 26.0,
+  "max_events": 2,
+  "levels": {
+    "17": "belt", "18": "none", "19": "belt", "20": "truck",
+    "21": "none", "22": "alternate", "23": "belt", "24": "none",
+    "25": "both", "26": "truck", "27": "none", "28": "alternate",
+    "29": "belt", "30": "both"
+  },
+  "later_pattern": ["none", "belt", "truck", "none", "alternate", "both"]
+}

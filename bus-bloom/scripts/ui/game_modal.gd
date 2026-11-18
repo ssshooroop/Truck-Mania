@@ -15,6 +15,14 @@ const OPEN_TIME := 0.30
 const CLOSE_TIME := 0.16
 const PACK_H := 196.0
 const FLIGHT_COINS := 14
+const DAY_H := 140.0
+const CHECK := preload("res://assets/artwork/menu/green-checkmark.png")
+const COIN_PILES := [
+	preload("res://assets/artwork/menu/coin.png"),
+	preload("res://assets/artwork/menu/coins-stack-small.png"),
+	preload("res://assets/artwork/menu/coins-stack-medium.png"),
+	preload("res://assets/artwork/menu/coins-stack-big.png"),
+]
 
 var spec: Dictionary = {}
 var reduced_motion := false
@@ -27,12 +35,15 @@ var pressed_id := ""
 var press_inside := false
 var press: Dictionary = {}
 var busy: Dictionary = {}
+var input_locked := false
 var flash_text := ""
 var flash_time := 0.0
 var base := Transform2D.IDENTITY
 var _laid_out_for := Vector2.ZERO
 var flight_start := 0.0
 var reward_coin := Vector2.ZERO
+var message_input:TextEdit
+var language_font:Font
 
 func _init(value:Dictionary={}) -> void:
 	spec = value
@@ -41,6 +52,26 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	resized.connect(func(): _laid_out_for = Vector2.ZERO)
+
+	for block in spec.get("blocks",[]):
+		if block.type=="input":
+			message_input = TextEdit.new()
+			message_input.placeholder_text = Style.Loc.text("Ваше сообщение…")
+			message_input.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
+			message_input.add_theme_font_override("font",Style.LocalText.localized_font(Style.BOLD))
+			message_input.add_theme_font_size_override("font_size",21)
+			message_input.add_theme_color_override("font_color",Style.INK)
+			message_input.add_theme_color_override("font_placeholder_color",Color("596574"))
+			var field = StyleBoxFlat.new()
+			field.bg_color = Style.TILE
+			field.set_corner_radius_all(14)
+			field.content_margin_left = 12
+			field.content_margin_top = 10
+			message_input.add_theme_stylebox_override("normal",field)
+			add_child(message_input)
+		if block.type=="languages":
+			language_font = Style.BOLD.duplicate()
+			language_font.fallbacks = [load("res://assets/fonts/localization/NotoSansArabic.ttf"),load("res://assets/fonts/localization/NotoSansKR.ttf"),load("res://assets/fonts/localization/NotoSansSC.ttf")]
 
 ## Replace the content without replaying the entrance (e.g. ad finished).
 func update_spec(value:Dictionary) -> void:
@@ -65,11 +96,25 @@ func close() -> void:
 
 ## Android back / Escape: runs the spec's "back" action, if any.
 func back() -> void:
+	if input_locked: return
 	var id: String = spec.get("back","")
 	if id!="" and not is_closing(): action.emit(id)
 
+func refresh_controls() -> void:
+	_laid_out_for = Vector2.ZERO
+	queue_redraw()
+
 func _process(delta:float) -> void:
 	age += delta
+	if message_input:
+		_layout()
+		for item in placed:
+			if item.block.type=="input":
+				message_input.position = base*item.rect.position
+				message_input.size = item.rect.size
+				message_input.scale = base.get_scale()
+		message_input.visible = age>=OPEN_TIME and not is_closing()
+
 	flash_time = maxf(0.0,flash_time-delta)
 	var appear := minf(1.0,age/(OPEN_TIME*0.6))
 	if closing_age>=0.0: appear = 1.0-clampf(closing_age/CLOSE_TIME,0,1)
@@ -90,6 +135,9 @@ func _process(delta:float) -> void:
 
 func _block_height(b:Dictionary) -> float:
 	match b.get("type",""):
+		"preferences": return 84.0
+		"languages": return 6*62.0
+		"input": return 130.0
 		"art": return float(b.get("height",200))
 		"hero": return float(b.get("size",150))+24.0
 		"text": return Style.paragraph_height(b.text,INNER_W,int(b.get("size",22)))
@@ -103,6 +151,7 @@ func _block_height(b:Dictionary) -> float:
 		"status": return 64.0
 		"gap": return float(b.get("height",8))
 		"label": return 26.0
+		"days": return DAY_H*2.0+130.0+20.0
 		"deal": return 158.0
 		"packs":
 			var rows := ceili(float(b.tiles.size())/float(b.get("columns",3)))
@@ -160,6 +209,10 @@ func _layout() -> void:
 		var b: Dictionary = blocks[i]
 		var rect := Rect2(INNER_X,y,INNER_W,heights[i])
 		placed.append({"block":b,"rect":rect})
+		if b.type=="preferences":
+			for j in b.items.size(): hits[b.items[j].id] = _preference_rect(rect,j,b.items.size())
+		if b.type=="languages":
+			for j in b.items.size(): hits["language:"+b.items[j][0]] = _language_rect(rect,j)
 		if b.type=="packs":
 			for t in b.tiles.size():
 				if b.tiles[t].get("enabled",true): hits[b.tiles[t].id] = _pack_rect(b,rect,t)
@@ -171,7 +224,9 @@ func _layout() -> void:
 				"link": hits[id] = rect.grow_individual(-90,6,-90,6)
 				"deal": hits[id] = rect
 		y += heights[i]+BLOCK_GAP
-	if spec.get("close",false): hits["close"] = Rect2(_close_center()-Vector2(32,32),Vector2(64,64))
+	# Keep the footer's close action region; the header has its own hit test.
+	if spec.get("close",false) and not hits.has("close"):
+		hits["close"] = Rect2(_close_center()-Vector2(32,32),Vector2(64,64))
 
 func _pack_rect(b:Dictionary,rect:Rect2,i:int) -> Rect2:
 	var cols := int(b.get("columns",3))
@@ -264,6 +319,29 @@ func _pulse(b:Dictionary) -> float:
 
 func _draw_block(b:Dictionary,rect:Rect2) -> void:
 	match b.get("type",""):
+		"preferences":
+			for j in b.items.size():
+				var tile := _preference_rect(rect,j,b.items.size())
+				Style.icon(self,b.items[j].icon,tile.get_center(),64.0)
+				if not b.items[j].on:
+					var center := tile.get_center()
+					draw_line(center+Vector2(-24,24),center+Vector2(24,-24),Color.WHITE,7,true)
+					draw_line(center+Vector2(-24,24),center+Vector2(24,-24),Color("f02d32"),4,true)
+		"languages":
+			for j in b.items.size():
+				var r = _language_rect(rect,j)
+				var selected:bool = b.items[j][0]==b.selected
+				Style.round_rect(self,r,Color("4ccb5e") if selected else Style.TILE,14,Style.TILE_EDGE,2)
+				var label:String = b.items[j][1]
+				var font:Font=language_font
+				var native_fonts={"ko":"NotoSansKR","zh":"NotoSansSC","ar":"NotoSansArabic"}
+				if native_fonts.has(b.items[j][0]):
+					var native=FontVariation.new()
+					native.base_font=load("res://assets/fonts/localization/"+native_fonts[b.items[j][0]]+".ttf")
+					native.variation_opentype={TextServerManager.get_primary_interface().name_to_tag("wght"):700}
+					font=native
+				var w = font.get_string_size(label,HORIZONTAL_ALIGNMENT_LEFT,-1,23).x
+				draw_string(font,r.get_center()+Vector2(-w/2,8),label,HORIZONTAL_ALIGNMENT_LEFT,-1,23,Style.INK)
 		"art": _draw_art(b,rect)
 		"hero":
 			var center := rect.get_center()
@@ -281,12 +359,15 @@ func _draw_block(b:Dictionary,rect:Rect2) -> void:
 		"row": _draw_row(b,rect)
 		"link":
 			var pressed: float = press.get(b.get("id",""),0.0)
-			Style.text(self,b.label,rect.get_center()+Vector2(0,8+pressed*2),21,Style.MUTED.darkened(0.15*pressed),Style.HEAVY)
+			var enabled: bool = b.get("enabled",true)
+			var color := Style.MUTED.darkened(0.15*pressed) if enabled else Color(Style.MUTED,0.45)
+			Style.text(self,b.label,rect.get_center()+Vector2(0,8+pressed*2),21,color,Style.HEAVY)
 			var w := Style.HEAVY.get_string_size(b.label,HORIZONTAL_ALIGNMENT_LEFT,-1,21).x
-			draw_line(rect.get_center()+Vector2(-w*0.5,13),rect.get_center()+Vector2(w*0.5,13),Color(Style.MUTED,0.45),2)
+			if enabled: draw_line(rect.get_center()+Vector2(-w*0.5,13),rect.get_center()+Vector2(w*0.5,13),Color(Style.MUTED,0.45),2)
 		"timer": _draw_timer(b,rect)
 		"bundle": _draw_bundle(b,rect)
 		"label": Style.text_left(self,b.text,rect.position+Vector2(4,21),22,Style.TEXT,Style.HEAVY)
+		"days": _draw_days(b,rect)
 		"deal": _draw_deal(b,rect)
 		"packs":
 			for t in b.tiles.size(): _draw_pack(b.tiles[t],_pack_rect(b,rect,t))
@@ -416,6 +497,7 @@ static func _format_left(seconds:int) -> String:
 ## Wide offer card: picture left, contents and price right; the whole card is the target.
 func _draw_deal(b:Dictionary,rect:Rect2) -> void:
 	var id: String = b.get("id","")
+	var enabled: bool = b.get("enabled",true)
 	var p: float = press.get(id,0.0)
 	var r := Rect2(rect.position+Vector2(0,p*3),rect.size)
 	Style.round_rect(self,Rect2(rect.position+Vector2(0,5),rect.size),Style.TILE_EDGE,Style.R_TILE)
@@ -424,11 +506,11 @@ func _draw_deal(b:Dictionary,rect:Rect2) -> void:
 	if b.has("art"): _draw_art({"texture":b.art,"focus":b.get("focus",Vector2(0.5,0.4))},pic)
 	else:
 		Style.round_rect(self,pic,Style.PAPER_DEEP,Style.R_TILE-6)
-		if not reduced_motion: Style.rays(self,pic.get_center(),70,age*0.35,0.7)
-		Style.icon(self,b.icon,pic.get_center(),104)
+		if not reduced_motion and enabled: Style.rays(self,pic.get_center(),70,age*0.35,0.7)
+		Style.icon(self,b.icon,pic.get_center(),104,1.0 if enabled else 0.5)
 	var x := pic.end.x+14
 	var right := r.end.x-12
-	Style.text_left(self,b.title,Vector2(x,r.position.y+32),22,Style.TEXT,Style.HEAVY,right-x)
+	Style.text_left(self,b.title,Vector2(x,r.position.y+32),22,Style.TEXT if enabled else Style.MUTED,Style.HEAVY,right-x)
 	if b.has("subtitle"): Style.text_left(self,b.subtitle,Vector2(x,r.position.y+54),15,Style.MUTED,Style.BOLD,right-x)
 	var ix := x
 	for it: Dictionary in b.get("items",[]):
@@ -436,9 +518,10 @@ func _draw_deal(b:Dictionary,rect:Rect2) -> void:
 		Style.text_left(self,it.count,Vector2(ix+32,r.position.y+85),17,Style.TEXT,Style.HEAVY)
 		ix += 36+Style.HEAVY.get_string_size(it.count,HORIZONTAL_ALIGNMENT_LEFT,-1,17).x+8
 	var btn := Rect2(right-128,r.end.y-54,128,42)
-	var face := Style.button(self,btn,"primary",p)
+	var kind := "primary" if enabled else "disabled"
+	var face := Style.button(self,btn,kind,p)
 	if busy.has(id): Style.spinner(self,face.get_center(),12,age,Color.WHITE)
-	else: Style.button_label(self,b.price,face.get_center(),22,"primary",face.size.x-14)
+	else: Style.button_label(self,b.price,face.get_center(),22,kind,face.size.x-14)
 	if b.has("old_price"):
 		var old_c := Vector2(btn.position.x-40,face.get_center().y+6)
 		Style.text(self,b.old_price,old_c,16,Style.MUTED,Style.BOLD)
@@ -465,10 +548,24 @@ func _draw_pack(t:Dictionary,r:Rect2) -> void:
 	var face := Style.button(self,Rect2(r.position.x+8,r.end.y-58,r.size.x-16,46),kind,p)
 	if busy.has(id): Style.spinner(self,face.get_center(),12,age,Color.WHITE)
 	elif t.get("kind","")=="ad":
-		Style.icon(self,Style.AD,Vector2(face.position.x+24,face.get_center().y),38)
-		Style.button_label(self,t.price,face.get_center()+Vector2(16,0),19,kind,face.size.x-56)
+		var label := _pack_ad_layout(face,t.price)
+		Style.icon(self,Style.AD,label.icon.get_center(),label.icon.size.x)
+		var colors:Dictionary = Style.BUTTONS.get(kind,Style.BUTTONS.secondary)
+		if colors.outline.a>0: label.paragraph.draw_outline(get_canvas_item(),label.origin,2,colors.outline)
+		label.paragraph.draw(get_canvas_item(),label.origin,colors.text)
 	else: Style.button_label(self,t.price,face.get_center(),21,kind,face.size.x-12)
 	if best: _tag(t.tag,Vector2(r.position.x-6,r.position.y-10),-0.10)
+
+## Reserve independent areas so translated labels cannot touch the ad badge.
+static func _pack_ad_layout(face:Rect2,value:String) -> Dictionary:
+	var icon := Rect2(face.position+Vector2(8,(face.size.y-30)*0.5),Vector2(30,30))
+	var area := Rect2(Vector2(icon.end.x+8,face.position.y+4),Vector2(face.end.x-8-(icon.end.x+8),face.size.y-8))
+	var size := 18
+	var paragraph = Style.LocalText.paragraph(value,Style.HEAVY,size,area.size.x)
+	while size>12 and (paragraph.get_size().y>area.size.y or paragraph.get_size().x>area.size.x):
+		size-=1
+		paragraph=Style.LocalText.paragraph(value,Style.HEAVY,size,area.size.x)
+	return {"icon":icon,"area":area,"paragraph":paragraph,"origin":area.position+Vector2(0,(area.size.y-paragraph.get_size().y)*0.5)}
 
 func _tag(label:String,pos:Vector2,angle:float) -> void:
 	var w := Style.BLACK.get_string_size(label,HORIZONTAL_ALIGNMENT_LEFT,-1,17).x+22
@@ -510,6 +607,68 @@ static func displayed_balance(before:int,after:int,t:float,reduced:bool) -> int:
 	var last := 0.5+(FLIGHT_COINS-1)*(0.065+0.018)+0.68
 	return roundi(lerpf(before,after,clampf((t-first)/(last-first),0.0,1.0)))
 
+## Seven-day calendar: six tiles in two rows and a wide seventh day.
+## Day states come from daily_calendar.gd: claimed, available, locked, missed.
+func _draw_days(b:Dictionary,rect:Rect2) -> void:
+	var w := (rect.size.x-20.0)/3.0
+	for i in 7:
+		var r := Rect2(rect.position.x+(i%3)*(w+10.0),rect.position.y+(i/3)*(DAY_H+10.0),w,DAY_H)
+		if i==6: r = Rect2(rect.position.x,rect.position.y+2*(DAY_H+10.0),rect.size.x,130.0)
+		_draw_day(i,b.days[i],r,b.get("pop",-1)==i)
+
+func _draw_day(i:int,day:Dictionary,r:Rect2,pop:bool) -> void:
+	var state: String = day.state
+	var today: bool = state=="available"
+	Style.round_rect(self,r,Color("fff3c4") if today else Style.TILE,Style.R_TILE,Style.GOLD if today else Style.TILE_EDGE,4 if today else 3)
+	if not today: Style.text_left(self,"День %d" % (i+1),r.position+Vector2(12,24),15,Style.MUTED,Style.HEAVY)
+	var rewards: Array = day.rewards
+	var art_y := r.position.y+(64 if i<6 else 60)
+	for j in rewards.size():
+		var x := r.position.x+r.size.x*(j+1)/(rewards.size()+1)
+		var item: Dictionary = rewards[j]
+		var size := 96.0 if i==6 else (74.0 if rewards.size()==1 else 54.0)
+		var c := Vector2(x,art_y)
+		if today and j==0 and not reduced_motion: Style.rays(self,c,size*0.85,age*0.4,0.6)
+		if item.item=="coins":
+			_coin_pile(int(item.quantity),c,size)
+			if today or pop: reward_coin = c
+		else: Style.icon(self,item.texture,c,size*0.85)
+		var label := str(int(item.quantity)) if item.item=="coins" else "×%d" % int(item.quantity)
+		Style.juicy(self,label,Vector2(x,r.end.y-(18 if i<6 else 16)),24 if rewards.size()==1 else 20,Color.WHITE,r.size.x/rewards.size()-8)
+	if state in ["claimed","missed"]:
+		Style.round_rect(self,r,Color(1,1,1,0.5),Style.R_TILE)
+	if state=="claimed":
+		var k := 1.0
+		if pop and not reduced_motion:
+			var t := clampf((age-flight_start)/0.35,0.0,1.0)
+			k = Style.back_out(t)
+		if k>0.01: Style.icon(self,CHECK,Vector2(r.end.x-20,r.position.y+18),46*k)
+	elif state=="missed":
+		var pill := Rect2(Vector2(r.get_center().x-50,art_y-14),Vector2(100,28))
+		Style.round_rect(self,pill,Color("53617a"),Style.R_PILL)
+		Style.text(self,"Пропущен",pill.get_center()+Vector2(0,6),16,Color.WHITE,Style.HEAVY)
+	elif state=="locked":
+		var angle := -0.22 if i<6 else -0.08
+		var c := r.get_center()+Vector2(0,4)
+		draw_set_transform_matrix(base*_card_anim()*Transform2D(angle,c))
+		Style.tape(self,Rect2(-r.size.x*0.5+6,-9,r.size.x-12,18))
+		draw_set_transform_matrix(base*_card_anim())
+	if today: _tag("Сегодня",Vector2(r.position.x-6,r.position.y-12),-0.10)
+
+## Bigger amounts are shown as bigger piles, combining the coin pictures.
+func _coin_pile(amount:int,c:Vector2,size:float) -> void:
+	for p in coin_pile(amount):
+		Style.icon(self,COIN_PILES[p.art],c+Vector2(p.dx,p.dy)*size,size*p.scale)
+
+## Layout of the pile for an amount: [{art, dx, dy, scale}], back to front.
+static func coin_pile(amount:int) -> Array:
+	if amount<25: return [{"art":0,"dx":0.0,"dy":0.0,"scale":0.8}]
+	if amount<45: return [{"art":1,"dx":0.0,"dy":0.0,"scale":1.0}]
+	if amount<80: return [{"art":2,"dx":0.0,"dy":0.0,"scale":1.0}]
+	if amount<120: return [{"art":3,"dx":0.0,"dy":0.0,"scale":1.05}]
+	if amount<200: return [{"art":3,"dx":-0.28,"dy":-0.04,"scale":1.0},{"art":2,"dx":0.32,"dy":0.08,"scale":0.8}]
+	return [{"art":3,"dx":-0.34,"dy":-0.04,"scale":1.0},{"art":2,"dx":0.36,"dy":0.02,"scale":0.8},{"art":1,"dx":0.0,"dy":0.16,"scale":0.62}]
+
 func _draw_bundle(b:Dictionary,rect:Rect2) -> void:
 	var items: Array = b.items
 	var n := items.size()
@@ -538,12 +697,14 @@ func design_point(screen:Vector2) -> Vector2:
 	return base.affine_inverse()*screen
 
 func _hit(p:Vector2) -> String:
+	if spec.get("close",false) and Rect2(_close_center()-Vector2(32,32),Vector2(64,64)).has_point(p):
+		return "close"
 	for id in hits:
 		if hits[id].has_point(p): return id
 	return ""
 
 func _gui_input(event:InputEvent) -> void:
-	if is_closing() or age<0.12:
+	if input_locked or is_closing() or age<0.12:
 		accept_event()
 		return
 	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT:
@@ -565,7 +726,15 @@ func _gui_input(event:InputEvent) -> void:
 
 ## Test helper: press and release an element by id, as a finger would.
 func tap(id:String) -> bool:
+	if input_locked: return false
 	_layout()
 	if not hits.has(id) or busy.has(id): return false
 	action.emit(id)
 	return true
+
+func _language_rect(rect:Rect2,index:int) -> Rect2:
+	return Rect2(rect.position+Vector2((index%2)*(rect.size.x/2+5),(index/2)*62),Vector2(rect.size.x/2-5,52))
+
+func _preference_rect(rect:Rect2,index:int,count:int) -> Rect2:
+	var width := rect.size.x/count
+	return Rect2(rect.position+Vector2(index*width,0),Vector2(width,rect.size.y))

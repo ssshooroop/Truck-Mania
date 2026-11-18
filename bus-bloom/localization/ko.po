@@ -1,0 +1,936 @@
+msgid ""
+msgstr ""
+"Language: ko\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgctxt "config.achievements.achievements.0.dispatcher_1.83f7eca71358"
+msgid "Диспетчер стройки I"
+msgstr "배차 담당 I"
+
+msgctxt "config.achievements.achievements.1.dispatcher_2.63332aabd948"
+msgid "Диспетчер стройки II"
+msgstr "배차 담당 II"
+
+msgctxt "config.achievements.achievements.2.dispatcher_3.a56fb6a376d3"
+msgid "Диспетчер стройки III"
+msgstr "배차 담당 III"
+
+msgctxt "config.achievements.achievements.3.dispatcher_4.7d95d2998eaf"
+msgid "Диспетчер стройки IV"
+msgstr "배차 담당 IV"
+
+msgctxt "config.achievements.achievements.4.cargo_1000.a468efbda495"
+msgid "Тысяча грузов"
+msgstr "화물 1000개"
+
+msgctxt "config.achievements.achievements.5.flawless_loading.c4c7e7a91bb3"
+msgid "Безупречная погрузка"
+msgstr "완벽한 적재"
+
+msgctxt "config.achievements.achievements.6.no_mistakes_10.14d4390bae4e"
+msgid "Без единой ошибки"
+msgstr "실수 제로"
+
+msgctxt "config.achievements.achievements.7.on_the_edge.2131158405e9"
+msgid "На волоске"
+msgstr "아슬아슬"
+
+msgctxt "config.achievements.achievements.8.comeback.28b4f0f21de6"
+msgid "Не сдаваться"
+msgstr "포기는 없다"
+
+msgctxt "config.achievements.achievements.9.dream_fleet.ada7efaa9d67"
+msgid "Автопарк мечты"
+msgstr "꿈의 차고"
+
+msgctxt "config.daily_rewards.items.coins.label.a54143865c0d"
+msgid "Монеты"
+msgstr "코인"
+
+msgctxt "config.daily_rewards.items.crane.label.8224141e7344"
+msgid "Кран"
+msgstr "크레인"
+
+msgctxt "config.daily_rewards.items.extra_slot.label.4649b302d2a0"
+msgid "Место"
+msgstr "주차칸"
+
+msgctxt "config.daily_rewards.items.shuffle.label.b03d6d33ac21"
+msgid "Перемешивание"
+msgstr "섞기"
+
+msgctxt "config.daily_rewards.items.swap.label.9378e03b6132"
+msgid "Обмен"
+msgstr "교체"
+
+msgctxt "config.daily_rewards.items.undo.label.3ec2342a5527"
+msgid "Отмена хода"
+msgstr "되돌리기"
+
+msgctxt "config.seasonal_events.events.0.halloween_2026.a9f8a3eb45b4"
+msgid "Тыквы на складе, летучие мыши\nнад краном — набор только до 2 ноября!"
+msgstr "창고엔 호박, 크레인엔 박쥐\n11월 2일까지만 판매!"
+
+msgctxt "config.seasonal_events.events.0.halloween_2026.3e3da8ee1d96"
+msgid "Забрать набор"
+msgstr "받기"
+
+msgctxt "config.seasonal_events.events.0.halloween_2026.58bd03ae04fd"
+msgid "Ночная смена"
+msgstr "야간 근무"
+
+msgctxt "config.seasonal_events.events.1.newyear_2026.3e3da8ee1d96"
+msgid "Забрать набор"
+msgstr "받기"
+
+msgctxt "config.seasonal_events.events.1.newyear_2026.038586991416"
+msgid "Новогодний аврал"
+msgstr "새해 대작전"
+
+msgctxt "config.seasonal_events.events.1.newyear_2026.731e4b25b35d"
+msgid "Праздничные подарки уже на складе —\nуспей до конца каникул!"
+msgstr "연말 선물이 창고에 도착! 연휴가 끝나기 전에 받으세요!"
+
+msgctxt "config.store_catalog.products.2.coins_2600.e56b418b8103"
+msgid "Хит"
+msgstr "인기"
+
+msgctxt "config.store_catalog.products.4.coins_12000.18ec97a01aaa"
+msgid "Выгодно"
+msgstr "특가"
+
+msgctxt "config.store_catalog.products.5.starter.90436a08231e"
+msgid "Набор новичка"
+msgstr "초보자 팩"
+
+msgctxt "config.store_catalog.products.5.starter.7170092c5229"
+msgid "Один раз за всю игру"
+msgstr "계정당 1회"
+
+msgctxt "config.store_catalog.products.6.season_halloween_2026.a03446388631"
+msgid "Набор ночной смены"
+msgstr "야간 근무 팩"
+
+msgctxt "config.store_catalog.products.7.season_newyear_2026.694f571f43c4"
+msgid "Новогодний набор"
+msgstr "새해 팩"
+
+msgctxt "scripts.cargo_art.9143eb5dcc80"
+msgid "Доски"
+msgstr "판자"
+
+msgctxt "scripts.cargo_art.bd86ace178a0"
+msgid "Кабель"
+msgstr "케이블"
+
+msgctxt "scripts.cargo_art.34896f67adfa"
+msgid "Кирпичи"
+msgstr "벽돌"
+
+msgctxt "scripts.cargo_art.cb488b3124a1"
+msgid "Профнастил"
+msgstr "강판"
+
+msgctxt "scripts.cargo_art.291fa3db8353"
+msgid "Трубы"
+msgstr "파이프"
+
+msgctxt "scripts.cargo_art.0ef0f22c90df"
+msgid "Цемент"
+msgstr "시멘트"
+
+msgctxt "scripts.cargo_art.34a493696529"
+msgid "Бортовой"
+msgstr "카고"
+
+msgctxt "scripts.cargo_art.144095769e68"
+msgid "Пикап"
+msgstr "픽업"
+
+msgctxt "scripts.cargo_art.315789424c5f"
+msgid "Самосвал"
+msgstr "덤프"
+
+msgctxt "scripts.daily_bonus.eb9739970cd2"
+msgid "День %d"
+msgstr "%d일차"
+
+msgctxt "scripts.daily_bonus.6662621fbab6"
+msgid "Пропущен"
+msgstr "놓침"
+
+msgctxt "scripts.daily_bonus.e276492e344d"
+msgid "Забрать"
+msgstr "받기"
+
+msgctxt "scripts.daily_bonus.a42aee58d60a"
+msgid "Продолжить"
+msgstr "계속"
+
+msgctxt "scripts.daily_bonus.f4cdc2548c52"
+msgid "Заходите каждый день"
+msgstr "매일 접속하고"
+
+msgctxt "scripts.daily_bonus.1f46e7410c9f"
+msgid "и получайте призы!"
+msgstr "보상을 받으세요!"
+
+msgctxt "scripts.daily_bonus.a1af0e391ab9"
+msgid "ЕЖЕДНЕВНЫЙ БОНУС"
+msgstr "일일 보너스"
+
+msgctxt "scripts.game_model.ef9052e0abf8"
+msgid "Первая поставка"
+msgstr "첫 배송"
+
+msgctxt "scripts.game_model.d6bcf97d5770"
+msgid "Склад %d"
+msgstr "창고 %d"
+
+msgctxt "scripts.game_model.b4f4294c73e0"
+msgid "Стройка оживает"
+msgstr "현장이 살아난다"
+
+msgctxt "scripts.game_model.ee0b343982c8"
+msgid "Плотная парковка"
+msgstr "빽빽한 주차장"
+
+msgctxt "scripts.game_model.775d6e7f5168"
+msgid "Большая разгрузка"
+msgstr "대량 하역"
+
+msgctxt "scripts.game_model.e148bd322eb6"
+msgid "Рабочий квартал"
+msgstr "작업 구역"
+
+msgctxt "scripts.game_model.c1ff8ad27d51"
+msgid "Строительный час пик"
+msgstr "공사 러시아워"
+
+msgctxt "scripts.main.b695d5d8d1c5"
+msgid "Сначала открой соседнее место"
+msgstr "먼저 옆 칸을 여세요"
+
+msgctxt "scripts.main.91a064acd00e"
+msgid "Нужно %d монет"
+msgstr "필요: %d {{coin}}"
+
+msgctxt "scripts.main.22c3ddf18611"
+msgid "Лимит помощи в этой попытке исчерпан"
+msgstr "이번 도전의 부스터 한도 도달"
+
+msgctxt "scripts.main.1375e36fe936"
+msgid "+%d"
+msgstr "+%d"
+
+msgctxt "scripts.main.7312d70f7a8b"
+msgid "УРОВЕНЬ %d"
+msgstr "레벨 %d"
+
+msgctxt "scripts.main.1d4f240c7386"
+msgid "НАЖМИ НА КОНУС"
+msgstr "콘을 탭하세요"
+
+msgctxt "scripts.main.1f72393019ca"
+msgid "ОТКРОЙ МЕСТО!"
+msgstr "칸을 여세요!"
+
+msgctxt "scripts.main.db50163456aa"
+msgid "БЕСПЛАТНО!"
+msgstr "무료!"
+
+msgctxt "scripts.main.e993bacd9ca4"
+msgid "До конца этой попытки"
+msgstr "이번 도전 동안"
+
+msgctxt "scripts.main.57b425f0b144"
+msgid "БОЛЬШЕ МЕСТА!"
+msgstr "주차칸 추가!"
+
+msgctxt "scripts.main.6087ccb7cb2d"
+msgid "Открой место до конца попытки"
+msgstr "이번 도전 동안 칸 열기"
+
+msgctxt "scripts.main.359ec6222b67"
+msgid "Открыть за %d монет"
+msgstr "%d {{coin}} 사용해 열기"
+
+msgctxt "scripts.main.308594c1fc02"
+msgid "Цена уточняется"
+msgstr "가격 확인 중…"
+
+msgctxt "scripts.main.29d1e351c540"
+msgid "Реклама пока недоступна"
+msgstr "지금은 광고를 볼 수 없어요"
+
+msgctxt "scripts.main.c4c39ac6251c"
+msgid "Помощь на стройке"
+msgstr "부스터"
+
+msgctxt "scripts.main.971455b7f908"
+msgid "Замена машины"
+msgstr "트럭 교체"
+
+msgctxt "scripts.main.8224141e7344"
+msgid "Кран"
+msgstr "크레인"
+
+msgctxt "scripts.main.baf34c9a08fe"
+msgid "Перемешать грузы"
+msgstr "화물 섞기"
+
+msgctxt "scripts.main.caf21fe0d262"
+msgid "%s · %d монет"
+msgstr "%s · %d {{coin}}"
+
+msgctxt "scripts.main.ad2d15963945"
+msgid "Помощь действует в этой попытке"
+msgstr "이번 도전에만 적용돼요"
+
+msgctxt "scripts.main.5ddb4a930a33"
+msgid "Баланс: %d"
+msgstr "잔액: %d"
+
+msgctxt "scripts.main.199de93a9257"
+msgid "Перерыв на стройке"
+msgstr "휴식 중"
+
+msgctxt "scripts.main.8314a586f880"
+msgid "Груз и машины подождут"
+msgstr "트럭과 화물은 기다려 줘요!"
+
+msgctxt "scripts.main.21dffe50ffc5"
+msgid "Звуки погрузки"
+msgstr "적재 효과음"
+
+msgctxt "scripts.main.bf0e90816be7"
+msgid "Меньше анимации"
+msgstr "움직임 줄이기"
+
+msgctxt "scripts.main.0541c131cbc0"
+msgid "Продолжить работу"
+msgstr "작업 계속"
+
+msgctxt "scripts.main.0c7925af0933"
+msgid "Начать уровень заново"
+msgstr "레벨 다시 시작"
+
+msgctxt "scripts.main.8e8dad84ce78"
+msgid "Выбрать склад"
+msgstr "창고 선택"
+
+msgctxt "scripts.main.fb16f2253476"
+msgid "Твои склады"
+msgstr "내 창고"
+
+msgctxt "scripts.main.589bafc9b8fb"
+msgid "Больше машин — интереснее задача"
+msgstr "트럭이 많을수록 더 어려워요"
+
+msgctxt "scripts.main.b2dd460cc970"
+msgid "%02d"
+msgstr "%02d"
+
+msgctxt "scripts.main.3a5628fdf323"
+msgid "ЗАКРЫТ"
+msgstr "잠김"
+
+msgctxt "scripts.main.39b131afe827"
+msgid "НАЧАТЬ"
+msgstr "시작"
+
+msgctxt "scripts.main.e94c8b10fb66"
+msgid "Новый склад открывается после полной отгрузки"
+msgstr "모두 출하하면 새 창고가 열려요"
+
+msgctxt "scripts.main.f9135b8def31"
+msgid "Нет хода для отмены"
+msgstr "되돌릴 수 없어요"
+
+msgctxt "scripts.main.01e589e7cd6d"
+msgid "Ролик пока не готов — попробуй позже"
+msgstr "영상 준비 중 — 나중에 다시 시도하세요"
+
+msgctxt "scripts.main.195f8283a5ee"
+msgid "Ролик не досмотрен — награды нет"
+msgstr "끝까지 보지 않아 보상 없음"
+
+msgctxt "scripts.main.85790e1f3a24"
+msgid "+%d %s"
+msgstr "+%d %s"
+
+msgctxt "scripts.main.07989dddb60a"
+msgid "Покупки восстановлены"
+msgstr "구매 복원 완료"
+
+msgctxt "scripts.main.0767e8068116"
+msgid "Покупки появятся в следующей версии"
+msgstr "구매는 다음 버전에 추가돼요"
+
+msgctxt "scripts.main.eb13f87aaacb"
+msgid "Покупка не завершена — деньги не списаны"
+msgstr "구매 미완료 — 결제되지 않았어요"
+
+msgctxt "scripts.main.91d91f393841"
+msgid "Посты заняты — отмени ход или дождись погрузки"
+msgstr "칸이 가득 — 되돌리거나 적재를 기다리세요"
+
+msgctxt "scripts.main.af6341234057"
+msgid "Проезд занят — попробуй после проезда соседней машины"
+msgstr "길이 막혔어요 — 옆 트럭이 지나간 뒤 다시 하세요"
+
+msgctxt "scripts.main.9f7d1e182ba7"
+msgid "Машины и конвейер вернулись на ход назад"
+msgstr "트럭과 벨트가 한 수 전으로 돌아갔어요"
+
+msgctxt "scripts.main.d338a4ad3d38"
+msgid "Освободи машину у края или отмени последний ход"
+msgstr "가장자리 트럭을 빼거나 마지막 수를 되돌리세요"
+
+msgctxt "scripts.main.8e499a7944ea"
+msgid "Вернись на ход назад — здесь нет решения"
+msgstr "한 수 되돌리세요 — 여기선 답이 없어요"
+
+msgctxt "scripts.main.0e2764290fd4"
+msgid "Выделенная машина поможет разгрузить двор"
+msgstr "강조된 트럭으로 마당을 비우세요"
+
+msgctxt "scripts.slot_offer.99bf27c02d89"
+msgid "−100"
+msgstr "−100"
+
+msgctxt "scripts.ui.game_modal.1375e36fe936"
+msgid "+%d"
+msgstr "+%d"
+
+msgctxt "scripts.ui.game_modal.22a5d9112486"
+msgid "Загружаем…"
+msgstr "불러오는 중…"
+
+msgctxt "scripts.ui.game_modal.4367e0063eba"
+msgid "Взять"
+msgstr "받기"
+
+msgctxt "scripts.ui.game_modal.912fad7363d8"
+msgid "%s  %s"
+msgstr "%s  %s"
+
+msgctxt "scripts.ui.game_modal.0246a2516cda"
+msgid "Осталось"
+msgstr "남은 시간"
+
+msgctxt "scripts.ui.game_modal.e656bc246d80"
+msgid "%d д %d ч"
+msgstr "%d일 %d시간"
+
+msgctxt "scripts.ui.game_modal.77cbdae53b1d"
+msgid "%d ч %02d мин"
+msgstr "%d시간 %02d분"
+
+msgctxt "scripts.ui.game_modal.22aa5926e209"
+msgid "%d:%02d"
+msgstr "%d:%02d"
+
+msgctxt "scripts.ui.modal_catalog.04a597bd50fb"
+msgid "Материалы на ленте\nвстанут в новом порядке."
+msgstr "벨트 위 자재가\n새로 섞여요."
+
+msgctxt "scripts.ui.modal_catalog.8afd9b9a4ecf"
+msgid "Перемешать"
+msgstr "섞기"
+
+msgctxt "scripts.ui.modal_catalog.9b8183747132"
+msgid "Перемешать груз?"
+msgstr "화물을 섞을까요?"
+
+msgctxt "scripts.ui.modal_catalog.7c47f7292ba4"
+msgid "Отменить"
+msgstr "되돌리기"
+
+msgctxt "scripts.ui.modal_catalog.c350b098b327"
+msgid "Отменить ход?"
+msgstr "되돌릴까요?"
+
+msgctxt "scripts.ui.modal_catalog.215d188d6b1a"
+msgid "Последняя машина\nвернётся на парковку."
+msgstr "마지막 트럭이\n주차장으로 돌아가요."
+
+msgctxt "scripts.ui.modal_catalog.36f798a63c92"
+msgid "Помощь"
+msgstr "도움말"
+
+msgctxt "scripts.ui.modal_catalog.86991a952a8c"
+msgid "Бесплатно с рекламой"
+msgstr "광고 보고 무료"
+
+msgctxt "scripts.ui.modal_catalog.d4fe5fffa3d6"
+msgid "Не сейчас"
+msgstr "나중에"
+
+msgctxt "scripts.ui.modal_catalog.90cba449230b"
+msgid "Нужно ещё %d %s."
+msgstr "%d %s 더 필요해요."
+
+msgctxt "scripts.ui.modal_catalog.15e07e80df50"
+msgid "+%d за рекламу"
+msgstr "광고 보고 +%d"
+
+msgctxt "scripts.ui.modal_catalog.2cacba01ed01"
+msgid "%d монет"
+msgstr "%d {{coin}}"
+
+msgctxt "scripts.ui.modal_catalog.0b350c3a966b"
+msgid "Все наборы в магазине"
+msgstr "상점의 모든 팩"
+
+msgctxt "scripts.ui.modal_catalog.0e71379e30e5"
+msgid "Не хватает монет"
+msgstr "코인이 부족해요"
+
+msgctxt "scripts.ui.modal_catalog.83c948293f13"
+msgid "Монеты уже в копилке!"
+msgstr "코인 추가 완료!"
+
+msgctxt "scripts.ui.modal_catalog.c459a8469cdb"
+msgid "Отлично!"
+msgstr "좋아요!"
+
+msgctxt "scripts.ui.modal_catalog.ae5d2abc4e93"
+msgid "Награда получена!"
+msgstr "보상 획득!"
+
+msgctxt "scripts.ui.modal_catalog.d674c9a43e5f"
+msgid "Загружаем ролик…"
+msgstr "영상 불러오는 중…"
+
+msgctxt "scripts.ui.modal_catalog.8fbe9b75cbdf"
+msgid "Отмена"
+msgstr "취소"
+
+msgctxt "scripts.ui.modal_catalog.81be36fb6d76"
+msgid "Ролик не загрузился.\nПроверь интернет и попробуй ещё раз."
+msgstr "영상을 불러오지 못했어요.\n인터넷 연결 확인 후 다시 시도하세요."
+
+msgctxt "scripts.ui.modal_catalog.13222328c826"
+msgid "Попробовать ещё"
+msgstr "다시 시도"
+
+msgctxt "scripts.ui.modal_catalog.a7a4033657e8"
+msgid "Закрыть"
+msgstr "닫기"
+
+msgctxt "scripts.ui.modal_catalog.c510079471ac"
+msgid "Посмотри короткий ролик\nи получи %d %s."
+msgstr "짧은 영상을 보고\n%d %s 받으세요."
+
+msgctxt "scripts.ui.modal_catalog.7ac84107c129"
+msgid "Смотреть"
+msgstr "보기"
+
+msgctxt "scripts.ui.modal_catalog.f3c8f3a92afd"
+msgid "Бесплатные монеты"
+msgstr "무료 코인"
+
+msgctxt "scripts.ui.modal_catalog.4ac69ceabdf6"
+msgid "Удвоить награду"
+msgstr "보상 2배"
+
+msgctxt "scripts.ui.modal_catalog.fd5ddecfacae"
+msgid "Награда за этот уровень\nуже получена."
+msgstr "이 레벨의 보상은\n이미 받았어요."
+
+msgctxt "scripts.ui.modal_catalog.7b3864be0f54"
+msgid "Карта уровней"
+msgstr "레벨 지도"
+
+msgctxt "scripts.ui.modal_catalog.6eaef62bc617"
+msgid "Следующий уровень"
+msgstr "다음 레벨"
+
+msgctxt "scripts.ui.modal_catalog.800380963da6"
+msgid "Сыграть ещё раз"
+msgstr "다시 하기"
+
+msgctxt "scripts.ui.modal_catalog.6e06b221d0f8"
+msgid "Груз отправлен!"
+msgstr "화물 출발!"
+
+msgctxt "scripts.ui.modal_catalog.44ce35728237"
+msgid "Достижения"
+msgstr "업적"
+
+msgctxt "scripts.ui.modal_catalog.a7bdff844b22"
+msgid "Серия"
+msgstr "연속"
+
+msgctxt "scripts.ui.modal_catalog.e1368cabf157"
+msgid "Сундук"
+msgstr "상자"
+
+msgctxt "scripts.ui.modal_catalog.7f67af3d6cd9"
+msgid "Уровень"
+msgstr "레벨"
+
+msgctxt "scripts.ui.modal_catalog.d2904dded9ed"
+msgid "До конца"
+msgstr "종료까지"
+
+msgctxt "scripts.ui.modal_catalog.3e3da8ee1d96"
+msgid "Забрать набор"
+msgstr "받기"
+
+msgctxt "scripts.ui.modal_catalog.7996f711496a"
+msgid "Позже"
+msgstr "나중에"
+
+msgctxt "scripts.ui.modal_catalog.04c98320ca2b"
+msgid "Обычная цена %s"
+msgstr "정가 %s"
+
+msgctxt "scripts.ui.modal_catalog.2f46e9af5b29"
+msgid "Сезонная акция"
+msgstr "시즌 특가"
+
+msgctxt "scripts.ui.modal_catalog.14071c7fed0a"
+msgid "%s · ещё %s"
+msgstr "%s · %s 남음"
+
+msgctxt "scripts.ui.modal_catalog.a54143865c0d"
+msgid "Монеты"
+msgstr "코인"
+
+msgctxt "scripts.ui.modal_catalog.ecaab828792b"
+msgid "Бесплатно"
+msgstr "무료"
+
+msgctxt "scripts.ui.modal_catalog.72c299e0d65e"
+msgid "Скоро"
+msgstr "곧 출시"
+
+msgctxt "scripts.ui.modal_catalog.16af0289546a"
+msgid "Восстановить покупки"
+msgstr "구매 복원"
+
+msgctxt "scripts.ui.modal_catalog.23e3c7064746"
+msgid "Магазин"
+msgstr "상점"
+
+msgctxt "scripts.ui.modal_catalog.fb544c2664fb"
+msgid "Готово!"
+msgstr "완료!"
+
+msgctxt "scripts.ui.modal_catalog.900d17c85c44"
+msgid "Всё уже на складе. За работу!"
+msgstr "모두 준비됐어요. 일하러 가요!"
+
+msgctxt "scripts.ui.modal_catalog.91faf0b5f015"
+msgid "%d д"
+msgstr "%d일"
+
+msgctxt "scripts.ui.modal_catalog.fdb60b7161f2"
+msgid "%d ч"
+msgstr "%d시간"
+
+msgctxt "scripts.ui.modal_catalog.ec2f763fe6e3"
+msgid "монета"
+msgstr "{{coin}}"
+
+msgctxt "scripts.ui.modal_catalog.253383400304"
+msgid "монеты"
+msgstr "{{coin}}"
+
+msgctxt "scripts.ui.modal_catalog.5722f18f0748"
+msgid "монет"
+msgstr "{{coin}}"
+
+msgctxt "scripts.ui.modal_catalog.ea58bb0bc6d4"
+msgid "Дальше"
+msgstr "다음"
+
+msgctxt "scripts.ui.modal_catalog.2179f8734c6f"
+msgid "Нажми на машину — она выедет по стрелке к складу."
+msgstr "트럭을 탭하면 화살표 방향으로 창고에 가요."
+
+msgctxt "scripts.ui.modal_catalog.e180633a436f"
+msgid "Привет, я Билли!"
+msgstr "안녕, 난 빌리야!"
+
+msgctxt "scripts.ui.modal_catalog.1e15b34f2534"
+msgid "Машина берёт только свой материал. Следи за лентой сверху!"
+msgstr "트럭은 자기 자재만 실어요. 위쪽 벨트를 보세요!"
+
+msgctxt "scripts.ui.modal_catalog.4d3181b2b05e"
+msgid "Цвет — это груз"
+msgstr "색깔 = 화물"
+
+msgctxt "scripts.ui.modal_catalog.e7735f16fb5f"
+msgid "Мест всего три"
+msgstr "칸은 단 3개!"
+
+msgctxt "scripts.ui.modal_catalog.d09cef487b9e"
+msgid "Начать работу"
+msgstr "작업 시작"
+
+msgctxt "scripts.ui.modal_catalog.2052041e04c0"
+msgid "Не занимай места машинами, которым груз пока не нужен."
+msgstr "아직 필요 없는 트럭으로 칸을 채우지 마세요."
+
+msgctxt "scripts.ui.modal_catalog.9e4d256050a3"
+msgid "Пропустить обучение"
+msgstr "튜토리얼 건너뛰기"
+
+msgctxt "scripts.ui.modal_catalog.48dccafab27d"
+msgid "Все места у склада заняты.\nОткрой ещё одно — и продолжай!"
+msgstr "창고 앞 칸이 모두 찼어요.\n하나 더 열고 계속하세요!"
+
+msgctxt "scripts.ui.modal_catalog.c60d2d77d06d"
+msgid "Открыть место"
+msgstr "칸 열기"
+
+msgctxt "scripts.ui.modal_catalog.aa882b151605"
+msgid "Место за рекламу"
+msgstr "광고 보고 칸 열기"
+
+msgctxt "scripts.ui.modal_catalog.6909d293a79e"
+msgid "Ролик готовится…"
+msgstr "영상 준비 중…"
+
+msgctxt "scripts.ui.modal_catalog.cf19cb36e0bd"
+msgid "Кран переставит нужную машину прямо к складу."
+msgstr "크레인이 필요한 트럭을 창고 앞으로 옮겨요."
+
+msgctxt "scripts.ui.modal_catalog.25b355813f82"
+msgid "Вызвать кран"
+msgstr "크레인 부르기"
+
+msgctxt "scripts.ui.modal_catalog.2398ba31360b"
+msgid "Помощь в этой попытке закончилась.\nОтмени ход или начни заново."
+msgstr "이번 도전의 부스터를 다 썼어요.\n되돌리거나 다시 시작하세요."
+
+msgctxt "scripts.ui.modal_catalog.0abf7381f65f"
+msgid "Место и нужная машина"
+msgstr "칸과 필요한 트럭"
+
+msgctxt "scripts.ui.modal_catalog.4367e0063eba"
+msgid "Взять"
+msgstr "받기"
+
+msgctxt "scripts.ui.modal_catalog.8d589b0c3c10"
+msgid "Отменить ход"
+msgstr "되돌리기"
+
+msgctxt "scripts.ui.modal_catalog.19640d8d48a9"
+msgid "Бесплатно: ещё %d"
+msgstr "무료: %d회 남음"
+
+msgctxt "scripts.ui.modal_catalog.f40432b44242"
+msgid "Вернуть последнюю машину"
+msgstr "마지막 트럭 되돌리기"
+
+msgctxt "scripts.ui.modal_catalog.086406bd4bfe"
+msgid "Перемешать груз"
+msgstr "화물 섞기"
+
+msgctxt "scripts.ui.modal_catalog.ab24f870e1e9"
+msgid "Новый порядок на ленте"
+msgstr "벨트 순서 변경"
+
+msgctxt "scripts.ui.modal_catalog.0c7925af0933"
+msgid "Начать уровень заново"
+msgstr "레벨 다시 시작"
+
+msgctxt "scripts.ui.modal_catalog.6d45f7c36311"
+msgid "Парковка заполнена!"
+msgstr "주차장이 가득 찼어요!"
+
+msgctxt "scripts.ui.modal_catalog.07cb65087477"
+msgid "Убрать"
+msgstr "치우기"
+
+msgctxt "scripts.ui.modal_catalog.0aece7c229eb"
+msgid "Убрать конус?"
+msgstr "콘을 치울까요?"
+
+msgctxt "scripts.ui.modal_catalog.26bf5538561c"
+msgid "Четвёртое место у склада\nдо конца этой попытки."
+msgstr "이번 도전 동안\n4번째 칸을 열어요."
+
+msgctxt "scripts.ui.modal_catalog.b4d4430a6344"
+msgid "Вызвать"
+msgstr "부르기"
+
+msgctxt "scripts.ui.modal_catalog.2aef95648c48"
+msgid "Вызвать кран?"
+msgstr "크레인을 부를까요?"
+
+msgctxt "scripts.ui.modal_catalog.8cf3ff0db4db"
+msgid "Кран поставит нужную машину\nна свободное место."
+msgstr "크레인이 필요한 트럭을\n빈 칸에 놓아요."
+
+msgctxt "scripts.ui.modal_style.ecaab828792b"
+msgid "Бесплатно"
+msgstr "무료"
+
+msgctxt "web.wasm-loader.4ed8a7ee34b3"
+msgid "Подготовка загрузки…"
+msgstr "다운로드 준비 중…"
+
+msgctxt "web.wasm-loader.3a8db977333d"
+msgid "Загрузка игры: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} МБ"
+msgstr "게임 불러오는 중: ${(bytes/1048576).toFixed(1)} / ${(total/1048576).toFixed(1)} MB"
+
+msgctxt "web.wasm-loader.d2db517556a1"
+msgid "Файлы загружены. Запускаем игру…"
+msgstr "파일 로드 완료. 게임을 시작합니다…"
+
+msgctxt "web.wasm-loader.c9a6e2e1026a"
+msgid "Не удалось загрузить игру. "
+msgstr "게임을 불러오지 못했습니다."
+
+msgctxt "web.wasm-loader.5189135a6110"
+msgid "Повторить"
+msgstr "다시 시도"
+
+msgctxt "web.wasm-loader.9c14e5456dd5"
+msgid "Запуск занимает слишком долго. Попробуйте перезагрузить страницу."
+msgstr "시작이 너무 오래 걸립니다. 페이지를 새로고침해 주세요."
+
+msgctxt "web.wasm-loader.edb5706027b7"
+msgid "Ошибка загрузки (${response.status})."
+msgstr "로드 오류(${response.status})."
+
+msgctxt "web.wasm-loader.ae4e27ff7bd9"
+msgid "Проверьте вход в свой аккаунт ChatGPT в Safari."
+msgstr "Safari에서 ChatGPT 로그인 상태를 확인해 주세요."
+
+msgctxt "web.wasm-loader.a8161b487809"
+msgid "Обновите браузер для запуска игры."
+msgstr "브라우저를 업데이트해 주세요."
+
+msgctxt "web.wasm-loader.1c5e2746e50d"
+msgid "Файл загружен не полностью. Обновите страницу."
+msgstr "파일이 완전히 로드되지 않았습니다. 새로고침해 주세요."
+
+msgctxt "menu.language.title"
+msgid "Язык"
+msgstr "언어"
+
+msgctxt "menu.support.title"
+msgid "Поддержка"
+msgstr "고객 지원"
+
+msgctxt "menu.support.intro"
+msgid "Нашли ошибку или есть идея?\nНапишите — читаем каждое письмо."
+msgstr "버그를 발견했거나 아이디어가 있나요?\n메시지를 보내 주세요. 모든 메시지를 읽고 있어요."
+
+msgctxt "menu.support.metadata"
+msgid "Версия: %s\nID: %s"
+msgstr "빌드: %s\nID: %s"
+
+msgctxt "menu.support.compose"
+msgid "Открыть письмо"
+msgstr "이메일 열기"
+
+msgctxt "menu.support.copy"
+msgid "Скопировать сообщение"
+msgstr "메시지 복사"
+
+msgctxt "menu.support.placeholder"
+msgid "Ваше сообщение…"
+msgstr "메시지 입력…"
+
+msgctxt "menu.support.required"
+msgid "Напишите сообщение"
+msgstr "메시지를 입력해 주세요"
+
+msgctxt "menu.support.copied"
+msgid "Сообщение скопировано"
+msgstr "메시지가 복사되었어요"
+
+msgctxt "menu.support.finish"
+msgid "Завершите отправку в почтовом приложении"
+msgstr "이메일 앱에서 전송을 완료해 주세요"
+
+msgctxt "daily.title"
+msgid "Ежедневный бонус"
+msgstr "일일 보상"
+
+msgctxt "daily.tomorrow"
+msgid "Завтра: %s"
+msgstr "내일: %s"
+
+msgctxt "daily.next_week"
+msgid "Новая неделя начнётся завтра!"
+msgstr "내일 새로운 주가 시작돼요!"
+
+msgctxt "daily.invitation"
+msgid "Заходи каждый день — награды растут!"
+msgstr "매일 접속하고 더 큰 보상을 받으세요!"
+
+msgctxt "daily.claim"
+msgid "Забрать"
+msgstr "받기"
+
+msgctxt "daily.missed"
+msgid "Пропущен"
+msgstr "놓침"
+
+msgctxt "daily.today"
+msgid "Сегодня"
+msgstr "오늘"
+
+msgctxt "daily.day"
+msgid "День %d"
+msgstr "%d일차"
+
+msgctxt "daily.item.undo"
+msgid "отмена хода ×%d"
+msgstr "되돌리기 ×%d"
+
+msgctxt "daily.item.extra_slot"
+msgid "место ×%d"
+msgstr "추가 칸 ×%d"
+
+msgctxt "daily.item.crane"
+msgid "кран ×%d"
+msgstr "크레인 ×%d"
+
+msgctxt "daily.item.shuffle"
+msgid "перемешивание ×%d"
+msgstr "섞기 ×%d"
+
+msgctxt "daily.item.gift"
+msgid "подарок ×%d"
+msgstr "선물 ×%d"
+
+msgctxt "crane.intro.title"
+msgid "Закончились ходы?"
+msgstr "더 이상 움직일 수 없나요?"
+
+msgctxt "crane.intro.prompt"
+msgid "Вызовите кран!"
+msgstr "크레인을 부르세요!"
+
+msgctxt "crane.intro.free"
+msgid "Вызвать бесплатно"
+msgstr "무료로 부르기"
+
+msgctxt "crane.intro.price"
+msgid "В первый раз бесплатно, потом — {price} {{coin}}."
+msgstr "첫 호출은 무료, 이후 {price} {{coin}}."
+
+msgctxt "crane.intro.retry"
+msgid "Попробовать заново"
+msgstr "다시 도전"
+
+msgctxt "loading.start"
+msgid "Запускаем игру…"
+msgstr "시작하는 중…"
+
+msgctxt "loading.error"
+msgid "Не удалось загрузить игру. Проверьте подключение и повторите."
+msgstr "불러오지 못했어요. 연결을 확인하고 다시 시도해 주세요."
+
+msgctxt "loading.retry"
+msgid "Повторить"
+msgstr "다시 시도"

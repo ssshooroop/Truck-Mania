@@ -1,0 +1,57 @@
+{
+  "ru": {
+    "loading.start": "Запускаем игру…",
+    "loading.error": "Не удалось загрузить игру. Проверьте подключение и повторите.",
+    "loading.retry": "Повторить"
+  },
+  "en": {
+    "loading.start": "Starting…",
+    "loading.error": "Unable to load. Check your connection and try again.",
+    "loading.retry": "Retry"
+  },
+  "de": {
+    "loading.start": "Wird gestartet…",
+    "loading.error": "Laden fehlgeschlagen. Prüfe deine Verbindung und versuche es erneut.",
+    "loading.retry": "Wiederholen"
+  },
+  "fr": {
+    "loading.start": "Démarrage…",
+    "loading.error": "Échec du chargement. Vérifie ta connexion et réessaie.",
+    "loading.retry": "Réessayer"
+  },
+  "ja": {
+    "loading.start": "起動中…",
+    "loading.error": "読み込めませんでした。接続を確認して、もう一度お試しください。",
+    "loading.retry": "再試行"
+  },
+  "ko": {
+    "loading.start": "시작하는 중…",
+    "loading.error": "불러오지 못했어요. 연결을 확인하고 다시 시도해 주세요.",
+    "loading.retry": "다시 시도"
+  },
+  "zh": {
+    "loading.start": "正在启动…",
+    "loading.error": "加载失败。请检查网络连接后重试。",
+    "loading.retry": "重试"
+  },
+  "tr": {
+    "loading.start": "Başlatılıyor…",
+    "loading.error": "Yüklenemedi. Bağlantını kontrol edip tekrar dene.",
+    "loading.retry": "Yeniden dene"
+  },
+  "pl": {
+    "loading.start": "Uruchamianie…",
+    "loading.error": "Nie udało się wczytać. Sprawdź połączenie i spróbuj ponownie.",
+    "loading.retry": "Ponów"
+  },
+  "es": {
+    "loading.start": "Iniciando…",
+    "loading.error": "No se pudo cargar. Revisa tu conexión e inténtalo de nuevo.",
+    "loading.retry": "Reintentar"
+  },
+  "ar": {
+    "loading.start": "جارٍ التشغيل…",
+    "loading.error": "تعذّر التحميل. تحقق من اتصالك وحاول مرة أخرى.",
+    "loading.retry": "إعادة المحاولة"
+  }
+}

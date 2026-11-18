@@ -1,0 +1,15 @@
+{
+  "android_game_id": "800430064",
+  "test_mode": false,
+  "privacy_policy": "https://quasar-verse-91b.notion.site/Privacy-Policy-7a29de6176ff42f89f6cc19550c39eae",
+  "rewarded": {
+    "shortfall": "25_coins_level",
+    "shop": "25_coins_store",
+    "double": "double_reward",
+    "slot": "open_slot",
+    "undo": "undo"
+  },
+  "interstitial": "BP_Interstitial_Android",
+  "interstitial_interval": 4,
+  "interstitial_cooldown_seconds": 120
+}
